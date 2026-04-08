@@ -98,42 +98,42 @@ function setupEventListeners() {
 }
 
 function applyFilters() {
-    const search = document.getElementById('searchInput').value.toLowerCase();
+    const term = document.getElementById('searchInput').value.toLowerCase();
+    const type = document.getElementById('filterType').value; // NUEVO
     const level = document.getElementById('filterLevel').value;
     const area = document.getElementById('filterArea').value;
     const country = document.getElementById('filterCountry').value;
     const sort = document.getElementById('filterSort').value;
 
     let filtered = scholarships.filter(beca => {
-        // 1. Búsqueda de texto (Título, Institución, País, Tags)
-        const matchSearch = 
-            beca.titulo.toLowerCase().includes(search) ||
-            beca.institucion.toLowerCase().includes(search) ||
-            beca.pais.toLowerCase().includes(search) ||
-            (beca.tags && beca.tags.some(t => t.toLowerCase().includes(search)));
+        // 1. Búsqueda de texto
+        const matchText = beca.titulo.toLowerCase().includes(term) || 
+                          beca.institucion.toLowerCase().includes(term) ||
+                          beca.pais.toLowerCase().includes(term) ||
+                          (beca.tags && beca.tags.some(t => t.toLowerCase().includes(term)));
 
-        // 2. Filtro Nivel
+        // 2. Filtro por TIPO (NUEVO)
+        const matchType = type === 'all' || beca.tipo === type;
+
+        // 3. Filtro por Nivel
         const matchLevel = level === 'all' || beca.nivel.includes(level);
 
-        // 3. Filtro Área (Coincidencia parcial o exacta)
-        let matchArea = true;
-        if (area !== 'all') {
-            matchArea = beca.area.some(a => a.includes(area) || area.includes(a));
-        }
+        // 4. Filtro por Área
+        const matchArea = area === 'all' || beca.area.includes(area) || 
+                          (beca.area.some(a => a.includes(area)));
 
-        // 4. Filtro País (Exacto)
-        const matchCountry = country === 'all' || beca.pais === country;
+        // 5. Filtro por País
+        const matchCountry = country === 'all' || beca.pais === country || 
+                             (country === 'Europa' && beca.pais.includes('Europa'));
 
-        return matchSearch && matchLevel && matchArea && matchCountry;
+        return matchText && matchType && matchLevel && matchArea && matchCountry;
     });
 
     // Ordenamiento
     if (sort === 'deadline') {
         filtered.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
     } else if (sort === 'recent') {
-        filtered.sort((a, b) => b.id.localeCompare(a.id)); // Asumiendo ID cronológico o fecha creación
-    } else if (sort === 'alpha') {
-        filtered.sort((a, b) => a.titulo.localeCompare(b.titulo));
+        filtered.reverse();
     }
 
     renderScholarships(filtered);
