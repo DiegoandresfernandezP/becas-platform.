@@ -205,19 +205,112 @@ function setupEventListeners() {
     });
 }
 
-function applyFilters() {
-    const level = document.getElementById('filterLevel').value;
-    const area = document.getElementById('filterArea').value;
-    const sort = document.getElementById('filterSort').value;
-
-    let filtered = scholarships.filter(b => {
-        const matchLevel = level === 'all' || b.nivel.includes(level);
-        const matchArea = area === 'all' || b.area.includes(area);
-        return matchLevel && matchArea;
+// --- FILTROS Y BÚSQUEDA (ACTUALIZADO) ---
+function setupEventListeners() {
+    // Buscador
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+        applyFilters();
     });
 
-    if (sort === 'deadline') filtered.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+    // Todos los selectores
+    const filters = ['filterType', 'filterLevel', 'filterArea', 'filterCountry', 'filterSort'];
+    filters.forEach(id => {
+        document.getElementById(id).addEventListener('change', () => applyFilters());
+    });
+}
+
+function applyFilters() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const type = document.getElementById('filterType').value;
+    const level = document.getElementById('filterLevel').value;
+    const area = document.getElementById('filterArea').value;
+    const country = document.getElementById('filterCountry').value;
+    const sort = document.getElementById('filterSort').value;
+
+    let filtered = scholarships.filter(beca => {
+        // 1. Búsqueda por texto (título, institución, país, tags)
+        const inTitle = beca.titulo.toLowerCase().includes(searchTerm);
+        const inInst = beca.institucion.toLowerCase().includes(searchTerm);
+        const inCountry = beca.pais.toLowerCase().includes(searchTerm);
+        const inTags = beca.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+        const matchesSearch = inTitle || inInst || inCountry || inTags;
+
+        if (!matchesSearch) return false;
+
+        // 2. Filtro por Tipo (Lógica inteligente basada en tags y título)
+        if (type !== 'all') {
+            let matchesType = false;
+            const titleLower = beca.titulo.toLowerCase();
+            const tagsLower = beca.tags.map(t => t.toLowerCase());
+            
+            if (type === 'Beca' && (titleLower.includes('scholarship') || titleLower.includes('beca') || titleLower.includes('fellowship'))) matchesType = true;
+            else if (type === 'Internship' && (titleLower.includes('intern') || tagsLower.includes('internship'))) matchesType = true;
+            else if (type === 'Verano' && (titleLower.includes('summer') || tagsLower.includes('verano'))) matchesType = true;
+            else if (type === 'Doctorado' && (beca.nivel.includes('Doctorado') || titleLower.includes('phd'))) matchesType = true;
+            else if (type === 'Conferencia' && (titleLower.includes('conference') || titleLower.includes('forum') || tagsLower.includes('competencia'))) matchesType = true;
+            else if (type === 'Curso' && (titleLower.includes('course') || titleLower.includes('camp') || titleLower.includes('taller'))) matchesType = true;
+            
+            if (!matchesType) return false;
+        }
+
+        // 3. Filtro por Nivel
+        if (level !== 'all') {
+            if (level === 'Todos') {
+                if (!beca.nivel.includes('Todos')) return false;
+            } else {
+                if (!beca.nivel.includes(level)) return false;
+            }
+        }
+
+        // 4. Filtro por Área
+        if (area !== 'all') {
+            // Busca coincidencia directa o padre (ej: STEM cubre muchas)
+            const hasArea = beca.area.some(a => a.includes(area) || area.includes(a));
+            // Caso especial: Computer Science está dentro de STEM a veces
+            const isSTEM = area === 'STEM' && (beca.area.includes('Ingeniería') || beca.area.includes('Computación') || beca.area.includes('Ciencia'));
+            if (!hasArea && !isSTEM) return false;
+        }
+
+        // 5. Filtro por País
+        if (country !== 'all') {
+            if (country === 'Remoto') {
+                if (!beca.pais.includes('Remoto')) return false;
+            } else if (country === 'Europa') {
+                // Países que consideramos Europa para el filtro
+                const euCountries = ['Alemania', 'Francia', 'España', 'Reino Unido', 'Suiza', 'Italia', 'Países Bajos', 'Suecia', 'Austria', 'Bélgica', 'Hungría', 'Portugal', 'Irlanda', 'Dinamarca', 'Finlandia', 'Noruega', 'Polonia', 'Rumania', 'Bulgaria', 'Grecia', 'Chipre', 'Malta', 'Luxemburgo', 'Eslovenia', 'Eslovaquia', 'Lituania', 'Letonia', 'Estonia', 'Croacia', 'Chequia'];
+                if (!euCountries.some(c => beca.pais.includes(c)) && !beca.pais.includes('Europa')) return false;
+            } else if (country === 'Latinoamérica') {
+                const latamCountries = ['México', 'Argentina', 'Brasil', 'Chile', 'Colombia', 'Perú', 'Costa Rica', 'Panamá', 'Uruguay', 'Ecuador', 'Bolivia', 'Paraguay', 'Venezuela', 'Cuba', 'República Dominicana'];
+                if (!latamCountries.some(c => beca.pais.includes(c))) return false;
+            } else {
+                if (!beca.pais.includes(country)) return false;
+            }
+        }
+
+        return true;
+    });
+
+    // 6. Ordenamiento
+    if (sort === 'deadline') {
+        // Filtrar primero las que tienen fecha válida
+        filtered = filtered.filter(b => b.deadline && b.deadline !== 'Sin deadline indicado');
+        filtered.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+    } else if (sort === 'recent') {
+        // Ordenar por ID descendente (asumiendo que IDs mayores son más recientes)
+        filtered.sort((a, b) => {
+            const idA = parseInt(a.id.replace('beca_', ''));
+            const idB = parseInt(b.id.replace('beca_', ''));
+            return idB - idA;
+        });
+    } else if (sort === 'alpha') {
+        filtered.sort((a, b) => a.titulo.localeCompare(b.titulo));
+    }
+
     renderScholarships(filtered);
+    
+    // Actualizar contador de resultados
+    const countLabel = document.getElementById('result-count');
+    if(countLabel) countLabel.textContent = `${filtered.length} oportunidades encontradas`;
 }
 
 // --- TRACKER & DASHBOARD ---
