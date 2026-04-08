@@ -71,50 +71,83 @@ def is_future_deadline(deadline_str):
         return True # Si no hay fecha, asumimos que sigue abierta por seguridad
     return date_obj >= datetime.now()
 
+def detect_type(title, summary):
+    """Detecta el tipo de oportunidad basado en palabras clave"""
+    text = (title + " " + summary).lower()
+    
+    if any(x in text for x in ["internship", "pasantía", "prácticas", "trainee"]):
+        return "Internship"
+    elif any(x in text for x in ["summer", "verano", "school", "camp"]):
+        return "Verano"
+    elif any(x in text for x in ["phd", "doctorado", "researcher"]):
+        return "Doctorado"
+    elif any(x in text for x in ["master", "maestría", "msc", "mba"]):
+        return "Maestría"
+    elif any(x in text for x in ["competition", "contest", "hackathon", "brandstorm", "challenge"]):
+        return "Competencia"
+    elif any(x in text for x in ["course", "curso", "workshop", "bootcamp", "training"]):
+        return "Curso"
+    elif any(x in text for x in ["fellowship", "beca", "scholarship", "grant"]):
+        return "Beca"
+    else:
+        return "Otro"
+
 def extract_info_from_entry(entry, source_name, region):
-    """Extrae información estructurada de una entrada RSS o Web"""
+    """Extrae información estructurada incluyendo el Tipo"""
     title = entry.get('title', 'Sin título')
     link = entry.get('link', '#')
     published = entry.get('published', entry.get('updated', ''))
-    summary = entry.get('summary', '')[:200] # Resumen corto
+    summary = entry.get('summary', '')
     
-    # Detección básica de palabras clave para categorizar
-    level = ["Maestría", "Doctorado"] # Default
-    area = ["Todas"]
+    # --- DETECCIÓN DE TIPO ---
+    tipo_oportunidad = detect_type(title, summary)
     
-    if any(x in title.lower() for x in ["phd", "doctoral", "researcher"]):
+    # Detección de Nivel (se mantiene pero refinada)
+    level = []
+    if tipo_oportunidad == "Verano" or tipo_oportunidad == "Internship":
+        level = ["Pregrado", "Maestría"] # Por defecto para estos tipos
+    elif any(x in title.lower() for x in ["phd", "doctoral"]):
         level = ["Doctorado"]
-    elif any(x in title.lower() for x in ["master", "maestría", "msc"]):
+    elif any(x in title.lower() for x in ["master", "maestría"]):
         level = ["Maestría"]
-    elif any(x in title.lower() for x in ["internship", "práctica", "summer"]):
-        level = ["Pregrado", "Maestría"]
-        
-    if any(x in title.lower() for x in ["cs", "computer", "ai", "data", "engineer"]):
-        area = ["STEM", "Ingeniería", "Computer Science"]
-    elif any(x in title.lower() for x in ["bio", "med", "health"]):
-        area = ["Salud", "Biociencias"]
+    elif any(x in title.lower() for x in ["high school", "secundaria", "teen"]):
+        level = ["Secundaria"]
+    else:
+        level = ["Todos"]
 
-    # Generar ID único basado en el título para evitar duplicados exactos
-    safe_title = re.sub(r'\W+', '', title.lower())
-    new_id = f"auto_{safe_title[:10]}_{datetime.now().year}"
+    # Detección de Área
+    area = ["Todas"]
+    if any(x in title.lower() for x in ["cs", "computer", "ai", "data", "engineer", "robot"]):
+        area = ["STEM", "Computer Science"]
+    elif any(x in title.lower() for x in ["bio", "med", "health", "neuro"]):
+        area = ["Salud", "Neurociencia"]
+    elif any(x in title.lower() for x in ["business", "econ", "management"]):
+        area = ["Negocios"]
+
+    # Generar ID ESTABLE (Hash basado en contenido limpio)
+    import hashlib
+    clean_title = re.sub(r'\W+', '', title.lower())
+    unique_string = f"{clean_title}_{source_name}_{region}"
+    stable_id = "auto_" + hashlib.md5(unique_string.encode()).hexdigest()[:12]
     
-    # Intentar inferir deadline del texto si no viene explícito
-    deadline = "Verificar en web" 
-    # Aquí podrías agregar regex más complejos para buscar fechas en el resumen
+    # Inferir Deadline (Lógica simple)
+    deadline = "Verificar en web"
+    # Aquí podrías agregar lógica para buscar fechas en el texto si el RSS las trae desordenadas
     
     return {
-        "id": new_id,
+        "id": stable_id,
         "titulo": title,
         "institucion": source_name,
         "pais": region,
+        "tipo": tipo_oportunidad,  # <--- NUEVO CAMPO
         "nivel": level,
         "area": area,
-        "financiamiento": "Variable (Ver web)",
+        "financiamiento": "Variable",
         "deadline": deadline,
         "url_convocatoria": link,
-        "requisitos_idioma": ["Inglés", "Local"],
+        "requisitos_idioma": ["Inglés"],
         "documentos_sugeridos": ["CV", "Carta Motivación"],
-        "tags": ["Auto-Actualizado", source_name, region],
+        "tags": [tipo_oportunidad, region],
         "source_type": "rss_auto"
     }
 
