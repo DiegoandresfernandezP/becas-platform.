@@ -63,44 +63,90 @@
             <h2 class="section-title">Catálogo de Oportunidades</h2>
             
             <div class="filters-container">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="searchInput" placeholder="Buscar por título, universidad o país...">
-                </div>
-                <div class="filters-grid">
-                    <select id="filterLevel" class="filter-select">
-                        <option value="all">Todos los Niveles</option>
-                        <option value="Pregrado">Pregrado</option>
-                        <option value="Maestría">Maestría</option>
-                        <option value="Doctorado">Doctorado</option>
-                        <option value="Secundaria">Secundaria</option>
-                    </select>
-                    <select id="filterArea" class="filter-select">
-                        <option value="all">Todas las Áreas</option>
-                        <option value="STEM">STEM</option>
-                        <option value="Humanidades">Humanidades</option>
-                        <option value="Negocios">Negocios</option>
-                        <option value="Salud">Salud</option>
-                    </select>
-                    <select id="filterCountry" class="filter-select">
-                        <option value="all">Todos los Países</option>
-                        <option value="Remoto">Remoto</option>
-                        <option value="Estados Unidos">Estados Unidos</option>
-                        <option value="Alemania">Alemania</option>
-                        <option value="España">España</option>
-                        <option value="Japón">Japón</option>
-                        <option value="China">China</option>
-                        <option value="Reino Unido">Reino Unido</option>
-                        <option value="Francia">Francia</option>
-                        <option value="Europa">Europa</option>
-                        <!-- Agrega más países si es necesario -->
-                    </select>
-                    <select id="filterSort" class="filter-select">
-                        <option value="default">Ordenar por...</option>
-                        <option value="deadline">Más Urgentes</option>
-                    </select>
-                </div>
-            </div>
+    <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Buscar por título, universidad o país...">
+    </div>
+    
+    <div class="filters-grid">
+        <!-- Filtro de Nivel -->
+        <select id="filterLevel" class="filter-select">
+            <option value="all">Todos los Niveles</option>
+            <option value="Pregrado">Pregrado</option>
+            <option value="Maestría">Maestría</option>
+            <option value="Doctorado">Doctorado</option>
+            <option value="Secundaria">Secundaria</option>
+            <option value="Posdoctorado">Posdoctorado</option>
+        </select>
+
+        <!-- Filtro de Área -->
+        <select id="filterArea" class="filter-select">
+            <option value="all">Todas las Áreas</option>
+            <option value="STEM">STEM</option>
+            <option value="Humanidades">Humanidades</option>
+            <option value="Negocios">Negocios</option>
+            <option value="Artes">Artes</option>
+            <option value="Salud">Salud</option>
+            <option value="Computer Science">Computación e IA</option>
+            <option value="Neurociencia">Neurociencia</option>
+        </select>
+
+        <!-- Filtro de País (El que faltaba o fallaba) -->
+        <select id="filterCountry" class="filter-select">
+            <option value="all">Todos los Países</option>
+            <option value="Remoto">🌍 Remoto</option>
+            <option value="Estados Unidos">🇺🇸 Estados Unidos</option>
+            <option value="Alemania">🇩🇪 Alemania</option>
+            <option value="España">🇪🇸 España</option>
+            <option value="Japón">🇯🇵 Japón</option>
+            <option value="China">🇨🇳 China</option>
+            <option value="Reino Unido">🇬🇧 Reino Unido</option>
+            <option value="Francia">🇫🇷 Francia</option>
+            <option value="Italia">🇮🇹 Italia</option>
+            <option value="Corea del Sur">🇰🇷 Corea del Sur</option>
+            <option value="Suiza">🇨🇭 Suiza</option>
+            <option value="Canadá">🇨🇦 Canadá</option>
+            <option value="Australia">🇦🇺 Australia</option>
+            <option value="Brasil">🇧🇷 Brasil</option>
+            <option value="Argentina">🇦🇷 Argentina</option>
+            <option value="México">🇲🇽 México</option>
+            <option value="Colombia">🇨🇴 Colombia</option>
+            <option value="Turquía">🇹🇷 Turquía</option>
+            <option value="Hungría">🇭🇺 Hungría</option>
+            <option value="Suecia">🇸🇪 Suecia</option>
+            <option value="Irlanda">🇮🇪 Irlanda</option>
+            <option value="Austria">🇦🇹 Austria</option>
+            <option value="Países Bajos">🇳🇱 Países Bajos</option>
+            <option value="Portugal">🇵🇹 Portugal</option>
+            <option value="Rusia">🇷🇺 Rusia</option>
+            <option value="Cuba">🇨🇺 Cuba</option>
+            <option value="Emiratos Árabes Unidos">🇦🇪 Emiratos Árabes</option>
+            <option value="Taiwán">🇹🇼 Taiwán</option>
+            <option value="India">🇮🇳 India</option>
+            <option value="Chile">🇨🇱 Chile</option>
+            <option value="Perú">🇵🇪 Perú</option>
+            <option value="Panamá">🇵🇦 Panamá</option>
+            <option value="Romania">🇷🇴 Romania</option>
+            <option value="Bulgaria">🇧🇬 Bulgaria</option>
+            <option value="Grecia">🇬🇷 Grecia</option>
+            <option value="Finlandia">🇫🇮 Finlandia</option>
+            <option value="Hong Kong">🇭🇰 Hong Kong</option>
+            <option value="Europa">🇪🇺 Europa (Varios)</option>
+        </select>
+
+        <!-- Filtro de Ordenamiento -->
+        <select id="filterSort" class="filter-select">
+            <option value="default">Ordenar por...</option>
+            <option value="deadline">⏳ Más Urgentes (Deadline)</option>
+            <option value="recent">✨ Más Recientes</option>
+            <option value="alpha">🔤 A-Z (Nombre)</option>
+        </select>
+    </div>
+    
+    <div id="results-info" style="margin-top: 15px; color: #666; font-size: 0.9rem;">
+        Mostrando <strong id="count-display">0</strong> oportunidades
+    </div>
+</div>
 
             <div id="results-info" style="margin-bottom: 15px; color: #666; font-size: 0.9rem;">
                 Mostrando <strong id="count-display">0</strong> oportunidades
