@@ -14,15 +14,37 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // --- CARGA DE DATOS ---
+// --- CARGA DE DATOS ---
 async function loadScholarships() {
     try {
         const response = await fetch('./data/becas.json');
-        scholarships = await response.json();
+        let allScholarships = await response.json();
+        
+        // FILTRO AUTOMÁTICO: Eliminar becas vencidas
+        const today = new Date().toISOString().split('T')[0]; // Formato YYYY-MM-DD
+        scholarships = allScholarships.filter(beca => {
+            return beca.deadline >= today; 
+        });
+
+        // Ordenar por urgencia (las más próximas primero)
+        scholarships.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+
         renderScholarships(scholarships);
         updateStats();
+        
+        // Mostrar mensaje si hay pocas becas activas
+        if (scholarships.length === 0) {
+            document.getElementById('catalogo').innerHTML = `
+                <div style="text-align:center; padding: 40px;">
+                    <i class="fas fa-calendar-check" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+                    <h3>No hay becas activas en este momento</h3>
+                    <p>Las convocatorias de inicio de año han cerrado. ¡Pronto se abrirán las de mitad de año!</p>
+                </div>
+            `;
+        }
     } catch (error) {
         console.error('Error cargando becas:', error);
-        document.getElementById('catalogo').innerHTML = '<p>Error cargando datos. Usa un servidor local.</p>';
+        document.getElementById('catalogo').innerHTML = '<p>Error cargando datos.</p>';
     }
 }
 
