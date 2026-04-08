@@ -99,7 +99,7 @@ function setupEventListeners() {
 
 function applyFilters() {
     const term = document.getElementById('searchInput').value.toLowerCase();
-    const type = document.getElementById('filterType').value; // NUEVO
+    const typeFilter = document.getElementById('filterType').value; 
     const level = document.getElementById('filterLevel').value;
     const area = document.getElementById('filterArea').value;
     const country = document.getElementById('filterCountry').value;
@@ -112,15 +112,19 @@ function applyFilters() {
                           beca.pais.toLowerCase().includes(term) ||
                           (beca.tags && beca.tags.some(t => t.toLowerCase().includes(term)));
 
-        // 2. Filtro por TIPO (NUEVO)
-        const matchType = type === 'all' || beca.tipo === type;
+        // 2. Filtro por TIPO (Con protección si el campo no existe)
+        // Si la beca no tiene campo 'tipo', asumimos que es 'Beca' por defecto
+        const becaType = beca.tipo || 'Beca'; 
+        const matchType = typeFilter === 'all' || becaType === typeFilter;
 
-        // 3. Filtro por Nivel
-        const matchLevel = level === 'all' || beca.nivel.includes(level);
+        // 3. Filtro por Nivel (Protección si es string o array)
+        const becaNivel = Array.isArray(beca.nivel) ? beca.nivel : [beca.nivel];
+        const matchLevel = level === 'all' || becaNivel.includes(level);
 
         // 4. Filtro por Área
-        const matchArea = area === 'all' || beca.area.includes(area) || 
-                          (beca.area.some(a => a.includes(area)));
+        const becaArea = Array.isArray(beca.area) ? beca.area : [beca.area];
+        const matchArea = area === 'all' || becaArea.includes(area) || 
+                          becaArea.some(a => a && a.includes(area));
 
         // 5. Filtro por País
         const matchCountry = country === 'all' || beca.pais === country || 
@@ -133,7 +137,10 @@ function applyFilters() {
     if (sort === 'deadline') {
         filtered.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
     } else if (sort === 'recent') {
-        filtered.reverse();
+        // Ordenar por ID inverso asumiendo que los nuevos tienen IDs mayores o simplemente invertir
+        filtered.reverse(); 
+    } else if (sort === 'alpha') {
+        filtered.sort((a, b) => a.titulo.localeCompare(b.titulo));
     }
 
     renderScholarships(filtered);
