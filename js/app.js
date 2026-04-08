@@ -1,508 +1,136 @@
-/**
- * BecasInternacionales - Aplicación Principal
- * Módulo público: Catálogo de becas con filtros y búsqueda
- */
+setupEventListeners();
+});
 
-// Estado global de la aplicación
-const AppState = {
-  scholarships: [],
-  filteredScholarships: [],
-  filters: {
-    search: '',
-    level: '',
-    area: '',
-    funding: '',
-    country: '',
-    sortBy: 'deadline'
-  }
-};
-
-// Elementos del DOM
-const DOM = {
-  searchInput: null,
-  filterLevel: null,
-  filterArea: null,
-  filterFunding: null,
-  filterCountry: null,
-  sortBy: null,
-  cardsContainer: null,
-  loadingSpinner: null,
-  noResults: null,
-  totalScholarships: null,
-  totalCountries: null,
-  totalUniversities: null,
-  newsletterForm: null
-};
-
-/**
- * Inicializa la aplicación
- */
-async function init() {
-  console.log('🎓 Iniciando BecasInternacionales...');
-
-  // Cache de elementos DOM
-  cacheDOMElements();
-
-  // Configurar event listeners
-  setupEventListeners();
-
-  // Cargar datos
-  await loadScholarships();
-
-  // Actualizar estadísticas
-  updateStats();
-
-  console.log('✅ Aplicación inicializada correctamente');
-}
-
-/**
- * Almacena referencias a elementos del DOM
- */
-function cacheDOMElements() {
-  DOM.searchInput = document.getElementById('searchInput');
-  DOM.filterLevel = document.getElementById('filterLevel');
-  DOM.filterArea = document.getElementById('filterArea');
-  DOM.filterFunding = document.getElementById('filterFunding');
-  DOM.filterCountry = document.getElementById('filterCountry');
-  DOM.sortBy = document.getElementById('sortBy');
-  DOM.cardsContainer = document.getElementById('cardsContainer');
-  DOM.loadingSpinner = document.getElementById('loadingSpinner');
-  DOM.noResults = document.getElementById('noResults');
-  DOM.totalScholarships = document.getElementById('totalScholarships');
-  DOM.totalCountries = document.getElementById('totalCountries');
-  DOM.totalUniversities = document.getElementById('totalUniversities');
-  DOM.newsletterForm = document.getElementById('newsletterForm');
-}
-
-/**
- * Configura los event listeners
- */
-function setupEventListeners() {
-  // Búsqueda en tiempo real
-  DOM.searchInput.addEventListener('input', debounce((e) => {
-    AppState.filters.search = sanitizeInput(e.target.value);
-    applyFilters();
-  }, 300));
-
-  // Filtros
-  DOM.filterLevel.addEventListener('change', (e) => {
-    AppState.filters.level = e.target.value;
-    applyFilters();
-  });
-
-  DOM.filterArea.addEventListener('change', (e) => {
-    AppState.filters.area = e.target.value;
-    applyFilters();
-  });
-
-  DOM.filterFunding.addEventListener('change', (e) => {
-    AppState.filters.funding = e.target.value;
-    applyFilters();
-  });
-
-  DOM.filterCountry.addEventListener('change', (e) => {
-    AppState.filters.country = e.target.value;
-    applyFilters();
-  });
-
-  DOM.sortBy.addEventListener('change', (e) => {
-    AppState.filters.sortBy = e.target.value;
-    applyFilters();
-  });
-
-  // Newsletter
-  if (DOM.newsletterForm) {
-    DOM.newsletterForm.addEventListener('submit', handleNewsletterSubmit);
-  }
-
-  // Botones de login/registro (placeholder para futura implementación)
-  const loginBtn = document.getElementById('loginBtn');
-  const registerBtn = document.getElementById('registerBtn');
-
-  if (loginBtn) {
-    loginBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      alert('Funcionalidad de login próximamente disponible. ¡Pronto podrás gestionar tus postulaciones!');
-    });
-  }
-
-  if (registerBtn) {
-    registerBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      alert('Funcionalidad de registro próximamente disponible. ¡Pronto podrás guardar tus becas favoritas!');
-    });
-  }
-}
-
-/**
- * Carga las becas desde el archivo JSON
- */
+// --- CARGA DE DATOS ---
+// --- CARGA DE DATOS ---
 async function loadScholarships() {
-  try {
-    showLoading(true);
+try {
+const response = await fetch('./data/becas.json');
+let allScholarships = await response.json();
 
-    const response = await fetch('data/becas.json');
+        // FILTRO AUTOMÁTICO: Eliminar becas vencidas
+        const today = new Date().toISOString().split('T')[0]; // Formato YYYY-MM-DD
+        scholarships = allScholarships.filter(beca => {
+            return beca.deadline >= today; 
+        });
+        const today = new Date();
+        // Formatear hoy a YYYY-MM-DD para comparar
+        const todayStr = today.toISOString().split('T')[0];
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+        // Ordenar por urgencia (las más próximas primero)
+        scholarships.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+        // Separar en Activas y Cerradas
+        scholarships = allScholarships.filter(b => b.deadline >= todayStr);
+        const closedScholarships = allScholarships.filter(b => b.deadline < todayStr);
 
-    AppState.scholarships = await response.json();
-    AppState.filteredScholarships = [...AppState.scholarships];
+        renderScholarships(scholarships);
+        updateStats();
+        // Renderizar primero las activas
+        renderScholarships(scholarships, false); // false = no son cerradas
 
-    renderCards();
-    showLoading(false);
-
-  } catch (error) {
-    console.error('Error cargando becas:', error);
-    showError('No se pudieron cargar las becas. Por favor recarga la página.');
-    showLoading(false);
-  }
+        // Mostrar mensaje si hay pocas becas activas
+        if (scholarships.length === 0) {
+            document.getElementById('catalogo').innerHTML = `
+                <div style="text-align:center; padding: 40px;">
+                    <i class="fas fa-calendar-check" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+                    <h3>No hay becas activas en este momento</h3>
+                    <p>Las convocatorias de inicio de año han cerrado. ¡Pronto se abrirán las de mitad de año!</p>
+                </div>
+        // Si hay cerradas, las mostramos debajo con un título
+        if (closedScholarships.length > 0) {
+            const container = document.getElementById('catalogo');
+            const separator = document.createElement('div');
+            separator.style.gridColumn = "1 / -1";
+            separator.style.marginTop = "40px";
+            separator.style.marginBottom = "20px";
+            separator.innerHTML = `
+                <h3 style="text-align:center; color:#666; border-bottom: 2px solid #eee; padding-bottom:10px;">
+                    Oportunidades Cerradas (Próxima apertura: 2027)
+                </h3>
+                <p style="text-align:center; font-size:0.9rem; color:#888;">Úsalas como referencia para preparar tus documentos.</p>
+           `;
+            container.appendChild(separator);
+            
+            renderScholarships(closedScholarships, true); // true = son cerradas
 }
 
-/**
- * Aplica todos los filtros y ordenamiento
- */
-function applyFilters() {
-  let filtered = [...AppState.scholarships];
-
-  // Filtro por búsqueda
-  if (AppState.filters.search) {
-    const searchTerm = AppState.filters.search.toLowerCase();
-    filtered = filtered.filter(beca =>
-      beca.titulo.toLowerCase().includes(searchTerm) ||
-      beca.institucion.toLowerCase().includes(searchTerm) ||
-      beca.pais.toLowerCase().includes(searchTerm) ||
-      beca.area.some(a => a.toLowerCase().includes(searchTerm)) ||
-      beca.tags.some(t => t.toLowerCase().includes(searchTerm)) ||
-      beca.descripcion.toLowerCase().includes(searchTerm)
-    );
-  }
-
-  // Filtro por nivel
-  if (AppState.filters.level) {
-    filtered = filtered.filter(beca =>
-      beca.nivel.includes(AppState.filters.level)
-    );
-  }
-
-  // Filtro por área
-  if (AppState.filters.area) {
-    filtered = filtered.filter(beca =>
-      beca.area.some(a => a.includes(AppState.filters.area))
-    );
-  }
-
-  // Filtro por financiamiento
-  if (AppState.filters.funding) {
-    if (AppState.filters.funding === '100%') {
-      filtered = filtered.filter(beca =>
-        beca.financiamiento.includes('100%')
-      );
-    } else if (AppState.filters.funding === 'Parcial') {
-      filtered = filtered.filter(beca =>
-        !beca.financiamiento.includes('100%')
-      );
-    }
-  }
-
-  // Filtro por país
-  if (AppState.filters.country) {
-    filtered = filtered.filter(beca =>
-      beca.pais.includes(AppState.filters.country)
-    );
-  }
-
-  // Ordenamiento
-  filtered = sortScholarships(filtered, AppState.filters.sortBy);
-
-  AppState.filteredScholarships = filtered;
-  renderCards();
+        updateStats();
+} catch (error) {
+console.error('Error cargando becas:', error);
+document.getElementById('catalogo').innerHTML = '<p>Error cargando datos.</p>';
+}
 }
 
-/**
- * Ordena las becas según el criterio seleccionado
- */
-function sortScholarships(scholarships, sortBy) {
-  const sorted = [...scholarships];
+// --- AUTENTICACIÓN Y MENÚ (CORREGIDO) ---
+function checkAuth() {
+const storedUser = localStorage.getItem('scholarship_user');
+@@ -172,35 +178,56 @@ window.toggleMenu = () => {
+};
 
-  switch (sortBy) {
-    case 'deadline':
-      sorted.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
-      break;
-    case 'dateAdded':
-      // Como no tenemos fecha de agregado, usamos el ID como proxy
-      sorted.sort((a, b) => b.id.localeCompare(a.id));
-      break;
-    case 'alphabetical':
-      sorted.sort((a, b) => a.titulo.localeCompare(b.titulo));
-      break;
-  }
+// --- RENDERIZADO DE BECAS ---
+function renderScholarships(data) {
+function renderScholarships(data, isClosed = false) {
+const container = document.getElementById('catalogo');
+    container.innerHTML = '';
+    if (data.length === 0) {
+        container.innerHTML = '<p style="grid-column: 1/-1; text-align:center;">No se encontraron becas.</p>';
+    // No borramos todo el contenedor si ya hay separador, pero para simplificar 
+    // en esta versión, asumimos que llamamos a esta función en bloques separados
+    // o limpiamos solo si es la primera llamada. 
+    // NOTA: La lógica de arriba ya maneja la appendición, aquí solo cambiamos el estilo de la card.
 
-  return sorted;
+    if (data.length === 0 && !isClosed) {
+        // Solo mostrar mensaje si no hay activas Y no estamos renderizando las cerradas
+        if(container.children.length === 0) {
+             container.innerHTML = '<p class="text-center col-span-full">No hay becas activas en este momento.</p>';
+        }
+return;
 }
 
-/**
- * Renderiza las tarjetas de becas
- */
-function renderCards() {
-  const scholarships = AppState.filteredScholarships;
+data.forEach(beca => {
+        const isSaved = currentUser && userApplications.some(a => a.id === beca.id);
+const card = document.createElement('div');
+card.className = 'beca-card';
+        
+        // Si es cerrada, añadimos clase especial o estilo inline
+        if (isClosed) {
+            card.style.opacity = "0.7";
+            card.style.filter = "grayscale(80%)";
+            card.style.pointerEvents = "none"; // Desactivar clicks
+        }
 
-  if (scholarships.length === 0) {
-    DOM.cardsContainer.innerHTML = '';
-    DOM.noResults.classList.remove('hidden');
-    return;
-  }
+        const deadlineClass = isClosed ? 'background:#ccc; color:#555;' : 'background:#fee2e2; color:#ef4444;';
+        const deadlineText = isClosed ? 'CERRADA' : `<i class="far fa-clock"></i> ${beca.deadline}`;
+        const btnText = isClosed ? 'Cerrada' : (currentUser ? 'Guardar' : 'Guardar');
+        const btnAction = isClosed ? '' : `onclick="${currentUser ? `addToTracker('${beca.id}')` : 'toggleAuthModal()'}"`;
+        const btnClass = isClosed ? 'btn-secondary' : 'btn-primary';
+        const btnStyle = isClosed ? 'background:#ccc; cursor:not-allowed;' : '';
 
-  DOM.noResults.classList.add('hidden');
-
-  const cardsHTML = scholarships.map(beca => createCardHTML(beca)).join('');
-  DOM.cardsContainer.innerHTML = cardsHTML;
-
-  // Agregar event listeners a los botones "Más Información"
-  document.querySelectorAll('.btn-info').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const becaId = e.target.dataset.id;
-      showBecaDetails(becaId);
-    });
-  });
-
-  // Agregar event listeners a los botones "Guardar"
-  document.querySelectorAll('.btn-save').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const becaId = e.target.dataset.id;
-      saveBeca(becaId);
-    });
-  });
-}
-
-/**
- * Crea el HTML para una tarjeta de beca
- */
-function createCardHTML(beca) {
-  const deadlineDate = new Date(beca.deadline);
-  const daysUntilDeadline = Math.ceil((deadlineDate - new Date()) / (1000 * 60 * 60 * 24));
-  const deadlineText = daysUntilDeadline > 0
-    ? `${daysUntilDeadline} días restantes`
-    : '¡Vencida!';
-
-  const nivelBadge = beca.nivel[0];
-  const countryBadge = beca.pais.split(' ')[0]; // Primer palabra del país
-
-  return `
-    <article class="card">
-      <div class="card-header">
-        <h3 class="card-title">${escapeHTML(beca.titulo)}</h3>
-        <p class="card-institution">${escapeHTML(beca.institucion)}</p>
-      </div>
-      <div class="card-body">
-        <div class="card-info">
-          <span class="badge badge-level">${nivelBadge}</span>
-          <span class="badge badge-country">${countryBadge}</span>
-          <span class="badge badge-funding">${beca.financiamiento.split('(')[0].trim()}</span>
-        </div>
-        <p class="card-description">${escapeHTML(beca.descripcion)}</p>
-        <div style="margin-bottom: 1rem;">
-          <strong style="font-size: 0.75rem; color: var(--text-secondary);">ÁREAS:</strong>
-          <div style="display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.25rem;">
-            ${beca.area.slice(0, 3).map(area =>
-              `<span style="font-size: 0.7rem; background: #f3f4f6; padding: 0.125rem 0.5rem; border-radius: 0.25rem;">${escapeHTML(area)}</span>`
-            ).join('')}
-          </div>
-        </div>
-        <div class="card-meta">
-          <span class="deadline">⏰ ${deadlineText}</span>
-          <span>📅 ${formatDate(beca.deadline)}</span>
-        </div>
-      </div>
-      <div class="card-actions">
-        <button class="btn btn-outline btn-info" data-id="${beca.id}">Ver Detalles</button>
-        <button class="btn btn-primary btn-save" data-id="${beca.id}">💾 Guardar</button>
-      </div>
-    </article>
-  `;
-}
-
-/**
- * Muestra los detalles de una beca (placeholder)
- */
-function showBecaDetails(becaId) {
-  const beca = AppState.scholarships.find(b => b.id === becaId);
-
-  if (!beca) return;
-
-  const details = `
-    📚 ${beca.titulo}
-
-    🏛️ Institución: ${beca.institucion}
-    🌍 País: ${beca.pais}
-    📊 Nivel: ${beca.nivel.join(', ')}
-    💰 Financiamiento: ${beca.financiamiento}
-    📅 Deadline: ${formatDate(beca.deadline)}
-
-    📋 Documentos sugeridos:
-    ${beca.documentos_sugeridos.map(doc => `• ${doc}`).join('\n')}
-
-    🔗 Más información: ${beca.url_convocatoria}
-  `;
-
-  alert(details);
-
-  // En el futuro, esto abrirá un modal o página de detalles
-}
-
-/**
- * Guarda una beca (placeholder para funcionalidad futura)
- */
-function saveBeca(becaId) {
-  // Verificar si el usuario está registrado (placeholder)
-  const user = localStorage.getItem('user');
-
-  if (!user) {
-    alert('Para guardar becas necesitas registrarte. ¡La funcionalidad de usuario estará disponible pronto!');
-    return;
-  }
-
-  // Lógica de guardado (se implementará en la fase de autenticación)
-  console.log('Guardando beca:', becaId);
-}
-
-/**
- * Maneja el envío del formulario de newsletter
- */
-function handleNewsletterSubmit(e) {
-  e.preventDefault();
-
-  const emailInput = e.target.querySelector('input[type="email"]');
-  const email = emailInput.value;
-
-  // Validación básica
-  if (!isValidEmail(email)) {
-    alert('Por favor ingresa un correo electrónico válido');
-    return;
-  }
-
-  // Guardar en localStorage (simulación)
-  const subscribers = JSON.parse(localStorage.getItem('newsletterSubscribers') || '[]');
-
-  if (!subscribers.includes(email)) {
-    subscribers.push(email);
-    localStorage.setItem('newsletterSubscribers', JSON.stringify(subscribers));
-
-    alert('¡Gracias por suscribirte! Pronto recibirás las mejores oportunidades en tu correo.');
-    emailInput.value = '';
-  } else {
-    alert('Este correo ya está suscrito a nuestro newsletter.');
-  }
-}
-
-/**
- * Actualiza las estadísticas en la página
- */
-function updateStats() {
-  const totalScholarships = AppState.scholarships.length;
-  const countries = new Set(AppState.scholarships.map(b => b.pais));
-  const universities = new Set(AppState.scholarships.map(b => b.institucion));
-
-  animateNumber(DOM.totalScholarships, totalScholarships);
-  animateNumber(DOM.totalCountries, countries.size);
-  animateNumber(DOM.totalUniversities, universities.size);
-}
-
-/**
- * Anima un número desde 0 hasta el valor final
- */
-function animateNumber(element, target) {
-  const duration = 1000;
-  const start = 0;
-  const increment = target / (duration / 16);
-  let current = start;
-
-  const timer = setInterval(() => {
-    current += increment;
-    if (current >= target) {
-      element.textContent = target;
-      clearInterval(timer);
-    } else {
-      element.textContent = Math.floor(current);
-    }
-  }, 16);
-}
-
-/**
- * Muestra u oculta el spinner de carga
- */
-function showLoading(show) {
-  if (show) {
-    DOM.loadingSpinner.classList.remove('hidden');
-    DOM.cardsContainer.classList.add('hidden');
-  } else {
-    DOM.loadingSpinner.classList.add('hidden');
-    DOM.cardsContainer.classList.remove('hidden');
-  }
-}
-
-/**
- * Muestra un mensaje de error
- */
-function showError(message) {
-  DOM.cardsContainer.innerHTML = `
-    <div class="no-results">
-      <h3>⚠️ Error</h3>
-      <p>${escapeHTML(message)}</p>
-    </div>
-  `;
-}
-
-/**
- * Sanitiza input para prevenir XSS
- */
-function sanitizeInput(input) {
-  const div = document.createElement('div');
-  div.textContent = input;
-  return div.innerHTML;
-}
-
-/**
- * Escapa HTML para prevenir XSS
- */
-function escapeHTML(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
-}
-
-/**
- * Valida un email
- */
-function isValidEmail(email) {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(email);
-}
-
-/**
- * Formatea una fecha
- */
-function formatDate(dateString) {
-  const date = new Date(dateString);
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  return date.toLocaleDateString('es-ES', options);
-}
-
-/**
- * Función de debounce para optimizar la búsqueda
- */
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
-
-// Iniciar la aplicación cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', init);
+card.innerHTML = `
+           <div class="card-body">
+               <span class="tag">${beca.financiamiento}</span>
+                ${isClosed ? '<span class="tag" style="background:#555; color:white;">Cerrada</span>' : ''}
+               <h3 style="margin: 10px 0;">${beca.titulo}</h3>
+               <p style="color: var(--primary); font-weight: bold;">${beca.institucion}</p>
+               <p style="font-size: 0.9rem; color: #666;"><i class="fas fa-map-marker-alt"></i> ${beca.pais}</p>
+                <div class="card-tags">${beca.nivel.map(n => `<span class="tag">${n}</span>`).join('')}</div>
+                <p style="margin-top: 10px; font-size: 0.9rem;"><i class="far fa-clock"></i> ${beca.deadline}</p>
+                <div class="card-tags">
+                    ${beca.nivel.map(n => `<span class="tag">${n}</span>`).join('')}
+                </div>
+                <p style="margin-top: 10px; font-size: 0.9rem; font-weight:bold; ${deadlineClass} padding:5px; border-radius:4px; display:inline-block;">
+                    ${deadlineText}
+                </p>
+           </div>
+           <div class="card-footer">
+               <a href="${beca.url_convocatoria}" target="_blank" class="btn btn-outline btn-sm">Ver Web</a>
+                ${currentUser ? 
+                    `<button class="btn ${isSaved ? 'btn-secondary' : 'btn-primary'} btn-sm" onclick="addToTracker('${beca.id}')">
+                        ${isSaved ? '<i class="fas fa-check"></i> Guardado' : 'Guardar'}
+                     </button>` : 
+                    `<button class="btn btn-secondary btn-sm" style="background:#ccc" onclick="toggleAuthModal()">Guardar</button>`
+                }
+                <button class="btn ${btnClass} btn-sm" style="${btnStyle}" ${btnAction}>${btnText}</button>
+           </div>
+       `;
+container.appendChild(card);
