@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScholarHub - Gestor de Becas</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Navegación Corregida -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo" onclick="navigate('home')">Scholar<span class="highlight">Hub</span></a>
+            <div class="nav-links" id="nav-links">
+                <a href="#" onclick="navigate('home')">Inicio</a>
+                <a href="#" onclick="navigate('catalog')">Becas</a>
+                <!-- Sección dinámica para usuarios logueados -->
+                <div id="auth-section" style="display: contents;"></div>
+            </div>
+            <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- VISTA: HOME -->
+    <section id="home" class="view-section active">
+        <header class="hero">
+            <div class="container">
+                <h1>Tu Camino a la Beca Ideal Comienza Aquí</h1>
+                <p>Descubre oportunidades, organiza tus documentos y genera cartas de motivación perfectas.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="navigate('catalog')">Ver Becas</button>
+                    <button class="btn btn-outline" onclick="document.getElementById('about').scrollIntoView()">Saber Más</button>
+                </div>
+            </div>
+        </header>
+        
+        <section class="stats-section">
+            <div class="container stats-grid">
+                <div class="stat-card"><h3 id="stat-becas">0</h3><p>Becas Activas</p></div>
+                <div class="stat-card"><h3 id="stat-paises">0</h3><p>Países</p></div>
+                <div class="stat-card"><h3 id="stat-unis">0</h3><p>Universidades</p></div>
+            </div>
+        </section>
+
+        <section id="about" class="container" style="padding: 60px 20px; text-align: center;">
+            <h2 class="section-title">¿Cómo Funciona?</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+                <div><i class="fas fa-search fa-3x" style="color:var(--primary); margin-bottom:15px;"></i><h3>1. Busca</h3><p>Filtra entre cientos de oportunidades reales.</p></div>
+                <div><i class="fas fa-user-plus fa-3x" style="color:var(--primary); margin-bottom:15px;"></i><h3>2. Regístrate</h3><p>Crea tu cuenta gratis para guardar favoritos.</p></div>
+                <div><i class="fas fa-pen-nib fa-3x" style="color:var(--primary); margin-bottom:15px;"></i><h3>3. Redacta</h3><p>Usa nuestro generador de cartas inteligente.</p></div>
+            </div>
+        </section>
+    </section>
+
+    <!-- VISTA: CATÁLOGO -->
+    <section id="catalog" class="view-section hidden">
+        <div class="container">
+            <h2 class="section-title">Catálogo de Oportunidades</h2>
+            <div class="filters-container">
+                <div class="search-box"><i class="fas fa-search"></i><input type="text" id="searchInput" placeholder="Buscar por título, universidad o país..."></div>
+                <div class="filters-grid">
+                    <select id="filterLevel" class="filter-select"><option value="all">Todos los Niveles</option><option value="Pregrado">Pregrado</option><option value="Maestría">Maestría</option><option value="Doctorado">Doctorado</option></select>
+                    <select id="filterArea" class="filter-select"><option value="all">Todas las Áreas</option><option value="STEM">STEM</option><option value="Humanidades">Humanidades</option><option value="Negocios">Negocios</option></select>
+                    <select id="filterSort" class="filter-select"><option value="default">Ordenar por...</option><option value="deadline">Más Urgentes</option><option value="recent">Más Recientes</option></select>
+                </div>
+            </div>
+            <div id="catalogo" class="scholarships-grid"></div>
+        </div>
+    </section>
+
+    <!-- VISTA: DASHBOARD -->
+    <section id="dashboard-section" class="view-section hidden">
+        <div class="container dashboard-container">
+            <div class="dashboard-header">
+                <h2>Hola, <span id="userNameDisplay">Usuario</span></h2>
+                <button class="btn btn-outline" onclick="logout()">Cerrar Sesión</button>
+            </div>
+            <div class="dashboard-grid">
+                <div class="dash-sidebar">
+                    <div class="dash-card">
+                        <h3>Mi Progreso</h3>
+                        <canvas id="statusChart"></canvas>
+                    </div>
+                    <div class="dash-card">
+                        <h3>Resumen</h3>
+                        <p>Total Aplicaciones: <strong id="dash-total">0</strong></p>
+                        <p>Documentos Listos: <strong id="dash-docs">0%</strong></p>
+                    </div>
+                </div>
+                <div class="dash-main">
+                    <div class="dash-card">
+                        <h3>Mis Postulaciones (Tracker)</h3>
+                        <div id="tracker-list" class="tracker-columns"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL: LOGIN / REGISTRO -->
+    <div id="auth-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <span class="close-modal" onclick="toggleAuthModal()">&times;</span>
+            <h2 id="auth-title" style="margin-bottom: 20px;">Iniciar Sesión</h2>
+            <form id="loginForm" class="auth-form">
+                <div class="form-group"><label>Email</label><input type="email" id="loginEmail" required></div>
+                <div class="form-group"><label>Contraseña</label><input type="password" id="loginPass" required></div>
+                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                <p class="auth-toggle" onclick="toggleAuthMode()">¿No tienes cuenta? Regístrate</p>
+            </form>
+            <form id="registerForm" class="auth-form hidden">
+                <div class="form-group"><label>Nombre Completo</label><input type="text" id="regName" required></div>
+                <div class="form-group"><label>Email</label><input type="email" id="regEmail" required></div>
+                <div class="form-group"><label>Contraseña</label><input type="password" id="regPass" required></div>
+                <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+                <p class="auth-toggle" onclick="toggleAuthMode()">¿Ya tienes cuenta? Inicia sesión</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- NUEVO MODAL: GENERADOR DE CARTAS MEJORADO -->
+    <div id="letterModal" class="modal-overlay hidden">
+        <div class="modal-content modal-large">
+            <span class="close-modal" onclick="closeLetterModal()">&times;</span>
+            <h2 style="margin-bottom: 10px;"><i class="fas fa-magic"></i> Generador de Documentos</h2>
+            <p class="small-text" style="margin-bottom: 20px;">Selecciona el tipo de documento y personalízalo.</p>
+            
+            <!-- Selector de Plantilla -->
+            <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+                <button class="btn btn-primary btn-sm" onclick="loadTemplate('motivation')"><i class="fas fa-file-signature"></i> Carta Motivación</button>
+                <button class="btn btn-outline btn-sm" onclick="loadTemplate('recommendation')"><i class="fas fa-user-tie"></i> Solicitud Recomendación</button>
+                <button class="btn btn-outline btn-sm" onclick="loadTemplate('email')"><i class="fas fa-envelope"></i> Email a Profesor</button>
+            </div>
+
+            <!-- Campos de Personalización -->
+            <div class="form-group">
+                <label>Punto Fuerte o Logro Principal (Opcional):</label>
+                <input type="text" id="custom-achievement" placeholder="Ej: Graduado con honores, 3 años de experiencia en...">
+            </div>
+            
+            <textarea id="letterContent" rows="15" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-family: serif; line-height: 1.5;"></textarea>
+            
+            <div style="margin-top: 15px; text-align: right; display: flex; gap: 10px; justify-content: flex-end;">
+                <button class="btn btn-secondary" onclick="closeLetterModal()" style="background: #666; color: white;">Cancelar</button>
+                <button class="btn btn-primary" onclick="copyLetter()"><i class="fas fa-copy"></i> Copiar Texto</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

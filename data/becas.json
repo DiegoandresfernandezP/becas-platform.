@@ -1,0 +1,58 @@
+[
+  {
+    "id": "beca_001",
+    "titulo": "Master in Computer Science",
+    "institucion": "ETH Zurich",
+    "pais": "Suiza",
+    "nivel": ["Maestría"],
+    "area": ["STEM", "Ingeniería", "Ciencias de la Computación"],
+    "financiamiento": "Parcial (Tuition waiver)",
+    "deadline": "2024-12-15",
+    "url_convocatoria": "https://ethz.ch",
+    "requisitos_idioma": ["Inglés C1"],
+    "documentos_sugeridos": ["CV", "Carta Motivación", "Transcript", "2 Recomendaciones"],
+    "tags": ["IA", "Robotics"]
+  },
+  {
+    "id": "beca_002",
+    "titulo": "Chevening Scholarship",
+    "institucion": "UK Government",
+    "pais": "Reino Unido",
+    "nivel": ["Maestría"],
+    "area": ["Negocios", "Humanidades", "STEM"],
+    "financiamiento": "100% (Full Ride)",
+    "deadline": "2024-11-05",
+    "url_convocatoria": "https://chevening.org",
+    "requisitos_idioma": ["Inglés IELTS 6.5+"],
+    "documentos_sugeridos": ["CV UK Style", "2 Cartas Recomendación", "Essay"],
+    "tags": ["Liderazgo", "Global"]
+  },
+  {
+    "id": "beca_003",
+    "titulo": "Fulbright Foreign Student",
+    "institucion": "USA Universities",
+    "pais": "EE.UU.",
+    "nivel": ["Maestría", "Doctorado"],
+    "area": ["Artes", "Ciencias", "Humanidades"],
+    "financiamiento": "100% + Stipend",
+    "deadline": "2025-02-20",
+    "url_convocatoria": "https://fulbright.org",
+    "requisitos_idioma": ["Inglés TOEFL 90+"],
+    "documentos_sugeridos": ["Portfolio", "Research Proposal", "3 Recommendations"],
+    "tags": ["Investigación", "Cultura"]
+  },
+  {
+    "id": "beca_004",
+    "titulo": "DAAD EPOS",
+    "institucion": "German Universities",
+    "pais": "Alemania",
+    "nivel": ["Maestría"],
+    "area": ["Desarrollo", "Ingeniería", "Economía"],
+    "financiamiento": "100% (Monthly stipend)",
+    "deadline": "2024-10-31",
+    "url_convocatoria": "https://daad.de",
+    "requisitos_idioma": ["Inglés o Alemán B2"],
+    "documentos_sugeridos": ["CV Europass", "Motivation Letter", "Work Experience Proof"],
+    "tags": ["Desarrollo", "Europa"]
+  }
+]
