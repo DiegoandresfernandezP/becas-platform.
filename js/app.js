@@ -23,23 +23,67 @@ function initModalsSafety() {
     if (!document.getElementById('letterModal')) console.warn('⚠️ Falta #letterModal en HTML');
 }
 
-// --- CARGA DE DATOS ---
+// --- CARGA DE DATOS (CON HISTORIAL INTELIGENTE) ---
 async function loadScholarships() {
     try {
         const response = await fetch('./data/becas.json');
         if (!response.ok) throw new Error('Error al cargar JSON');
         
         let allScholarships = await response.json();
-        
-        // Filtrar becas activas (no vencidas)
         const todayStr = new Date().toISOString().split('T')[0];
-        scholarships = allScholarships.filter(b => b.deadline >= todayStr);
         
-        // Ordenar por defecto (más urgentes)
-        scholarships.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+        // 1. Separar en Activas y Cerradas
+        const active = allScholarships.filter(b => b.deadline >= todayStr);
+        const closed = allScholarships.filter(b => b.deadline < todayStr);
         
-        renderScholarships(scholarships);
-        updateStats();
+        // 2. Ordenar activas por urgencia
+        active.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+        // Opcional: Ordenar cerradas por fecha reciente primero (para ver las más nuevas históricamente)
+        closed.sort((a, b) => new Date(b.deadline) - new Date(a.deadline));
+        
+        const container = document.getElementById('catalogo');
+        if (!container) return;
+
+        container.innerHTML = ''; // Limpiar contenedor
+
+        // 3. Renderizar ACTIVAS
+        if (active.length > 0) {
+            // Título de sección activa
+            const headerActive = document.createElement('div');
+            headerActive.className = 'section-header';
+            headerActive.style.gridColumn = "1 / -1";
+            headerActive.style.marginBottom = "20px";
+            headerActive.innerHTML = `<h2 style="color: var(--primary);"><i class="fas fa-clock"></i> Convocatorias Abiertas (${active.length})</h2>`;
+            container.appendChild(headerActive);
+
+            renderScholarships(active, false, container); // false = no es cerrada
+        } else {
+            container.innerHTML += `<div style="grid-column:1/-1; text-align:center; padding:20px;">No hay becas activas en este momento.</div>`;
+        }
+        
+        // 4. Renderizar CERRADAS (Historial)
+        if (closed.length > 0) {
+            const separator = document.createElement('div');
+            separator.style.gridColumn = "1 / -1";
+            separator.style.margin = "60px 0 30px";
+            separator.style.padding = "30px";
+            separator.style.background = "linear-gradient(to right, #f9fafb, #f3f4f6)";
+            separator.style.borderLeft = "5px solid #9ca3af";
+            separator.style.borderRadius = "8px";
+            separator.innerHTML = `
+                <h3 style="color: #4b5563; margin-bottom: 10px; font-size: 1.3rem;">
+                    <i class="fas fa-archive"></i> Historial de Convocatorias Cerradas
+                </h3>
+                <p style="font-size: 0.95rem; color: #6b7280; max-width: 800px; margin: 0 auto;">
+                    Estas becas ya finalizaron su ciclo actual. Úsalas como <strong>referencia</strong> para revisar los requisitos, documentos y fechas típicas, y así prepararte con anticipación para la próxima edición.
+                </p>
+            `;
+            container.appendChild(separator);
+            
+            renderScholarships(closed, true, container); // true = modo cerrado
+        }
+        
+        updateStats(active.length); // Stats basadas solo en activas
         
     } catch (error) {
         console.error('Error:', error);
@@ -160,18 +204,21 @@ function applyFilters() {
     renderScholarships(filtered);
 }
 
-// --- RENDERIZADO ---
-function renderScholarships(data) {
-    const container = document.getElementById('catalogo');
+// --- RENDERIZADO (MEJORADO PARA CERRADAS) ---
+// Nota: Ahora recibe 'container' como argumento para hacer append directo
+function renderScholarships(data, isClosed = false, container = null) {
+    // Si no se pasa container, usamos el global (para retrocompatibilidad si se llama desde filtros)
+    const targetContainer = container || document.getElementById('catalogo');
     const countDisplay = document.getElementById('count-display');
     
-    if (!container) return;
+    // Solo actualizamos el contador global si NO es una sección de cerradas
+    if (!isClosed && countDisplay) {
+        countDisplay.textContent = data.length;
+    }
 
-    container.innerHTML = '';
-    if(countDisplay) countDisplay.textContent = data.length;
-
-    if (data.length === 0) {
-        container.innerHTML = `
+    if (data.length === 0 && !container) {
+        // Solo mostrar mensaje de "no encontrado" si estamos filtrando todo el catálogo
+        targetContainer.innerHTML = `
             <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
                 <i class="fas fa-search" style="font-size: 3rem; color: #ccc; margin-bottom: 15px;"></i>
                 <h3>No se encontraron resultados</h3>
@@ -183,15 +230,47 @@ function renderScholarships(data) {
     data.forEach(beca => {
         const isSaved = currentUser && userApplications.some(a => a.id === beca.id);
         const card = document.createElement('div');
-        card.className = 'beca-card';
+        card.className = `beca-card ${isClosed ? 'beca-card-closed' : ''}`;
         
-        // Protección si nivel es undefined
+        // Estilos específicos si está cerrada (opacidad o borde gris)
+        if (isClosed) {
+            card.style.opacity = "0.85";
+            card.style.borderColor = "#e5e7eb";
+        }
+
         const niveles = beca.nivel ? beca.nivel.slice(0, 2) : [];
+        
+        // Lógica de botones según estado
+        let actionButtonHTML = '';
+        let webButtonHTML = '';
+
+        if (isClosed) {
+            // Botón Guardado DESACTIVADO
+            actionButtonHTML = `<button class="btn btn-secondary btn-sm" disabled style="cursor: not-allowed; opacity: 0.6;"><i class="fas fa-lock"></i> Cerrado</button>`;
+            // Botón Web (Opcional: podrías cambiar el texto a "Ver Info")
+            webButtonHTML = `<a href="${beca.url_convocatoria}" target="_blank" class="btn btn-outline btn-sm" style="filter: grayscale(100%);">Ver Info</a>`;
+        } else {
+            // Lógica normal para activas
+            if (currentUser) {
+                actionButtonHTML = `<button class="btn ${isSaved ? 'btn-secondary' : 'btn-primary'} btn-sm" onclick="addToTracker('${beca.id}')">
+                        ${isSaved ? '<i class="fas fa-check"></i> Guardado' : 'Guardar'}
+                     </button>`;
+            } else {
+                actionButtonHTML = `<button class="btn btn-secondary btn-sm" onclick="toggleAuthModal()">Guardar</button>`;
+            }
+            webButtonHTML = `<a href="${beca.url_convocatoria}" target="_blank" class="btn btn-outline btn-sm">Ver Web</a>`;
+        }
+
+        // Etiqueta de estado en la esquina
+        const statusBadge = isClosed 
+            ? `<span style="position:absolute; top:10px; right:10px; background:#ef4444; color:white; padding:4px 8px; border-radius:4px; font-size:0.7rem; font-weight:bold;">CERRADO</span>` 
+            : `<span style="position:absolute; top:10px; right:10px; background:#10b981; color:white; padding:4px 8px; border-radius:4px; font-size:0.7rem; font-weight:bold;">ABIERTO</span>`;
 
         card.innerHTML = `
-            <div class="card-body">
+            <div class="card-body" style="position:relative;">
+                ${statusBadge}
                 <span class="tag" style="background:#e0f2fe; color:#0369a1;">${beca.financiamiento}</span>
-                <h3 style="margin: 10px 0; font-size: 1.2rem;">${beca.titulo}</h3>
+                <h3 style="margin: 10px 0; font-size: 1.2rem; ${isClosed ? 'color:#6b7280;' : ''}">${beca.titulo}</h3>
                 <p style="color: var(--primary); font-weight: bold;">${beca.institucion}</p>
                 <p style="font-size: 0.9rem; color: #666;"><i class="fas fa-map-marker-alt"></i> ${beca.pais}</p>
                 
@@ -199,22 +278,17 @@ function renderScholarships(data) {
                     ${niveles.map(n => `<span class="tag">${n}</span>`).join('')}
                 </div>
                 
-                <p style="margin-top: 15px; font-size: 0.85rem; color: var(--danger); font-weight: bold;">
+                <p style="margin-top: 15px; font-size: 0.85rem; color: ${isClosed ? '#9ca3af' : 'var(--danger)'}; font-weight: bold;">
                     <i class="far fa-clock"></i> Deadline: ${beca.deadline}
                 </p>
             </div>
             
             <div class="card-footer">
-                <a href="${beca.url_convocatoria}" target="_blank" class="btn btn-outline btn-sm">Ver Web</a>
-                ${currentUser ? 
-                    `<button class="btn ${isSaved ? 'btn-secondary' : 'btn-primary'} btn-sm" onclick="addToTracker('${beca.id}')">
-                        ${isSaved ? '<i class="fas fa-check"></i> Guardado' : 'Guardar'}
-                     </button>` : 
-                    `<button class="btn btn-secondary btn-sm" onclick="toggleAuthModal()">Guardar</button>`
-                }
+                ${webButtonHTML}
+                ${actionButtonHTML}
             </div>
         `;
-        container.appendChild(card);
+        targetContainer.appendChild(card);
     });
 }
 
