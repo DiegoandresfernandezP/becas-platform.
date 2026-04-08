@@ -588,3 +588,127 @@ window.copyLetter = () => {
 window.closeLetterModal = () => {
     document.getElementById('letterModal').classList.add('hidden');
 };
+// --- VARIABLES GLOBALES PARA COMPARTIR ---
+let currentSharedBeca = null;
+const BASE_URL = window.location.href.split('#')[0]; // URL base sin hash
+
+// --- ACTUALIZAR META TAGS DINÁMICOS ---
+function updateMetaTags(beca) {
+    const title = `${beca.titulo} en ${beca.institucion} | ScholarHub`;
+    const desc = `Beca ${beca.financiamiento} en ${beca.pais}. Deadline: ${beca.deadline}. Área: ${beca.area.join(', ')}.`;
+    
+    // Título de la pestaña
+    document.title = title;
+
+    // Open Graph
+    document.querySelector('meta[property="og:title"]').setAttribute("content", title);
+    document.querySelector('meta[property="og:description"]').setAttribute("content", desc);
+    
+    // Twitter
+    document.querySelector('meta[property="twitter:title"]').setAttribute("content", title);
+    document.querySelector('meta[property="twitter:description"]').setAttribute("content", desc);
+
+    // Guardar referencia para compartir
+    currentSharedBeca = beca;
+}
+
+// --- RESTAURAR META TAGS ORIGINALES ---
+function resetMetaTags() {
+    document.title = "ScholarHub - Tu Portal de Becas Internacionales";
+    document.querySelector('meta[property="og:title"]').setAttribute("content", "ScholarHub - Encuentra tu Beca Ideal");
+    document.querySelector('meta[property="og:description"]').setAttribute("content", "Más de 100 oportunidades de estudio en el extranjero. Filtra, guarda y gestiona tu postulación gratis.");
+    document.querySelector('meta[property="twitter:title"]').setAttribute("content", "ScholarHub - Encuentra tu Beca Ideal");
+    document.querySelector('meta[property="twitter:description"]').setAttribute("content", "Más de 100 oportunidades de estudio en el extranjero. Filtra, guarda y gestiona tu postulación gratis.");
+    currentSharedBeca = null;
+}
+
+// --- ABRIR MODAL DE DETALLE CON BOTONES ---
+// Reemplaza tu función openDetail existente o crea una nueva llamada desde la card
+function openDetailModal(beca) {
+    const modal = document.getElementById('detail-modal');
+    const content = document.getElementById('detail-content');
+    
+    // Actualizar meta tags para SEO social
+    updateMetaTags(beca);
+
+    // Construir HTML del detalle
+    content.innerHTML = `
+        <h2 style="color: var(--primary);">${beca.titulo}</h2>
+        <h3 style="margin-bottom: 15px;">${beca.institucion} 📍 ${beca.pais}</h3>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+            <div><strong>Deadline:</strong> <span style="color: var(--danger);">${beca.deadline}</span></div>
+            <div><strong>Nivel:</strong> ${beca.nivel.join(', ')}</div>
+            <div><strong>Financiamiento:</strong> ${beca.financiamiento}</div>
+            <div><strong>Área:</strong> ${beca.area.join(', ')}</div>
+        </div>
+
+        <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+            <h4>Documentos Sugeridos:</h4>
+            <ul style="margin-left: 20px; margin-top: 5px;">
+                ${beca.documentos_sugeridos.map(d => `<li>${d}</li>`).join('')}
+            </ul>
+        </div>
+
+        <a href="${beca.url_convocatoria}" target="_blank" class="btn btn-primary" style="display: inline-block; width: 100%; text-align: center;">
+            Ir a la Convocatoria Oficial <i class="fas fa-external-link-alt"></i>
+        </a>
+        
+        ${currentUser ? 
+            `<button class="btn btn-secondary" style="display: inline-block; width: 100%; text-align: center; margin-top: 10px;" onclick="addToTracker('${beca.id}'); closeDetailModal();">
+                💾 Guardar en mi Tracker
+            </button>` : ''
+        }
+    `;
+
+    modal.classList.remove('hidden');
+}
+
+function closeDetailModal() {
+    document.getElementById('detail-modal').classList.add('hidden');
+    resetMetaTags();
+}
+
+// --- FUNCIONES DE COMPARTIR ---
+function getShareUrl() {
+    // Como es una SPA estática, usamos la URL base + un hash o parámetro simulado
+    // Para una implementación perfecta necesitarías hosting con SSR, pero esto funciona para copiar texto
+    return BASE_URL; 
+}
+
+function shareWhatsApp() {
+    if (!currentSharedBeca) return;
+    const text = `¡Mira esta beca! ${currentSharedBeca.titulo} en ${currentSharedBeca.pais}. Deadline: ${currentSharedBeca.deadline}. Más info aquí:`;
+    const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + ' ' + getShareUrl())}`;
+    window.open(url, '_blank');
+}
+
+function shareTwitter() {
+    if (!currentSharedBeca) return;
+    const text = `Oportunidad: ${currentSharedBeca.titulo} en ${currentSharedBeca.institucion} (${currentSharedBeca.pais}).`;
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(getShareUrl())}`;
+    window.open(url, '_blank');
+}
+
+function shareLinkedIn() {
+    if (!currentSharedBeca) return;
+    const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(getShareUrl())}`;
+    window.open(url, '_blank');
+}
+
+function copyLink() {
+    navigator.clipboard.writeText(getShareUrl()).then(() => {
+        alert("Enlace copiado al portapapeles. ¡Pégalo donde quieras!");
+    });
+}
+
+// --- ACTUALIZAR RENDERIZADO DE CARDS ---
+// En tu función renderScholarships, asegúrate de llamar a openDetailModal
+// Ejemplo dentro del bucle forEach:
+/*
+card.innerHTML = `
+  ...
+  <button class="btn btn-sm btn-primary" onclick='openDetailModal(${JSON.stringify(beca).replace(/'/g, "&#39;")})'>Ver Detalles</button>
+  ...
+`;
+*/
