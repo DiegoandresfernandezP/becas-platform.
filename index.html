@@ -1,278 +1,261 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO Básico -->
-    <title>ScholarHub - Tu Portal de Becas Internacionales</title>
-    <meta name="description" content="Encuentra y gestiona más de 100 becas internacionales gratuitas. Filtra por país, nivel y área. Genera cartas de motivación y organiza tu postulación.">
-    <meta name="keywords" content="becas, scholarships, estudio en el extranjero, fulbright, erasmus, gratis, educación, master, doctorado">
-    <meta name="author" content="ScholarHub Team">
-
-    <!-- Open Graph / Facebook / WhatsApp (Se actualizan dinámicamente con JS) -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://diegoandresfernandezp.github.io/becas-platform/">
-    <meta property="og:title" content="ScholarHub - Encuentra tu Beca Ideal">
-    <meta property="og:description" content="Más de 100 oportunidades de estudio en el extranjero. Filtra, guarda y gestiona tu postulación gratis.">
-    <meta property="og:image" content="https://diegoandresfernandezp.github.io/becas-platform/assets/og-default.jpg">
-
-    <!-- Twitter (Se actualizan dinámicamente con JS) -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://diegoandresfernandezp.github.io/becas-platform/">
-    <meta property="twitter:title" content="ScholarHub - Encuentra tu Beca Ideal">
-    <meta property="twitter:description" content="Más de 100 oportunidades de estudio en el extranjero. Filtra, guarda y gestiona tu postulación gratis.">
-    <meta property="twitter:image" content="https://diegoandresfernandezp.github.io/becas-platform/assets/og-default.jpg">
-
-    <!-- Estilos e Iconos -->
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Encuentra oportunidades de becas internacionales para estudiar en el extranjero. Plataforma gratuita para democratizar el acceso a educación global.">
+  <title>BecasInternacionales - Encuentra tu Beca Ideal</title>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-
-    <!-- Navegación -->
-    <nav class="navbar">
-        <div class="container nav-container">
-            <a href="#" class="logo" onclick="navigate('home')">Scholar<span class="highlight">Hub</span></a>
-            <div class="nav-links" id="nav-links">
-                <a href="#" onclick="navigate('home')">Inicio</a>
-                <a href="#" onclick="navigate('catalog')">Becas</a>
-                <div id="auth-buttons"></div>
-            </div>
-            <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
-        </div>
-    </nav>
-
-    <!-- VISTA: HOME -->
-    <section id="home" class="view-section active">
-        <header class="hero">
-            <div class="container">
-                <h1>Encuentra y Gestiona tu Beca Ideal</h1>
-                <p>La plataforma gratuita para descubrir oportunidades y organizar tu postulación.</p>
-                <div class="hero-buttons">
-                    <button class="btn btn-primary" onclick="navigate('catalog')">Ver Becas</button>
-                    <button class="btn btn-outline" onclick="navigate('about')">Saber Más</button>
-                </div>
-            </div>
-        </header>
-        
-        <section class="stats-section">
-            <div class="container stats-grid">
-                <div class="stat-card">
-                    <h3 id="stat-becas">0</h3>
-                    <p>Becas Activas</p>
-                </div>
-                <div class="stat-card">
-                    <h3 id="stat-paises">0</h3>
-                    <p>Países</p>
-                </div>
-                <div class="stat-card">
-                    <h3 id="stat-unis">0</h3>
-                    <p>Universidades</p>
-                </div>
-            </div>
-        </section>
-    </section>
-
-    <!-- VISTA: CATÁLOGO -->
-    <section id="catalog" class="view-section hidden">
-        <div class="container">
-            <h2 class="section-title">Catálogo de Oportunidades</h2>
-            
-            <div class="filters-container">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="searchInput" placeholder="Buscar por título, universidad o país...">
-                </div>
-                <div class="filters-grid">
-                    <select id="filterLevel" class="filter-select">
-                        <option value="all">Todos los Niveles</option>
-                        <option value="Pregrado">Pregrado</option>
-                        <option value="Maestría">Maestría</option>
-                        <option value="Doctorado">Doctorado</option>
-                        <option value="Secundaria">Secundaria</option>
-                        <option value="Posdoctorado">Posdoctorado</option>
-                    </select>
-                    <select id="filterArea" class="filter-select">
-                        <option value="all">Todas las Áreas</option>
-                        <option value="STEM">STEM</option>
-                        <option value="Humanidades">Humanidades</option>
-                        <option value="Negocios">Negocios</option>
-                        <option value="Artes">Artes</option>
-                        <option value="Salud">Salud</option>
-                    </select>
-                    <select id="filterCountry" class="filter-select">
-                        <option value="all">Todos los Países</option>
-                        <option value="Remoto">Remoto</option>
-                        <option value="Estados Unidos">Estados Unidos</option>
-                        <option value="Alemania">Alemania</option>
-                        <option value="España">España</option>
-                        <option value="Japón">Japón</option>
-                        <option value="China">China</option>
-                        <option value="Reino Unido">Reino Unido</option>
-                        <option value="Francia">Francia</option>
-                        <option value="Italia">Italia</option>
-                        <option value="Corea del Sur">Corea del Sur</option>
-                        <option value="Suiza">Suiza</option>
-                        <option value="Canadá">Canadá</option>
-                        <option value="Australia">Australia</option>
-                        <option value="Brasil">Brasil</option>
-                        <option value="Argentina">Argentina</option>
-                        <option value="México">México</option>
-                        <option value="Colombia">Colombia</option>
-                        <option value="Turquía">Turquía</option>
-                        <option value="Hungría">Hungría</option>
-                        <option value="Suecia">Suecia</option>
-                        <option value="Irlanda">Irlanda</option>
-                        <option value="Austria">Austria</option>
-                        <option value="Países Bajos">Países Bajos</option>
-                        <option value="Portugal">Portugal</option>
-                        <option value="Rusia">Rusia</option>
-                        <option value="Cuba">Cuba</option>
-                        <option value="Emiratos Árabes Unidos">Emiratos Árabes Unidos</option>
-                        <option value="Taiwán">Taiwán</option>
-                        <option value="India">India</option>
-                        <option value="Chile">Chile</option>
-                        <option value="Perú">Perú</option>
-                        <option value="Panamá">Panamá</option>
-                        <option value="Romania">Romania</option>
-                        <option value="Bulgaria">Bulgaria</option>
-                        <option value="Grecia">Grecia</option>
-                        <option value="Finlandia">Finlandia</option>
-                        <option value="Hong Kong">Hong Kong</option>
-                        <option value="Europa">Europa (Múltiple)</option>
-                    </select>
-                    <select id="filterSort" class="filter-select">
-                        <option value="default">Ordenar por...</option>
-                        <option value="deadline">Más Urgentes</option>
-                        <option value="recent">Más Recientes</option>
-                    </select>
-                </div>
-            </div>
-
-            <div id="results-info" style="margin-bottom: 15px; color: #666; font-size: 0.9rem;">
-                Mostrando <strong id="count-display">0</strong> oportunidades
-            </div>
-
-            <div id="catalogo" class="scholarships-grid">
-                <p style="text-align:center; grid-column: 1/-1;">Cargando oportunidades...</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- VISTA: DASHBOARD (Privado) -->
-    <section id="dashboard-section" class="view-section hidden">
-        <div class="container dashboard-container">
-            <div class="dashboard-header">
-                <h2>Hola, <span id="userNameDisplay">Usuario</span></h2>
-                <button class="btn btn-outline" onclick="logout()">Cerrar Sesión</button>
-            </div>
-
-            <div class="dashboard-grid">
-                <div class="dash-sidebar">
-                    <div class="dash-card">
-                        <h3>Mi Progreso</h3>
-                        <canvas id="statusChart"></canvas>
-                    </div>
-                    <div class="dash-card">
-                        <h3>Resumen</h3>
-                        <p>Total Aplicaciones: <strong id="dash-total">0</strong></p>
-                        <p>Documentos Listos: <strong id="dash-docs">0%</strong></p>
-                    </div>
-                </div>
-                <div class="dash-main">
-                    <div class="dash-card">
-                        <h3>Mis Postulaciones (Tracker)</h3>
-                        <p class="small-text">Gestiona el estado de cada beca.</p>
-                        <div id="tracker-list" class="tracker-columns">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- MODAL: LOGIN / REGISTRO -->
-    <div id="auth-modal" class="modal-overlay hidden">
-        <div class="modal-content">
-            <span class="close-modal" onclick="toggleAuthModal()">&times;</span>
-            <h2 id="auth-title" style="margin-bottom: 20px;">Iniciar Sesión</h2>
-            
-            <form id="loginForm" class="auth-form">
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" id="loginEmail" required>
-                </div>
-                <div class="form-group">
-                    <label>Contraseña</label>
-                    <input type="password" id="loginPass" required>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
-                <p class="auth-toggle" onclick="toggleAuthMode()">¿No tienes cuenta? Regístrate</p>
-            </form>
-
-            <form id="registerForm" class="auth-form hidden">
-                <div class="form-group">
-                    <label>Nombre Completo</label>
-                    <input type="text" id="regName" required>
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" id="regEmail" required>
-                </div>
-                <div class="form-group">
-                    <label>Contraseña</label>
-                    <input type="password" id="regPass" required>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
-                <p class="auth-toggle" onclick="toggleAuthMode()">¿Ya tienes cuenta? Inicia sesión</p>
-            </form>
-        </div>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-content">
+      <a href="#" class="logo">🎓 BecasInternacionales</a>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="#inicio" class="nav-link">Inicio</a></li>
+          <li><a href="#catalogo" class="nav-link">Catálogo</a></li>
+          <li><a href="#como-funciona" class="nav-link">Cómo Funciona</a></li>
+          <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
+          <li><a href="#" class="btn btn-outline" id="loginBtn">Ingresar</a></li>
+          <li><a href="#" class="btn btn-primary" id="registerBtn">Registrarse</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
 
-    <!-- MODAL: DETALLE DE BECA (Con Botones de Compartir) -->
-    <div id="detail-modal" class="modal-overlay hidden">
-        <div class="modal-content modal-large">
-            <span class="close-modal" onclick="closeDetailModal()">&times;</span>
-            <div id="detail-content">
-                <!-- Contenido dinámico -->
-            </div>
-            
-            <!-- Sección de Compartir -->
-            <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #eee;">
-                <h4 style="margin-bottom: 10px; color: #555;">Compartir esta oportunidad:</h4>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <button class="btn btn-primary" style="background-color: #25D366;" onclick="shareWhatsApp()">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </button>
-                    <button class="btn btn-primary" style="background-color: #1DA1F2;" onclick="shareTwitter()">
-                        <i class="fab fa-twitter"></i> Twitter
-                    </button>
-                    <button class="btn btn-primary" style="background-color: #0077b5;" onclick="shareLinkedIn()">
-                        <i class="fab fa-linkedin"></i> LinkedIn
-                    </button>
-                    <button class="btn btn-secondary" onclick="copyLink()">
-                        <i class="fas fa-link"></i> Copiar Enlace
-                    </button>
-                </div>
-            </div>
-        </div>
+  <!-- Hero Section -->
+  <section id="inicio" class="hero">
+    <div class="container">
+      <h1>Encuentra la Beca Perfecta para Tu Futuro</h1>
+      <p>Democratizamos el acceso a oportunidades educativas globales. Explora cientos de becas completamente financiadas y comienza tu viaje internacional.</p>
+
+      <div class="search-container">
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input"
+          placeholder="Busca por universidad, país, área de estudio..."
+          aria-label="Buscar becas"
+        >
+      </div>
     </div>
+  </section>
 
-    <!-- MODAL: GENERADOR DE CARTAS -->
-    <div id="letterModal" class="modal-overlay hidden">
-        <div class="modal-content modal-large">
-            <span class="close-modal" onclick="closeLetterModal()">&times;</span>
-            <h2 id="letterTitle" style="margin-bottom: 15px;">Generador de Cartas</h2>
-            <p class="small-text" style="margin-bottom: 15px;">Esta plantilla inteligente usa tus datos. Edita el texto antes de copiar.</p>
-            <textarea id="letterContent" rows="15" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-family: serif;"></textarea>
-            <div style="margin-top: 15px; text-align: right;">
-                <button class="btn btn-primary" onclick="copyLetter()"><i class="fas fa-copy"></i> Copiar al Portapapeles</button>
-            </div>
+  <!-- Filters Section -->
+  <section class="filters-section">
+    <div class="container">
+      <div class="filters-grid">
+        <div class="filter-group">
+          <label for="filterLevel" class="filter-label">Nivel Académico</label>
+          <select id="filterLevel" class="filter-select">
+            <option value="">Todos los niveles</option>
+            <option value="Pregrado">Pregrado</option>
+            <option value="Maestría">Maestría</option>
+            <option value="Doctorado">Doctorado</option>
+          </select>
         </div>
-    </div>
 
-    <script src="js/app.js"></script>
+        <div class="filter-group">
+          <label for="filterArea" class="filter-label">Área de Estudio</label>
+          <select id="filterArea" class="filter-select">
+            <option value="">Todas las áreas</option>
+            <option value="STEM">STEM</option>
+            <option value="Humanidades">Humanidades</option>
+            <option value="Ciencias Sociales">Ciencias Sociales</option>
+            <option value="Negocios">Negocios</option>
+            <option value="Arte">Arte</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="filterFunding" class="filter-label">Financiamiento</label>
+          <select id="filterFunding" class="filter-select">
+            <option value="">Cualquiera</option>
+            <option value="100%">100% Financiado</option>
+            <option value="Parcial">Financiamiento Parcial</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="filterCountry" class="filter-label">País de Destino</label>
+          <select id="filterCountry" class="filter-select">
+            <option value="">Todos los países</option>
+            <option value="Estados Unidos">Estados Unidos</option>
+            <option value="Reino Unido">Reino Unido</option>
+            <option value="Alemania">Alemania</option>
+            <option value="Suiza">Suiza</option>
+            <option value="Japón">Japón</option>
+            <option value="Australia">Australia</option>
+            <option value="Europa">Europa (Múltiple)</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="sortBy" class="filter-label">Ordenar por</label>
+          <select id="sortBy" class="filter-select">
+            <option value="deadline">Fecha Límite (Más Urgente)</option>
+            <option value="dateAdded">Más Recientes</option>
+            <option value="alphabetical">Alfabético</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catalog Section -->
+  <section id="catalogo" class="catalog-section">
+    <div class="container">
+      <h2 class="section-title">Oportunidades Disponibles</h2>
+      <div id="loadingSpinner" class="spinner"></div>
+      <div id="cardsContainer" class="cards-grid"></div>
+      <div id="noResults" class="no-results hidden">
+        <h3>No se encontraron resultados</h3>
+        <p>Intenta ajustar los filtros o términos de búsqueda</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <h3 id="totalScholarships">0</h3>
+          <p>Becas Activas</p>
+        </div>
+        <div class="stat-item">
+          <h3 id="totalCountries">0</h3>
+          <p>Países</p>
+        </div>
+        <div class="stat-item">
+          <h3 id="totalUniversities">0</h3>
+          <p>Universidades</p>
+        </div>
+        <div class="stat-item">
+          <h3>100%</h3>
+          <p>Gratuito</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="como-funciona" class="how-it-works">
+    <div class="container">
+      <h2 class="section-title">¿Cómo Funciona?</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Explora</h3>
+          <p>Navega por nuestro catálogo de becas y usa los filtros para encontrar las que mejor se adapten a tu perfil académico.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Regístrate</h3>
+          <p>Crea tu cuenta gratuita para guardar becas, gestionar tus postulaciones y acceder a herramientas de seguimiento.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Postúlate</h3>
+          <p>Usa nuestro tracker personal para organizar documentos, seguir deadlines y maximizar tus posibilidades de éxito.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3>Gana tu Beca</h3>
+          <p>Recibe apoyo con plantillas y pronto con IA para mejorar tus cartas y prepararte para entrevistas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Us -->
+  <section id="nosotros" class="how-it-works" style="background: var(--bg-white);">
+    <div class="container">
+      <h2 class="section-title">Sobre Nosotros</h2>
+      <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
+          Somos una plataforma comprometida con democratizar el acceso a oportunidades educativas globales.
+          Creemos que el talento está distribuido equitativamente en el mundo, pero las oportunidades no.
+        </p>
+        <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
+          Nuestra misión es centralizar información dispersa sobre becas internacionales y proporcionar
+          herramientas prácticas para que estudiantes de cualquier origen puedan competir exitosamente
+          por financiamiento educativo en las mejores universidades del mundo.
+        </p>
+        <div style="margin-top: 2rem;">
+          <a href="#" class="btn btn-primary">Sugerir Nueva Beca</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="how-it-works">
+    <div class="container">
+      <div style="background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+                  color: white; padding: 3rem; border-radius: var(--radius-lg); text-align: center;">
+        <h2 style="margin-bottom: 1rem;">Recibe Alertas de Nuevas Becas</h2>
+        <p style="margin-bottom: 1.5rem; opacity: 0.9;">Suscríbete a nuestro newsletter y sé el primero en conocer nuevas oportunidades.</p>
+        <form id="newsletterForm" class="newsletter-form" style="max-width: 500px; margin: 0 auto;">
+          <input
+            type="email"
+            class="newsletter-input"
+            placeholder="Tu correo electrónico"
+            required
+            aria-label="Correo electrónico para newsletter"
+          >
+          <button type="submit" class="btn" style="background: white; color: var(--primary-color);">Suscribirme</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>🎓 BecasInternacionales</h4>
+          <p style="color: #9ca3af; font-size: 0.875rem; line-height: 1.6;">
+            Democratizando el acceso a educación global desde 2025.
+          </p>
+        </div>
+        <div>
+          <h4>Enlaces Rápidos</h4>
+          <ul class="footer-links">
+            <li><a href="#catalogo">Catálogo de Becas</a></li>
+            <li><a href="#como-funciona">Cómo Funciona</a></li>
+            <li><a href="#nosotros">Sobre Nosotros</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Recursos</h4>
+          <ul class="footer-links">
+            <li><a href="#">Guía de Postulación</a></li>
+            <li><a href="#">Plantillas de Documentos</a></li>
+            <li><a href="#">Preguntas Frecuentes</a></li>
+            <li><a href="#">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Síguenos</h4>
+          <ul class="footer-links">
+            <li><a href="#">Twitter / X</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 BecasInternacionales. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
 </body>
 </html>
