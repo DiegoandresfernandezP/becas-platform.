@@ -1,9 +1,9 @@
 // --- ESTADO GLOBAL ---
 let scholarships = [];
-let closedScholarships = [];
 let currentUser = null;
 let userApplications = [];
 let currentSharedBeca = null;
+// Nuevo: Lista de todos los usuarios registrados (simulada en DB local)
 let allUsers = JSON.parse(localStorage.getItem('scholarship_db_users')) || [];
 
 // --- INICIALIZACIÓN ---
@@ -11,142 +11,52 @@ document.addEventListener('DOMContentLoaded', () => {
     loadScholarships();
     checkAuth();
     setupEventListeners();
+    
+    // Inicializar modales si existen en el HTML (prevención de errores)
     initModalsSafety();
 });
 
 function initModalsSafety() {
-    if (!document.getElementById('auth-modal')) console.warn('⚠️ Falta #auth-modal');
-    if (!document.getElementById('detail-modal')) console.warn('⚠️ Falta #detail-modal');
+    // Verifica que los modales existan antes de asignar eventos globales si fuera necesario
+    if (!document.getElementById('auth-modal')) console.warn('⚠️ Falta #auth-modal en HTML');
+    if (!document.getElementById('detail-modal')) console.warn('⚠️ Falta #detail-modal en HTML');
+    if (!document.getElementById('letterModal')) console.warn('⚠️ Falta #letterModal en HTML');
 }
 
-// --- CARGA DE DATOS (CON LÓGICA DE CERRADAS) ---
+// --- CARGA DE DATOS ---
 async function loadScholarships() {
     try {
         const response = await fetch('./data/becas.json');
-        if (!response.ok) throw new Error('Error HTTP');
+        if (!response.ok) throw new Error('Error al cargar JSON');
         
-        let allData = await response.json();
+        let allScholarships = await response.json();
+        
+        // Filtrar becas activas (no vencidas)
         const todayStr = new Date().toISOString().split('T')[0];
-
-        // 1. Separar Activas vs Cerradas
-        scholarships = allData.filter(b => b.deadline >= todayStr);
-        closedScholarships = allData.filter(b => b.deadline < todayStr);
-
-        // 2. Ordenar activas por urgencia
+        scholarships = allScholarships.filter(b => b.deadline >= todayStr);
+        
+        // Ordenar por defecto (más urgentes)
         scholarships.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
         
-        // 3. Renderizar todo (Activas + Separador + Cerradas)
-        renderAllScholarships();
+        renderScholarships(scholarships);
         updateStats();
-
+        
     } catch (error) {
-        console.error('Error cargando becas:', error);
+        console.error('Error:', error);
         const container = document.getElementById('catalogo');
         if(container) {
             container.innerHTML = `
                 <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
-                    <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: var(--danger); margin-bottom: 15px;"></i>
-                    <h3>Error al cargar los datos</h3>
-                    <p>Revisa tu conexión o el archivo becas.json.</p>
-                    <button class="btn btn-primary" onclick="location.reload()">Recargar</button>
+                    <i class="fas fa-exclamation-circle" style="font-size: 3rem; color: var(--danger); margin-bottom: 15px;"></i>
+                    <h3>Error al cargar las becas</h3>
+                    <p>Verifica tu conexión o recarga la página.</p>
+                    <button class="btn btn-primary" onclick="location.reload()" style="margin-top: 15px;">Recargar</button>
                 </div>`;
         }
     }
 }
 
-// --- RENDERIZADO COMBINADO ---
-function renderAllScholarships() {
-    const container = document.getElementById('catalogo');
-    const countDisplay = document.getElementById('count-display');
-    
-    if (!container) return;
-    container.innerHTML = '';
-
-    // Contador solo de activas (o total si prefieres)
-    if(countDisplay) countDisplay.textContent = scholarships.length + closedScholarships.length;
-
-    // 1. Renderizar ACTIVAS
-    if (scholarships.length > 0) {
-        scholarships.forEach(beca => createCard(beca, container, false));
-    } else {
-        container.innerHTML += `<div style="grid-column:1/-1; text-align:center; padding:20px; color:#666;">No hay becas activas en este momento.</div>`;
-    }
-
-    // 2. Renderizar SEPARADOR y CERRADAS (Si existen)
-    if (closedScholarships.length > 0) {
-        const separator = document.createElement('div');
-        separator.style.gridColumn = "1 / -1";
-        separator.style.margin = "40px 0 20px 0";
-        separator.style.padding = "20px";
-        separator.style.background = "#f1f5f9";
-        separator.style.borderRadius = "8px";
-        separator.style.textAlign = "center";
-        separator.innerHTML = `
-            <h3 style="color: #64748b; margin-bottom: 5px;"><i class="fas fa-history"></i> Convocatorias Cerradas (Referencia)</h3>
-            <p style="font-size: 0.9rem; color: #94a3b8;">Úsalas para preparar tus documentos. ¡Suelen abrirse en las mismas fechas el próximo año!</p>
-        `;
-        container.appendChild(separator);
-
-        closedScholarships.forEach(beca => createCard(beca, container, true));
-    }
-}
-
-// Función auxiliar para crear tarjetas (Soporta modo "Cerrada")
-function createCard(beca, container, isClosed) {
-    const isSaved = currentUser && userApplications.some(a => a.id === beca.id);
-    const card = document.createElement('div');
-    card.className = 'beca-card';
-    
-    // Estilos visuales para cerradas
-    if (isClosed) {
-        card.style.opacity = "0.7";
-        card.style.filter = "grayscale(80%)";
-        card.style.pointerEvents = "auto"; // Permitir click para ver detalles si quieres
-    }
-
-    const niveles = beca.nivel ? beca.nivel.slice(0, 2) : [];
-    const deadlineLabel = isClosed ? "CERRADA" : beca.deadline;
-    const deadlineColor = isClosed ? "#94a3b8" : "var(--danger)";
-    
-    // Botón de guardar deshabilitado si está cerrada
-    const saveButton = isClosed 
-        ? `<button class="btn btn-secondary btn-sm" disabled style="cursor:not-allowed; opacity:0.6;">Cerrada</button>`
-        : (currentUser 
-            ? `<button class="btn ${isSaved ? 'btn-secondary' : 'btn-primary'} btn-sm" onclick="addToTracker('${beca.id}')">
-                 ${isSaved ? '<i class="fas fa-check"></i> Guardado' : 'Guardar'}
-               </button>`
-            : `<button class="btn btn-secondary btn-sm" onclick="toggleAuthModal()">Guardar</button>`
-          );
-
-    card.innerHTML = `
-        <div class="card-body">
-            <span class="tag" style="background:${isClosed ? '#e2e8f0' : '#e0f2fe'}; color:${isClosed ? '#64748b' : '#0369a1'};">
-                ${beca.financiamiento}
-            </span>
-            ${isClosed ? '<span class="tag" style="background:#ef4444; color:white;">Cerrada</span>' : ''}
-            
-            <h3 style="margin: 10px 0; font-size: 1.2rem;">${beca.titulo}</h3>
-            <p style="color: var(--primary); font-weight: bold;">${beca.institucion}</p>
-            <p style="font-size: 0.9rem; color: #666;"><i class="fas fa-map-marker-alt"></i> ${beca.pais}</p>
-            
-            <div class="card-tags" style="margin-top: 10px;">
-                ${niveles.map(n => `<span class="tag">${n}</span>`).join('')}
-            </div>
-            
-            <p style="margin-top: 15px; font-size: 0.85rem; color: ${deadlineColor}; font-weight: bold;">
-                <i class="far fa-clock"></i> Deadline: ${deadlineLabel}
-            </p>
-        </div>
-        
-        <div class="card-footer">
-            <a href="${beca.url_convocatoria}" target="_blank" class="btn btn-outline btn-sm">Ver Web</a>
-            ${saveButton}
-        </div>
-    `;
-    container.appendChild(card);
-}
-
-// --- AUTENTICACIÓN ---
+// --- AUTENTICACIÓN (CORREGIDA PARA MÚLTIPLES USUARIOS) ---
 function checkAuth() {
     const storedUser = localStorage.getItem('scholarship_user');
     if (storedUser) {
@@ -161,6 +71,7 @@ function checkAuth() {
 function updateNav(isLoggedIn) {
     const container = document.getElementById('auth-buttons');
     const nameDisplay = document.getElementById('userNameDisplay');
+    
     if (!container) return;
 
     if (isLoggedIn) {
@@ -202,7 +113,7 @@ window.toggleMenu = () => {
     if(nav) nav.classList.toggle('active');
 };
 
-// --- FILTROS (ACTUALIZADOS PARA BUSCAR EN AMBAS LISTAS SI ES NECESARIO) ---
+// --- FILTROS Y BÚSQUEDA ---
 function setupEventListeners() {
     const searchInput = document.getElementById('searchInput');
     if(searchInput) searchInput.addEventListener('input', applyFilters);
@@ -222,124 +133,190 @@ function applyFilters() {
     const country = document.getElementById('filterCountry')?.value || 'all';
     const sort = document.getElementById('filterSort')?.value || 'default';
 
-    // Filtramos sobre la lista combinada para la búsqueda, pero mantenemos la lógica de orden
-    // Para simplificar, filtramos activas y cerradas por separado y las volvemos a unir
-    let filteredActive = scholarships.filter(b => matchFilters(b, term, type, level, area, country));
-    let filteredClosed = closedScholarships.filter(b => matchFilters(b, term, type, level, area, country));
+    let filtered = scholarships.filter(beca => {
+        const matchText = beca.titulo.toLowerCase().includes(term) || 
+                          beca.institucion.toLowerCase().includes(term) ||
+                          beca.pais.toLowerCase().includes(term) ||
+                          (beca.tags && beca.tags.some(t => t.toLowerCase().includes(term)));
+
+        const becaType = beca.tipo || 'Beca'; 
+        const matchType = type === 'all' || becaType === type;
+        const matchLevel = level === 'all' || (beca.nivel && beca.nivel.includes(level));
+        const matchArea = area === 'all' || (beca.area && (beca.area.includes(area) || beca.area.some(a => a.includes(area))));
+        const matchCountry = country === 'all' || beca.pais === country || 
+                             (country === 'Europa' && beca.pais.includes('Europa')); // Lógica simple para Europa
+
+        return matchText && matchType && matchLevel && matchArea && matchCountry;
+    });
 
     if (sort === 'deadline') {
-        filteredActive.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+        filtered.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+    } else if (sort === 'recent') {
+        filtered = [...filtered].reverse(); 
     } else if (sort === 'alpha') {
-        filteredActive.sort((a, b) => a.titulo.localeCompare(b.titulo));
-        filteredClosed.sort((a, b) => a.titulo.localeCompare(b.titulo));
+        filtered.sort((a, b) => a.titulo.localeCompare(b.titulo));
     }
 
-    // Re-renderizar manualmente con los filtros aplicados
-    const container = document.getElementById('catalogo');
-    const countDisplay = document.getElementById('count-display');
-    if (!container) return;
-    container.innerHTML = '';
-    if(countDisplay) countDisplay.textContent = filteredActive.length + filteredClosed.length;
-
-    if (filteredActive.length > 0) {
-        filteredActive.forEach(b => createCard(b, container, false));
-    } else if (filteredClosed.length === 0) {
-         container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px;"><h3>No hay resultados</h3></div>`;
-         return;
-    }
-
-    if (filteredClosed.length > 0) {
-        // Re-agregar separador
-        const separator = document.createElement('div');
-        separator.style.gridColumn = "1 / -1";
-        separator.style.margin = "40px 0 20px 0";
-        separator.style.padding = "20px";
-        separator.style.background = "#f1f5f9";
-        separator.style.borderRadius = "8px";
-        separator.style.textAlign = "center";
-        separator.innerHTML = `<h4 style="color:#64748b;">Convocatorias Cerradas Coincidentes</h4>`;
-        container.appendChild(separator);
-        
-        filteredClosed.forEach(b => createCard(b, container, true));
-    }
+    renderScholarships(filtered);
 }
 
-function matchFilters(beca, term, type, level, area, country) {
-    const becaType = beca.tipo || 'Beca';
-    const matchText = beca.titulo.toLowerCase().includes(term) || 
-                      beca.institucion.toLowerCase().includes(term) ||
-                      beca.pais.toLowerCase().includes(term);
-    const matchType = type === 'all' || becaType === type;
-    const matchLevel = level === 'all' || (beca.nivel && beca.nivel.includes(level));
-    const matchArea = area === 'all' || (beca.area && (beca.area.includes(area) || beca.area.some(a => a.includes(area))));
-    const matchCountry = country === 'all' || beca.pais === country || (country === 'Europa' && beca.pais.includes('Europa'));
+// --- RENDERIZADO ---
+function renderScholarships(data) {
+    const container = document.getElementById('catalogo');
+    const countDisplay = document.getElementById('count-display');
     
-    return matchText && matchType && matchLevel && matchArea && matchCountry;
+    if (!container) return;
+
+    container.innerHTML = '';
+    if(countDisplay) countDisplay.textContent = data.length;
+
+    if (data.length === 0) {
+        container.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
+                <i class="fas fa-search" style="font-size: 3rem; color: #ccc; margin-bottom: 15px;"></i>
+                <h3>No se encontraron resultados</h3>
+                <p>Intenta ajustar los filtros.</p>
+            </div>`;
+        return;
+    }
+
+    data.forEach(beca => {
+        const isSaved = currentUser && userApplications.some(a => a.id === beca.id);
+        const card = document.createElement('div');
+        card.className = 'beca-card';
+        
+        // Protección si nivel es undefined
+        const niveles = beca.nivel ? beca.nivel.slice(0, 2) : [];
+
+        card.innerHTML = `
+            <div class="card-body">
+                <span class="tag" style="background:#e0f2fe; color:#0369a1;">${beca.financiamiento}</span>
+                <h3 style="margin: 10px 0; font-size: 1.2rem;">${beca.titulo}</h3>
+                <p style="color: var(--primary); font-weight: bold;">${beca.institucion}</p>
+                <p style="font-size: 0.9rem; color: #666;"><i class="fas fa-map-marker-alt"></i> ${beca.pais}</p>
+                
+                <div class="card-tags" style="margin-top: 10px;">
+                    ${niveles.map(n => `<span class="tag">${n}</span>`).join('')}
+                </div>
+                
+                <p style="margin-top: 15px; font-size: 0.85rem; color: var(--danger); font-weight: bold;">
+                    <i class="far fa-clock"></i> Deadline: ${beca.deadline}
+                </p>
+            </div>
+            
+            <div class="card-footer">
+                <a href="${beca.url_convocatoria}" target="_blank" class="btn btn-outline btn-sm">Ver Web</a>
+                ${currentUser ? 
+                    `<button class="btn ${isSaved ? 'btn-secondary' : 'btn-primary'} btn-sm" onclick="addToTracker('${beca.id}')">
+                        ${isSaved ? '<i class="fas fa-check"></i> Guardado' : 'Guardar'}
+                     </button>` : 
+                    `<button class="btn btn-secondary btn-sm" onclick="toggleAuthModal()">Guardar</button>`
+                }
+            </div>
+        `;
+        container.appendChild(card);
+    });
 }
 
 function updateStats() {
     const elBecas = document.getElementById('stat-becas');
     const elPaises = document.getElementById('stat-paises');
     const elUnis = document.getElementById('stat-unis');
+
     if(elBecas) elBecas.textContent = scholarships.length;
-    if(elPaises) elPaises.textContent = new Set(scholarships.map(s => s.pais)).size;
-    if(elUnis) elUnis.textContent = new Set(scholarships.map(s => s.institucion)).size;
+    if(elPaises) {
+        const countries = new Set(scholarships.map(s => s.pais)).size;
+        elPaises.textContent = countries;
+    }
+    if(elUnis) {
+        const unis = new Set(scholarships.map(s => s.institucion)).size;
+        elUnis.textContent = unis;
+    }
 }
 
-// --- TRACKER & DASHBOARD (Mismo código funcional que tenías) ---
+// --- TRACKER & DASHBOARD ---
 function addToTracker(id) {
     if (!currentUser) return toggleAuthModal();
+    
     const beca = scholarships.find(s => s.id === id);
     if (!beca) return;
-    if (userApplications.some(a => a.id === id)) { alert('Ya guardada'); return; }
-    
-    const newApp = { ...beca, status: 'Interesado', documents: { cv: false, carta: false, recomendaciones: false, idiomas: false }, notes: '' };
+
+    if (userApplications.some(a => a.id === id)) {
+        alert('Esta beca ya está en tu tracker.');
+        return;
+    }
+
+    const newApp = {
+        ...beca,
+        status: 'Interesado',
+        documents: { cv: false, carta: false, recomendaciones: false, idiomas: false },
+        notes: ''
+    };
+
     userApplications.push(newApp);
     localStorage.setItem(`apps_${currentUser.email}`, JSON.stringify(userApplications));
-    alert('¡Beca guardada!');
-    renderAllScholarships(); // Refrescar para mostrar "Guardado"
+    alert('¡Beca guardada en tu tracker!');
+    renderScholarships(scholarships); 
 }
 
 function loadDashboard() {
     if (!currentUser) return;
+    
     const dashTotal = document.getElementById('dash-total');
     const dashDocs = document.getElementById('dash-docs');
+    
     if(dashTotal) dashTotal.textContent = userApplications.length;
+    
     if(dashDocs) {
-        const total = userApplications.length * 4;
-        const done = userApplications.reduce((acc, app) => acc + Object.values(app.documents).filter(Boolean).length, 0);
-        dashDocs.textContent = total === 0 ? "0%" : `${Math.round((done/total)*100)}%`;
+        const totalDocs = userApplications.length * 4;
+        const completedDocs = userApplications.reduce((acc, app) => {
+            return acc + Object.values(app.documents).filter(Boolean).length;
+        }, 0);
+        const percent = totalDocs === 0 ? 0 : Math.round((completedDocs / totalDocs) * 100);
+        dashDocs.textContent = `${percent}%`;
     }
+
     renderTracker();
     renderChart();
 }
 
 function renderTracker() {
     const container = document.getElementById('tracker-list');
-    if(!container) return;
+    if (!container) return;
+    
     container.innerHTML = '';
-    if(userApplications.length === 0) {
-        container.innerHTML = '<p style="grid-column:1/-1; text-align:center; padding:20px;">Sin becas guardadas.</p>';
+
+    if (userApplications.length === 0) {
+        container.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#666; padding:20px;">No tienes becas guardadas aún.</p>';
         return;
     }
+
     userApplications.forEach(app => {
         const done = Object.values(app.documents).filter(Boolean).length;
+        const percent = (done / 4) * 100;
+        
         const item = document.createElement('div');
         item.className = 'tracker-item';
         item.innerHTML = `
             <h4>${app.titulo}</h4>
             <p style="font-size:0.85rem; color:#666;">${app.institucion}</p>
-            <div class="progress-bar"><div class="progress-fill" style="width:${(done/4)*100}%"></div></div>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:5px; margin:10px 0; font-size:0.8rem;">
-                ${Object.entries(app.documents).map(([k,v]) => `<label><input type="checkbox" ${v?'checked':''} onchange="toggleDoc('${app.id}','${k}')"> ${k.toUpperCase()}</label>`).join('')}
+            <div class="progress-bar"><div class="progress-fill" style="width:${percent}%"></div></div>
+            <div class="checklist-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:5px; margin:10px 0;">
+                ${Object.entries(app.documents).map(([key, val]) => `
+                    <label style="font-size:0.8rem; cursor:pointer;">
+                        <input type="checkbox" ${val ? 'checked' : ''} onchange="toggleDoc('${app.id}', '${key}')">
+                        ${key.charAt(0).toUpperCase() + key.slice(1)}
+                    </label>
+                `).join('')}
             </div>
-            <div style="display:flex; gap:5px; margin-top:10px;">
-                <button class="btn btn-outline btn-sm" style="flex:1" onclick="openLetterGenerator('${app.id}')">Carta</button>
-                <select onchange="updateStatus('${app.id}', this.value)" style="font-size:0.8rem;">
-                    <option value="Interesado" ${app.status==='Interesado'?'selected':''}>Interesado</option>
-                    <option value="En Proceso" ${app.status==='En Proceso'?'selected':''}>Proceso</option>
-                    <option value="Enviada" ${app.status==='Enviada'?'selected':''}>Enviada</option>
-                    <option value="Aceptada" ${app.status==='Aceptada'?'selected':''}>Aceptada</option>
+            <div style="margin-top:10px; display:flex; gap:5px; flex-wrap:wrap;">
+                <button class="btn btn-outline btn-sm" style="flex:1;" onclick="openLetterGenerator('${app.id}')">Carta</button>
+                <select onchange="updateStatus('${app.id}', this.value)" style="font-size:0.8rem; border-radius:4px; padding:4px;">
+                    <option value="Interesado" ${app.status === 'Interesado' ? 'selected' : ''}>Interesado</option>
+                    <option value="En Proceso" ${app.status === 'En Proceso' ? 'selected' : ''}>Proceso</option>
+                    <option value="Enviada" ${app.status === 'Enviada' ? 'selected' : ''}>Enviada</option>
+                    <option value="Aceptada" ${app.status === 'Aceptada' ? 'selected' : ''}>Aceptada</option>
+                    <option value="Rechazada" ${app.status === 'Rechazada' ? 'selected' : ''}>Rechazada</option>
                 </select>
             </div>
         `;
@@ -347,87 +324,200 @@ function renderTracker() {
     });
 }
 
-function toggleDoc(id, key) {
+function toggleDoc(id, docKey) {
     const app = userApplications.find(a => a.id === id);
-    if(app) { app.documents[key] = !app.documents[key]; localStorage.setItem(`apps_${currentUser.email}`, JSON.stringify(userApplications)); loadDashboard(); }
+    if (app) {
+        app.documents[docKey] = !app.documents[docKey];
+        localStorage.setItem(`apps_${currentUser.email}`, JSON.stringify(userApplications));
+        loadDashboard();
+    }
 }
-function updateStatus(id, status) {
+
+function updateStatus(id, newStatus) {
     const app = userApplications.find(a => a.id === id);
-    if(app) { app.status = status; localStorage.setItem(`apps_${currentUser.email}`, JSON.stringify(userApplications)); }
+    if (app) {
+        app.status = newStatus;
+        localStorage.setItem(`apps_${currentUser.email}`, JSON.stringify(userApplications));
+    }
 }
 
 function renderChart() {
-    const ctx = document.getElementById('statusChart');
-    if(!ctx || typeof Chart === 'undefined') return;
-    const counts = { 'Interesado':0, 'En Proceso':0, 'Enviada':0, 'Aceptada':0 };
-    userApplications.forEach(a => { if(counts[a.status]!==undefined) counts[a.status]++; });
-    if(window.myChart) window.myChart.destroy();
-    const labels = Object.keys(counts).filter(k=>counts[k]>0);
-    window.myChart = new Chart(ctx.getContext('2d'), {
+    const ctxCanvas = document.getElementById('statusChart');
+    if (!ctxCanvas) return; // Salir si no hay canvas
+
+    const ctx = ctxCanvas.getContext('2d');
+    const counts = { 'Interesado': 0, 'En Proceso': 0, 'Enviada': 0, 'Aceptada': 0, 'Rechazada': 0 };
+    
+    userApplications.forEach(app => { 
+        if(counts[app.status] !== undefined) counts[app.status]++; 
+    });
+
+    // Filtrar ceros para que el gráfico se vea limpio
+    const labels = Object.keys(counts).filter(k => counts[k] > 0);
+    const data = labels.map(k => counts[k]);
+
+    if (window.myChart) window.myChart.destroy();
+    
+    // Verificar si Chart.js está cargado
+    if (typeof Chart === 'undefined') {
+        console.warn("Chart.js no está cargado. Incluye el script CDN en index.html");
+        return;
+    }
+
+    window.myChart = new Chart(ctx, {
         type: 'doughnut',
-        data: { labels: labels, datasets: [{ data: labels.map(k=>counts[k]), backgroundColor: ['#94a3b8','#3b82f6','#10b981','#22c55e'] }] },
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                backgroundColor: ['#94a3b8', '#3b82f6', '#10b981', '#22c55e', '#ef4444']
+            }]
+        },
         options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
     });
 }
 
-// --- MODALES ---
-window.toggleAuthModal = () => { const m = document.getElementById('auth-modal'); if(m) m.classList.toggle('hidden'); };
+// --- MODALES Y COMPARTIR ---
+window.toggleAuthModal = () => {
+    const modal = document.getElementById('auth-modal');
+    if(modal) modal.classList.toggle('hidden');
+};
+
 window.toggleAuthMode = () => {
-    const l = document.getElementById('loginForm'), r = document.getElementById('registerForm'), t = document.getElementById('auth-title');
-    if(l&&r&&t) {
-        if(l.classList.contains('hidden')) { l.classList.remove('hidden'); r.classList.add('hidden'); t.textContent="Iniciar Sesión"; }
-        else { l.classList.add('hidden'); r.classList.remove('hidden'); t.textContent="Crear Cuenta"; }
+    const loginForm = document.getElementById('loginForm');
+    const regForm = document.getElementById('registerForm');
+    const title = document.getElementById('auth-title');
+    
+    if (loginForm && regForm && title) {
+        if (loginForm.classList.contains('hidden')) {
+            loginForm.classList.remove('hidden');
+            regForm.classList.add('hidden');
+            title.textContent = "Iniciar Sesión";
+        } else {
+            loginForm.classList.add('hidden');
+            regForm.classList.remove('hidden');
+            title.textContent = "Crear Cuenta";
+        }
     }
 };
 
+// Forms (Lógica Corregida para múltiples usuarios)
 const loginFormEl = document.getElementById('loginForm');
-if(loginFormEl) loginFormEl.addEventListener('submit', e => {
-    e.preventDefault();
-    const email = document.getElementById('loginEmail').value;
-    const pass = document.getElementById('loginPass').value;
-    const user = allUsers.find(u => u.email === email && u.pass === pass);
-    if(user) { localStorage.setItem('scholarship_user', JSON.stringify(user)); checkAuth(); toggleAuthModal(); navigate('home'); }
-    else alert('Credenciales incorrectas');
-});
+if(loginFormEl) {
+    loginFormEl.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const pass = document.getElementById('loginPass').value;
+        
+        // Buscar usuario en la "base de datos" local
+        const user = allUsers.find(u => u.email === email && u.pass === pass);
+        
+        if (user) {
+            localStorage.setItem('scholarship_user', JSON.stringify(user));
+            checkAuth();
+            toggleAuthModal();
+            navigate('home'); // O 'dashboard-section'
+        } else {
+            alert('Credenciales incorrectas o usuario no existe.');
+        }
+    });
+}
 
-const regFormEl = document.getElementById('registerForm');
-if(regFormEl) regFormEl.addEventListener('submit', e => {
-    e.preventDefault();
-    const name = document.getElementById('regName').value;
-    const email = document.getElementById('regEmail').value;
-    const pass = document.getElementById('regPass').value;
-    if(allUsers.some(u => u.email === email)) { alert('Email ya registrado'); return; }
-    const newUser = {name, email, pass};
-    allUsers.push(newUser);
-    localStorage.setItem('scholarship_db_users', JSON.stringify(allUsers));
-    localStorage.setItem(`apps_${email}`, JSON.stringify([]));
-    alert('Registro exitoso. Inicia sesión.');
-    toggleAuthMode();
-});
+const registerFormEl = document.getElementById('registerForm');
+if(registerFormEl) {
+    registerFormEl.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('regName').value;
+        const email = document.getElementById('regEmail').value;
+        const pass = document.getElementById('regPass').value;
+        
+        // Verificar si ya existe
+        if (allUsers.some(u => u.email === email)) {
+            alert('Este correo ya está registrado.');
+            return;
+        }
 
+        const newUser = { name, email, pass };
+        allUsers.push(newUser);
+        localStorage.setItem('scholarship_db_users', JSON.stringify(allUsers));
+        localStorage.setItem(`apps_${email}`, JSON.stringify([]));
+        
+        alert('Registro exitoso. Ahora inicia sesión.');
+        toggleAuthMode();
+    });
+}
+
+// Detalle y Compartir
 window.openDetailModal = (beca) => {
     currentSharedBeca = beca;
     const modal = document.getElementById('detail-modal');
     const content = document.getElementById('detail-content');
-    if(!modal||!content) return;
-    content.innerHTML = `<h2 style="color:var(--primary)">${beca.titulo}</h2><h3>${beca.institucion} 📍 ${beca.pais}</h3><p><strong>Deadline:</strong> ${beca.deadline}</p><p><strong>Nivel:</strong> ${beca.nivel?.join(', ')||'N/A'}</p><a href="${beca.url_convocatoria}" target="_blank" class="btn btn-primary" style="display:block;text-align:center;margin-top:20px;">Ir a la Web</a>`;
+    
+    if (!modal || !content) return;
+
+    content.innerHTML = `
+        <h2 style="color:var(--primary);">${beca.titulo}</h2>
+        <h3>${beca.institucion} 📍 ${beca.pais}</h3>
+        <p><strong>Deadline:</strong> ${beca.deadline}</p>
+        <p><strong>Nivel:</strong> ${beca.nivel ? beca.nivel.join(', ') : 'N/A'}</p>
+        <p><strong>Área:</strong> ${beca.area ? beca.area.join(', ') : 'N/A'}</p>
+        <p><strong>Financiamiento:</strong> ${beca.financiamiento}</p>
+        <a href="${beca.url_convocatoria}" target="_blank" class="btn btn-primary" style="display:block; text-align:center; margin-top:20px;">Ir a la Convocatoria</a>
+    `;
     modal.classList.remove('hidden');
 };
-window.closeDetailModal = () => { const m = document.getElementById('detail-modal'); if(m) m.classList.add('hidden'); };
-window.shareWhatsApp = () => { if(!currentSharedBeca) return; window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(currentSharedBeca.titulo + ': ' + window.location.href)}`); };
-window.copyLink = () => { navigator.clipboard.writeText(window.location.href); alert('Copiado'); };
 
+window.closeDetailModal = () => {
+    const modal = document.getElementById('detail-modal');
+    if(modal) modal.classList.add('hidden');
+};
+
+window.shareWhatsApp = () => {
+    if (!currentSharedBeca) return;
+    const text = `Mira esta beca: ${currentSharedBeca.titulo} en ${currentSharedBeca.pais}. Deadline: ${currentSharedBeca.deadline}.`;
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text + ' ' + window.location.href)}`, '_blank');
+};
+
+window.copyLink = () => {
+    navigator.clipboard.writeText(window.location.href);
+    alert('Enlace copiado al portapapeles');
+};
+
+// Generador de Cartas
 window.openLetterGenerator = (id) => {
     const app = userApplications.find(a => a.id === id);
-    if(!app) return;
+    if (!app) return;
+    
+    const letterModal = document.getElementById('letterModal');
+    const letterTitle = document.getElementById('letterTitle');
+    const letterContent = document.getElementById('letterContent');
+
+    if(!letterModal || !letterTitle || !letterContent) return;
+    
+    const letter = `Estimado Comité de Admisiones,
+
+Por medio de la presente expreso mi interés en el programa ${app.titulo} en ${app.institucion}.
+
+Mi motivación principal es... [Completa aquí detallando tu experiencia y por qué este programa es ideal para ti].
+
+Atentamente,
+${currentUser.name}`;
+
+    letterTitle.textContent = `Carta: ${app.titulo}`;
+    letterContent.value = letter;
+    letterModal.classList.remove('hidden');
+};
+
+window.closeLetterModal = () => {
     const modal = document.getElementById('letterModal');
-    const title = document.getElementById('letterTitle');
+    if(modal) modal.classList.add('hidden');
+};
+
+window.copyLetter = () => {
     const txt = document.getElementById('letterContent');
-    if(modal&&title&&txt) {
-        title.textContent = `Carta: ${app.titulo}`;
-        txt.value = `Estimado Comité,\n\nExpreso mi interés en ${app.titulo} en ${app.institucion}.\n\n[Motivación]\n\nAtentamente,\n${currentUser.name}`;
-        modal.classList.remove('hidden');
+    if(txt) {
+        txt.select();
+        document.execCommand('copy');
+        alert('Carta copiada');
     }
 };
-window.closeLetterModal = () => { const m = document.getElementById('letterModal'); if(m) m.classList.add('hidden'); };
-window.copyLetter = () => { const t = document.getElementById('letterContent'); if(t){ t.select(); document.execCommand('copy'); alert('Copiado'); } };
