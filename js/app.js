@@ -336,3 +336,188 @@ function toggleDoc(id, docKey) {
 function updateStatus(id, newStatus) {
     const app = userApplications.find(a => a.id === id);
     if (app) {
+        app.status = newStatus;
+        localStorage.setItem(`apps_${currentUser.email}`, JSON.stringify(userApplications));
+    }
+}
+
+function renderChart() {
+    const ctxCanvas = document.getElementById('statusChart');
+    if (!ctxCanvas) return; // Salir si no hay canvas
+
+    const ctx = ctxCanvas.getContext('2d');
+    const counts = { 'Interesado': 0, 'En Proceso': 0, 'Enviada': 0, 'Aceptada': 0, 'Rechazada': 0 };
+    
+    userApplications.forEach(app => { 
+        if(counts[app.status] !== undefined) counts[app.status]++; 
+    });
+
+    // Filtrar ceros para que el gráfico se vea limpio
+    const labels = Object.keys(counts).filter(k => counts[k] > 0);
+    const data = labels.map(k => counts[k]);
+
+    if (window.myChart) window.myChart.destroy();
+    
+    // Verificar si Chart.js está cargado
+    if (typeof Chart === 'undefined') {
+        console.warn("Chart.js no está cargado. Incluye el script CDN en index.html");
+        return;
+    }
+
+    window.myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                backgroundColor: ['#94a3b8', '#3b82f6', '#10b981', '#22c55e', '#ef4444']
+            }]
+        },
+        options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+    });
+}
+
+// --- MODALES Y COMPARTIR ---
+window.toggleAuthModal = () => {
+    const modal = document.getElementById('auth-modal');
+    if(modal) modal.classList.toggle('hidden');
+};
+
+window.toggleAuthMode = () => {
+    const loginForm = document.getElementById('loginForm');
+    const regForm = document.getElementById('registerForm');
+    const title = document.getElementById('auth-title');
+    
+    if (loginForm && regForm && title) {
+        if (loginForm.classList.contains('hidden')) {
+            loginForm.classList.remove('hidden');
+            regForm.classList.add('hidden');
+            title.textContent = "Iniciar Sesión";
+        } else {
+            loginForm.classList.add('hidden');
+            regForm.classList.remove('hidden');
+            title.textContent = "Crear Cuenta";
+        }
+    }
+};
+
+// Forms (Lógica Corregida para múltiples usuarios)
+const loginFormEl = document.getElementById('loginForm');
+if(loginFormEl) {
+    loginFormEl.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const pass = document.getElementById('loginPass').value;
+        
+        // Buscar usuario en la "base de datos" local
+        const user = allUsers.find(u => u.email === email && u.pass === pass);
+        
+        if (user) {
+            localStorage.setItem('scholarship_user', JSON.stringify(user));
+            checkAuth();
+            toggleAuthModal();
+            navigate('home'); // O 'dashboard-section'
+        } else {
+            alert('Credenciales incorrectas o usuario no existe.');
+        }
+    });
+}
+
+const registerFormEl = document.getElementById('registerForm');
+if(registerFormEl) {
+    registerFormEl.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('regName').value;
+        const email = document.getElementById('regEmail').value;
+        const pass = document.getElementById('regPass').value;
+        
+        // Verificar si ya existe
+        if (allUsers.some(u => u.email === email)) {
+            alert('Este correo ya está registrado.');
+            return;
+        }
+
+        const newUser = { name, email, pass };
+        allUsers.push(newUser);
+        localStorage.setItem('scholarship_db_users', JSON.stringify(allUsers));
+        localStorage.setItem(`apps_${email}`, JSON.stringify([]));
+        
+        alert('Registro exitoso. Ahora inicia sesión.');
+        toggleAuthMode();
+    });
+}
+
+// Detalle y Compartir
+window.openDetailModal = (beca) => {
+    currentSharedBeca = beca;
+    const modal = document.getElementById('detail-modal');
+    const content = document.getElementById('detail-content');
+    
+    if (!modal || !content) return;
+
+    content.innerHTML = `
+        <h2 style="color:var(--primary);">${beca.titulo}</h2>
+        <h3>${beca.institucion} 📍 ${beca.pais}</h3>
+        <p><strong>Deadline:</strong> ${beca.deadline}</p>
+        <p><strong>Nivel:</strong> ${beca.nivel ? beca.nivel.join(', ') : 'N/A'}</p>
+        <p><strong>Área:</strong> ${beca.area ? beca.area.join(', ') : 'N/A'}</p>
+        <p><strong>Financiamiento:</strong> ${beca.financiamiento}</p>
+        <a href="${beca.url_convocatoria}" target="_blank" class="btn btn-primary" style="display:block; text-align:center; margin-top:20px;">Ir a la Convocatoria</a>
+    `;
+    modal.classList.remove('hidden');
+};
+
+window.closeDetailModal = () => {
+    const modal = document.getElementById('detail-modal');
+    if(modal) modal.classList.add('hidden');
+};
+
+window.shareWhatsApp = () => {
+    if (!currentSharedBeca) return;
+    const text = `Mira esta beca: ${currentSharedBeca.titulo} en ${currentSharedBeca.pais}. Deadline: ${currentSharedBeca.deadline}.`;
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text + ' ' + window.location.href)}`, '_blank');
+};
+
+window.copyLink = () => {
+    navigator.clipboard.writeText(window.location.href);
+    alert('Enlace copiado al portapapeles');
+};
+
+// Generador de Cartas
+window.openLetterGenerator = (id) => {
+    const app = userApplications.find(a => a.id === id);
+    if (!app) return;
+    
+    const letterModal = document.getElementById('letterModal');
+    const letterTitle = document.getElementById('letterTitle');
+    const letterContent = document.getElementById('letterContent');
+
+    if(!letterModal || !letterTitle || !letterContent) return;
+    
+    const letter = `Estimado Comité de Admisiones,
+
+Por medio de la presente expreso mi interés en el programa ${app.titulo} en ${app.institucion}.
+
+Mi motivación principal es... [Completa aquí detallando tu experiencia y por qué este programa es ideal para ti].
+
+Atentamente,
+${currentUser.name}`;
+
+    letterTitle.textContent = `Carta: ${app.titulo}`;
+    letterContent.value = letter;
+    letterModal.classList.remove('hidden');
+};
+
+window.closeLetterModal = () => {
+    const modal = document.getElementById('letterModal');
+    if(modal) modal.classList.add('hidden');
+};
+
+window.copyLetter = () => {
+    const txt = document.getElementById('letterContent');
+    if(txt) {
+        txt.select();
+        document.execCommand('copy');
+        alert('Carta copiada');
+    }
+};
