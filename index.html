@@ -59,14 +59,77 @@
     <section id="catalog" class="view-section hidden">
         <div class="container">
             <h2 class="section-title">Catálogo de Oportunidades</h2>
-            <div class="filters-container">
-                <div class="search-box"><i class="fas fa-search"></i><input type="text" id="searchInput" placeholder="Buscar por título, universidad o país..."></div>
-                <div class="filters-grid">
-                    <select id="filterLevel" class="filter-select"><option value="all">Todos los Niveles</option><option value="Pregrado">Pregrado</option><option value="Maestría">Maestría</option><option value="Doctorado">Doctorado</option></select>
-                    <select id="filterArea" class="filter-select"><option value="all">Todas las Áreas</option><option value="STEM">STEM</option><option value="Humanidades">Humanidades</option><option value="Negocios">Negocios</option></select>
-                    <select id="filterSort" class="filter-select"><option value="default">Ordenar por...</option><option value="deadline">Más Urgentes</option><option value="recent">Más Recientes</option></select>
-                </div>
-            </div>
+            <!-- Reemplaza todo el div.filters-container dentro de la sección catalog -->
+<div class="filters-container">
+    <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Buscar por título, universidad, país o tag...">
+    </div>
+    
+    <div class="filters-grid">
+        <!-- Filtro Tipo -->
+        <select id="filterType" class="filter-select">
+            <option value="all">Todos los Tipos</option>
+            <option value="Beca">Beca de Estudios</option>
+            <option value="Internship">Pasantías / Internships</option>
+            <option value="Verano">Escuelas de Verano</option>
+            <option value="Doctorado">Programas PhD</option>
+            <option value="Conferencia">Conferencias / Eventos</option>
+            <option value="Curso">Cursos / Talleres</option>
+        </select>
+
+        <!-- Filtro Nivel -->
+        <select id="filterLevel" class="filter-select">
+            <option value="all">Todos los Niveles</option>
+            <option value="Secundaria">Secundaria / High School</option>
+            <option value="Pregrado">Pregrado</option>
+            <option value="Maestría">Maestría</option>
+            <option value="Doctorado">Doctorado / PhD</option>
+            <option value="Posdoctorado">Posdoctorado</option>
+            <option value="Todos">Todos los niveles (Abierto)</option>
+        </select>
+
+        <!-- Filtro Área Principal -->
+        <select id="filterArea" class="filter-select">
+            <option value="all">Todas las Áreas</option>
+            <option value="STEM">Ciencias e Ingeniería (STEM)</option>
+            <option value="Computer Science">Computación e IA</option>
+            <option value="Neurociencia">Neurociencia</option>
+            <option value="Biología">Biología y Salud</option>
+            <option value="Negocios">Negocios y Economía</option>
+            <option value="Humanidades">Humanidades y Sociales</option>
+            <option value="Artes">Artes y Diseño</option>
+            <option value="Liderazgo">Liderazgo y Emprendimiento</option>
+        </select>
+
+        <!-- Filtro Destino -->
+        <select id="filterCountry" class="filter-select">
+            <option value="all">Todos los Destinos</option>
+            <option value="Remoto">🌍 Remoto / Online</option>
+            <option value="Estados Unidos">🇺🇸 Estados Unidos</option>
+            <option value="Alemania">🇩🇪 Alemania</option>
+            <option value="Reino Unido">🇬🇧 Reino Unido</option>
+            <option value="Francia">🇫🇷 Francia</option>
+            <option value="España">🇪🇸 España</option>
+            <option value="Japón">🇯🇵 Japón</option>
+            <option value="Corea del Sur">🇰🇷 Corea del Sur</option>
+            <option value="China">🇨🇳 China</option>
+            <option value="Suiza">🇨🇭 Suiza</option>
+            <option value="Europa">🇪🇺 Europa (Varios/Multisede)</option>
+            <option value="Canadá">🇨🇦 Canadá</option>
+            <option value="Australia">🇦🇺 Australia</option>
+            <option value="Latinoamérica">🌎 Latinoamérica</option>
+        </select>
+
+        <!-- Ordenamiento -->
+        <select id="filterSort" class="filter-select">
+            <option value="default">Ordenar por...</option>
+            <option value="deadline">⏳ Más Urgentes (Deadline)</option>
+            <option value="recent">✨ Más Recientes (ID)</option>
+            <option value="alpha">🔤 A-Z (Nombre)</option>
+        </select>
+    </div>
+</div>
             <div id="catalogo" class="scholarships-grid"></div>
         </div>
     </section>
