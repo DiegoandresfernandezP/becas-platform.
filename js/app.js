@@ -213,38 +213,74 @@ function updateStats() {
     document.getElementById('stat-unis').textContent = new Set(scholarships.map(s => s.institucion)).size;
 }
 
-// --- FILTROS ---
+// --- FILTROS Y BÚSQUEDA ---
 function setupEventListeners() {
+    // Buscador de texto
     document.getElementById('searchInput').addEventListener('input', applyFilters);
-    document.querySelectorAll('.filter-select').forEach(select => select.addEventListener('change', applyFilters));
+
+    // Escuchar cambios en los 4 selectores
+    ['filterLevel', 'filterArea', 'filterCountry', 'filterSort'].forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.addEventListener('change', applyFilters);
+        }
+    });
+
+    // Forms Auth (mantener los tuyos)
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        // ... tu lógica de login ...
+    });
+    
+    document.getElementById('registerForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        // ... tu lógica de registro ...
+    });
 }
 
 function applyFilters() {
-    const search = document.getElementById('searchInput').value.toLowerCase();
-    const level = document.getElementById('filterLevel').value;
-    const area = document.getElementById('filterArea').value;
-    const country = document.getElementById('filterCountry').value;
-    const sort = document.getElementById('filterSort').value;
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const levelVal = document.getElementById('filterLevel').value;
+    const areaVal = document.getElementById('filterArea').value;
+    const countryVal = document.getElementById('filterCountry').value;
+    const sortVal = document.getElementById('filterSort').value;
 
-    let filtered = scholarships.filter(b => {
-        const matchSearch = b.titulo.toLowerCase().includes(search) || b.institucion.toLowerCase().includes(search) || b.pais.toLowerCase().includes(search);
-        const matchLevel = level === 'all' || b.nivel.includes(level);
-        const matchArea = area === 'all' || b.area.includes(area);
-        const matchCountry = country === 'all' || b.pais === country;
-        return matchSearch && matchLevel && matchArea && matchCountry;
+    // 1. Filtrar
+    let filtered = scholarships.filter(beca => {
+        // Búsqueda por texto (título, institución, país)
+        const matchText = beca.titulo.toLowerCase().includes(searchTerm) || 
+                          beca.institucion.toLowerCase().includes(searchTerm) ||
+                          beca.pais.toLowerCase().includes(searchTerm);
+        
+        // Filtro Nivel
+        const matchLevel = levelVal === 'all' || beca.nivel.includes(levelVal);
+        
+        // Filtro Área (busca coincidencia parcial en el array de áreas)
+        const matchArea = areaVal === 'all' || beca.area.some(a => a.includes(areaVal));
+        
+        // Filtro País (coincidencia exacta)
+        const matchCountry = countryVal === 'all' || beca.pais === countryVal;
+
+        return matchText && matchLevel && matchArea && matchCountry;
     });
 
-    if (sort === 'deadline') {
+    // 2. Ordenar
+    if (sortVal === 'deadline') {
         filtered.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+    } else if (sortVal === 'recent') {
+        // Asumiendo que ID mayor es más reciente, o podrías usar fecha de creación si la tuvieras
+        filtered.sort((a, b) => b.id.localeCompare(a.id)); 
+    } else if (sortVal === 'alpha') {
+        filtered.sort((a, b) => a.titulo.localeCompare(b.titulo));
     }
 
-    // Limpiar solo las becas activas (manteniendo el separador de cerradas si existe)
-    const container = document.getElementById('catalogo');
-    const separator = container.querySelector('h3'); // Buscar el separador
-    container.innerHTML = '';
-    if (separator) container.appendChild(separator.parentElement); // Restaurar separador y mensaje si existían
+    // 3. Renderizar y actualizar contador
+    renderScholarships(filtered);
     
-    renderScholarships(filtered, false);
+    const countDisplay = document.getElementById('count-display');
+    if (countDisplay) {
+        countDisplay.textContent = filtered.length;
+    }
 }
 
 // --- TRACKER Y DASHBOARD ---
