@@ -22,85 +22,89 @@ function initModalsSafety() {
     if (!document.getElementById('statusChart')) console.warn('⚠️ Falta canvas#statusChart en HTML');
 }
 
-// --- CARGA DE DATOS (CON HISTORIAL INTELIGENTE) ---
+// --- CARGA DE DATOS (VERSIÓN BLINDADA) ---
 async function loadScholarships() {
+    console.log("Iniciando carga de becas..."); // Debug
+    
     try {
         const response = await fetch('./data/becas.json');
-        if (!response.ok) throw new Error('Error al cargar JSON');
         
-        let allScholarships = await response.json();
-        window.rawScholarships = allScholarships;
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         
+        const allScholarships = await response.json();
+        
+        // 🟢 GUARDAR COPIA GLOBAL (CRUCIAL PARA EL TRACKER)
+        window.rawScholarships = allScholarships; 
+        console.log(`Becas cargadas: ${allScholarships.length} totales.`);
+
         const todayStr = new Date().toISOString().split('T')[0];
         
-        // 1. Separar en Activas y Cerradas
+        // Separar
         const active = allScholarships.filter(b => b.deadline >= todayStr);
         const closed = allScholarships.filter(b => b.deadline < todayStr);
         
-        // 2. Ordenar activas por urgencia (más próximas primero)
+        // Ordenar
         active.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
-        // Ordenar cerradas por fecha reciente primero (las más nuevas históricamente)
         closed.sort((a, b) => new Date(b.deadline) - new Date(a.deadline));
         
         const container = document.getElementById('catalogo');
-        if (!container) return;
+        
+        if (!container) {
+            console.error("ERROR: No se encontró el elemento con ID 'catalogo' en el HTML.");
+            return;
+        }
 
-        container.innerHTML = ''; // Limpiar contenedor
+        container.innerHTML = ''; // Limpiar
 
-        // 3. Renderizar ACTIVAS
+        // 1. Renderizar ACTIVAS
         if (active.length > 0) {
             const headerActive = document.createElement('div');
-            headerActive.className = 'section-header';
             headerActive.style.gridColumn = "1 / -1";
             headerActive.style.marginBottom = "20px";
-            headerActive.style.marginTop = "10px";
             headerActive.innerHTML = `<h2 style="color: var(--primary); font-size: 1.5rem;"><i class="fas fa-clock"></i> Convocatorias Abiertas (${active.length})</h2>`;
             container.appendChild(headerActive);
-
-            renderScholarships(active, false, container); 
+            
+            renderScholarships(active, false, container);
         } else {
-            container.innerHTML += `<div style="grid-column:1/-1; text-align:center; padding:20px; color:#666;">No hay becas activas en este momento.</div>`;
+            container.innerHTML += `<div style="grid-column:1/-1; text-align:center; padding:20px;">No hay becas activas.</div>`;
         }
         
-        // 4. Renderizar CERRADAS (Historial)
+        // 2. Renderizar CERRADAS
         if (closed.length > 0) {
             const separator = document.createElement('div');
             separator.style.gridColumn = "1 / -1";
             separator.style.margin = "60px 0 30px";
-            separator.style.padding = "30px";
-            separator.style.background = "linear-gradient(to right, #f9fafb, #f3f4f6)";
-            separator.style.borderLeft = "5px solid #9ca3af";
+            separator.style.padding = "20px";
+            separator.style.background = "#f3f4f6";
             separator.style.borderRadius = "8px";
             separator.innerHTML = `
-                <h3 style="color: #4b5563; margin-bottom: 10px; font-size: 1.3rem;">
-                    <i class="fas fa-archive"></i> Historial de Convocatorias Cerradas
-                </h3>
-                <p style="font-size: 0.95rem; color: #6b7280; max-width: 800px; margin: 0 auto;">
-                    Estas becas ya finalizaron su ciclo actual. Úsalas como <strong>referencia</strong> para revisar los requisitos, documentos y fechas típicas, y así prepararte con anticipación para la próxima edición.
-                </p>
+                <h3 style="color: #666;"><i class="fas fa-archive"></i> Historial (Referencia)</h3>
+                <p style="font-size:0.9rem; color:#888;">Becas cerradas para guía de preparación.</p>
             `;
             container.appendChild(separator);
             
-            renderScholarships(closed, true, container); 
+            renderScholarships(closed, true, container);
         }
         
-        updateStats(active.length); // Stats basadas solo en activas
-        
+        updateStats(active.length);
+        console.log("Carga completada exitosamente.");
+
     } catch (error) {
-        console.error('Error:', error);
+        console.error("ERROR CRÍTICO EN LOADSCHOLARSHIPS:", error);
         const container = document.getElementById('catalogo');
         if(container) {
             container.innerHTML = `
-                <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
-                    <i class="fas fa-exclamation-circle" style="font-size: 3rem; color: var(--danger); margin-bottom: 15px;"></i>
-                    <h3>Error al cargar las becas</h3>
-                    <p>Verifica tu conexión o recarga la página.</p>
-                    <button class="btn btn-primary" onclick="location.reload()" style="margin-top: 15px;">Recargar</button>
+                <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: red;">
+                    <h3>Error al cargar datos</h3>
+                    <p>${error.message}</p>
+                    <p>Revisa la consola (F12) para más detalles.</p>
+                    <button onclick="location.reload()" class="btn btn-primary">Recargar</button>
                 </div>`;
         }
     }
 }
-
 // --- AUTENTICACIÓN (MULTI-USUARIO) ---
 function checkAuth() {
     const storedUser = localStorage.getItem('scholarship_user');
