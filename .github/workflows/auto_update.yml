@@ -40,3 +40,5 @@ jobs:
           git config --global user.email 'action@github.com'
           git add data/becas.json
           git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 Auto-update: Nuevas becas y re-validación" && git push)
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  <-- ¡Esto es crucial!
