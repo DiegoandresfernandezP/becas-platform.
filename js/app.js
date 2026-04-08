@@ -85,25 +85,45 @@ window.toggleMenu = () => {
     document.getElementById('nav-links').classList.toggle('active');
 };
 
-// --- FILTROS Y BÚSQUEDA (CORREGIDO) ---
+
+
+    // --- FILTROS Y BÚSQUEDA (BLINDADO) ---
 function setupEventListeners() {
     // Buscador de texto
-    document.getElementById('searchInput').addEventListener('input', applyFilters);
+    const searchInput = document.getElementById('searchInput');
+    if(searchInput) searchInput.addEventListener('input', applyFilters);
     
-    // Selectores
-    document.getElementById('filterLevel').addEventListener('change', applyFilters);
-    document.getElementById('filterArea').addEventListener('change', applyFilters);
-    document.getElementById('filterCountry').addEventListener('change', applyFilters);
-    document.getElementById('filterSort').addEventListener('change', applyFilters);
+    // Selectores (Verificamos que existan antes de añadir evento)
+    const ids = ['filterLevel', 'filterType', 'filterArea', 'filterCountry', 'filterSort'];
+    
+    ids.forEach(id => {
+        const el = document.getElementById(id);
+        if(el) {
+            el.addEventListener('change', applyFilters);
+        } else {
+            console.warn(`⚠️ El elemento con ID '${id}' no existe en el HTML.`);
+        }
+    });
 }
 
 function applyFilters() {
-    const term = document.getElementById('searchInput').value.toLowerCase();
-    const typeFilter = document.getElementById('filterType').value; 
-    const level = document.getElementById('filterLevel').value;
-    const area = document.getElementById('filterArea').value;
-    const country = document.getElementById('filterCountry').value;
-    const sort = document.getElementById('filterSort').value;
+    const term = (document.getElementById('searchInput').value || '').toLowerCase();
+    
+    // Obtenemos los valores, si el elemento no existe usamos 'all' por defecto
+    const typeEl = document.getElementById('filterType');
+    const type = typeEl ? typeEl.value : 'all';
+    
+    const levelEl = document.getElementById('filterLevel');
+    const level = levelEl ? levelEl.value : 'all';
+    
+    const areaEl = document.getElementById('filterArea');
+    const area = areaEl ? areaEl.value : 'all';
+    
+    const countryEl = document.getElementById('filterCountry');
+    const country = countryEl ? countryEl.value : 'all';
+    
+    const sortEl = document.getElementById('filterSort');
+    const sort = sortEl ? sortEl.value : 'default';
 
     let filtered = scholarships.filter(beca => {
         // 1. Búsqueda de texto
@@ -112,19 +132,15 @@ function applyFilters() {
                           beca.pais.toLowerCase().includes(term) ||
                           (beca.tags && beca.tags.some(t => t.toLowerCase().includes(term)));
 
-        // 2. Filtro por TIPO (Con protección si el campo no existe)
-        // Si la beca no tiene campo 'tipo', asumimos que es 'Beca' por defecto
+        // 2. Filtro por TIPO (Blindado: si no existe el campo, asume 'Beca')
         const becaType = beca.tipo || 'Beca'; 
-        const matchType = typeFilter === 'all' || becaType === typeFilter;
+        const matchType = type === 'all' || becaType === type;
 
-        // 3. Filtro por Nivel (Protección si es string o array)
-        const becaNivel = Array.isArray(beca.nivel) ? beca.nivel : [beca.nivel];
-        const matchLevel = level === 'all' || becaNivel.includes(level);
+        // 3. Filtro por Nivel
+        const matchLevel = level === 'all' || (beca.nivel && beca.nivel.includes(level));
 
         // 4. Filtro por Área
-        const becaArea = Array.isArray(beca.area) ? beca.area : [beca.area];
-        const matchArea = area === 'all' || becaArea.includes(area) || 
-                          becaArea.some(a => a && a.includes(area));
+        const matchArea = area === 'all' || (beca.area && (beca.area.includes(area) || beca.area.some(a => a.includes(area))));
 
         // 5. Filtro por País
         const matchCountry = country === 'all' || beca.pais === country || 
@@ -137,8 +153,8 @@ function applyFilters() {
     if (sort === 'deadline') {
         filtered.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
     } else if (sort === 'recent') {
-        // Ordenar por ID inverso asumiendo que los nuevos tienen IDs mayores o simplemente invertir
-        filtered.reverse(); 
+        // Copia para no mutar el original si no quieres
+        filtered = [...filtered].reverse(); 
     } else if (sort === 'alpha') {
         filtered.sort((a, b) => a.titulo.localeCompare(b.titulo));
     }
