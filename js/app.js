@@ -3,188 +3,128 @@ let scholarships = [];
 let currentUser = null;
 let userApplications = [];
 let currentSharedBeca = null;
-// Base de datos local de usuarios (para soportar múltiples cuentas)
+// Nuevo: Lista de todos los usuarios registrados (simulada en DB local)
 let allUsers = JSON.parse(localStorage.getItem('scholarship_db_users')) || [];
 
 // --- INICIALIZACIÓN ---
 document.addEventListener('DOMContentLoaded', () => {
-    loadScholarships();
-    checkAuth();
-    setupEventListeners();
+loadScholarships();
+checkAuth();
+setupEventListeners();
+    
+    // Inicializar modales si existen en el HTML (prevención de errores)
     initModalsSafety();
 });
 
 function initModalsSafety() {
-    // Verifica existencia de modales críticos para evitar errores en consola
+    // Verifica que los modales existan antes de asignar eventos globales si fuera necesario
     if (!document.getElementById('auth-modal')) console.warn('⚠️ Falta #auth-modal en HTML');
     if (!document.getElementById('detail-modal')) console.warn('⚠️ Falta #detail-modal en HTML');
     if (!document.getElementById('letterModal')) console.warn('⚠️ Falta #letterModal en HTML');
-    if (!document.getElementById('statusChart')) console.warn('⚠️ Falta canvas#statusChart en HTML');
 }
 
-// --- CARGA DE DATOS (VERSIÓN BLINDADA) ---
+// --- CARGA DE DATOS ---
 async function loadScholarships() {
-    console.log("Iniciando carga de becas..."); // Debug
-    
-    try {
-        const response = await fetch('./data/becas.json');
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const allScholarships = await response.json();
-        
-        // 🟢 GUARDAR COPIA GLOBAL (CRUCIAL PARA EL TRACKER)
-        window.rawScholarships = allScholarships; 
-        console.log(`Becas cargadas: ${allScholarships.length} totales.`);
-
-        const todayStr = new Date().toISOString().split('T')[0];
-        
-        // Separar
-        const active = allScholarships.filter(b => b.deadline >= todayStr);
-        const closed = allScholarships.filter(b => b.deadline < todayStr);
-        
-        // Ordenar
-        active.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
-        closed.sort((a, b) => new Date(b.deadline) - new Date(a.deadline));
-        
-        const container = document.getElementById('catalogo');
-        
-        if (!container) {
-            console.error("ERROR: No se encontró el elemento con ID 'catalogo' en el HTML.");
-            return;
-        }
-
-        container.innerHTML = ''; // Limpiar
-
-        // 1. Renderizar ACTIVAS
-        if (active.length > 0) {
-            const headerActive = document.createElement('div');
-            headerActive.style.gridColumn = "1 / -1";
-            headerActive.style.marginBottom = "20px";
-            headerActive.innerHTML = `<h2 style="color: var(--primary); font-size: 1.5rem;"><i class="fas fa-clock"></i> Convocatorias Abiertas (${active.length})</h2>`;
-            container.appendChild(headerActive);
-            
-            renderScholarships(active, false, container);
-        } else {
-            container.innerHTML += `<div style="grid-column:1/-1; text-align:center; padding:20px;">No hay becas activas.</div>`;
-        }
-        
-        // 2. Renderizar CERRADAS
-        if (closed.length > 0) {
-            const separator = document.createElement('div');
-            separator.style.gridColumn = "1 / -1";
-            separator.style.margin = "60px 0 30px";
-            separator.style.padding = "20px";
-            separator.style.background = "#f3f4f6";
-            separator.style.borderRadius = "8px";
-            separator.innerHTML = `
-                <h3 style="color: #666;"><i class="fas fa-archive"></i> Historial (Referencia)</h3>
-                <p style="font-size:0.9rem; color:#888;">Becas cerradas para guía de preparación.</p>
-            `;
-            container.appendChild(separator);
-            
-            renderScholarships(closed, true, container);
-        }
-        
-        updateStats(active.length);
-        console.log("Carga completada exitosamente.");
-
-    } catch (error) {
-        console.error("ERROR CRÍTICO EN LOADSCHOLARSHIPS:", error);
-        const container = document.getElementById('catalogo');
-        if(container) {
-            container.innerHTML = `
-                <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: red;">
-                    <h3>Error al cargar datos</h3>
-                    <p>${error.message}</p>
-                    <p>Revisa la consola (F12) para más detalles.</p>
-                    <button onclick="location.reload()" class="btn btn-primary">Recargar</button>
-                </div>`;
-        }
-    }
+try {
+@@ -44,7 +56,7 @@
 }
-// --- AUTENTICACIÓN (MULTI-USUARIO) ---
+}
+
+// --- AUTENTICACIÓN ---
+// --- AUTENTICACIÓN (CORREGIDA PARA MÚLTIPLES USUARIOS) ---
 function checkAuth() {
-    const storedUser = localStorage.getItem('scholarship_user');
-    if (storedUser) {
-        currentUser = JSON.parse(storedUser);
-        userApplications = JSON.parse(localStorage.getItem(`apps_${currentUser.email}`)) || [];
-        updateNav(true);
-    } else {
-        updateNav(false);
-    }
-}
+const storedUser = localStorage.getItem('scholarship_user');
+if (storedUser) {
+@@ -58,14 +70,16 @@
 
 function updateNav(isLoggedIn) {
-    const container = document.getElementById('auth-buttons');
+const container = document.getElementById('auth-buttons');
+    if(!container) return;
     const nameDisplay = document.getElementById('userNameDisplay');
     
     if (!container) return;
 
-    if (isLoggedIn) {
-        container.innerHTML = `
-            <a href="#" onclick="navigate('dashboard-section')" style="color:var(--primary); font-weight:bold; margin-right:10px; text-decoration:none;">Mi Panel</a>
-            <span style="margin-right:10px; font-size:0.9rem; color:#555;">Hola, ${currentUser.name.split(' ')[0]}</span>
+if (isLoggedIn) {
+container.innerHTML = `
+            <a href="#" onclick="navigate('dashboard-section')" style="color:var(--primary); font-weight:bold;">Mi Panel</a>
+            <button class="btn btn-outline btn-sm" onclick="logout()" style="margin-left:10px;">Salir</button>
+            <a href="#" onclick="navigate('dashboard-section')" style="color:var(--primary); font-weight:bold; margin-right:10px;">Mi Panel</a>
+            <span style="margin-right:10px; font-size:0.9rem;">Hola, ${currentUser.name.split(' ')[0]}</span>
             <button class="btn btn-outline btn-sm" onclick="logout()">Salir</button>
-        `;
-        if(nameDisplay) nameDisplay.textContent = currentUser.name.split(' ')[0];
-    } else {
-        container.innerHTML = `<button class="btn btn-primary btn-sm" onclick="toggleAuthModal()">Login / Registro</button>`;
-    }
-}
+       `;
+        const nameDisplay = document.getElementById('userNameDisplay');
+if(nameDisplay) nameDisplay.textContent = currentUser.name.split(' ')[0];
+} else {
+container.innerHTML = `<button class="btn btn-primary btn-sm" onclick="toggleAuthModal()">Login / Registro</button>`;
+@@ -74,28 +88,29 @@
 
 function logout() {
-    localStorage.removeItem('scholarship_user');
+localStorage.removeItem('scholarship_user');
     currentUser = null;
     userApplications = [];
-    location.reload();
+location.reload();
 }
 
 // --- NAVEGACIÓN ---
 window.navigate = (viewId) => {
+    document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
     const sections = document.querySelectorAll('.view-section');
     const navLinks = document.getElementById('nav-links');
     
     sections.forEach(el => el.classList.add('hidden'));
-    const target = document.getElementById(viewId);
+const target = document.getElementById(viewId);
+    if(target) {
+        target.classList.remove('hidden');
+        target.classList.add('active'); // Asegurar clase active
+    }
     if(target) target.classList.remove('hidden');
-    
-    if(navLinks) navLinks.classList.remove('active');
-    
-    if (viewId === 'dashboard-section') loadDashboard();
-    window.scrollTo(0, 0);
+
+    const navLinks = document.getElementById('nav-links');
+if(navLinks) navLinks.classList.remove('active');
+
+if (viewId === 'dashboard-section') loadDashboard();
+window.scrollTo(0, 0);
 };
 
 window.toggleMenu = () => {
+    const navLinks = document.getElementById('nav-links');
+    if(navLinks) navLinks.classList.toggle('active');
     const nav = document.getElementById('nav-links');
     if(nav) nav.classList.toggle('active');
 };
 
 // --- FILTROS Y BÚSQUEDA ---
-function setupEventListeners() {
-    const searchInput = document.getElementById('searchInput');
-    if(searchInput) searchInput.addEventListener('input', applyFilters);
+@@ -104,32 +119,19 @@
+if(searchInput) searchInput.addEventListener('input', applyFilters);
+
+const ids = ['filterLevel', 'filterType', 'filterArea', 'filterCountry', 'filterSort'];
     
-    const ids = ['filterLevel', 'filterType', 'filterArea', 'filterCountry', 'filterSort'];
-    ids.forEach(id => {
-        const el = document.getElementById(id);
+ids.forEach(id => {
+const el = document.getElementById(id);
+        if(el) {
+            el.addEventListener('change', applyFilters);
+        }
         if(el) el.addEventListener('change', applyFilters);
-    });
+});
 }
 
 function applyFilters() {
-    // Nota: Los filtros solo aplican sobre las becas ACTIVAS para no confundir al usuario
-    // Si quisieras filtrar también el historial, la lógica sería más compleja.
-    // Aquí filtramos el array global 'scholarships' que en loadScholarships mezcló todo, 
-    // pero para ser precisos, deberíamos filtrar solo las activas. 
-    // Para simplificar en esta v1, filtraremos sobre el array principal cargado.
+    const term = (document.getElementById('searchInput').value || '').toLowerCase();
     
-    // CORRECCIÓN: Para que el filtro funcione bien con la separación, 
-    // lo ideal es recargar la vista completa aplicando el filtro a la lista original.
-    // Pero como 'scholarships' ahora es solo la lista procesada, haremos el filtro sobre ella.
+    const typeEl = document.getElementById('filterType');
+    const type = typeEl ? typeEl.value : 'all';
     
+    const levelEl = document.getElementById('filterLevel');
+    const level = levelEl ? levelEl.value : 'all';
+    
+    const areaEl = document.getElementById('filterArea');
+    const area = areaEl ? areaEl.value : 'all';
+    
+    const countryEl = document.getElementById('filterCountry');
+    const country = countryEl ? countryEl.value : 'all';
+    
+    const sortEl = document.getElementById('filterSort');
+    const sort = sortEl ? sortEl.value : 'default';
     const term = (document.getElementById('searchInput')?.value || '').toLowerCase();
     const type = document.getElementById('filterType')?.value || 'all';
     const level = document.getElementById('filterLevel')?.value || 'all';
@@ -192,238 +132,98 @@ function applyFilters() {
     const country = document.getElementById('filterCountry')?.value || 'all';
     const sort = document.getElementById('filterSort')?.value || 'default';
 
-    // Filtramos TODO el array scholarships (que contiene activas y cerradas si se cargaron juntas, 
-    // pero en nuestra nueva lógica loadScholarships no actualiza 'scholarships' global con la mezcla.
-    // Para arreglar esto sin reescribir todo: filtraremos sobre la lista original si la guardamos, 
-    // o asumimos que el usuario quiere filtrar lo que ve.
-    
-    // ESTRATEGIA SIMPLE: Recargamos la lógica de renderizado pasando los filtros.
-    // Pero para no complicar, aplicaremos el filtro visualmente sobre los elementos DOM existentes 
-    // o regeneramos la lista desde el JSON original. 
-    
-    // MEJOR ENFOQUE: Volver a leer el JSON o guardar una copia 'rawScholarships'.
-    // Para este script, asumiremos que 'scholarships' contiene todo lo cargado inicialmente si modificamos loadScholarships.
-    // PERO como loadScholarships ahora hace append directo, el filtro global es tricky.
-    
-    // SOLUCIÓN PRÁCTICA: El filtro solo aplicará a las BECAS ACTIVAS mostradas arriba.
-    // Las cerradas se mantendrán abajo siempre como referencia estática.
-    
-    // Necesitamos acceder a la lista original. La guardaremos en una variable global extra.
-    // (Se asume que modificaremos loadScholarships para guardar 'rawScholarships' o pasamos el filtro aquí).
-    // Para mantener este script funcional sin cambiar más lógica:
-    // Filtraremos las tarjetas visibles en el DOM que NO tengan la clase 'beca-card-closed'.
-    
-    const container = document.getElementById('catalogo');
-    const cards = container ? container.querySelectorAll('.beca-card:not(.beca-card-closed)') : [];
-    
-    let visibleCount = 0;
+let filtered = scholarships.filter(beca => {
+const matchText = beca.titulo.toLowerCase().includes(term) || 
+@@ -139,13 +141,10 @@
 
-    cards.forEach(card => {
-        // Extraer datos de la tarjeta para filtrar (menos eficiente pero funciona sin re-cargar JSON)
-        const title = card.querySelector('h3').textContent.toLowerCase();
-        const inst = card.querySelector('.card-body p:nth-child(3)').textContent.toLowerCase(); // Institución
-        const pais = card.querySelector('.card-body p:nth-child(4)').textContent.toLowerCase(); // País
-        
-        // Tags (niveles)
-        const tagsContainer = card.querySelector('.card-tags');
-        const levels = tagsContainer ? Array.from(tagsContainer.querySelectorAll('.tag')).map(t => t.textContent.toLowerCase()) : [];
+const becaType = beca.tipo || 'Beca'; 
+const matchType = type === 'all' || becaType === type;
 
-        const matchText = title.includes(term) || inst.includes(term) || pais.includes(term);
-        
-        // Filtros select (simplificados para demo)
-        // En una app real, deberías filtrar el array de datos antes de renderizar.
-        // Aquí hacemos una aproximación visual:
-        let matches = true;
-        
-        if (level !== 'all' && !levels.some(l => l.includes(level.toLowerCase()))) matches = false;
-        if (country !== 'all' && !pais.includes(country.toLowerCase())) matches = false;
-        // Tipo y Área son más difíciles de extraer solo del DOM sin data-attributes.
-        // Asumiremos que el usuario usa principalmente la búsqueda de texto para estos.
+const matchLevel = level === 'all' || (beca.nivel && beca.nivel.includes(level));
 
-        if (matches && matchText) {
-            card.style.display = 'block';
-            visibleCount++;
-        } else {
-            card.style.display = 'none';
-        }
-    });
+const matchArea = area === 'all' || (beca.area && (beca.area.includes(area) || beca.area.some(a => a.includes(area))));
 
-    // Actualizar contador
-    const countDisplay = document.getElementById('count-display');
-    if(countDisplay) countDisplay.textContent = visibleCount;
-    
-    // Mensaje si no hay resultados en activas
-    const header = container.querySelector('.section-header');
-    if (visibleCount === 0 && cards.length > 0) {
-        let msg = container.querySelector('.no-results-msg');
-        if (!msg) {
-            msg = document.createElement('div');
-            msg.className = 'no-results-msg';
-            msg.style.gridColumn = "1/-1";
-            msg.style.textAlign = "center";
-            msg.style.padding = "20px";
-            msg.style.color = "#666";
-            msg.textContent = "No se encontraron becas activas con esos criterios.";
-            container.insertBefore(msg, container.querySelector('.section-header').nextSibling);
-        }
-    } else {
-        const msg = container.querySelector('.no-results-msg');
-        if(msg) msg.remove();
-    }
-}
+const matchCountry = country === 'all' || beca.pais === country || 
+                             (country === 'Europa' && beca.pais.includes('Europa'));
+                             (country === 'Europa' && beca.pais.includes('Europa')); // Lógica simple para Europa
 
-// --- RENDERIZADO (MEJORADO PARA CERRADAS) ---
-function renderScholarships(data, isClosed = false, container = null) {
-    const targetContainer = container || document.getElementById('catalogo');
-    const countDisplay = document.getElementById('count-display');
-    
-    // Solo actualizamos el contador global si NO es una sección de cerradas
-    if (!isClosed && countDisplay && container === null) {
-        countDisplay.textContent = data.length;
-    }
-
-    if (data.length === 0 && !container) {
-        targetContainer.innerHTML = `
-            <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
-                <i class="fas fa-search" style="font-size: 3rem; color: #ccc; margin-bottom: 15px;"></i>
-                <h3>No se encontraron resultados</h3>
+return matchText && matchType && matchLevel && matchArea && matchCountry;
+});
+@@ -176,7 +175,7 @@
+           <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
+               <i class="fas fa-search" style="font-size: 3rem; color: #ccc; margin-bottom: 15px;"></i>
+               <h3>No se encontraron resultados</h3>
+                <p>Intenta ajustar los filtros o buscar otro término.</p>
                 <p>Intenta ajustar los filtros.</p>
-            </div>`;
-        return;
-    }
+           </div>`;
+return;
+}
+@@ -186,6 +185,9 @@
+const card = document.createElement('div');
+card.className = 'beca-card';
 
-    data.forEach(beca => {
-        const isSaved = currentUser && userApplications.some(a => a.id === beca.id);
-        const card = document.createElement('div');
-        card.className = `beca-card ${isClosed ? 'beca-card-closed' : ''}`;
-        
-        // Estilos específicos si está cerrada
-        if (isClosed) {
-            card.style.opacity = "0.85";
-            card.style.borderColor = "#e5e7eb";
-            card.style.background = "#fafafa";
-        }
-
+        // Protección si nivel es undefined
         const niveles = beca.nivel ? beca.nivel.slice(0, 2) : [];
-        
-        // Lógica de botones según estado
-        let actionButtonHTML = '';
-        let webButtonHTML = '';
 
-        if (isClosed) {
-            actionButtonHTML = `<button class="btn btn-secondary btn-sm" disabled style="cursor: not-allowed; opacity: 0.6; background:#ccc;"><i class="fas fa-lock"></i> Cerrado</button>`;
-            webButtonHTML = `<a href="${beca.url_convocatoria}" target="_blank" class="btn btn-outline btn-sm" style="filter: grayscale(100%);">Ver Info</a>`;
-        } else {
-            if (currentUser) {
-                actionButtonHTML = `<button class="btn ${isSaved ? 'btn-secondary' : 'btn-primary'} btn-sm" onclick="addToTracker('${beca.id}')">
-                        ${isSaved ? '<i class="fas fa-check"></i> Guardado' : 'Guardar'}
-                     </button>`;
-            } else {
-                actionButtonHTML = `<button class="btn btn-secondary btn-sm" onclick="toggleAuthModal()">Guardar</button>`;
-            }
-            webButtonHTML = `<a href="${beca.url_convocatoria}" target="_blank" class="btn btn-outline btn-sm">Ver Web</a>`;
-        }
-
-        const statusBadge = isClosed 
-            ? `<span style="position:absolute; top:10px; right:10px; background:#9ca3af; color:white; padding:4px 8px; border-radius:4px; font-size:0.7rem; font-weight:bold;">CERRADO</span>` 
-            : `<span style="position:absolute; top:10px; right:10px; background:#10b981; color:white; padding:4px 8px; border-radius:4px; font-size:0.7rem; font-weight:bold;">ABIERTO</span>`;
-
-        card.innerHTML = `
-            <div class="card-body" style="position:relative;">
-                ${statusBadge}
-                <span class="tag" style="background:#e0f2fe; color:#0369a1;">${beca.financiamiento}</span>
-                <h3 style="margin: 10px 0; font-size: 1.2rem; ${isClosed ? 'color:#6b7280;' : ''}">${beca.titulo}</h3>
-                <p style="color: var(--primary); font-weight: bold;">${beca.institucion}</p>
-                <p style="font-size: 0.9rem; color: #666;"><i class="fas fa-map-marker-alt"></i> ${beca.pais}</p>
-                
-                <div class="card-tags" style="margin-top: 10px;">
+card.innerHTML = `
+           <div class="card-body">
+               <span class="tag" style="background:#e0f2fe; color:#0369a1;">${beca.financiamiento}</span>
+@@ -194,7 +196,7 @@
+               <p style="font-size: 0.9rem; color: #666;"><i class="fas fa-map-marker-alt"></i> ${beca.pais}</p>
+               
+               <div class="card-tags" style="margin-top: 10px;">
+                    ${beca.nivel.slice(0, 2).map(n => `<span class="tag">${n}</span>`).join('')}
                     ${niveles.map(n => `<span class="tag">${n}</span>`).join('')}
-                </div>
-                
-                <p style="margin-top: 15px; font-size: 0.85rem; color: ${isClosed ? '#9ca3af' : 'var(--danger)'}; font-weight: bold;">
-                    <i class="far fa-clock"></i> Deadline: ${beca.deadline}
-                </p>
-            </div>
-            
-            <div class="card-footer" style="margin-top:15px; display:flex; gap:10px; justify-content:space-between; align-items:center;">
-                ${webButtonHTML}
-                ${actionButtonHTML}
-            </div>
-        `;
-        targetContainer.appendChild(card);
-    });
+               </div>
+               
+               <p style="margin-top: 15px; font-size: 0.85rem; color: var(--danger); font-weight: bold;">
+@@ -217,18 +219,18 @@
 }
 
-function updateStats(activeCount) {
+function updateStats() {
+    const statBecas = document.getElementById('stat-becas');
+    const statPaises = document.getElementById('stat-paises');
+    const statUnis = document.getElementById('stat-unis');
     const elBecas = document.getElementById('stat-becas');
     const elPaises = document.getElementById('stat-paises');
     const elUnis = document.getElementById('stat-unis');
 
-    // Calculamos stats basados en el array global 'scholarships' (si lo tuviéramos completo) 
-    // o usamos el conteo activo pasado.
-    // Para países y unis, idealmente deberíamos calcular sobre todo el JSON original.
-    // Aquí usamos una aproximación o valores estáticos si no tenemos el raw data accesible fácilmente.
-    // Mejora: Guardar 'rawScholarships' en loadScholarships.
-    
-    if(elBecas) elBecas.textContent = activeCount;
-    
-    // Nota: Para stats reales de países/unis de TODAS las becas, necesitaríamos acceso al JSON completo.
-    // Dejamos placeholder o calculamos sobre las activas si es lo único disponible.
-    if(elPaises) elPaises.textContent = "?"; // Requiere acceso a lista completa
-    if(elUnis) elUnis.textContent = "?"; 
+    if(statBecas) statBecas.textContent = scholarships.length;
+    if(statPaises) {
+    if(elBecas) elBecas.textContent = scholarships.length;
+    if(elPaises) {
+const countries = new Set(scholarships.map(s => s.pais)).size;
+        statPaises.textContent = countries;
+        elPaises.textContent = countries;
+}
+    if(statUnis) {
+    if(elUnis) {
+const unis = new Set(scholarships.map(s => s.institucion)).size;
+        statUnis.textContent = unis;
+        elUnis.textContent = unis;
+}
 }
 
-// --- TRACKER & DASHBOARD ---
-function addToTracker(id) {
-    if (!currentUser) return toggleAuthModal();
-    
-    // Buscar en el DOM o en una lista global. Como renderizamos directo, necesitamos la data.
-    // Truco: Buscar en el JSON original es mejor, pero no lo tenemos en variable global fácil aquí.
-    // Solución: Iterar sobre las tarjetas activas para extraer datos? No, es sucio.
-    // Mejor: Guardar una copia de 'activeScholarships' en variable global en loadScholarships.
-    // PARA ESTE SCRIPT: Asumiremos que el usuario tiene la data o pasamos el objeto si pudiéramos.
-    // Como no podemos cambiar todo el flujo ahora, haremos un fetch rápido o alertamos.
-    // CORRECCIÓN: Vamos a asumir que 'scholarships' en el scope global tiene los datos si lo llenamos bien.
-    // En loadScholarships, deberíamos hacer: window.rawScholarships = allScholarships;
-    
-    const beca = window.rawScholarships ? window.rawScholarships.find(s => s.id === id) : null;
-    
-    if (!beca) {
-        alert("Error: No se pudo encontrar la información de la beca. Recarga la página.");
-        return;
-    }
-
-    if (userApplications.some(a => a.id === id)) {
-        alert('Esta beca ya está en tu tracker.');
-        return;
-    }
-
-    const newApp = {
-        ...beca,
-        status: 'Interesado',
-        documents: { cv: false, carta: false, recomendaciones: false, idiomas: false },
-        notes: ''
-    };
-
-    userApplications.push(newApp);
-    localStorage.setItem(`apps_${currentUser.email}`, JSON.stringify(userApplications));
-    alert('¡Beca guardada en tu tracker!');
-    // Refrescar vista si estamos en home
-    if (!document.getElementById('dashboard-section').classList.contains('hidden') === false) {
-       // Estamos en home, refrescar botones
-       // La forma más fácil es recargar o llamar a renderScholarships de nuevo con los datos actuales.
-       // Por simplicidad, el usuario verá el cambio al recargar o navegar.
-    }
+@@ -254,7 +256,7 @@
+userApplications.push(newApp);
+localStorage.setItem(`apps_${currentUser.email}`, JSON.stringify(userApplications));
+alert('¡Beca guardada en tu tracker!');
+    renderScholarships(scholarships);
+    renderScholarships(scholarships); 
 }
 
 function loadDashboard() {
-    if (!currentUser) return;
+@@ -265,26 +267,27 @@
+
+if(dashTotal) dashTotal.textContent = userApplications.length;
+
+    const totalDocs = userApplications.length * 4;
+    const completedDocs = userApplications.reduce((acc, app) => {
+        return acc + Object.values(app.documents).filter(Boolean).length;
+    }, 0);
+    const percent = totalDocs === 0 ? 0 : Math.round((completedDocs / totalDocs) * 100);
     
-    const dashTotal = document.getElementById('dash-total');
-    const dashDocs = document.getElementById('dash-docs');
-    
-    if(dashTotal) dashTotal.textContent = userApplications.length;
-    
+    if(dashDocs) dashDocs.textContent = `${percent}%`;
     if(dashDocs) {
         const totalDocs = userApplications.length * 4;
         const completedDocs = userApplications.reduce((acc, app) => {
@@ -433,188 +233,138 @@ function loadDashboard() {
         dashDocs.textContent = `${percent}%`;
     }
 
-    renderTracker();
-    renderChart();
+renderTracker();
+renderChart();
 }
 
 function renderTracker() {
-    const container = document.getElementById('tracker-list');
+const container = document.getElementById('tracker-list');
+    if(!container) return;
     if (!container) return;
-    
-    container.innerHTML = '';
 
-    if (userApplications.length === 0) {
-        container.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#666; padding:40px; font-size:1.1rem;">No tienes becas guardadas aún.<br>Ve al catálogo y guarda tus oportunidades favoritas.</p>';
-        return;
-    }
+container.innerHTML = '';
 
-    userApplications.forEach(app => {
-        const done = Object.values(app.documents).filter(Boolean).length;
-        const percent = (done / 4) * 100;
-        
-        const item = document.createElement('div');
-        item.className = 'tracker-item';
-        item.style.background = "#fff";
-        item.style.padding = "20px";
-        item.style.borderRadius = "8px";
-        item.style.boxShadow = "0 2px 5px rgba(0,0,0,0.05)";
-        item.style.marginBottom = "20px";
+if (userApplications.length === 0) {
+        container.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#666;">No tienes becas guardadas aún.</p>';
+        container.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#666; padding:20px;">No tienes becas guardadas aún.</p>';
+return;
+}
 
-        item.innerHTML = `
-            <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:10px;">
-                <div>
-                    <h4 style="margin:0; color:var(--primary);">${app.titulo}</h4>
-                    <p style="font-size:0.85rem; color:#666; margin:5px 0 0;">${app.institucion} • ${app.pais}</p>
-                </div>
-                <span style="background:#e0f2fe; color:#0369a1; padding:4px 8px; border-radius:4px; font-size:0.8rem; font-weight:bold;">${app.status}</span>
-            </div>
-            
-            <div style="margin:15px 0;">
-                <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:5px;">
-                    <span>Progreso de Documentos</span>
-                    <span>${Math.round(percent)}%</span>
-                </div>
-                <div class="progress-bar" style="width:100%; height:8px; background:#e5e7eb; border-radius:4px; overflow:hidden;">
-                    <div class="progress-fill" style="height:100%; width:${percent}%; background:var(--primary); transition:width 0.3s;"></div>
-                </div>
-            </div>
-
-            <div class="checklist-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:15px 0; background:#f9fafb; padding:15px; border-radius:6px;">
-                ${Object.entries(app.documents).map(([key, val]) => `
-                    <label style="font-size:0.85rem; cursor:pointer; display:flex; align-items:center; gap:8px;">
-                        <input type="checkbox" ${val ? 'checked' : ''} onchange="toggleDoc('${app.id}', '${key}')" style="accent-color:var(--primary);">
-                        ${key.charAt(0).toUpperCase() + key.slice(1)}
-                    </label>
-                `).join('')}
-            </div>
-            
-            <div style="margin-top:15px; display:flex; gap:10px; flex-wrap:wrap; border-top:1px solid #eee; paddingTop:15px;">
-                <button class="btn btn-outline btn-sm" style="flex:1;" onclick="openLetterGenerator('${app.id}')"><i class="fas fa-pen"></i> Generar Carta</button>
-                <select onchange="updateStatus('${app.id}', this.value)" style="font-size:0.85rem; border-radius:4px; padding:6px; border:1px solid #ddd;">
-                    <option value="Interesado" ${app.status === 'Interesado' ? 'selected' : ''}>Interesado</option>
-                    <option value="En Proceso" ${app.status === 'En Proceso' ? 'selected' : ''}>En Proceso</option>
-                    <option value="Enviada" ${app.status === 'Enviada' ? 'selected' : ''}>Enviada</option>
+@@ -298,20 +301,22 @@
+           <h4>${app.titulo}</h4>
+           <p style="font-size:0.85rem; color:#666;">${app.institucion}</p>
+           <div class="progress-bar"><div class="progress-fill" style="width:${percent}%"></div></div>
+            <div class="checklist-grid">
+            <div class="checklist-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:5px; margin:10px 0;">
+               ${Object.entries(app.documents).map(([key, val]) => `
+                    <label style="font-size:0.8rem;">
+                    <label style="font-size:0.8rem; cursor:pointer;">
+                       <input type="checkbox" ${val ? 'checked' : ''} onchange="toggleDoc('${app.id}', '${key}')">
+                       ${key.charAt(0).toUpperCase() + key.slice(1)}
+                   </label>
+               `).join('')}
+           </div>
+            <div style="margin-top:10px; display:flex; gap:5px;">
+            <div style="margin-top:10px; display:flex; gap:5px; flex-wrap:wrap;">
+               <button class="btn btn-outline btn-sm" style="flex:1;" onclick="openLetterGenerator('${app.id}')">Carta</button>
+                <select onchange="updateStatus('${app.id}', this.value)" style="font-size:0.8rem; border-radius:4px;">
+                <select onchange="updateStatus('${app.id}', this.value)" style="font-size:0.8rem; border-radius:4px; padding:4px;">
+                   <option value="Interesado" ${app.status === 'Interesado' ? 'selected' : ''}>Interesado</option>
+                   <option value="En Proceso" ${app.status === 'En Proceso' ? 'selected' : ''}>Proceso</option>
+                   <option value="Enviada" ${app.status === 'Enviada' ? 'selected' : ''}>Enviada</option>
                     <option value="Aceptada" ${app.status === 'Aceptada' ? 'selected' : ''}>Aceptada</option>
                     <option value="Rechazada" ${app.status === 'Rechazada' ? 'selected' : ''}>Rechazada</option>
-                </select>
-            </div>
-        `;
-        container.appendChild(item);
-    });
-}
-
-function toggleDoc(id, docKey) {
-    const app = userApplications.find(a => a.id === id);
-    if (app) {
-        app.documents[docKey] = !app.documents[docKey];
-        localStorage.setItem(`apps_${currentUser.email}`, JSON.stringify(userApplications));
-        loadDashboard();
-    }
-}
-
-function updateStatus(id, newStatus) {
-    const app = userApplications.find(a => a.id === id);
-    if (app) {
-        app.status = newStatus;
-        localStorage.setItem(`apps_${currentUser.email}`, JSON.stringify(userApplications));
-        // No recargamos todo para no perder foco, pero podríamos actualizar la etiqueta visual si quisiéramos
-    }
+               </select>
+           </div>
+       `;
+@@ -337,22 +342,35 @@
 }
 
 function renderChart() {
+    const ctx = document.getElementById('statusChart');
+    if(!ctx) return;
     const ctxCanvas = document.getElementById('statusChart');
-    if (!ctxCanvas) return; 
+    if (!ctxCanvas) return; // Salir si no hay canvas
 
     const ctx = ctxCanvas.getContext('2d');
     const counts = { 'Interesado': 0, 'En Proceso': 0, 'Enviada': 0, 'Aceptada': 0, 'Rechazada': 0 };
-    
+
+    const context = ctx.getContext('2d');
+    const counts = { 'Interesado': 0, 'En Proceso': 0, 'Enviada': 0 };
+    userApplications.forEach(app => { if(counts[app.status] !== undefined) counts[app.status]++; });
     userApplications.forEach(app => { 
         if(counts[app.status] !== undefined) counts[app.status]++; 
     });
 
+    // Filtrar ceros para que el gráfico se vea limpio
     const labels = Object.keys(counts).filter(k => counts[k] > 0);
     const data = labels.map(k => counts[k]);
 
-    if (window.myChart) window.myChart.destroy();
-    
+if (window.myChart) window.myChart.destroy();
+
+    window.myChart = new Chart(context, {
+    // Verificar si Chart.js está cargado
     if (typeof Chart === 'undefined') {
-        console.warn("Chart.js no está cargado.");
+        console.warn("Chart.js no está cargado. Incluye el script CDN en index.html");
         return;
     }
 
     window.myChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
+type: 'doughnut',
+data: {
+            labels: Object.keys(counts),
             labels: labels,
-            datasets: [{
+datasets: [{
+                data: Object.values(counts),
+                backgroundColor: ['#94a3b8', '#3b82f6', '#10b981']
                 data: data,
-                backgroundColor: ['#94a3b8', '#3b82f6', '#10b981', '#22c55e', '#ef4444'],
-                borderWidth: 0
-            }]
-        },
-        options: { 
-            responsive: true, 
-            maintainAspectRatio: false,
-            plugins: { 
-                legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } 
-            } 
-        }
-    });
+                backgroundColor: ['#94a3b8', '#3b82f6', '#10b981', '#22c55e', '#ef4444']
+}]
+},
+options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+@@ -383,25 +401,24 @@
 }
-
-// --- MODALES Y COMPARTIR ---
-window.toggleAuthModal = () => {
-    const modal = document.getElementById('auth-modal');
-    if(modal) modal.classList.toggle('hidden');
 };
 
-window.toggleAuthMode = () => {
-    const loginForm = document.getElementById('loginForm');
-    const regForm = document.getElementById('registerForm');
-    const title = document.getElementById('auth-title');
-    
-    if (loginForm && regForm && title) {
-        if (loginForm.classList.contains('hidden')) {
-            loginForm.classList.remove('hidden');
-            regForm.classList.add('hidden');
-            title.textContent = "Iniciar Sesión";
-        } else {
-            loginForm.classList.add('hidden');
-            regForm.classList.remove('hidden');
-            title.textContent = "Crear Cuenta";
-        }
-    }
-};
-
-// Forms
+// Forms (Lógica Corregida para múltiples usuarios)
 const loginFormEl = document.getElementById('loginForm');
 if(loginFormEl) {
-    loginFormEl.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = document.getElementById('loginEmail').value;
-        const pass = document.getElementById('loginPass').value;
-        
+loginFormEl.addEventListener('submit', (e) => {
+e.preventDefault();
+const email = document.getElementById('loginEmail').value;
+const pass = document.getElementById('loginPass').value;
+        const stored = localStorage.getItem('scholarship_user');
+
+        if (stored) {
+            const user = JSON.parse(stored);
+            if (user.email === email && user.pass === pass) {
+                checkAuth();
+                toggleAuthModal();
+                navigate('home');
+            } else {
+                alert('Credenciales incorrectas');
+            }
+        // Buscar usuario en la "base de datos" local
         const user = allUsers.find(u => u.email === email && u.pass === pass);
         
         if (user) {
             localStorage.setItem('scholarship_user', JSON.stringify(user));
             checkAuth();
             toggleAuthModal();
-            navigate('dashboard-section');
-        } else {
+            navigate('home'); // O 'dashboard-section'
+} else {
+            alert('Usuario no encontrado. Regístrate primero.');
             alert('Credenciales incorrectas o usuario no existe.');
-        }
-    });
 }
+});
+}
+@@ -414,32 +431,40 @@
+const email = document.getElementById('regEmail').value;
+const pass = document.getElementById('regPass').value;
 
-const registerFormEl = document.getElementById('registerForm');
-if(registerFormEl) {
-    registerFormEl.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = document.getElementById('regName').value;
-        const email = document.getElementById('regEmail').value;
-        const pass = document.getElementById('regPass').value;
-        
+        const user = { name, email, pass };
+        localStorage.setItem('scholarship_user', JSON.stringify(user));
+        // Verificar si ya existe
         if (allUsers.some(u => u.email === email)) {
             alert('Este correo ya está registrado.');
             return;
@@ -623,93 +373,93 @@ if(registerFormEl) {
         const newUser = { name, email, pass };
         allUsers.push(newUser);
         localStorage.setItem('scholarship_db_users', JSON.stringify(allUsers));
-        localStorage.setItem(`apps_${email}`, JSON.stringify([]));
-        
-        alert('Registro exitoso. Ahora inicia sesión.');
-        toggleAuthMode();
-    });
+localStorage.setItem(`apps_${email}`, JSON.stringify([]));
+
+alert('Registro exitoso. Ahora inicia sesión.');
+toggleAuthMode();
+});
 }
 
 // Detalle y Compartir
 window.openDetailModal = (beca) => {
-    currentSharedBeca = beca;
-    const modal = document.getElementById('detail-modal');
-    const content = document.getElementById('detail-content');
-    
+currentSharedBeca = beca;
+const modal = document.getElementById('detail-modal');
+const content = document.getElementById('detail-content');
+
+    if(content && modal) {
+        content.innerHTML = `
+            <h2 style="color:var(--primary);">${beca.titulo}</h2>
+            <h3>${beca.institucion} 📍 ${beca.pais}</h3>
+            <p><strong>Deadline:</strong> ${beca.deadline}</p>
+            <p><strong>Nivel:</strong> ${beca.nivel.join(', ')}</p>
+            <p><strong>Área:</strong> ${beca.area.join(', ')}</p>
+            <p><strong>Financiamiento:</strong> ${beca.financiamiento}</p>
+            <a href="${beca.url_convocatoria}" target="_blank" class="btn btn-primary" style="display:block; text-align:center; margin-top:20px;">Ir a la Convocatoria</a>
+        `;
+        modal.classList.remove('hidden');
+    }
     if (!modal || !content) return;
 
     content.innerHTML = `
-        <h2 style="color:var(--primary); margin-bottom:10px;">${beca.titulo}</h2>
-        <h3 style="font-size:1.1rem; color:#555; margin-bottom:20px;">${beca.institucion} 📍 ${beca.pais}</h3>
-        <div style="display:grid; gap:10px; font-size:0.95rem;">
-            <p><strong>Deadline:</strong> ${beca.deadline}</p>
-            <p><strong>Nivel:</strong> ${beca.nivel ? beca.nivel.join(', ') : 'N/A'}</p>
-            <p><strong>Área:</strong> ${beca.area ? beca.area.join(', ') : 'N/A'}</p>
-            <p><strong>Financiamiento:</strong> ${beca.financiamiento}</p>
-            <p><strong>Requisitos Idioma:</strong> ${beca.requisitos_idioma ? beca.requisitos_idioma.join(', ') : 'N/A'}</p>
-        </div>
-        <a href="${beca.url_convocatoria}" target="_blank" class="btn btn-primary" style="display:block; text-align:center; margin-top:30px; padding:12px;">Ir a la Convocatoria Oficial</a>
+        <h2 style="color:var(--primary);">${beca.titulo}</h2>
+        <h3>${beca.institucion} 📍 ${beca.pais}</h3>
+        <p><strong>Deadline:</strong> ${beca.deadline}</p>
+        <p><strong>Nivel:</strong> ${beca.nivel ? beca.nivel.join(', ') : 'N/A'}</p>
+        <p><strong>Área:</strong> ${beca.area ? beca.area.join(', ') : 'N/A'}</p>
+        <p><strong>Financiamiento:</strong> ${beca.financiamiento}</p>
+        <a href="${beca.url_convocatoria}" target="_blank" class="btn btn-primary" style="display:block; text-align:center; margin-top:20px;">Ir a la Convocatoria</a>
     `;
     modal.classList.remove('hidden');
 };
 
 window.closeDetailModal = () => {
-    const modal = document.getElementById('detail-modal');
-    if(modal) modal.classList.add('hidden');
-};
-
-window.shareWhatsApp = () => {
-    if (!currentSharedBeca) return;
-    const text = `Mira esta oportunidad: ${currentSharedBeca.titulo} en ${currentSharedBeca.pais}. Deadline: ${currentSharedBeca.deadline}.`;
-    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text + ' ' + window.location.href)}`, '_blank');
-};
-
-window.copyLink = () => {
-    navigator.clipboard.writeText(window.location.href);
-    alert('Enlace copiado al portapapeles');
+@@ -458,38 +483,41 @@
+alert('Enlace copiado al portapapeles');
 };
 
 // Generador de Cartas
 window.openLetterGenerator = (id) => {
-    const app = userApplications.find(a => a.id === id);
-    if (!app) return;
-    
+const app = userApplications.find(a => a.id === id);
+if (!app) return;
+
     const letterModal = document.getElementById('letterModal');
     const letterTitle = document.getElementById('letterTitle');
     const letterContent = document.getElementById('letterContent');
 
     if(!letterModal || !letterTitle || !letterContent) return;
     
-    const letter = `Estimado Comité de Admisiones,
+const letter = `Estimado Comité de Admisiones,
 
-Por medio de la presente expreso mi firme interés en postularme al programa "${app.titulo}" ofrecido por ${app.institucion}.
+Por medio de la presente expreso mi interés en el programa ${app.titulo} en ${app.institucion}.
 
-Mi motivación principal para aplicar radica en... [Espacio para detallar tu experiencia académica, proyectos relevantes y por qué este programa específico es el siguiente paso lógico en tu carrera].
-
-Estoy convencido/a de que mi perfil en el área de ${app.area ? app.area[0] : 'ciencias'} se alinea con los objetivos de su institución.
-
-Agradezco de antemano su tiempo y consideración.
+Mi motivación principal es... [Completa aquí]
+Mi motivación principal es... [Completa aquí detallando tu experiencia y por qué este programa es ideal para ti].
 
 Atentamente,
+${currentUser.name}`;
 
-${currentUser.name}
-${currentUser.email}`;
+    const titleEl = document.getElementById('letterTitle');
+    const contentEl = document.getElementById('letterContent');
+    const modal = document.getElementById('letterModal');
 
-    letterTitle.textContent = `Borrador: ${app.titulo}`;
+    if(titleEl) titleEl.textContent = `Carta: ${app.titulo}`;
+    if(contentEl) contentEl.value = letter;
+    if(modal) modal.classList.remove('hidden');
+    letterTitle.textContent = `Carta: ${app.titulo}`;
     letterContent.value = letter;
     letterModal.classList.remove('hidden');
 };
 
 window.closeLetterModal = () => {
-    const modal = document.getElementById('letterModal');
-    if(modal) modal.classList.add('hidden');
+const modal = document.getElementById('letterModal');
+if(modal) modal.classList.add('hidden');
 };
 
 window.copyLetter = () => {
-    const txt = document.getElementById('letterContent');
-    if(txt) {
-        txt.select();
-        document.execCommand('copy');
-        alert('Carta copiada al portapapeles. ¡Pégala en tu editor y personalízala!');
-    }
+const txt = document.getElementById('letterContent');
+if(txt) {
+txt.select();
+document.execCommand('copy');
+alert('Carta copiada');
+}
 };
