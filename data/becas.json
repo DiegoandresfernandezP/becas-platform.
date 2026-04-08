@@ -237,7 +237,7 @@
     "documentos_sugeridos": ["CV", "2 Recomendaciones", "Transcript"],
     "tags": ["USA", "Verano", "Marino"]
   },
-   {
+  {
     "id": "beca_018",
     "titulo": "CERN Summer Student Programme 2026",
     "institucion": "CERN",
@@ -475,7 +475,7 @@
     "documentos_sugeridos": ["CV", "Transcript", "Carta Motivación"],
     "tags": ["USA", "Industria", "Matemáticas"]
   },
-   {
+  {
     "id": "beca_035",
     "titulo": "Max Planck Institute Astronomy Internship",
     "institucion": "MPIA",
