@@ -1,503 +1,508 @@
-// --- ESTADO GLOBAL ---
-let scholarships = [];
-let currentUser = null;
-let userApplications = [];
-let isLoginMode = true;
-let myChart = null;
-let currentSharedBeca = null;
+/**
+ * BecasInternacionales - Aplicación Principal
+ * Módulo público: Catálogo de becas con filtros y búsqueda
+ */
 
-// --- INICIALIZACIÓN ---
-document.addEventListener('DOMContentLoaded', () => {
-    loadScholarships();
-    checkAuth();
-    setupEventListeners();
-    navigate('home'); // Asegurar que empiece en Home
-});
-
-// --- CARGA DE DATOS ---
-async function loadScholarships() {
-    try {
-        const response = await fetch('./data/becas.json');
-        if (!response.ok) throw new Error("Error cargando JSON");
-        scholarships = await response.json();
-        
-        // Filtrar becas vigentes (o mostrar todas si quieres ver las cerradas como referencia)
-        // Para este ejemplo, mostramos todas pero podrías filtrar por fecha aquí
-        renderScholarships(scholarships);
-        updateStats();
-    } catch (error) {
-        console.error('Error cargando becas:', error);
-        document.getElementById('catalogo').innerHTML = `
-            <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
-                <h3>Error al cargar las becas</h3>
-                <p>Verifica que el archivo data/becas.json exista y sea válido.</p>
-                <p class="small-text">${error.message}</p>
-            </div>`;
-    }
-}
-
-// --- NAVEGACIÓN ---
-window.navigate = (viewId) => {
-    // Ocultar todas las secciones
-    document.querySelectorAll('.view-section').forEach(el => {
-        el.classList.remove('active');
-        el.classList.add('hidden');
-    });
-
-    // Mostrar la seleccionada
-    const target = document.getElementById(viewId);
-    if (target) {
-        target.classList.remove('hidden');
-        target.classList.add('active');
-    }
-
-    // Lógica específica por vista
-    if (viewId === 'dashboard-section') {
-        if (!currentUser) {
-            toggleAuthModal(); // Si no hay usuario, pedir login
-            navigate('home');
-            return;
-        }
-        loadUserDashboard();
-    }
-
-    // Cerrar menú móvil si está abierto
-    document.getElementById('nav-links').classList.remove('active');
-    window.scrollTo(0, 0);
+// Estado global de la aplicación
+const AppState = {
+  scholarships: [],
+  filteredScholarships: [],
+  filters: {
+    search: '',
+    level: '',
+    area: '',
+    funding: '',
+    country: '',
+    sortBy: 'deadline'
+  }
 };
 
-window.toggleMenu = () => {
-    document.getElementById('nav-links').classList.toggle('active');
+// Elementos del DOM
+const DOM = {
+  searchInput: null,
+  filterLevel: null,
+  filterArea: null,
+  filterFunding: null,
+  filterCountry: null,
+  sortBy: null,
+  cardsContainer: null,
+  loadingSpinner: null,
+  noResults: null,
+  totalScholarships: null,
+  totalCountries: null,
+  totalUniversities: null,
+  newsletterForm: null
 };
 
-// --- AUTENTICACIÓN ---
-function checkAuth() {
-    const stored = localStorage.getItem('scholarship_user');
-    if (stored) {
-        currentUser = JSON.parse(stored);
-        updateNav(true);
-    } else {
-        updateNav(false);
-    }
+/**
+ * Inicializa la aplicación
+ */
+async function init() {
+  console.log('🎓 Iniciando BecasInternacionales...');
+
+  // Cache de elementos DOM
+  cacheDOMElements();
+
+  // Configurar event listeners
+  setupEventListeners();
+
+  // Cargar datos
+  await loadScholarships();
+
+  // Actualizar estadísticas
+  updateStats();
+
+  console.log('✅ Aplicación inicializada correctamente');
 }
 
-function updateNav(isLoggedIn) {
-    const container = document.getElementById('auth-buttons');
-    if (isLoggedIn) {
-        container.innerHTML = `
-            <span style="font-size:0.9rem; margin-right:10px;">Hola, ${currentUser.name.split(' ')[0]}</span>
-            <a href="#" onclick="navigate('dashboard-section')" style="color:var(--primary); font-weight:bold;">Mi Panel</a>
-            <a href="#" onclick="logout()" style="margin-left:10px; color:var(--danger);"><i class="fas fa-sign-out-alt"></i></a>
-        `;
-        document.getElementById('userNameDisplay').textContent = currentUser.name;
-    } else {
-        container.innerHTML = `<button class="btn btn-primary btn-sm" onclick="toggleAuthModal()">Login / Registro</button>`;
-    }
+/**
+ * Almacena referencias a elementos del DOM
+ */
+function cacheDOMElements() {
+  DOM.searchInput = document.getElementById('searchInput');
+  DOM.filterLevel = document.getElementById('filterLevel');
+  DOM.filterArea = document.getElementById('filterArea');
+  DOM.filterFunding = document.getElementById('filterFunding');
+  DOM.filterCountry = document.getElementById('filterCountry');
+  DOM.sortBy = document.getElementById('sortBy');
+  DOM.cardsContainer = document.getElementById('cardsContainer');
+  DOM.loadingSpinner = document.getElementById('loadingSpinner');
+  DOM.noResults = document.getElementById('noResults');
+  DOM.totalScholarships = document.getElementById('totalScholarships');
+  DOM.totalCountries = document.getElementById('totalCountries');
+  DOM.totalUniversities = document.getElementById('totalUniversities');
+  DOM.newsletterForm = document.getElementById('newsletterForm');
 }
 
-function toggleAuthModal() {
-    const modal = document.getElementById('auth-modal');
-    modal.classList.toggle('hidden');
-}
-
-function toggleAuthMode() {
-    isLoginMode = !isLoginMode;
-    const loginForm = document.getElementById('loginForm');
-    const regForm = document.getElementById('registerForm');
-    const title = document.getElementById('auth-title');
-    const toggleText = document.querySelector('.auth-toggle');
-
-    if (isLoginMode) {
-        loginForm.classList.remove('hidden');
-        regForm.classList.add('hidden');
-        title.textContent = "Iniciar Sesión";
-        toggleText.innerHTML = '¿No tienes cuenta? <u>Regístrate</u>';
-    } else {
-        loginForm.classList.add('hidden');
-        regForm.classList.remove('hidden');
-        title.textContent = "Crear Cuenta";
-        toggleText.innerHTML = '¿Ya tienes cuenta? <u>Inicia sesión</u>';
-    }
-}
-
-document.getElementById('loginForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = document.getElementById('loginEmail').value;
-    const pass = document.getElementById('loginPass').value;
-    
-    const storedUser = localStorage.getItem('scholarship_user');
-    if (storedUser) {
-        const user = JSON.parse(storedUser);
-        if (user.email === email && user.pass === pass) {
-            currentUser = user;
-            localStorage.setItem('scholarship_user', JSON.stringify(user));
-            toggleAuthModal();
-            checkAuth();
-            navigate('dashboard-section');
-        } else {
-            alert('Credenciales incorrectas');
-        }
-    } else {
-        alert('Usuario no encontrado. Regístrate primero.');
-    }
-});
-
-document.getElementById('registerForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('regName').value;
-    const email = document.getElementById('regEmail').value;
-    const pass = document.getElementById('regPass').value;
-
-    if (!name || !email || !pass) return alert('Completa todos los campos');
-
-    const user = { name, email, pass };
-    localStorage.setItem('scholarship_user', JSON.stringify(user));
-    localStorage.setItem(`apps_${email}`, JSON.stringify([]));
-    
-    alert('Registro exitoso. Ahora inicia sesión.');
-    toggleAuthMode();
-});
-
-function logout() {
-    localStorage.removeItem('scholarship_user');
-    currentUser = null;
-    location.reload();
-}
-
-// --- RENDERIZADO DE BECAS ---
-function renderScholarships(data) {
-    const container = document.getElementById('catalogo');
-    const countDisplay = document.getElementById('count-display');
-    
-    if (!container) return;
-
-    container.innerHTML = '';
-    
-    if (data.length === 0) {
-        container.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">No se encontraron becas con esos filtros.</p>';
-        if(countDisplay) countDisplay.textContent = '0';
-        return;
-    }
-
-    if(countDisplay) countDisplay.textContent = data.length;
-
-    data.forEach(beca => {
-        const card = document.createElement('div');
-        card.className = 'beca-card';
-        
-        // Determinar estado visual
-        const isClosed = new Date(beca.deadline) < new Date();
-        const statusBadge = isClosed 
-            ? `<span style="background:#eee; color:#666; padding:4px 8px; border-radius:4px; font-size:0.8rem;">Cerrada</span>` 
-            : `<span style="background:#d1fae5; color:#065f46; padding:4px 8px; border-radius:4px; font-size:0.8rem;">Abierta</span>`;
-
-        card.innerHTML = `
-            <div class="card-body">
-                <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:10px;">
-                    <span class="tag">${beca.financiamiento}</span>
-                    ${statusBadge}
-                </div>
-                <h3 style="margin: 10px 0; font-size:1.2rem;">${beca.titulo}</h3>
-                <p style="color: var(--primary); font-weight: bold;">${beca.institucion}</p>
-                <p style="font-size: 0.9rem; color: #666;"><i class="fas fa-map-marker-alt"></i> ${beca.pais}</p>
-                
-                <div class="card-tags" style="margin-top:10px;">
-                    ${beca.nivel.slice(0, 2).map(n => `<span class="tag">${n}</span>`).join('')}
-                </div>
-                
-                <p style="margin-top: 15px; font-size: 0.9rem;">
-                    <i class="far fa-clock"></i> Deadline: <strong>${beca.deadline}</strong>
-                </p>
-            </div>
-            <div class="card-footer">
-                <a href="${beca.url_convocatoria}" target="_blank" class="btn btn-outline btn-sm">Ver Web</a>
-                <button class="btn btn-primary btn-sm" onclick='openDetailModal(${JSON.stringify(beca).replace(/'/g, "&#39;")})'>
-                    Ver Detalles
-                </button>
-            </div>
-        `;
-        container.appendChild(card);
-    });
-}
-
-function updateStats() {
-    const total = scholarships.length;
-    const countries = new Set(scholarships.map(s => s.pais)).size;
-    const unis = new Set(scholarships.map(s => s.institucion)).size;
-
-    const elTotal = document.getElementById('stat-becas');
-    const elPaises = document.getElementById('stat-paises');
-    const elUnis = document.getElementById('stat-unis');
-
-    if(elTotal) elTotal.textContent = total;
-    if(elPaises) elPaises.textContent = countries;
-    if(elUnis) elUnis.textContent = unis;
-}
-
-// --- FILTROS ---
+/**
+ * Configura los event listeners
+ */
 function setupEventListeners() {
-    // Buscador
-    const searchInput = document.getElementById('searchInput');
-    if(searchInput) {
-        searchInput.addEventListener('input', (e) => applyFilters());
-    }
+  // Búsqueda en tiempo real
+  DOM.searchInput.addEventListener('input', debounce((e) => {
+    AppState.filters.search = sanitizeInput(e.target.value);
+    applyFilters();
+  }, 300));
 
-    // Selects de filtros
-    ['filterLevel', 'filterArea', 'filterCountry', 'filterSort'].forEach(id => {
-        const el = document.getElementById(id);
-        if(el) el.addEventListener('change', () => applyFilters());
+  // Filtros
+  DOM.filterLevel.addEventListener('change', (e) => {
+    AppState.filters.level = e.target.value;
+    applyFilters();
+  });
+
+  DOM.filterArea.addEventListener('change', (e) => {
+    AppState.filters.area = e.target.value;
+    applyFilters();
+  });
+
+  DOM.filterFunding.addEventListener('change', (e) => {
+    AppState.filters.funding = e.target.value;
+    applyFilters();
+  });
+
+  DOM.filterCountry.addEventListener('change', (e) => {
+    AppState.filters.country = e.target.value;
+    applyFilters();
+  });
+
+  DOM.sortBy.addEventListener('change', (e) => {
+    AppState.filters.sortBy = e.target.value;
+    applyFilters();
+  });
+
+  // Newsletter
+  if (DOM.newsletterForm) {
+    DOM.newsletterForm.addEventListener('submit', handleNewsletterSubmit);
+  }
+
+  // Botones de login/registro (placeholder para futura implementación)
+  const loginBtn = document.getElementById('loginBtn');
+  const registerBtn = document.getElementById('registerBtn');
+
+  if (loginBtn) {
+    loginBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('Funcionalidad de login próximamente disponible. ¡Pronto podrás gestionar tus postulaciones!');
     });
+  }
+
+  if (registerBtn) {
+    registerBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('Funcionalidad de registro próximamente disponible. ¡Pronto podrás guardar tus becas favoritas!');
+    });
+  }
 }
 
+/**
+ * Carga las becas desde el archivo JSON
+ */
+async function loadScholarships() {
+  try {
+    showLoading(true);
+
+    const response = await fetch('data/becas.json');
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    AppState.scholarships = await response.json();
+    AppState.filteredScholarships = [...AppState.scholarships];
+
+    renderCards();
+    showLoading(false);
+
+  } catch (error) {
+    console.error('Error cargando becas:', error);
+    showError('No se pudieron cargar las becas. Por favor recarga la página.');
+    showLoading(false);
+  }
+}
+
+/**
+ * Aplica todos los filtros y ordenamiento
+ */
 function applyFilters() {
-    const term = document.getElementById('searchInput').value.toLowerCase();
-    const level = document.getElementById('filterLevel').value;
-    const area = document.getElementById('filterArea').value;
-    const country = document.getElementById('filterCountry').value;
-    const sort = document.getElementById('filterSort').value;
+  let filtered = [...AppState.scholarships];
 
-    let filtered = scholarships.filter(b => {
-        const matchTerm = b.titulo.toLowerCase().includes(term) || 
-                          b.institucion.toLowerCase().includes(term) ||
-                          b.pais.toLowerCase().includes(term);
-        const matchLevel = level === 'all' || b.nivel.includes(level);
-        const matchArea = area === 'all' || b.area.includes(area);
-        const matchCountry = country === 'all' || b.pais === country;
-        
-        return matchTerm && matchLevel && matchArea && matchCountry;
-    });
+  // Filtro por búsqueda
+  if (AppState.filters.search) {
+    const searchTerm = AppState.filters.search.toLowerCase();
+    filtered = filtered.filter(beca =>
+      beca.titulo.toLowerCase().includes(searchTerm) ||
+      beca.institucion.toLowerCase().includes(searchTerm) ||
+      beca.pais.toLowerCase().includes(searchTerm) ||
+      beca.area.some(a => a.toLowerCase().includes(searchTerm)) ||
+      beca.tags.some(t => t.toLowerCase().includes(searchTerm)) ||
+      beca.descripcion.toLowerCase().includes(searchTerm)
+    );
+  }
 
-    if (sort === 'deadline') {
-        filtered.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
-    } else if (sort === 'recent') {
-        filtered.reverse();
+  // Filtro por nivel
+  if (AppState.filters.level) {
+    filtered = filtered.filter(beca =>
+      beca.nivel.includes(AppState.filters.level)
+    );
+  }
+
+  // Filtro por área
+  if (AppState.filters.area) {
+    filtered = filtered.filter(beca =>
+      beca.area.some(a => a.includes(AppState.filters.area))
+    );
+  }
+
+  // Filtro por financiamiento
+  if (AppState.filters.funding) {
+    if (AppState.filters.funding === '100%') {
+      filtered = filtered.filter(beca =>
+        beca.financiamiento.includes('100%')
+      );
+    } else if (AppState.filters.funding === 'Parcial') {
+      filtered = filtered.filter(beca =>
+        !beca.financiamiento.includes('100%')
+      );
     }
+  }
 
-    renderScholarships(filtered);
+  // Filtro por país
+  if (AppState.filters.country) {
+    filtered = filtered.filter(beca =>
+      beca.pais.includes(AppState.filters.country)
+    );
+  }
+
+  // Ordenamiento
+  filtered = sortScholarships(filtered, AppState.filters.sortBy);
+
+  AppState.filteredScholarships = filtered;
+  renderCards();
 }
 
-// --- MODAL DE DETALLE Y COMPARTIR ---
-window.openDetailModal = (beca) => {
-    const modal = document.getElementById('detail-modal');
-    const content = document.getElementById('detail-content');
-    
-    currentSharedBeca = beca;
-    updateMetaTags(beca);
+/**
+ * Ordena las becas según el criterio seleccionado
+ */
+function sortScholarships(scholarships, sortBy) {
+  const sorted = [...scholarships];
 
-    const isClosed = new Date(beca.deadline) < new Date();
-    const btnText = isClosed ? "Convocatoria Cerrada" : "Ir a la Convocatoria";
-    const btnClass = isClosed ? "btn-secondary" : "btn-primary";
-    const btnDisabled = isClosed ? "disabled style='opacity:0.6; cursor:not-allowed;'" : "";
+  switch (sortBy) {
+    case 'deadline':
+      sorted.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+      break;
+    case 'dateAdded':
+      // Como no tenemos fecha de agregado, usamos el ID como proxy
+      sorted.sort((a, b) => b.id.localeCompare(a.id));
+      break;
+    case 'alphabetical':
+      sorted.sort((a, b) => a.titulo.localeCompare(b.titulo));
+      break;
+  }
 
-    content.innerHTML = `
-        <h2 style="color: var(--primary); margin-bottom:10px;">${beca.titulo}</h2>
-        <h3 style="color: #555; margin-bottom: 20px;">${beca.institucion} 📍 ${beca.pais}</h3>
-        
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px; background:#f8fafc; padding:15px; border-radius:8px;">
-            <div><strong>Deadline:</strong> <span style="color: ${isClosed ? 'var(--danger)' : 'var(--success)'}">${beca.deadline}</span></div>
-            <div><strong>Nivel:</strong> ${beca.nivel.join(', ')}</div>
-            <div><strong>Financiamiento:</strong> ${beca.financiamiento}</div>
-            <div><strong>Área:</strong> ${beca.area.join(', ')}</div>
-        </div>
-
-        <div style="margin-bottom: 25px;">
-            <h4>Documentos Sugeridos:</h4>
-            <ul style="margin-left: 20px; margin-top: 5px; line-height:1.6;">
-                ${beca.documentos_sugeridos.map(d => `<li>${d}</li>`).join('')}
-            </ul>
-        </div>
-
-        <a href="${beca.url_convocatoria}" target="_blank" class="btn ${btnClass}" style="display: block; text-align: center; width:100%;" ${btnDisabled}>
-            ${btnText} <i class="fas fa-external-link-alt"></i>
-        </a>
-        
-        ${currentUser && !isClosed ? 
-            `<button class="btn btn-outline" style="display: block; width: 100%; margin-top: 10px;" onclick="addToTracker('${beca.id}'); closeDetailModal();">
-                💾 Guardar en mi Tracker
-            </button>` : ''
-        }
-    `;
-
-    modal.classList.remove('hidden');
-};
-
-window.closeDetailModal = () => {
-    document.getElementById('detail-modal').classList.add('hidden');
-    resetMetaTags();
-};
-
-// Funciones de Compartir
-function updateMetaTags(beca) {
-    const title = `${beca.titulo} | ScholarHub`;
-    const desc = `Beca en ${beca.pais}. Deadline: ${beca.deadline}.`;
-    
-    document.title = title;
-    document.querySelector('meta[property="og:title"]')?.setAttribute("content", title);
-    document.querySelector('meta[property="og:description"]')?.setAttribute("content", desc);
+  return sorted;
 }
 
-function resetMetaTags() {
-    document.title = "ScholarHub - Tu Portal de Becas";
-    document.querySelector('meta[property="og:title"]')?.setAttribute("content", "ScholarHub - Encuentra tu Beca Ideal");
-    document.querySelector('meta[property="og:description"]')?.setAttribute("content", "Más de 100 oportunidades...");
-    currentSharedBeca = null;
-}
+/**
+ * Renderiza las tarjetas de becas
+ */
+function renderCards() {
+  const scholarships = AppState.filteredScholarships;
 
-window.shareWhatsApp = () => {
-    if (!currentSharedBeca) return;
-    const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(currentSharedBeca.titulo + ': ' + currentSharedBeca.url_convocatoria)}`;
-    window.open(url, '_blank');
-};
+  if (scholarships.length === 0) {
+    DOM.cardsContainer.innerHTML = '';
+    DOM.noResults.classList.remove('hidden');
+    return;
+  }
 
-window.shareTwitter = () => {
-    if (!currentSharedBeca) return;
-    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(currentSharedBeca.titulo)}&url=${encodeURIComponent(currentSharedBeca.url_convocatoria)}`;
-    window.open(url, '_blank');
-};
+  DOM.noResults.classList.add('hidden');
 
-window.shareLinkedIn = () => {
-    if (!currentSharedBeca) return;
-    const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentSharedBeca.url_convocatoria)}`;
-    window.open(url, '_blank');
-};
+  const cardsHTML = scholarships.map(beca => createCardHTML(beca)).join('');
+  DOM.cardsContainer.innerHTML = cardsHTML;
 
-window.copyLink = () => {
-    if (!currentSharedBeca) return;
-    navigator.clipboard.writeText(currentSharedBeca.url_convocatoria).then(() => {
-        alert("Enlace copiado al portapapeles");
+  // Agregar event listeners a los botones "Más Información"
+  document.querySelectorAll('.btn-info').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const becaId = e.target.dataset.id;
+      showBecaDetails(becaId);
     });
-};
+  });
 
-// --- TRACKER Y DASHBOARD (Lógica existente simplificada) ---
-function getUserApps() {
-    if (!currentUser) return [];
-    const data = localStorage.getItem(`apps_${currentUser.email}`);
-    return data ? JSON.parse(data) : [];
+  // Agregar event listeners a los botones "Guardar"
+  document.querySelectorAll('.btn-save').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const becaId = e.target.dataset.id;
+      saveBeca(becaId);
+    });
+  });
 }
 
-function saveUserApps(apps) {
-    if (!currentUser) return;
-    localStorage.setItem(`apps_${currentUser.email}`, JSON.stringify(apps));
-    userApplications = apps;
-    loadUserDashboard();
+/**
+ * Crea el HTML para una tarjeta de beca
+ */
+function createCardHTML(beca) {
+  const deadlineDate = new Date(beca.deadline);
+  const daysUntilDeadline = Math.ceil((deadlineDate - new Date()) / (1000 * 60 * 60 * 24));
+  const deadlineText = daysUntilDeadline > 0
+    ? `${daysUntilDeadline} días restantes`
+    : '¡Vencida!';
+
+  const nivelBadge = beca.nivel[0];
+  const countryBadge = beca.pais.split(' ')[0]; // Primer palabra del país
+
+  return `
+    <article class="card">
+      <div class="card-header">
+        <h3 class="card-title">${escapeHTML(beca.titulo)}</h3>
+        <p class="card-institution">${escapeHTML(beca.institucion)}</p>
+      </div>
+      <div class="card-body">
+        <div class="card-info">
+          <span class="badge badge-level">${nivelBadge}</span>
+          <span class="badge badge-country">${countryBadge}</span>
+          <span class="badge badge-funding">${beca.financiamiento.split('(')[0].trim()}</span>
+        </div>
+        <p class="card-description">${escapeHTML(beca.descripcion)}</p>
+        <div style="margin-bottom: 1rem;">
+          <strong style="font-size: 0.75rem; color: var(--text-secondary);">ÁREAS:</strong>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.25rem;">
+            ${beca.area.slice(0, 3).map(area =>
+              `<span style="font-size: 0.7rem; background: #f3f4f6; padding: 0.125rem 0.5rem; border-radius: 0.25rem;">${escapeHTML(area)}</span>`
+            ).join('')}
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="deadline">⏰ ${deadlineText}</span>
+          <span>📅 ${formatDate(beca.deadline)}</span>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="btn btn-outline btn-info" data-id="${beca.id}">Ver Detalles</button>
+        <button class="btn btn-primary btn-save" data-id="${beca.id}">💾 Guardar</button>
+      </div>
+    </article>
+  `;
 }
 
-window.addToTracker = (id) => {
-    const beca = scholarships.find(s => s.id === id);
-    const apps = getUserApps();
-    
-    if (apps.find(a => a.id === id)) return alert('Ya guardaste esta beca');
+/**
+ * Muestra los detalles de una beca (placeholder)
+ */
+function showBecaDetails(becaId) {
+  const beca = AppState.scholarships.find(b => b.id === becaId);
 
-    const newApp = {
-        ...beca,
-        status: 'Interesado',
-        documents: { cv: false, carta: false, recomendaciones: false, idiomas: false },
-        notes: ''
+  if (!beca) return;
+
+  const details = `
+    📚 ${beca.titulo}
+
+    🏛️ Institución: ${beca.institucion}
+    🌍 País: ${beca.pais}
+    📊 Nivel: ${beca.nivel.join(', ')}
+    💰 Financiamiento: ${beca.financiamiento}
+    📅 Deadline: ${formatDate(beca.deadline)}
+
+    📋 Documentos sugeridos:
+    ${beca.documentos_sugeridos.map(doc => `• ${doc}`).join('\n')}
+
+    🔗 Más información: ${beca.url_convocatoria}
+  `;
+
+  alert(details);
+
+  // En el futuro, esto abrirá un modal o página de detalles
+}
+
+/**
+ * Guarda una beca (placeholder para funcionalidad futura)
+ */
+function saveBeca(becaId) {
+  // Verificar si el usuario está registrado (placeholder)
+  const user = localStorage.getItem('user');
+
+  if (!user) {
+    alert('Para guardar becas necesitas registrarte. ¡La funcionalidad de usuario estará disponible pronto!');
+    return;
+  }
+
+  // Lógica de guardado (se implementará en la fase de autenticación)
+  console.log('Guardando beca:', becaId);
+}
+
+/**
+ * Maneja el envío del formulario de newsletter
+ */
+function handleNewsletterSubmit(e) {
+  e.preventDefault();
+
+  const emailInput = e.target.querySelector('input[type="email"]');
+  const email = emailInput.value;
+
+  // Validación básica
+  if (!isValidEmail(email)) {
+    alert('Por favor ingresa un correo electrónico válido');
+    return;
+  }
+
+  // Guardar en localStorage (simulación)
+  const subscribers = JSON.parse(localStorage.getItem('newsletterSubscribers') || '[]');
+
+  if (!subscribers.includes(email)) {
+    subscribers.push(email);
+    localStorage.setItem('newsletterSubscribers', JSON.stringify(subscribers));
+
+    alert('¡Gracias por suscribirte! Pronto recibirás las mejores oportunidades en tu correo.');
+    emailInput.value = '';
+  } else {
+    alert('Este correo ya está suscrito a nuestro newsletter.');
+  }
+}
+
+/**
+ * Actualiza las estadísticas en la página
+ */
+function updateStats() {
+  const totalScholarships = AppState.scholarships.length;
+  const countries = new Set(AppState.scholarships.map(b => b.pais));
+  const universities = new Set(AppState.scholarships.map(b => b.institucion));
+
+  animateNumber(DOM.totalScholarships, totalScholarships);
+  animateNumber(DOM.totalCountries, countries.size);
+  animateNumber(DOM.totalUniversities, universities.size);
+}
+
+/**
+ * Anima un número desde 0 hasta el valor final
+ */
+function animateNumber(element, target) {
+  const duration = 1000;
+  const start = 0;
+  const increment = target / (duration / 16);
+  let current = start;
+
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= target) {
+      element.textContent = target;
+      clearInterval(timer);
+    } else {
+      element.textContent = Math.floor(current);
+    }
+  }, 16);
+}
+
+/**
+ * Muestra u oculta el spinner de carga
+ */
+function showLoading(show) {
+  if (show) {
+    DOM.loadingSpinner.classList.remove('hidden');
+    DOM.cardsContainer.classList.add('hidden');
+  } else {
+    DOM.loadingSpinner.classList.add('hidden');
+    DOM.cardsContainer.classList.remove('hidden');
+  }
+}
+
+/**
+ * Muestra un mensaje de error
+ */
+function showError(message) {
+  DOM.cardsContainer.innerHTML = `
+    <div class="no-results">
+      <h3>⚠️ Error</h3>
+      <p>${escapeHTML(message)}</p>
+    </div>
+  `;
+}
+
+/**
+ * Sanitiza input para prevenir XSS
+ */
+function sanitizeInput(input) {
+  const div = document.createElement('div');
+  div.textContent = input;
+  return div.innerHTML;
+}
+
+/**
+ * Escapa HTML para prevenir XSS
+ */
+function escapeHTML(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+/**
+ * Valida un email
+ */
+function isValidEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+}
+
+/**
+ * Formatea una fecha
+ */
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  return date.toLocaleDateString('es-ES', options);
+}
+
+/**
+ * Función de debounce para optimizar la búsqueda
+ */
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
     };
-
-    apps.push(newApp);
-    saveUserApps(apps);
-    alert('Beca guardada en tu panel.');
-    navigate('dashboard-section');
-};
-
-function loadUserDashboard() {
-    if (!currentUser) return;
-    const apps = getUserApps();
-    userApplications = apps;
-    
-    document.getElementById('dash-total').textContent = apps.length;
-    renderTracker(apps);
-    renderChart(apps);
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
 }
 
-function renderTracker(apps) {
-    const container = document.getElementById('tracker-list');
-    if (!container) return;
-    container.innerHTML = '';
-
-    if (apps.length === 0) {
-        container.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#888;">Aún no has guardado becas.</p>';
-        return;
-    }
-
-    apps.forEach(app => {
-        const done = Object.values(app.documents).filter(v => v).length;
-        const progress = (done / 4) * 100;
-
-        const item = document.createElement('div');
-        item.className = 'tracker-item';
-        item.innerHTML = `
-            <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                <h4>${app.titulo}</h4>
-                <select onchange="updateStatus('${app.id}', this.value)" style="padding:4px; border-radius:4px; font-size:0.8rem;">
-                    <option value="Interesado" ${app.status==='Interesado'?'selected':''}>Interesado</option>
-                    <option value="En Proceso" ${app.status==='En Proceso'?'selected':''}>En Proceso</option>
-                    <option value="Enviada" ${app.status==='Enviada'?'selected':''}>Enviada</option>
-                    <option value="Resultado" ${app.status==='Resultado'?'selected':''}>Resultado</option>
-                </select>
-            </div>
-            <p style="font-size:0.85rem; color:#666;">${app.institucion}</p>
-            <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>
-            <div class="checklist-grid">
-                <label><input type="checkbox" ${app.documents.cv?'checked':''} onchange="toggleDoc('${app.id}','cv')"> CV</label>
-                <label><input type="checkbox" ${app.documents.carta?'checked':''} onchange="toggleDoc('${app.id}','carta')"> Carta</label>
-                <label><input type="checkbox" ${app.documents.recomendaciones?'checked':''} onchange="toggleDoc('${app.id}','recomendaciones')"> Recs</label>
-                <label><input type="checkbox" ${app.documents.idiomas?'checked':''} onchange="toggleDoc('${app.id}','idiomas')"> Idioma</label>
-            </div>
-            <button class="btn btn-sm btn-outline" style="width:100%; margin-top:10px;" onclick="openLetterGenerator('${app.id}')">✨ Generar Carta</button>
-        `;
-        container.appendChild(item);
-    });
-    
-    const totalProgress = apps.reduce((acc, app) => acc + Object.values(app.documents).filter(v=>v).length, 0);
-    const globalPercent = Math.round((totalProgress / (apps.length * 4)) * 100) || 0;
-    document.getElementById('dash-docs').textContent = globalPercent + '%';
-}
-
-function updateStatus(id, status) {
-    const apps = getUserApps();
-    const app = apps.find(a => a.id === id);
-    if(app) { app.status = status; saveUserApps(apps); }
-}
-
-function toggleDoc(id, doc) {
-    const apps = getUserApps();
-    const app = apps.find(a => a.id === id);
-    if(app) { app.documents[doc] = !app.documents[doc]; saveUserApps(apps); }
-}
-
-function renderChart(apps) {
-    const ctx = document.getElementById('statusChart');
-    if(!ctx) return;
-    
-    const counts = { 'Interesado': 0, 'En Proceso': 0, 'Enviada': 0, 'Resultado': 0 };
-    apps.forEach(a => { if(counts[a.status] !== undefined) counts[a.status]++; });
-
-    if(myChart) myChart.destroy();
-
-    myChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: Object.keys(counts),
-            datasets: [{ data: Object.values(counts), backgroundColor: ['#9CA3AF', '#3B82F6', '#10B981', '#8B5CF6'] }]
-        },
-        options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
-    });
-}
-
-// Generador de cartas (igual que antes)
-window.openLetterGenerator = (id) => {
-    const app = userApplications.find(a => a.id === id);
-    if(!app) return;
-    // ... (lógica de generación de carta) ...
-    alert("Funcionalidad de carta disponible (usa la versión anterior del código para el texto completo)");
-    document.getElementById('letterModal').classList.remove('hidden');
-};
-window.closeLetterModal = () => document.getElementById('letterModal').classList.add('hidden');
-window.copyLetter = () => {
-    const txt = document.getElementById('letterContent');
-    txt.select(); document.execCommand('copy');
-    alert("Copiado");
-    closeLetterModal();
-};
+// Iniciar la aplicación cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', init);
