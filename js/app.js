@@ -236,13 +236,12 @@ function applyFilters() {
     if(countDisplay) countDisplay.textContent = filtered.length;
 }
 
-// --- RENDERIZADO MEJORADO ---
+// --- RENDERIZADO MEJORADO (Con interacción en cerradas) ---
 function renderScholarships(data, isClosedList = false) {
     const container = document.getElementById('catalogo');
     if (!container) return;
 
     if (data.length === 0 && !isClosedList) {
-        // Solo mostramos mensaje si no hay nada y no es la lista de cerradas
         if(container.children.length === 0) {
             container.innerHTML = `
                 <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
@@ -259,20 +258,16 @@ function renderScholarships(data, isClosedList = false) {
         const card = document.createElement('div');
         card.className = 'beca-card';
         
-        // Estilos para cerradas
+        // Estilos visuales para cerradas (solo apariencia, no bloquea clicks en botones)
         if (isClosedList) {
-            card.style.opacity = "0.7";
-            card.style.filter = "grayscale(80%)";
-            card.style.pointerEvents = "none"; // Desactivar clicks en toda la tarjeta
+            card.style.opacity = "0.8";
+            card.style.filter = "grayscale(90%)";
+            // Quitamos pointerEvents: none para permitir clicks en los botones específicos
         }
 
         const niveles = beca.nivel ? beca.nivel.slice(0, 2) : [];
-        const deadlineStatus = isClosedList ? "CERRADA" : beca.deadline;
-        const deadlineColor = isClosedList ? "#666" : "var(--danger)";
 
-        // ... dentro de renderScholarships, busca la sección card.innerHTML ...
-
-    card.innerHTML = `
+        card.innerHTML = `
             <div class="card-body">
                 <span class="tag" style="background:#e0f2fe; color:#0369a1;">${beca.financiamiento}</span>
                 ${isClosedList ? '<span class="tag" style="background:#555; color:white; margin-left:5px;">Cerrada</span>' : ''}
@@ -284,30 +279,24 @@ function renderScholarships(data, isClosedList = false) {
                     ${niveles.map(n => `<span class="tag">${n}</span>`).join('')}
                 </div>
                 
-                <p style="margin-top: 15px; font-size: 0.85rem; color: ${deadlineColor}; font-weight: bold;">
+                <p style="margin-top: 15px; font-size: 0.85rem; color: ${isClosedList ? '#666' : 'var(--danger)'}; font-weight: bold;">
                     <i class="far fa-clock"></i> ${isClosedList ? 'Convocatoria Finalizada' : 'Deadline: ' + beca.deadline}
                 </p>
             </div>
             
-            <div class="card-footer" style="${isClosedList ? 'justify-content: space-between;' : ''}">
-                <!-- Botón Ver Detalles (Abre el modal para compartir) -->
-                <button class="btn btn-outline btn-sm" onclick='openDetailModal(${JSON.stringify(beca).replace(/'/g, "&#39;")})' style="text-align:left; flex:1; margin-right:10px;">
-                    <i class="fas fa-eye"></i> Ver Detalles
-                </button>
-
-                <!-- Botón Ir a la Web -->
-                <a href="${beca.url_convocatoria}" target="_blank" class="btn btn-secondary btn-sm" style="text-decoration:none;">
-                    <i class="fas fa-external-link-alt"></i> ${isClosedList ? 'Archivo' : 'Web'}
+            <div class="card-footer" style="gap: 8px;">
+                <!-- Botón Ver Web/Archivo: Siempre visible y activo -->
+                <a href="${beca.url_convocatoria}" target="_blank" class="btn btn-outline btn-sm" style="text-decoration: none; flex: 1; text-align: center;">
+                    <i class="fas fa-external-link-alt"></i> ${isClosedList ? 'Ver Archivo' : 'Ver Convocatoria'}
                 </a>
                 
-                <!-- Botón Guardar (Solo activas) -->
-                ${!isClosedList ? (
-                    currentUser ? 
-                    `<button class="btn ${isSaved ? 'btn-secondary' : 'btn-primary'} btn-sm" onclick="addToTracker('${beca.id}')" style="margin-left:10px;">
-                        ${isSaved ? '<i class="fas fa-check"></i>' : '<i class="fas fa-plus"></i>'}
+                <!-- Botón Guardar/Archivar: AHORA ACTIVO TAMBIÉN PARA CERRADAS -->
+                ${currentUser ? 
+                    `<button class="btn ${isSaved ? 'btn-secondary' : 'btn-primary'} btn-sm" style="flex: 1;" onclick="addToTracker('${beca.id}')">
+                        ${isSaved ? '<i class="fas fa-check"></i> Guardado' : (isClosedList ? 'Archivar' : 'Guardar')}
                      </button>` : 
-                    `<button class="btn btn-secondary btn-sm" onclick="toggleAuthModal()" style="margin-left:10px;"><i class="fas fa-lock"></i></button>`
-                ) : ''}
+                    `<button class="btn btn-secondary btn-sm" style="flex: 1;" onclick="toggleAuthModal()">Guardar</button>`
+                }
             </div>
         `;
         container.appendChild(card);
