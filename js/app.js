@@ -292,7 +292,8 @@ function renderScholarships(data, isClosedList = false) {
 
                 <!-- Botones SOLO para activas -->
                 ${!isClosedList ? `
-                    <button class="btn btn-primary btn-sm" onclick="toggleSharePopup(event, ${JSON.stringify(beca).replace(/'/g, "&#39;")})" style="margin-left: 5px; position: relative;">
+                    <!-- Botón Compartir (Corregido para pasar solo el ID) -->
+                    <button class="btn btn-primary btn-sm" onclick="toggleSharePopup(event, '${beca.id}')" style="margin-left: 5px; position: relative;">
                          <i class="fas fa-share-alt"></i> Compartir
                     </button>
                 
@@ -600,52 +601,53 @@ window.copyLink = () => {
 
 // --- NUEVA LÓGICA DE COMPARTIR RÁPIDO (POPUP) ---
 
-// Función para abrir el menú emergente de compartir
-window.toggleSharePopup = (event, beca) => {
-    event.stopPropagation(); // Evita que el clic se propague y cierre el menú inmediatamente
+// Función para abrir el menú emergente de compartir (Recibe el ID)
+window.toggleSharePopup = (event, id) => {
+    event.stopPropagation(); // Evita que el clic cierre el menú inmediatamente
     
     // Eliminar cualquier popup abierto previamente
     closeSharePopup();
 
-    currentSharedBeca = beca; // Establecer la beca actual para compartir
+    // BUSCAR LA BECA USANDO EL ID
+    currentSharedBeca = allScholarshipsRaw.find(b => b.id === id);
+    
+    if (!currentSharedBeca) {
+        console.error("❌ No se encontró la beca con ID:", id);
+        alert("Error: No se pudo cargar la información de esta beca.");
+        return;
+    }
 
     // Crear el elemento del popup
     const popup = document.createElement('div');
     popup.id = 'share-popup';
     popup.className = 'share-popup';
     
-    // Estilos inline para asegurar que se vea bien sin tocar CSS global
+    // Estilos inline
     popup.style.position = 'absolute';
-    popup.style.bottom = '50px'; // Aparece arriba del botón
-    popup.style.right = '10px';
+    popup.style.bottom = '45px'; 
+    popup.style.right = '0'; 
     popup.style.backgroundColor = 'white';
     popup.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
     popup.style.borderRadius = '8px';
     popup.style.padding = '10px';
     popup.style.display = 'flex';
-    popup.style.gap = '10px';
+    popup.style.gap = '8px';
     popup.style.zIndex = '1000';
-    popup.style.animation = 'fadeIn 0.2s ease-out';
     popup.style.border = '1px solid #eee';
+    popup.style.animation = 'fadeIn 0.2s ease-out';
 
-    // Botones internos
+    // Botones internos (Iconos)
     popup.innerHTML = `
-        <button onclick="shareWhatsApp()" style="background:#25D366; color:white; border:none; border-radius:50%; width:35px; height:35px; cursor:pointer; display:flex; align-items:center; justify-content:center;" title="WhatsApp"><i class="fab fa-whatsapp"></i></button>
-        <button onclick="shareTwitter()" style="background:#1DA1F2; color:white; border:none; border-radius:50%; width:35px; height:35px; cursor:pointer; display:flex; align-items:center; justify-content:center;" title="Twitter"><i class="fab fa-twitter"></i></button>
-        <button onclick="shareLinkedIn()" style="background:#0077b5; color:white; border:none; border-radius:50%; width:35px; height:35px; cursor:pointer; display:flex; align-items:center; justify-content:center;" title="LinkedIn"><i class="fab fa-linkedin"></i></button>
-        <button onclick="shareFacebook()" style="background:#1877F2; color:white; border:none; border-radius:50%; width:35px; height:35px; cursor:pointer; display:flex; align-items:center; justify-content:center;" title="Facebook"><i class="fab fa-facebook-f"></i></button>
-        <button onclick="copyLinkDirect()" style="background:#64748b; color:white; border:none; border-radius:50%; width:35px; height:35px; cursor:pointer; display:flex; align-items:center; justify-content:center;" title="Copiar Enlace"><i class="fas fa-link"></i></button>
+        <button onclick="shareWhatsApp()" style="background:#25D366; color:white; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer; display:flex; align-items:center; justify-content:center;" title="WhatsApp"><i class="fab fa-whatsapp"></i></button>
+        <button onclick="shareTwitter()" style="background:#1DA1F2; color:white; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer; display:flex; align-items:center; justify-content:center;" title="Twitter"><i class="fab fa-twitter"></i></button>
+        <button onclick="shareLinkedIn()" style="background:#0077b5; color:white; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer; display:flex; align-items:center; justify-content:center;" title="LinkedIn"><i class="fab fa-linkedin"></i></button>
+        <button onclick="shareFacebook()" style="background:#1877F2; color:white; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer; display:flex; align-items:center; justify-content:center;" title="Facebook"><i class="fab fa-facebook-f"></i></button>
+        <button onclick="copyLinkDirect()" style="background:#64748b; color:white; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer; display:flex; align-items:center; justify-content:center;" title="Copiar Enlace"><i class="fas fa-link"></i></button>
     `;
 
-    // Posicionar el popup relativo al botón clickeado
+    // Asegurar contexto de posicionamiento relativo en el padre
     const button = event.currentTarget;
-    const rect = button.getBoundingClientRect();
-    
-    // Ajustar posición para que quede alineado a la derecha del botón
-    popup.style.right = '0'; 
-    popup.style.bottom = '45px'; 
-
-    button.parentElement.style.position = 'relative'; // Asegurar contexto de posicionamiento
+    button.parentElement.style.position = 'relative'; 
     button.parentElement.appendChild(popup);
 
     // Cerrar si se hace clic fuera
@@ -675,6 +677,9 @@ window.copyLinkDirect = () => {
     navigator.clipboard.writeText(window.location.href).then(() => {
         alert("✅ Enlace copiado al portapapeles");
         closeSharePopup();
+    }).catch(err => {
+        console.error('Error al copiar', err);
+        alert("No se pudo copiar automáticamente.");
     });
 };
 
