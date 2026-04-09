@@ -554,6 +554,43 @@ window.shareWhatsApp = () => {
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text + ' ' + window.location.href)}`, '_blank');
 };
 
+// --- FUNCIONES DE COMPARTIR MEJORADAS ---
+
+// Función auxiliar para obtener el texto base
+function getShareText(beca) {
+    return `🎓 ¡Oportunidad! ${beca.titulo} en ${beca.pais}. Deadline: ${beca.deadline}. Más info aquí:`;
+}
+
+window.shareTwitter = () => {
+    if (!currentSharedBeca) return;
+    const text = encodeURIComponent(`${getShareText(currentSharedBeca)} #Becas #StudyAbroad`);
+    const url = encodeURIComponent(window.location.href);
+    window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+};
+
+window.shareLinkedIn = () => {
+    if (!currentSharedBeca) return;
+    const url = encodeURIComponent(window.location.href);
+    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+};
+
+window.shareFacebook = () => {
+    if (!currentSharedBeca) return;
+    const url = encodeURIComponent(window.location.href);
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+};
+
+// Mejora de copyLink con feedback visual
+window.copyLink = () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+        // Pequeño truco para mostrar un mensaje más amigable sin alert nativo si quisieras
+        alert("✅ Enlace copiado al portapapeles. ¡Pégalo donde quieras!");
+    }).catch(err => {
+        console.error('Error al copiar', err);
+        alert("No se pudo copiar automáticamente. Por favor copia la URL manualmente.");
+    });
+};
+
 window.copyLink = () => {
     navigator.clipboard.writeText(window.location.href);
     alert('Enlace copiado al portapapeles');
