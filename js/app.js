@@ -293,7 +293,8 @@ function renderScholarships(data, isClosedList = false) {
                 <!-- Botones SOLO para activas -->
                 ${!isClosedList ? `
                     <button class="btn btn-primary btn-sm" onclick="openDetailModal(${JSON.stringify(beca).replace(/'/g, "&#39;")})" style="margin-left: 5px;">
-                        <i class="fas fa-eye"></i> Compartir
+                         <i class="fas fa-share-alt"></i> Compartir
+
                     </button>
                 
                      <!-- Botón Guardar/Archivar: AHORA ACTIVO TAMBIÉN PARA CERRADAS -->
