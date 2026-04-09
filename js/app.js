@@ -284,11 +284,17 @@ function renderScholarships(data, isClosedList = false) {
                 </p>
             </div>
             
-            <div class="card-footer" style="gap: 8px;">
-                <!-- Botón Ver Web/Archivo: Siempre visible y activo -->
-                <a href="${beca.url_convocatoria}" target="_blank" class="btn btn-outline btn-sm" style="text-decoration: none; flex: 1; text-align: center;">
+            <div class="card-footer" style="${isClosedList ? 'justify-content: flex-end;' : ''}">
+                <!-- Botón Ver Web SIEMPRE visible -->
+                <a href="${beca.url_convocatoria}" target="_blank" class="btn btn-outline btn-sm" style="text-decoration: none;">
                     <i class="fas fa-external-link-alt"></i> ${isClosedList ? 'Ver Archivo' : 'Ver Convocatoria'}
                 </a>
+
+                <!-- Botones SOLO para activas -->
+                ${!isClosedList ? `
+                    <button class="btn btn-primary btn-sm" onclick="openDetailModal(${JSON.stringify(beca).replace(/'/g, "&#39;")})" style="margin-left: 5px;">
+                        <i class="fas fa-eye"></i> Ver Detalles
+                    </button>
                 
                 <!-- Botón Guardar/Archivar: AHORA ACTIVO TAMBIÉN PARA CERRADAS -->
                 ${currentUser ? 
