@@ -224,16 +224,36 @@
         </div>
     </div>
 
-    <!-- MODAL: DETALLE DE BECA -->
+        <!-- MODAL: DETALLE DE BECA -->
     <div id="detail-modal" class="modal-overlay hidden">
         <div class="modal-content modal-large">
             <span class="close-modal" onclick="closeDetailModal()">&times;</span>
             <div id="detail-content"></div>
+            
+            <!-- Sección de Compartir Mejorada -->
             <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #eee;">
-                <h4 style="margin-bottom: 10px; color: #555;">Compartir:</h4>
-                <div style="display: flex; gap: 10px;">
-                    <button class="btn btn-primary" style="background:#25D366" onclick="shareWhatsApp()"><i class="fab fa-whatsapp"></i> WhatsApp</button>
-                    <button class="btn btn-secondary" onclick="copyLink()"><i class="fas fa-link"></i> Copiar Enlace</button>
+                <h4 style="margin-bottom: 10px; color: #555;">Compartir esta oportunidad:</h4>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <!-- WhatsApp -->
+                    <button class="btn" style="background-color: #25D366; color: white;" onclick="shareWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </button>
+                    <!-- Twitter / X -->
+                    <button class="btn" style="background-color: #1DA1F2; color: white;" onclick="shareTwitter()">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </button>
+                    <!-- LinkedIn -->
+                    <button class="btn" style="background-color: #0077b5; color: white;" onclick="shareLinkedIn()">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </button>
+                    <!-- Facebook -->
+                    <button class="btn" style="background-color: #1877F2; color: white;" onclick="shareFacebook()">
+                        <i class="fab fa-facebook-f"></i> Facebook
+                    </button>
+                    <!-- Copiar Enlace -->
+                    <button class="btn btn-secondary" onclick="copyLink()">
+                        <i class="fas fa-link"></i> Copiar Enlace
+                    </button>
                 </div>
             </div>
         </div>
