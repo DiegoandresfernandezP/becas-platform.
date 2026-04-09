@@ -1,64 +1,90 @@
 // --- ESTADO GLOBAL ---
 let scholarships = [];
+let allScholarshipsRaw = []; // Guardamos TODAS las becas (activas y cerradas)
 let currentUser = null;
 let userApplications = [];
 let currentSharedBeca = null;
-// Nuevo: Lista de todos los usuarios registrados (simulada en DB local)
 let allUsers = JSON.parse(localStorage.getItem('scholarship_db_users')) || [];
 
 // --- INICIALIZACIÓN ---
 document.addEventListener('DOMContentLoaded', () => {
+    console.log("🚀 Iniciando ScholarHub...");
     loadScholarships();
     checkAuth();
     setupEventListeners();
-    
-    // Inicializar modales si existen en el HTML (prevención de errores)
-    initModalsSafety();
 });
 
-function initModalsSafety() {
-    // Verifica que los modales existan antes de asignar eventos globales si fuera necesario
-    if (!document.getElementById('auth-modal')) console.warn('⚠️ Falta #auth-modal en HTML');
-    if (!document.getElementById('detail-modal')) console.warn('⚠️ Falta #detail-modal en HTML');
-    if (!document.getElementById('letterModal')) console.warn('⚠️ Falta #letterModal en HTML');
-}
-
-// --- CARGA DE DATOS (CON BECAS CERRADAS) ---
+// --- CARGA DE DATOS (FORZADA) ---
 async function loadScholarships() {
+    const container = document.getElementById('catalogo');
     try {
+        console.log("📡 Cargando becas.json...");
         const response = await fetch('./data/becas.json');
-        if (!response.ok) throw new Error('Error al cargar JSON');
         
-        let allScholarships = await response.json();
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        
+        const data = await response.json();
+        
+        if (!Array.isArray(data) || data.length === 0) {
+            throw new Error("El archivo JSON está vacío o no es un array.");
+        }
+
+        allScholarshipsRaw = data; // Guardamos todo
+        console.log(`✅ ${data.length} becas cargadas correctamente.`);
+
+        // Separamos activas y cerradas basándonos en la fecha de HOY
         const todayStr = new Date().toISOString().split('T')[0];
-
-        // SEPARAR: Activas vs Cerradas
-        window.activeScholarships = allScholarships.filter(b => b.deadline >= todayStr);
-        window.closedScholarships = allScholarships.filter(b => b.deadline < todayStr);
-
-        // Ordenar activas por urgencia
-        window.activeScholarships.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
         
-        // Renderizar ambas listas
-        renderAllScholarships(window.activeScholarships, window.closedScholarships);
+        scholarships = allScholarshipsRaw.filter(b => {
+            // Si no tiene deadline, asumimos que está activa
+            if (!b.deadline) return true;
+            return b.deadline >= todayStr;
+        });
+
+        const closedScholarships = allScholarshipsRaw.filter(b => {
+            if (!b.deadline) return false;
+            return b.deadline < todayStr;
+        });
+
+        console.log(`📊 Activas: ${scholarships.length}, Cerradas: ${closedScholarships.length}`);
+
+        // Renderizamos primero las activas
+        renderScholarships(scholarships, false);
+
+        // Si hay cerradas, añadimos un separador y las renderizamos debajo
+        if (closedScholarships.length > 0) {
+            const separator = document.createElement('div');
+            separator.style.gridColumn = "1 / -1";
+            separator.style.marginTop = "40px";
+            separator.style.marginBottom = "20px";
+            separator.innerHTML = `
+                <h3 style="text-align:center; color:#666; border-bottom: 2px solid #eee; padding-bottom:10px;">
+                    🕰️ Convocatorias Cerradas (Referencia Histórica)
+                </h3>
+                <p style="text-align:center; font-size:0.9rem; color:#888;">Úsalas para preparar tus documentos para el próximo ciclo.</p>
+            `;
+            container.appendChild(separator);
+            renderScholarships(closedScholarships, true); // true = son cerradas
+        }
+
         updateStats();
-        
+
     } catch (error) {
-        console.error('Error:', error);
-        const container = document.getElementById('catalogo');
+        console.error('❌ Error crítico:', error);
         if(container) {
             container.innerHTML = `
-                <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
-                    <i class="fas fa-exclamation-circle" style="font-size: 3rem; color: var(--danger); margin-bottom: 15px;"></i>
+                <div style="grid-column: 1/-1; text-align: center; padding: 40px; background: #fee2e2; border-radius: 8px;">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #ef4444; margin-bottom: 15px;"></i>
                     <h3>Error al cargar las becas</h3>
-                    <p>Verifica tu conexión o recarga la página.</p>
-                    <button class="btn btn-primary" onclick="location.reload()" style="margin-top: 15px;">Recargar</button>
+                    <p style="color: #666; margin-bottom: 10px;">${error.message}</p>
+                    <p>Verifica que el archivo <code>data/becas.json</code> exista y tenga formato válido.</p>
+                    <button class="btn btn-primary" onclick="location.reload()">Recargar</button>
                 </div>`;
         }
     }
 }
 
-// --- AUTENTICACIÓN (CORREGIDA PARA MÚLTIPLES USUARIOS) ---
+// --- AUTENTICACIÓN ---
 function checkAuth() {
     const storedUser = localStorage.getItem('scholarship_user');
     if (storedUser) {
@@ -73,7 +99,6 @@ function checkAuth() {
 function updateNav(isLoggedIn) {
     const container = document.getElementById('auth-buttons');
     const nameDisplay = document.getElementById('userNameDisplay');
-    
     if (!container) return;
 
     if (isLoggedIn) {
@@ -97,12 +122,22 @@ function logout() {
 
 // --- NAVEGACIÓN ---
 window.navigate = (viewId) => {
+    console.log(`Navegando a: ${viewId}`);
     const sections = document.querySelectorAll('.view-section');
     const navLinks = document.getElementById('nav-links');
     
-    sections.forEach(el => el.classList.add('hidden'));
+    sections.forEach(el => {
+        el.classList.add('hidden');
+        el.classList.remove('active');
+    });
+    
     const target = document.getElementById(viewId);
-    if(target) target.classList.remove('hidden');
+    if(target) {
+        target.classList.remove('hidden');
+        target.classList.add('active'); // Aseguramos que tenga active
+    } else {
+        console.error(`No se encontró la sección: ${viewId}`);
+    }
     
     if(navLinks) navLinks.classList.remove('active');
     
@@ -115,7 +150,7 @@ window.toggleMenu = () => {
     if(nav) nav.classList.toggle('active');
 };
 
-// --- FILTROS Y BÚSQUEDA ---
+// --- FILTROS ---
 function setupEventListeners() {
     const searchInput = document.getElementById('searchInput');
     if(searchInput) searchInput.addEventListener('input', applyFilters);
@@ -128,18 +163,21 @@ function setupEventListeners() {
 }
 
 function applyFilters() {
-    // Filtramos solo sobre las activas para no mezclar historial en la búsqueda principal
-    // Si quieres buscar también en cerradas, cambia 'window.activeScholarships' por una combinación de ambas
-    let sourceList = window.activeScholarships || []; 
-    
-    const term = (document.getElementById('searchInput')?.value || '').toLowerCase();
-    const type = document.getElementById('filterType')?.value || 'all';
-    const level = document.getElementById('filterLevel')?.value || 'all';
-    const area = document.getElementById('filterArea')?.value || 'all';
-    const country = document.getElementById('filterCountry')?.value || 'all';
-    const sort = document.getElementById('filterSort')?.value || 'default';
+    // Obtenemos valores seguros
+    const getVal = (id) => {
+        const el = document.getElementById(id);
+        return el ? el.value : 'all';
+    };
 
-    let filtered = sourceList.filter(beca => {
+    const term = (document.getElementById('searchInput')?.value || '').toLowerCase();
+    const type = getVal('filterType');
+    const level = getVal('filterLevel');
+    const area = getVal('filterArea');
+    const country = getVal('filterCountry');
+    const sort = getVal('filterSort');
+
+    // Filtramos sobre TODAS las becas (activas y cerradas) para que el buscador funcione en histórico
+    let filtered = allScholarshipsRaw.filter(beca => {
         const matchText = beca.titulo.toLowerCase().includes(term) || 
                           beca.institucion.toLowerCase().includes(term) ||
                           beca.pais.toLowerCase().includes(term) ||
@@ -155,108 +193,113 @@ function applyFilters() {
         return matchText && matchType && matchLevel && matchArea && matchCountry;
     });
 
+    // Ordenamiento
     if (sort === 'deadline') {
-        filtered.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+        filtered.sort((a, b) => new Date(a.deadline || '9999-12-31') - new Date(b.deadline || '9999-12-31'));
     } else if (sort === 'recent') {
         filtered = [...filtered].reverse(); 
     } else if (sort === 'alpha') {
         filtered.sort((a, b) => a.titulo.localeCompare(b.titulo));
     }
 
-    // Al filtrar, volvemos a llamar al renderizador doble, pasando las cerradas intactas al final
-    renderAllScholarships(filtered, window.closedScholarships || []);
-}
-// --- RENDERIZADO DOBLE (ACTIVAS + CERRADAS) ---
-function renderAllScholarships(activeData, closedData) {
-    const container = document.getElementById('catalogo');
-    const countDisplay = document.getElementById('count-display');
+    // Limpiamos el contenedor antes de volver a renderizar todo junto o separado?
+    // Para simplificar filtros globales, renderizamos todo junto si hay búsqueda, 
+    // sino mantenemos la lógica de separación.
     
+    const container = document.getElementById('catalogo');
+    container.innerHTML = ''; // Limpiar
+    
+    // Si hay término de búsqueda, mostramos todo mezclado
+    if (term !== '' || type !== 'all' || level !== 'all' || area !== 'all' || country !== 'all') {
+         renderScholarships(filtered, false); // Renderizamos resultado único
+    } else {
+        // Si no hay filtros, restauramos vista dividida (Activas | Cerradas)
+        const todayStr = new Date().toISOString().split('T')[0];
+        const active = filtered.filter(b => !b.deadline || b.deadline >= todayStr);
+        const closed = filtered.filter(b => b.deadline && b.deadline < todayStr);
+
+        renderScholarships(active, false);
+        
+        if (closed.length > 0) {
+            const separator = document.createElement('div');
+            separator.style.gridColumn = "1 / -1";
+            separator.style.marginTop = "40px";
+            separator.style.marginBottom = "20px";
+            separator.innerHTML = `<h3 style="text-align:center; color:#666;">Convocatorias Cerradas</h3>`;
+            container.appendChild(separator);
+            renderScholarships(closed, true);
+        }
+    }
+    
+    // Actualizar contador
+    const countDisplay = document.getElementById('count-display');
+    if(countDisplay) countDisplay.textContent = filtered.length;
+}
+
+// --- RENDERIZADO MEJORADO ---
+function renderScholarships(data, isClosedList = false) {
+    const container = document.getElementById('catalogo');
     if (!container) return;
 
-    container.innerHTML = '';
-    
-    // Contador total (activas + cerradas para referencia)
-    if(countDisplay) countDisplay.textContent = activeData.length;
-
-    // 1. RENDERIZAR ACTIVAS
-    if (activeData.length === 0 && closedData.length === 0) {
-        container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px;"><h3>No hay becas en la base de datos.</h3></div>`;
+    if (data.length === 0 && !isClosedList) {
+        // Solo mostramos mensaje si no hay nada y no es la lista de cerradas
+        if(container.children.length === 0) {
+            container.innerHTML = `
+                <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
+                    <i class="fas fa-search" style="font-size: 3rem; color: #ccc; margin-bottom: 15px;"></i>
+                    <h3>No se encontraron resultados</h3>
+                    <p>Intenta ajustar los filtros.</p>
+                </div>`;
+        }
         return;
     }
 
-    // Renderizar Activas
-    activeData.forEach(beca => createBecaCard(beca, container, false));
+    data.forEach(beca => {
+        const isSaved = currentUser && userApplications.some(a => a.id === beca.id);
+        const card = document.createElement('div');
+        card.className = 'beca-card';
+        
+        // Estilos para cerradas
+        if (isClosedList) {
+            card.style.opacity = "0.7";
+            card.style.filter = "grayscale(80%)";
+            card.style.pointerEvents = "none"; // Desactivar clicks en toda la tarjeta
+        }
 
-    // 2. RENDERIZAR CERRADAS (Si existen)
-    if (closedData.length > 0) {
-        // Separador visual
-        const separator = document.createElement('div');
-        separator.style.gridColumn = "1 / -1";
-        separator.style.margin = "40px 0 20px 0";
-        separator.style.paddingTop = "20px";
-        separator.style.borderTop = "2px solid #ddd";
-        separator.innerHTML = `
-            <h3 style="text-align:center; color:#666;">
-                <i class="fas fa-history"></i> Becas Cerradas (Referencia Histórica)
-            </h3>
-            <p style="text-align:center; font-size:0.9rem; color:#888;">
-                Úsalas para prepararte. Suelen abrirse en las mismas fechas el próximo año.
-            </p>
-        `;
-        container.appendChild(separator);
+        const niveles = beca.nivel ? beca.nivel.slice(0, 2) : [];
+        const deadlineStatus = isClosedList ? "CERRADA" : beca.deadline;
+        const deadlineColor = isClosedList ? "#666" : "var(--danger)";
 
-        // Renderizar tarjetas cerradas
-        closedData.forEach(beca => createBecaCard(beca, container, true));
-    }
-}
-
-// Función auxiliar para crear la tarjeta (evita repetir código)
-function createBecaCard(beca, container, isClosed) {
-    const card = document.createElement('div');
-    card.className = 'beca-card';
-    
-    // Estilos visuales para cerradas
-    if (isClosed) {
-        card.style.opacity = "0.7";
-        card.style.filter = "grayscale(100%)";
-        card.style.pointerEvents = "none"; // Desactivar clicks
-    }
-
-    const niveles = beca.nivel ? beca.nivel.slice(0, 2) : [];
-    const deadlineColor = isClosed ? '#999' : 'var(--danger)';
-    const deadlineLabel = isClosed ? 'CERRADA' : beca.deadline;
-    const btnText = isClosed ? 'Convocatoria Finalizada' : 'Guardar';
-    const btnClass = isClosed ? 'btn-secondary' : (currentUser && userApplications.some(a => a.id === beca.id) ? 'btn-secondary' : 'btn-primary');
-    const btnAction = isClosed ? '' : `onclick="${currentUser ? `addToTracker('${beca.id}')` : 'toggleAuthModal()'}"`;
-    const iconSaved = currentUser && userApplications.some(a => a.id === beca.id) ? '<i class="fas fa-check"></i> Guardado' : 'Guardar';
-
-    card.innerHTML = `
-        <div class="card-body">
-            ${isClosed ? '<span class="tag" style="background:#555; color:white;">CERRADA</span>' : '<span class="tag" style="background:#e0f2fe; color:#0369a1;">'+beca.financiamiento+'</span>'}
-            <h3 style="margin: 10px 0; font-size: 1.2rem;">${beca.titulo}</h3>
-            <p style="color: var(--primary); font-weight: bold;">${beca.institucion}</p>
-            <p style="font-size: 0.9rem; color: #666;"><i class="fas fa-map-marker-alt"></i> ${beca.pais}</p>
-            
-            <div class="card-tags" style="margin-top: 10px;">
-                ${niveles.map(n => `<span class="tag">${n}</span>`).join('')}
+        card.innerHTML = `
+            <div class="card-body">
+                <span class="tag" style="background:#e0f2fe; color:#0369a1;">${beca.financiamiento}</span>
+                ${isClosedList ? '<span class="tag" style="background:#555; color:white; margin-left:5px;">Cerrada</span>' : ''}
+                <h3 style="margin: 10px 0; font-size: 1.2rem;">${beca.titulo}</h3>
+                <p style="color: var(--primary); font-weight: bold;">${beca.institucion}</p>
+                <p style="font-size: 0.9rem; color: #666;"><i class="fas fa-map-marker-alt"></i> ${beca.pais}</p>
+                
+                <div class="card-tags" style="margin-top: 10px;">
+                    ${niveles.map(n => `<span class="tag">${n}</span>`).join('')}
+                </div>
+                
+                <p style="margin-top: 15px; font-size: 0.85rem; color: ${deadlineColor}; font-weight: bold;">
+                    <i class="far fa-clock"></i> ${isClosedList ? 'Convocatoria Finalizada' : 'Deadline: ' + beca.deadline}
+                </p>
             </div>
             
-            <p style="margin-top: 15px; font-size: 0.85rem; color: ${deadlineColor}; font-weight: bold;">
-                <i class="far fa-clock"></i> ${isClosed ? 'Fecha límite pasada' : 'Deadline: ' + beca.deadline}
-            </p>
-        </div>
-        
-        <div class="card-footer">
-            <a href="${beca.url_convocatoria}" target="_blank" class="btn btn-outline btn-sm" style="${isClosed ? 'pointer-events:auto; opacity:1;' : ''}">Ver Web</a>
-            ${currentUser ? 
-                `<button class="btn ${btnClass} btn-sm" ${btnAction} style="${isClosed ? 'cursor:not-allowed; background:#ccc;' : ''}">
-                    ${isClosed ? 'Cerrada' : iconSaved}
-                 </button>` : 
-                `<button class="btn btn-secondary btn-sm" onclick="toggleAuthModal()" style="${isClosed ? 'cursor:not-allowed; background:#ccc;' : ''}">Guardar</button>`
-            }
-        </div>
-    `;
-    container.appendChild(card);
+            <div class="card-footer">
+                <a href="${beca.url_convocatoria}" target="_blank" class="btn btn-outline btn-sm" ${isClosedList ? 'style="pointer-events:auto;"' : ''}>Ver Web</a>
+                ${!isClosedList ? (
+                    currentUser ? 
+                    `<button class="btn ${isSaved ? 'btn-secondary' : 'btn-primary'} btn-sm" onclick="addToTracker('${beca.id}')">
+                        ${isSaved ? '<i class="fas fa-check"></i> Guardado' : 'Guardar'}
+                     </button>` : 
+                    `<button class="btn btn-secondary btn-sm" onclick="toggleAuthModal()">Guardar</button>`
+                ) : ''}
+            </div>
+        `;
+        container.appendChild(card);
+    });
 }
 
 function updateStats() {
@@ -266,11 +309,11 @@ function updateStats() {
 
     if(elBecas) elBecas.textContent = scholarships.length;
     if(elPaises) {
-        const countries = new Set(scholarships.map(s => s.pais)).size;
+        const countries = new Set(allScholarshipsRaw.map(s => s.pais)).size;
         elPaises.textContent = countries;
     }
     if(elUnis) {
-        const unis = new Set(scholarships.map(s => s.institucion)).size;
+        const unis = new Set(allScholarshipsRaw.map(s => s.institucion)).size;
         elUnis.textContent = unis;
     }
 }
@@ -278,8 +321,7 @@ function updateStats() {
 // --- TRACKER & DASHBOARD ---
 function addToTracker(id) {
     if (!currentUser) return toggleAuthModal();
-    
-    const beca = scholarships.find(s => s.id === id);
+    const beca = allScholarshipsRaw.find(s => s.id === id);
     if (!beca) return;
 
     if (userApplications.some(a => a.id === id)) {
@@ -297,7 +339,8 @@ function addToTracker(id) {
     userApplications.push(newApp);
     localStorage.setItem(`apps_${currentUser.email}`, JSON.stringify(userApplications));
     alert('¡Beca guardada en tu tracker!');
-    renderScholarships(scholarships); 
+    // Recargar vista actual para actualizar botón
+    applyFilters(); 
 }
 
 function loadDashboard() {
@@ -324,7 +367,6 @@ function loadDashboard() {
 function renderTracker() {
     const container = document.getElementById('tracker-list');
     if (!container) return;
-    
     container.innerHTML = '';
 
     if (userApplications.length === 0) {
@@ -384,7 +426,7 @@ function updateStatus(id, newStatus) {
 
 function renderChart() {
     const ctxCanvas = document.getElementById('statusChart');
-    if (!ctxCanvas) return; // Salir si no hay canvas
+    if (!ctxCanvas) return;
 
     const ctx = ctxCanvas.getContext('2d');
     const counts = { 'Interesado': 0, 'En Proceso': 0, 'Enviada': 0, 'Aceptada': 0, 'Rechazada': 0 };
@@ -393,15 +435,13 @@ function renderChart() {
         if(counts[app.status] !== undefined) counts[app.status]++; 
     });
 
-    // Filtrar ceros para que el gráfico se vea limpio
     const labels = Object.keys(counts).filter(k => counts[k] > 0);
     const data = labels.map(k => counts[k]);
 
     if (window.myChart) window.myChart.destroy();
     
-    // Verificar si Chart.js está cargado
     if (typeof Chart === 'undefined') {
-        console.warn("Chart.js no está cargado. Incluye el script CDN en index.html");
+        console.warn("Chart.js no está cargado.");
         return;
     }
 
@@ -442,24 +482,21 @@ window.toggleAuthMode = () => {
     }
 };
 
-// Forms (Lógica Corregida para múltiples usuarios)
 const loginFormEl = document.getElementById('loginForm');
 if(loginFormEl) {
     loginFormEl.addEventListener('submit', (e) => {
         e.preventDefault();
         const email = document.getElementById('loginEmail').value;
         const pass = document.getElementById('loginPass').value;
-        
-        // Buscar usuario en la "base de datos" local
         const user = allUsers.find(u => u.email === email && u.pass === pass);
         
         if (user) {
             localStorage.setItem('scholarship_user', JSON.stringify(user));
             checkAuth();
             toggleAuthModal();
-            navigate('home'); // O 'dashboard-section'
+            navigate('home');
         } else {
-            alert('Credenciales incorrectas o usuario no existe.');
+            alert('Credenciales incorrectas.');
         }
     });
 }
@@ -472,7 +509,6 @@ if(registerFormEl) {
         const email = document.getElementById('regEmail').value;
         const pass = document.getElementById('regPass').value;
         
-        // Verificar si ya existe
         if (allUsers.some(u => u.email === email)) {
             alert('Este correo ya está registrado.');
             return;
@@ -488,12 +524,10 @@ if(registerFormEl) {
     });
 }
 
-// Detalle y Compartir
 window.openDetailModal = (beca) => {
     currentSharedBeca = beca;
     const modal = document.getElementById('detail-modal');
     const content = document.getElementById('detail-content');
-    
     if (!modal || !content) return;
 
     content.innerHTML = `
@@ -524,26 +558,15 @@ window.copyLink = () => {
     alert('Enlace copiado al portapapeles');
 };
 
-// Generador de Cartas
 window.openLetterGenerator = (id) => {
     const app = userApplications.find(a => a.id === id);
     if (!app) return;
-    
     const letterModal = document.getElementById('letterModal');
     const letterTitle = document.getElementById('letterTitle');
     const letterContent = document.getElementById('letterContent');
-
     if(!letterModal || !letterTitle || !letterContent) return;
     
-    const letter = `Estimado Comité de Admisiones,
-
-Por medio de la presente expreso mi interés en el programa ${app.titulo} en ${app.institucion}.
-
-Mi motivación principal es... [Completa aquí detallando tu experiencia y por qué este programa es ideal para ti].
-
-Atentamente,
-${currentUser.name}`;
-
+    const letter = `Estimado Comité de Admisiones,\n\nPor medio de la presente expreso mi interés en el programa ${app.titulo} en ${app.institucion}.\n\nMi motivación principal es...\n\nAtentamente,\n${currentUser.name}`;
     letterTitle.textContent = `Carta: ${app.titulo}`;
     letterContent.value = letter;
     letterModal.classList.remove('hidden');
