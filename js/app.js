@@ -288,14 +288,21 @@ function renderScholarships(data, isClosedList = false) {
                 </p>
             </div>
             
+            // Dentro de renderScholarships, en el card-footer:
             <div class="card-footer">
-                <a href="${beca.url_convocatoria}" target="_blank" class="btn btn-outline btn-sm" ${isClosedList ? 'style="pointer-events:auto;"' : ''}>Ver Web</a>
+                <!-- Botón Ver Detalles (NUEVO) -->
+                <button class="btn btn-outline btn-sm" style="flex:1; margin-right:5px;" onclick='openDetailModal(${JSON.stringify(beca).replace(/'/g, "&#39;")})'>
+                    <i class="fas fa-eye"></i> Ver Detalles
+                </button>
+                
+                <a href="${beca.url_convocatoria}" target="_blank" class="btn btn-primary btn-sm">Ver Web</a>
+                
                 ${!isClosedList ? (
                     currentUser ? 
                     `<button class="btn ${isSaved ? 'btn-secondary' : 'btn-primary'} btn-sm" onclick="addToTracker('${beca.id}')">
-                        ${isSaved ? '<i class="fas fa-check"></i> Guardado' : 'Guardar'}
+                        ${isSaved ? '<i class="fas fa-check"></i>' : '<i class="fas fa-plus"></i>'}
                      </button>` : 
-                    `<button class="btn btn-secondary btn-sm" onclick="toggleAuthModal()">Guardar</button>`
+                    `<button class="btn btn-secondary btn-sm" onclick="toggleAuthModal()"><i class="fas fa-lock"></i></button>`
                 ) : ''}
             </div>
         `;
