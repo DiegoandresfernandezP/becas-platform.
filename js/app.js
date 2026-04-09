@@ -274,38 +274,43 @@ function renderScholarships(data, isClosedList = false) {
         // ... dentro de renderScholarships, busca la sección card.innerHTML ...
 
     card.innerHTML = `
-        <div class="card-body">
-            <span class="tag" style="background:#e0f2fe; color:#0369a1;">${beca.financiamiento}</span>
-            ${isClosedList ? '<span class="tag" style="background:#555; color:white; margin-left:5px;">Cerrada</span>' : ''}
-            <h3 style="margin: 10px 0; font-size: 1.2rem;">${beca.titulo}</h3>
-            <p style="color: var(--primary); font-weight: bold;">${beca.institucion}</p>
-            <p style="font-size: 0.9rem; color: #666;"><i class="fas fa-map-marker-alt"></i> ${beca.pais}</p>
-            
-            <div class="card-tags" style="margin-top: 10px;">
-                ${niveles.map(n => `<span class="tag">${n}</span>`).join('')}
+            <div class="card-body">
+                <span class="tag" style="background:#e0f2fe; color:#0369a1;">${beca.financiamiento}</span>
+                ${isClosedList ? '<span class="tag" style="background:#555; color:white; margin-left:5px;">Cerrada</span>' : ''}
+                <h3 style="margin: 10px 0; font-size: 1.2rem;">${beca.titulo}</h3>
+                <p style="color: var(--primary); font-weight: bold;">${beca.institucion}</p>
+                <p style="font-size: 0.9rem; color: #666;"><i class="fas fa-map-marker-alt"></i> ${beca.pais}</p>
+                
+                <div class="card-tags" style="margin-top: 10px;">
+                    ${niveles.map(n => `<span class="tag">${n}</span>`).join('')}
+                </div>
+                
+                <p style="margin-top: 15px; font-size: 0.85rem; color: ${deadlineColor}; font-weight: bold;">
+                    <i class="far fa-clock"></i> ${isClosedList ? 'Convocatoria Finalizada' : 'Deadline: ' + beca.deadline}
+                </p>
             </div>
             
-            <p style="margin-top: 15px; font-size: 0.85rem; color: ${deadlineColor}; font-weight: bold;">
-                <i class="far fa-clock"></i> ${isClosedList ? 'Convocatoria Finalizada' : 'Deadline: ' + beca.deadline}
-            </p>
-        </div>
-        
-        <div class="card-footer" style="${isClosedList ? 'justify-content: flex-end;' : ''}">
-            <!-- Botón Ver Web SIEMPRE visible y funcional -->
-            <a href="${beca.url_convocatoria}" target="_blank" class="btn btn-outline btn-sm" style="text-decoration: none;">
-                <i class="fas fa-external-link-alt"></i> ${isClosedList ? 'Ver Archivo' : 'Ver Convocatoria'}
-            </a>
-            
-            <!-- Botón Guardar SOLO para activas -->
-            ${!isClosedList ? (
-                currentUser ? 
-                `<button class="btn ${isSaved ? 'btn-secondary' : 'btn-primary'} btn-sm" onclick="addToTracker('${beca.id}')">
-                    ${isSaved ? '<i class="fas fa-check"></i> Guardado' : 'Guardar'}
-                 </button>` : 
-                `<button class="btn btn-secondary btn-sm" onclick="toggleAuthModal()">Guardar</button>`
-            ) : ''}
-        </div>
-    `;
+            <div class="card-footer" style="${isClosedList ? 'justify-content: space-between;' : ''}">
+                <!-- Botón Ver Detalles (Abre el modal para compartir) -->
+                <button class="btn btn-outline btn-sm" onclick='openDetailModal(${JSON.stringify(beca).replace(/'/g, "&#39;")})' style="text-align:left; flex:1; margin-right:10px;">
+                    <i class="fas fa-eye"></i> Ver Detalles
+                </button>
+
+                <!-- Botón Ir a la Web -->
+                <a href="${beca.url_convocatoria}" target="_blank" class="btn btn-secondary btn-sm" style="text-decoration:none;">
+                    <i class="fas fa-external-link-alt"></i> ${isClosedList ? 'Archivo' : 'Web'}
+                </a>
+                
+                <!-- Botón Guardar (Solo activas) -->
+                ${!isClosedList ? (
+                    currentUser ? 
+                    `<button class="btn ${isSaved ? 'btn-secondary' : 'btn-primary'} btn-sm" onclick="addToTracker('${beca.id}')" style="margin-left:10px;">
+                        ${isSaved ? '<i class="fas fa-check"></i>' : '<i class="fas fa-plus"></i>'}
+                     </button>` : 
+                    `<button class="btn btn-secondary btn-sm" onclick="toggleAuthModal()" style="margin-left:10px;"><i class="fas fa-lock"></i></button>`
+                ) : ''}
+            </div>
+        `;
         container.appendChild(card);
     });
 }
@@ -598,10 +603,7 @@ window.copyLink = () => {
     });
 };
 
-window.copyLink = () => {
-    navigator.clipboard.writeText(window.location.href);
-    alert('Enlace copiado al portapapeles');
-};
+
 
 window.openLetterGenerator = (id) => {
     const app = userApplications.find(a => a.id === id);
