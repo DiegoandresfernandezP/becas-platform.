@@ -289,20 +289,19 @@ function renderScholarships(data, isClosedList = false) {
             </div>
             
             // Dentro de renderScholarships, en el card-footer:
-            <div class="card-footer">
-                <!-- Botón Ver Detalles (NUEVO) -->
-                <button class="btn btn-outline btn-sm" style="flex:1; margin-right:5px;" onclick='openDetailModal(${JSON.stringify(beca).replace(/'/g, "&#39;")})'>
-                    <i class="fas fa-eye"></i> Ver Detalles
-                </button>
-                
-                <a href="${beca.url_convocatoria}" target="_blank" class="btn btn-primary btn-sm">Ver Web</a>
-                
-                ${!isClosedList ? (
-                    currentUser ? 
-                    `<button class="btn ${isSaved ? 'btn-secondary' : 'btn-primary'} btn-sm" onclick="addToTracker('${beca.id}')">
-                        ${isSaved ? '<i class="fas fa-check"></i>' : '<i class="fas fa-plus"></i>'}
-                     </button>` : 
-                    `<button class="btn btn-secondary btn-sm" onclick="toggleAuthModal()"><i class="fas fa-lock"></i></button>`
+            <div class="card-footer" style="${isClosedList ? 'justify-content: flex-end;' : ''}">
+                    <!-- Botón Ver Web SIEMPRE visible y funcional -->
+                    <a href="${beca.url_convocatoria}" target="_blank" class="btn btn-outline btn-sm" style="text-decoration: none;">
+                        <i class="fas fa-external-link-alt"></i> ${isClosedList ? 'Ver Archivo' : 'Ver Convocatoria'}
+                    </a>
+                    
+                    <!-- Botón Guardar SOLO para activas -->
+                    ${!isClosedList ? (
+                        currentUser ? 
+                        `<button class="btn ${isSaved ? 'btn-secondary' : 'btn-primary'} btn-sm" onclick="addToTracker('${beca.id}')">
+                            ${isSaved ? '<i class="fas fa-check"></i> Guardado' : 'Guardar'}
+                         </button>` : 
+                        `<button class="btn btn-secondary btn-sm" onclick="toggleAuthModal()">Guardar</button>`
                 ) : ''}
             </div>
         `;
