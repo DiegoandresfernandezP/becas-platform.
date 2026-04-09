@@ -296,13 +296,14 @@ function renderScholarships(data, isClosedList = false) {
                         <i class="fas fa-eye"></i> Ver Detalles
                     </button>
                 
-                <!-- Botón Guardar/Archivar: AHORA ACTIVO TAMBIÉN PARA CERRADAS -->
-                ${currentUser ? 
-                    `<button class="btn ${isSaved ? 'btn-secondary' : 'btn-primary'} btn-sm" style="flex: 1;" onclick="addToTracker('${beca.id}')">
-                        ${isSaved ? '<i class="fas fa-check"></i> Guardado' : (isClosedList ? 'Archivar' : 'Guardar')}
-                     </button>` : 
-                    `<button class="btn btn-secondary btn-sm" style="flex: 1;" onclick="toggleAuthModal()">Guardar</button>`
-                }
+                     <!-- Botón Guardar/Archivar: AHORA ACTIVO TAMBIÉN PARA CERRADAS -->
+                    ${currentUser ? 
+                        `<button class="btn ${isSaved ? 'btn-secondary' : 'btn-primary'} btn-sm" style="flex: 1;" onclick="addToTracker('${beca.id}')">
+                               ${isSaved ? '<i class="fas fa-check"></i> Guardado' : (isClosedList ? 'Archivar' : 'Guardar')}
+                         </button>` : 
+                          `<button class="btn btn-secondary btn-sm" style="flex: 1;" onclick="toggleAuthModal()">Guardar</button>`
+                     }
+                 ` : ''}
             </div>
         `;
         container.appendChild(card);
