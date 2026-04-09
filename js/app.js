@@ -292,9 +292,8 @@ function renderScholarships(data, isClosedList = false) {
 
                 <!-- Botones SOLO para activas -->
                 ${!isClosedList ? `
-                    <button class="btn btn-primary btn-sm" onclick="openDetailModal(${JSON.stringify(beca).replace(/'/g, "&#39;")})" style="margin-left: 5px;">
+                    <button class="btn btn-primary btn-sm" onclick="toggleSharePopup(event, ${JSON.stringify(beca).replace(/'/g, "&#39;")})" style="margin-left: 5px; position: relative;">
                          <i class="fas fa-share-alt"></i> Compartir
-
                     </button>
                 
                      <!-- Botón Guardar/Archivar: AHORA ACTIVO TAMBIÉN PARA CERRADAS -->
