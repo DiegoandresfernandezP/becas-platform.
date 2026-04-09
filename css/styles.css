@@ -103,3 +103,22 @@ body { background-color: var(--bg-light); color: var(--text-dark); line-height: 
     .dashboard-grid { grid-template-columns: 1fr; }
     .hero h1 { font-size: 2rem; }
 }
+
+/* Fix para el icono de Guardado */
+.btn-secondary {
+    background-color: var(--secondary) !important;
+    color: white !important;
+}
+
+.btn-secondary i, 
+.btn-secondary .fa-check {
+    color: white !important;
+    margin-right: 5px;
+}
+
+/* Asegurar que FontAwesome cargue bien */
+.fas, .fab, .far {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    display: inline-block;
+}
