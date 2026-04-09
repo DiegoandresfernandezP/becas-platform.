@@ -6,6 +6,7 @@ let userApplications = [];
 let currentSharedBeca = null;
 let allUsers = JSON.parse(localStorage.getItem('scholarship_db_users')) || [];
 
+
 // --- INICIALIZACIÓN ---
 document.addEventListener('DOMContentLoaded', () => {
     console.log("🚀 Iniciando ScholarHub...");
