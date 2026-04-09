@@ -1,3 +1,97 @@
+# 🎓 ScholarHub - Tu Portal de Becas Internacionales
+
+[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-blue?logo=github)](https://diegoandresfernandezp.github.io/becas-platform/)
+[![Auto-Update](https://img.shields.io/badge/Auto-Update-Enabled-green?logo=python)](./scripts/update_becas.py)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+> **ScholarHub** es una plataforma web gratuita y de código abierto diseñada para centralizar, filtrar y gestionar oportunidades de estudio en el extranjero (becas, internships, veranos). Incluye un sistema de auto-actualización vía Python y herramientas para organizar tu postulación.
+
+🌐 **Demo en vivo:** [Visitar ScholarHub](https://diegoandresfernandezp.github.io/becas-platform/)
+
+---
+
+## ✨ Características Principales
+
+### 🔍 Para Estudiantes
+- **Catálogo Inteligente:** Filtra por Nivel, Área, País y Tipo de oportunidad.
+- **Estado en Tiempo Real:** Distingue automáticamente entre becas activas y convocatorias cerradas (histórico).
+- **Tracker de Postulaciones:** Panel privado para guardar becas, marcar documentos completados (CV, cartas, etc.) y ver progreso.
+- **Generador de Cartas:** Plantillas automáticas para cartas de motivación y correos a profesores.
+- **Compartir Fácil:** Botones integrados para compartir oportunidades en WhatsApp, LinkedIn, Twitter y Facebook.
+
+### 🤖 Para Administradores (Automatización)
+- **Auto-Update Semanal:** Script en Python (`update_becas.py`) que escanea RSS de embajadas y universidades top.
+- **Re-validación Inteligente:** Detecta ciclos anuales (ej. Fulbright, Erasmus) y actualiza fechas automáticamente.
+- **Detección de Duplicados:** Algoritmo de hashing para evitar entradas repetidas.
+- **GitHub Actions:** Flujo CI/CD configurado para ejecutar el scraper y hacer commit automático.
+
+---
+
+## 🛠️ Tecnologías Utilizadas
+
+| Frontend | Backend / Scripts | Datos | Deploy |
+| :--- | :--- | :--- | :--- |
+| HTML5, CSS3, JavaScript (ES6+) | Python 3.9+ | JSON Estático | GitHub Pages |
+| Chart.js (Gráficos) | Feedparser, BeautifulSoup | LocalStorage (Auth) | GitHub Actions |
+| FontAwesome (Iconos) | Requests | | |
+
+---
+
+becas-platform/
+├── data/
+│   └── becas.json          # Base de datos principal (auto-generada)
+├── scripts/
+│   ├── update_becas.py     # Script de scraping y actualización
+│   └── requirements.txt    # Dependencias de Python
+├── .github/
+│   └── workflows/
+│       └── auto_update.yml # Configuración de GitHub Actions
+├── css/
+│   └── styles.css          # Estilos y diseño responsivo
+├── js/
+│   └── app.js              # Lógica de filtros, auth y tracker
+├── index.html              # Punto de entrada (SPA)
+├── PLAN.md                 # Hoja de ruta y tareas pendientes
+└── README.md               # Este archivo
+
+## 🚀 Instalación y Uso Local
+
+Si quieres correr el proyecto en tu máquina o contribuir:
+
+1. **Clona el repositorio:**
+   ```bash
+   git clone https://github.com/DiegoandresfernandezP/becas-platform.git
+   cd becas-platform
+🗺️ Hoja de Ruta (Roadmap)
+El desarrollo sigue las prioridades definidas en PLAN.md:
+Fase 1: Catálogo básico, filtros y autenticación local.
+Fase 2: Integración de historial (becas cerradas) y botones de compartir.
+Fase 3 (En curso): Exportación de Tracker a PDF y notificaciones de deadlines.
+Fase 4: Comparador de becas y modo oscuro.
+🤝 Contribuciones
+¡Las contribuciones son bienvenidas! Si encuentras un bug o quieres agregar una nueva fuente de becas al script de Python:
+Haz un Fork del proyecto.
+Crea una rama (git checkout -b feature/NuevaFuncionalidad).
+Commit tus cambios (git commit -m 'Agrega nueva funcionalidad').
+Push a la rama (git push origin feature/NuevaFuncionalidad).
+Abre un Pull Request.
+📄 Licencia
+Este proyecto está bajo la licencia MIT. Siéntete libre de usarlo para aprender o crear tu propia versión.
+📬 Contacto
+Desarrollado con ❤️ por Diego Andres Fernandez.
+¿Tienes dudas o sugerencias? Abre un issue en este repositorio.
+<div align="center">
+<sub>Hecho con JavaScript, Python y mucho café ☕</sub>
+</div>
+```
+
+¿Qué hace este README especial?
+Badges Profesionales: Muestra estado del deploy y automatización.
+Separación Clara: Divide características para estudiantes vs. administradores.
+Instrucciones Precisas: Explica cómo correr el script de Python localmente.
+Estructura Visual: Usa tablas y árboles de directorios para fácil lectura.
+Llamado a la Acción: Invita a contribuir y enlaza al PLAN.md.
+Siguiente paso: Sube este archivo a GitHub, recarga la página principal del repositorio y verás toda la documentación renderizada perfectamente. ¡Tu proyecto ya parece una startup real! 🚀
 # 🎓 BecasInternacionales - Plataforma Integral de Becas
 
 ## Visión del Producto
