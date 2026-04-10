@@ -123,3 +123,12 @@ body { background-color: var(--bg-light); color: var(--text-dark); line-height: 
     font-weight: 900;
     display: inline-block;
 }
+
+.btn-danger {
+    background-color: #ef4444;
+    color: white;
+    transition: 0.3s;
+}
+.btn-danger:hover {
+    background-color: #dc2626;
+}
