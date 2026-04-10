@@ -1,18 +1,33 @@
 [
-  { 
+  {
     "id": "beca_003",
     "titulo": "Chevening Scholarships",
     "institucion": "UK Government",
     "pais": "Reino Unido",
     "tipo": "Beca",
-    "nivel": ["Maestría"],
-    "area": ["Todas"],
+    "nivel": [
+      "Maestría"
+    ],
+    "area": [
+      "Todas"
+    ],
     "financiamiento": "100% (Full Ride)",
     "deadline": "2025-11-05",
     "url_convocatoria": "https://www.chevening.org/",
-    "requisitos_idioma": ["Inglés IELTS"],
-    "documentos_sugeridos": ["CV", "4 Ensayos", "2 Cartas Recomendación", "Título"],
-    "tags": ["Liderazgo", "UK", "Full Ride"]
+    "requisitos_idioma": [
+      "Inglés IELTS"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "4 Ensayos",
+      "2 Cartas Recomendación",
+      "Título"
+    ],
+    "tags": [
+      "Liderazgo",
+      "UK",
+      "Full Ride"
+    ]
   },
   {
     "id": "beca_002",
@@ -20,14 +35,30 @@
     "institucion": "MIT",
     "pais": "Estados Unidos",
     "tipo": "Doctorado",
-    "nivel": ["Doctorado"],
-    "area": ["STEM", "Ciencias de la Computación"],
+    "nivel": [
+      "Doctorado"
+    ],
+    "area": [
+      "STEM",
+      "Ciencias de la Computación"
+    ],
     "financiamiento": "100% (Full Ride)",
     "deadline": "2025-12-01",
     "url_convocatoria": "https://www.eecs.mit.edu/",
-    "requisitos_idioma": ["Inglés TOEFL/IELTS"],
-    "documentos_sugeridos": ["CV", "SOP", "3 Recomendaciones", "GRE"],
-    "tags": ["IA", "USA", "Top Tier"]
+    "requisitos_idioma": [
+      "Inglés TOEFL/IELTS"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "SOP",
+      "3 Recomendaciones",
+      "GRE"
+    ],
+    "tags": [
+      "IA",
+      "USA",
+      "Top Tier"
+    ]
   },
   {
     "id": "beca_001",
@@ -35,14 +66,31 @@
     "institucion": "ETH Zurich",
     "pais": "Suiza",
     "tipo": "Maestría",
-    "nivel": ["Maestría"],
-    "area": ["STEM", "Ingeniería", "Ciencias de la Computación"],
+    "nivel": [
+      "Maestría"
+    ],
+    "area": [
+      "STEM",
+      "Ingeniería",
+      "Ciencias de la Computación"
+    ],
     "financiamiento": "100% (Tuition + Stipend)",
     "deadline": "2025-12-15",
     "url_convocatoria": "https://ethz.ch/",
-    "requisitos_idioma": ["Inglés C1"],
-    "documentos_sugeridos": ["CV", "Carta Motivación", "2 Recomendaciones", "Transcript"],
-    "tags": ["IA", "Robotics", "Europe"]
+    "requisitos_idioma": [
+      "Inglés C1"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación",
+      "2 Recomendaciones",
+      "Transcript"
+    ],
+    "tags": [
+      "IA",
+      "Robotics",
+      "Europe"
+    ]
   },
   {
     "id": "beca_024",
@@ -50,14 +98,30 @@
     "institucion": "ETH Zurich",
     "pais": "Suiza",
     "tipo": "Beca",
-    "nivel": ["Maestría"],
-    "area": ["STEM", "Ingeniería"],
+    "nivel": [
+      "Maestría"
+    ],
+    "area": [
+      "STEM",
+      "Ingeniería"
+    ],
     "financiamiento": "100% (Tuition + Stipend)",
     "deadline": "2025-12-15",
     "url_convocatoria": "https://ethz.ch/en/studies/funding/scholarships-for-master-s-students.html",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Carta Motivación", "3 Recomendaciones", "Propuesta Investigación"],
-    "tags": ["Suiza", "Excelencia", "Investigación"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación",
+      "3 Recomendaciones",
+      "Propuesta Investigación"
+    ],
+    "tags": [
+      "Suiza",
+      "Excelencia",
+      "Investigación"
+    ]
   },
   {
     "id": "beca_038",
@@ -65,14 +129,30 @@
     "institucion": "University of Tokyo",
     "pais": "Japón",
     "tipo": "Internship",
-    "nivel": ["Pregrado"],
-    "area": ["Ciencias", "Ingeniería"],
+    "nivel": [
+      "Pregrado"
+    ],
+    "area": [
+      "Ciencias",
+      "Ingeniería"
+    ],
     "financiamiento": "Viaje + Alojamiento + Stipend",
     "deadline": "2026-01-07",
     "url_convocatoria": "https://www.s.u-tokyo.ac.jp/en/utrip/apply-now/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Propuesta Investigación", "2 Recomendaciones", "Transcript"],
-    "tags": ["Japón", "Investigación", "Verano"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Propuesta Investigación",
+      "2 Recomendaciones",
+      "Transcript"
+    ],
+    "tags": [
+      "Japón",
+      "Investigación",
+      "Verano"
+    ]
   },
   {
     "id": "beca_039",
@@ -80,14 +160,31 @@
     "institucion": "IRB Barcelona",
     "pais": "España",
     "tipo": "Fellowship",
-    "nivel": ["Doctorado"],
-    "area": ["Biomedicina", "Biología Celular", "Oncología"],
+    "nivel": [
+      "Doctorado"
+    ],
+    "area": [
+      "Biomedicina",
+      "Biología Celular",
+      "Oncología"
+    ],
     "financiamiento": "Salario Doctoral (4 años)",
     "deadline": "2026-01-07",
     "url_convocatoria": "https://www.irbbarcelona.org/en/careers/young-scientists/irb-barcelona-international-phd-fellowships-2026",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Plan de Investigación", "3 Recomendaciones", "Título Master"],
-    "tags": ["España", "Doctorado", "Biomedicina"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Plan de Investigación",
+      "3 Recomendaciones",
+      "Título Master"
+    ],
+    "tags": [
+      "España",
+      "Doctorado",
+      "Biomedicina"
+    ]
   },
   {
     "id": "beca_045",
@@ -95,14 +192,30 @@
     "institucion": "RIKEN CBS",
     "pais": "Japón",
     "tipo": "Escuela Verano",
-    "nivel": ["Pregrado", "Posgrado"],
-    "area": ["Neurociencia", "Ciencia Cognitiva"],
+    "nivel": [
+      "Pregrado",
+      "Posgrado"
+    ],
+    "area": [
+      "Neurociencia",
+      "Ciencia Cognitiva"
+    ],
     "financiamiento": "Viaje + Alojamiento + Stipend",
     "deadline": "2026-01-07",
     "url_convocatoria": "https://cbs.riken.jp/en/summer/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Carta Motivación", "2 Recomendaciones"],
-    "tags": ["Japón", "Neurociencia", "Verano"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación",
+      "2 Recomendaciones"
+    ],
+    "tags": [
+      "Japón",
+      "Neurociencia",
+      "Verano"
+    ]
   },
   {
     "id": "beca_044",
@@ -110,14 +223,29 @@
     "institucion": "Wellcome Sanger Institute",
     "pais": "Reino Unido",
     "tipo": "Competencia",
-    "nivel": ["Pregrado"],
-    "area": ["Genómica", "Biología", "Bioinformática"],
+    "nivel": [
+      "Pregrado"
+    ],
+    "area": [
+      "Genómica",
+      "Biología",
+      "Bioinformática"
+    ],
     "financiamiento": "Premio + Visita al Instituto",
     "deadline": "2026-01-09",
     "url_convocatoria": "https://www.sanger.ac.uk/about/study/the-sanger-prize-competition-2026/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["Ensayo Científico", "CV"],
-    "tags": ["UK", "Genómica", "Competencia"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "Ensayo Científico",
+      "CV"
+    ],
+    "tags": [
+      "UK",
+      "Genómica",
+      "Competencia"
+    ]
   },
   {
     "id": "beca_036",
@@ -125,14 +253,31 @@
     "institucion": "Caltech / MIT",
     "pais": "Estados Unidos",
     "tipo": "Internship",
-    "nivel": ["Pregrado"],
-    "area": ["Física", "Ingeniería", "Ciencia de Datos"],
+    "nivel": [
+      "Pregrado"
+    ],
+    "area": [
+      "Física",
+      "Ingeniería",
+      "Ciencia de Datos"
+    ],
     "financiamiento": "Stipend + Alojamiento + Viaje",
     "deadline": "2026-01-11",
     "url_convocatoria": "https://labcit.ligo.caltech.edu/LIGO_web/students/SURF/applicants-info.shtml",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Transcript", "2 Recomendaciones", "Ensayo Personal"],
-    "tags": ["USA", "Física Ondas Gravitacionales", "Investigación"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Transcript",
+      "2 Recomendaciones",
+      "Ensayo Personal"
+    ],
+    "tags": [
+      "USA",
+      "Física Ondas Gravitacionales",
+      "Investigación"
+    ]
   },
   {
     "id": "beca_037",
@@ -140,14 +285,32 @@
     "institucion": "VBC",
     "pais": "Austria",
     "tipo": "Escuela Verano",
-    "nivel": ["Pregrado", "Maestría"],
-    "area": ["Biología", "Bioquímica", "Neurociencia"],
+    "nivel": [
+      "Pregrado",
+      "Maestría"
+    ],
+    "area": [
+      "Biología",
+      "Bioquímica",
+      "Neurociencia"
+    ],
     "financiamiento": "Gratuito + Stipend",
     "deadline": "2026-01-11",
     "url_convocatoria": "https://training.vbc.ac.at/how-to-apply/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Carta Motivación", "2 Recomendaciones", "Transcript"],
-    "tags": ["Austria", "Biología", "Verano"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación",
+      "2 Recomendaciones",
+      "Transcript"
+    ],
+    "tags": [
+      "Austria",
+      "Biología",
+      "Verano"
+    ]
   },
   {
     "id": "beca_042",
@@ -155,14 +318,30 @@
     "institucion": "SynBioBeta",
     "pais": "Remoto",
     "tipo": "Curso Corto",
-    "nivel": ["Secundaria", "Pregrado", "Posgrado"],
-    "area": ["Biotecnología", "Biología Sintética"],
+    "nivel": [
+      "Secundaria",
+      "Pregrado",
+      "Posgrado"
+    ],
+    "area": [
+      "Biotecnología",
+      "Biología Sintética"
+    ],
     "financiamiento": "Gratuito (Becas disponibles)",
     "deadline": "2026-01-12",
     "url_convocatoria": "https://synbiocamp.org/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["Formulario", "Interés en Biotech"],
-    "tags": ["Biotecnología", "Online", "Innovación"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "Formulario",
+      "Interés en Biotech"
+    ],
+    "tags": [
+      "Biotecnología",
+      "Online",
+      "Innovación"
+    ]
   },
   {
     "id": "beca_043",
@@ -170,14 +349,30 @@
     "institucion": "Santa Fe Institute",
     "pais": "Estados Unidos",
     "tipo": "Internship",
-    "nivel": ["Pregrado"],
-    "area": ["Ciencias Complejas", "Matemáticas", "Física"],
+    "nivel": [
+      "Pregrado"
+    ],
+    "area": [
+      "Ciencias Complejas",
+      "Matemáticas",
+      "Física"
+    ],
     "financiamiento": "Stipend + Alojamiento",
     "deadline": "2026-01-14",
     "url_convocatoria": "https://www.santafe.edu/ucr",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Transcript", "Carta Motivación"],
-    "tags": ["USA", "Complejidad", "Investigación"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Transcript",
+      "Carta Motivación"
+    ],
+    "tags": [
+      "USA",
+      "Complejidad",
+      "Investigación"
+    ]
   },
   {
     "id": "beca_035",
@@ -185,14 +380,32 @@
     "institucion": "MPIA",
     "pais": "Alemania",
     "tipo": "Internship",
-    "nivel": ["Pregrado", "Maestría"],
-    "area": ["Astronomía", "Física", "Astrofísica"],
+    "nivel": [
+      "Pregrado",
+      "Maestría"
+    ],
+    "area": [
+      "Astronomía",
+      "Física",
+      "Astrofísica"
+    ],
     "financiamiento": "Stipend + Alojamiento",
     "deadline": "2026-01-15",
     "url_convocatoria": "https://www.mpia.de/en/careers/internships/summer",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Carta Motivación", "2 Recomendaciones", "Transcript"],
-    "tags": ["Alemania", "Astronomía", "Verano"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación",
+      "2 Recomendaciones",
+      "Transcript"
+    ],
+    "tags": [
+      "Alemania",
+      "Astronomía",
+      "Verano"
+    ]
   },
   {
     "id": "beca_040",
@@ -200,14 +413,31 @@
     "institucion": "Gobierno de Hungría",
     "pais": "Hungría",
     "tipo": "Beca",
-    "nivel": ["Pregrado", "Maestría", "Doctorado"],
-    "area": ["Todas"],
+    "nivel": [
+      "Pregrado",
+      "Maestría",
+      "Doctorado"
+    ],
+    "area": [
+      "Todas"
+    ],
     "financiamiento": "100% (Tuition + Stipend + Alojamiento)",
     "deadline": "2026-01-15",
     "url_convocatoria": "https://apply.studyinhungary.hu/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Carta Motivación", "Títulos", "Certificado Médico"],
-    "tags": ["Hungría", "Full Ride", "Todos los niveles"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación",
+      "Títulos",
+      "Certificado Médico"
+    ],
+    "tags": [
+      "Hungría",
+      "Full Ride",
+      "Todos los niveles"
+    ]
   },
   {
     "id": "beca_041",
@@ -215,14 +445,30 @@
     "institucion": "US Department of State",
     "pais": "Estados Unidos",
     "tipo": "Programa Liderazgo",
-    "nivel": ["Secundaria"],
-    "area": ["Tecnología", "Liderazgo"],
+    "nivel": [
+      "Secundaria"
+    ],
+    "area": [
+      "Tecnología",
+      "Liderazgo"
+    ],
     "financiamiento": "100% (Viaje + Programa)",
     "deadline": "2026-01-20",
     "url_convocatoria": "https://techgirlsglobal.org/apply/eligibility-and-application-2/",
-    "requisitos_idioma": ["Inglés Básico"],
-    "documentos_sugeridos": ["Formulario", "Ensayo", "Nota Escolar"],
-    "tags": ["USA", "Mujeres", "Tecnología", "High School"]
+    "requisitos_idioma": [
+      "Inglés Básico"
+    ],
+    "documentos_sugeridos": [
+      "Formulario",
+      "Ensayo",
+      "Nota Escolar"
+    ],
+    "tags": [
+      "USA",
+      "Mujeres",
+      "Tecnología",
+      "High School"
+    ]
   },
   {
     "id": "beca_050",
@@ -230,14 +476,31 @@
     "institucion": "UNESCO / China",
     "pais": "China",
     "tipo": "Fellowship",
-    "nivel": ["Maestría", "Doctorado", "Investigación"],
-    "area": ["Todas"],
+    "nivel": [
+      "Maestría",
+      "Doctorado",
+      "Investigación"
+    ],
+    "area": [
+      "Todas"
+    ],
     "financiamiento": "100% (Tuition + Stipend + Viaje)",
     "deadline": "2026-01-23",
     "url_convocatoria": "https://www.unesco.org/en/fellowships/greatwall",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Plan de Estudio", "2 Recomendaciones", "Títulos"],
-    "tags": ["China", "UNESCO", "Full Ride"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Plan de Estudio",
+      "2 Recomendaciones",
+      "Títulos"
+    ],
+    "tags": [
+      "China",
+      "UNESCO",
+      "Full Ride"
+    ]
   },
   {
     "id": "beca_051",
@@ -245,14 +508,33 @@
     "institucion": "CERN",
     "pais": "Suiza",
     "tipo": "Internship",
-    "nivel": ["Pregrado", "Maestría"],
-    "area": ["STEM", "Física", "Ingeniería", "Computación"],
+    "nivel": [
+      "Pregrado",
+      "Maestría"
+    ],
+    "area": [
+      "STEM",
+      "Física",
+      "Ingeniería",
+      "Computación"
+    ],
     "financiamiento": "Stipend + Alojamiento",
     "deadline": "2026-01-26",
     "url_convocatoria": "https://careers.cern/jobs/cern-summer-student-programme-2026-member-and-non-member-state/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Carta Motivación", "Transcript", "2 Recomendaciones"],
-    "tags": ["Física", "Investigación", "Verano"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación",
+      "Transcript",
+      "2 Recomendaciones"
+    ],
+    "tags": [
+      "Física",
+      "Investigación",
+      "Verano"
+    ]
   },
   {
     "id": "beca_049",
@@ -260,14 +542,31 @@
     "institucion": "Engineering for Change",
     "pais": "Remoto / Global",
     "tipo": "Fellowship",
-    "nivel": ["Pregrado", "Posgrado", "Profesionales"],
-    "area": ["Ingeniería", "Desarrollo Sostenible"],
+    "nivel": [
+      "Pregrado",
+      "Posgrado",
+      "Profesionales"
+    ],
+    "area": [
+      "Ingeniería",
+      "Desarrollo Sostenible"
+    ],
     "financiamiento": "Stipend + Mentoría",
     "deadline": "2026-01-26",
     "url_convocatoria": "https://www.engineeringforchange.org/fellowships/2026-e4c-fellowship/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Portafolio Proyectos", "Carta Motivación"],
-    "tags": ["Ingeniería Social", "Global", "Fellowship"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Portafolio Proyectos",
+      "Carta Motivación"
+    ],
+    "tags": [
+      "Ingeniería Social",
+      "Global",
+      "Fellowship"
+    ]
   },
   {
     "id": "beca_047",
@@ -275,14 +574,31 @@
     "institucion": "National Institute for Materials Science",
     "pais": "Japón",
     "tipo": "Internship",
-    "nivel": ["Pregrado", "Posgrado"],
-    "area": ["Ciencia de Materiales", "Nanotecnología", "Química"],
+    "nivel": [
+      "Pregrado",
+      "Posgrado"
+    ],
+    "area": [
+      "Ciencia de Materiales",
+      "Nanotecnología",
+      "Química"
+    ],
     "financiamiento": "Stipend + Alojamiento",
     "deadline": "2026-01-30",
     "url_convocatoria": "https://www.nims.go.jp/eng/hr-development/internship.html",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Propuesta Investigación", "Recomendación"],
-    "tags": ["Japón", "Materiales", "Nanotecnología"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Propuesta Investigación",
+      "Recomendación"
+    ],
+    "tags": [
+      "Japón",
+      "Materiales",
+      "Nanotecnología"
+    ]
   },
   {
     "id": "beca_048",
@@ -290,14 +606,29 @@
     "institucion": "Aspire Institute",
     "pais": "Remoto",
     "tipo": "Programa Liderazgo",
-    "nivel": ["Pregrado", "Posgrado"],
-    "area": ["Liderazgo", "Emprendimiento Social"],
+    "nivel": [
+      "Pregrado",
+      "Posgrado"
+    ],
+    "area": [
+      "Liderazgo",
+      "Emprendimiento Social"
+    ],
     "financiamiento": "Gratuito",
     "deadline": "2026-01-30",
     "url_convocatoria": "https://www.aspireleaders.org/program/aspire-leaders-program/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["Formulario", "Ensayo Personal"],
-    "tags": ["Liderazgo", "Online", "Primera Generación"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "Formulario",
+      "Ensayo Personal"
+    ],
+    "tags": [
+      "Liderazgo",
+      "Online",
+      "Primera Generación"
+    ]
   },
   {
     "id": "beca_046",
@@ -305,14 +636,31 @@
     "institucion": "DESY",
     "pais": "Alemania",
     "tipo": "Escuela Verano",
-    "nivel": ["Pregrado", "Maestría"],
-    "area": ["Física", "Ingeniería", "Computación"],
+    "nivel": [
+      "Pregrado",
+      "Maestría"
+    ],
+    "area": [
+      "Física",
+      "Ingeniería",
+      "Computación"
+    ],
     "financiamiento": "Stipend + Alojamiento",
     "deadline": "2026-01-31",
     "url_convocatoria": "https://summerstudents.desy.de/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Transcript", "2 Recomendaciones"],
-    "tags": ["Alemania", "Física Partículas", "Verano"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Transcript",
+      "2 Recomendaciones"
+    ],
+    "tags": [
+      "Alemania",
+      "Física Partículas",
+      "Verano"
+    ]
   },
   {
     "id": "beca_052",
@@ -320,14 +668,30 @@
     "institucion": "MIT Media Lab",
     "pais": "Remoto",
     "tipo": "Curso Corto",
-    "nivel": ["Todos"],
-    "area": ["Ingeniería", "Diseño", "Fabricación Digital"],
+    "nivel": [
+      "Todos"
+    ],
+    "area": [
+      "Ingeniería",
+      "Diseño",
+      "Fabricación Digital"
+    ],
     "financiamiento": "Pago (Becas disponibles)",
     "deadline": "2026-02-01",
     "url_convocatoria": "https://docs.google.com/forms/d/e/1FAIpQLSdoBI_sJXZSfHs7k19Xu-XUWnF4I2J0Gmvdhqd01e-Y5Ruorg/viewform",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Portafolio", "Carta Motivación"],
-    "tags": ["FabLab", "Innovación", "Online"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Portafolio",
+      "Carta Motivación"
+    ],
+    "tags": [
+      "FabLab",
+      "Innovación",
+      "Online"
+    ]
   },
   {
     "id": "beca_058",
@@ -335,14 +699,30 @@
     "institucion": "Academia Sinica",
     "pais": "Taiwán",
     "tipo": "Doctorado",
-    "nivel": ["Doctorado"],
-    "area": ["STEM", "Humanidades"],
+    "nivel": [
+      "Doctorado"
+    ],
+    "area": [
+      "STEM",
+      "Humanidades"
+    ],
     "financiamiento": "100% (Tuition + Stipend)",
     "deadline": "2026-02-01",
     "url_convocatoria": "https://tigp.apps.sinica.edu.tw/index.php",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Plan de Investigación", "2 Recomendaciones", "Títulos"],
-    "tags": ["Taiwán", "Doctorado", "Investigación"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Plan de Investigación",
+      "2 Recomendaciones",
+      "Títulos"
+    ],
+    "tags": [
+      "Taiwán",
+      "Doctorado",
+      "Investigación"
+    ]
   },
   {
     "id": "beca_059",
@@ -350,14 +730,30 @@
     "institucion": "Woods Hole Oceanographic",
     "pais": "Estados Unidos",
     "tipo": "Fellowship",
-    "nivel": ["Pregrado"],
-    "area": ["Biología Marina", "Oceanografía", "Ingeniería"],
+    "nivel": [
+      "Pregrado"
+    ],
+    "area": [
+      "Biología Marina",
+      "Oceanografía",
+      "Ingeniería"
+    ],
     "financiamiento": "Stipend + Alojamiento",
     "deadline": "2026-02-01",
     "url_convocatoria": "https://www.whoi.edu/what-we-do/educate/undergraduate-programs/summer-student-fellowship/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "2 Recomendaciones", "Transcript"],
-    "tags": ["USA", "Verano", "Marino"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "2 Recomendaciones",
+      "Transcript"
+    ],
+    "tags": [
+      "USA",
+      "Verano",
+      "Marino"
+    ]
   },
   {
     "id": "beca_034",
@@ -365,14 +761,30 @@
     "institucion": "UCLA / IAMCS",
     "pais": "Estados Unidos",
     "tipo": "Internship",
-    "nivel": ["Pregrado"],
-    "area": ["Matemáticas", "Ciencia de Datos", "Ingeniería"],
+    "nivel": [
+      "Pregrado"
+    ],
+    "area": [
+      "Matemáticas",
+      "Ciencia de Datos",
+      "Ingeniería"
+    ],
     "financiamiento": "Stipend + Alojamiento",
     "deadline": "2026-02-03",
     "url_convocatoria": "https://www.mathprograms.org/db/programs/1832",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Transcript", "Carta Motivación"],
-    "tags": ["USA", "Industria", "Matemáticas"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Transcript",
+      "Carta Motivación"
+    ],
+    "tags": [
+      "USA",
+      "Industria",
+      "Matemáticas"
+    ]
   },
   {
     "id": "beca_103",
@@ -380,14 +792,33 @@
     "institucion": "KAUST",
     "pais": "Arabia Saudita",
     "tipo": "Internship",
-    "nivel": ["Pregrado", "Maestría"],
-    "area": ["STEM", "Energía", "Agua", "Medio Ambiente"],
+    "nivel": [
+      "Pregrado",
+      "Maestría"
+    ],
+    "area": [
+      "STEM",
+      "Energía",
+      "Agua",
+      "Medio Ambiente"
+    ],
     "financiamiento": "100% (Viaje + Alojamiento + Stipend $600/mes)",
     "deadline": "2026-02-15",
     "url_convocatoria": "https://admissions.kaust.edu.sa/study/internships",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Transcript", "2 Recomendaciones", "Propuesta"],
-    "tags": ["Oriente Medio", "Investigación", "Full Ride"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Transcript",
+      "2 Recomendaciones",
+      "Propuesta"
+    ],
+    "tags": [
+      "Oriente Medio",
+      "Investigación",
+      "Full Ride"
+    ]
   },
   {
     "id": "beca_092",
@@ -395,14 +826,30 @@
     "institucion": "Global Bioinformatics Community",
     "pais": "Remoto",
     "tipo": "Beca",
-    "nivel": ["Maestría", "Doctorado"],
-    "area": ["Bioinformática", "Ciencia de Datos"],
+    "nivel": [
+      "Maestría",
+      "Doctorado"
+    ],
+    "area": [
+      "Bioinformática",
+      "Ciencia de Datos"
+    ],
     "financiamiento": "Beca de curso/conferencia",
     "deadline": "2026-02-20",
     "url_convocatoria": "https://docs.google.com/forms/d/e/1FAIpQLSeyZBEpq9k0pDnZ2GBF_laztLsfOb4ELnRK5HOUI6aAPnwmFg/viewform",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["Formulario", "CV", "Ensayo Personal"],
-    "tags": ["Mujeres", "Bioinformática", "Online"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "Formulario",
+      "CV",
+      "Ensayo Personal"
+    ],
+    "tags": [
+      "Mujeres",
+      "Bioinformática",
+      "Online"
+    ]
   },
   {
     "id": "beca_093",
@@ -410,14 +857,31 @@
     "institucion": "UNIQLO (Fast Retailing)",
     "pais": "Japón",
     "tipo": "Programa Liderazgo",
-    "nivel": ["Pregrado"],
-    "area": ["Negocios", "Administración", "Retail"],
+    "nivel": [
+      "Pregrado"
+    ],
+    "area": [
+      "Negocios",
+      "Administración",
+      "Retail"
+    ],
     "financiamiento": "Salario + Formación Executiva",
     "deadline": "2026-02-20",
     "url_convocatoria": "https://www.fastretailing.com/employment/en/uniqlo/graduate/gmp/",
-    "requisitos_idioma": ["Inglés", "Japonés (Ventaja)"],
-    "documentos_sugeridos": ["CV", "Video Entrevista", "Pruebas Psicométricas"],
-    "tags": ["Japón", "Negocios", "Liderazgo"]
+    "requisitos_idioma": [
+      "Inglés",
+      "Japonés (Ventaja)"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Video Entrevista",
+      "Pruebas Psicométricas"
+    ],
+    "tags": [
+      "Japón",
+      "Negocios",
+      "Liderazgo"
+    ]
   },
   {
     "id": "beca_094",
@@ -425,14 +889,31 @@
     "institucion": "International Vaccine Institute",
     "pais": "Corea del Sur",
     "tipo": "Curso Corto",
-    "nivel": ["Profesional", "Posgrado"],
-    "area": ["Biotecnología", "Farmacia", "Salud"],
+    "nivel": [
+      "Profesional",
+      "Posgrado"
+    ],
+    "area": [
+      "Biotecnología",
+      "Farmacia",
+      "Salud"
+    ],
     "financiamiento": "Gratuito (Becas viaje disponibles)",
     "deadline": "2026-02-20",
     "url_convocatoria": "https://ivionlinecampus.ivi.int/2026-introductory-course-for-biologics-development-and-manufacturing/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Título Life Sciences", "Carta Motivación"],
-    "tags": ["Corea", "Vacunas", "Salud Global"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Título Life Sciences",
+      "Carta Motivación"
+    ],
+    "tags": [
+      "Corea",
+      "Vacunas",
+      "Salud Global"
+    ]
   },
   {
     "id": "beca_095",
@@ -440,14 +921,33 @@
     "institucion": "Gobierno de Turquía",
     "pais": "Turquía",
     "tipo": "Beca",
-    "nivel": ["Pregrado", "Maestría", "Doctorado"],
-    "area": ["Todas"],
+    "nivel": [
+      "Pregrado",
+      "Maestría",
+      "Doctorado"
+    ],
+    "area": [
+      "Todas"
+    ],
     "financiamiento": "100% (Tuition + Stipend + Alojamiento + Viaje)",
     "deadline": "2026-02-20",
     "url_convocatoria": "https://turkiyeburslari.gov.tr/",
-    "requisitos_idioma": ["Inglés", "Turco (Curso incluido)"],
-    "documentos_sugeridos": ["CV", "Carta Motivación", "Títulos", "Foto", "Pasaporte"],
-    "tags": ["Turquía", "Full Ride", "Todos los niveles"]
+    "requisitos_idioma": [
+      "Inglés",
+      "Turco (Curso incluido)"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación",
+      "Títulos",
+      "Foto",
+      "Pasaporte"
+    ],
+    "tags": [
+      "Turquía",
+      "Full Ride",
+      "Todos los niveles"
+    ]
   },
   {
     "id": "beca_090",
@@ -455,14 +955,31 @@
     "institucion": "Helmholtz-Zentrum Dresden-Rossendorf",
     "pais": "Alemania",
     "tipo": "Escuela Verano",
-    "nivel": ["Pregrado", "Maestría"],
-    "area": ["Física", "Química", "Ingeniería"],
+    "nivel": [
+      "Pregrado",
+      "Maestría"
+    ],
+    "area": [
+      "Física",
+      "Química",
+      "Ingeniería"
+    ],
     "financiamiento": "Stipend + Alojamiento",
     "deadline": "2026-02-22",
     "url_convocatoria": "https://www.hzdr.de/db/Cms?pNid=2519",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Transcript", "2 Recomendaciones"],
-    "tags": ["Alemania", "Investigación", "Verano"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Transcript",
+      "2 Recomendaciones"
+    ],
+    "tags": [
+      "Alemania",
+      "Investigación",
+      "Verano"
+    ]
   },
   {
     "id": "beca_091",
@@ -470,14 +987,29 @@
     "institucion": "Caltech",
     "pais": "Estados Unidos",
     "tipo": "Internship",
-    "nivel": ["Pregrado"],
-    "area": ["Todas las STEM"],
+    "nivel": [
+      "Pregrado"
+    ],
+    "area": [
+      "Todas las STEM"
+    ],
     "financiamiento": "Stipend + Alojamiento",
     "deadline": "2026-02-22",
     "url_convocatoria": "https://sfp.caltech.edu/undergraduate-research/programs/surf",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Transcript", "3 Recomendaciones", "Ensayo"],
-    "tags": ["USA", "Investigación", "Prestigio"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Transcript",
+      "3 Recomendaciones",
+      "Ensayo"
+    ],
+    "tags": [
+      "USA",
+      "Investigación",
+      "Prestigio"
+    ]
   },
   {
     "id": "beca_089",
@@ -485,14 +1017,30 @@
     "institucion": "University College Dublin",
     "pais": "Irlanda",
     "tipo": "Internship",
-    "nivel": ["Pregrado"],
-    "area": ["Microbiología", "Ciencias Ambientales", "Genética"],
+    "nivel": [
+      "Pregrado"
+    ],
+    "area": [
+      "Microbiología",
+      "Ciencias Ambientales",
+      "Genética"
+    ],
     "financiamiento": "Stipend",
     "deadline": "2026-02-24",
     "url_convocatoria": "https://www.ucd.ie/sbbs/study/currentstudents/acclimatize2summer2026studentship/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Expediente", "Carta Interés"],
-    "tags": ["Irlanda", "Medio Ambiente", "Verano"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Expediente",
+      "Carta Interés"
+    ],
+    "tags": [
+      "Irlanda",
+      "Medio Ambiente",
+      "Verano"
+    ]
   },
   {
     "id": "beca_033",
@@ -500,14 +1048,30 @@
     "institucion": "Swedish Institute",
     "pais": "Suecia",
     "tipo": "Beca",
-    "nivel": ["Maestría"],
-    "area": ["Todas"],
+    "nivel": [
+      "Maestría"
+    ],
+    "area": [
+      "Todas"
+    ],
     "financiamiento": "100% (Tuition + Stipend + Insurance)",
     "deadline": "2026-02-25",
     "url_convocatoria": "https://si.se/en/apply/scholarships/swedish-institute-scholarships-for-global-professionals/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Carta Motivación", "2 Recomendaciones", "Título", "Experiencia Laboral"],
-    "tags": ["Suecia", "Liderazgo", "Full Ride"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación",
+      "2 Recomendaciones",
+      "Título",
+      "Experiencia Laboral"
+    ],
+    "tags": [
+      "Suecia",
+      "Liderazgo",
+      "Full Ride"
+    ]
   },
   {
     "id": "beca_088",
@@ -515,14 +1079,30 @@
     "institucion": "University of Basel",
     "pais": "Suiza",
     "tipo": "Escuela Verano",
-    "nivel": ["Pregrado"],
-    "area": ["Biología", "Bioquímica", "Neurociencia"],
+    "nivel": [
+      "Pregrado"
+    ],
+    "area": [
+      "Biología",
+      "Bioquímica",
+      "Neurociencia"
+    ],
     "financiamiento": "Stipend + Alojamiento",
     "deadline": "2026-02-25",
     "url_convocatoria": "https://www.biozentrum.unibas.ch/summer-schools/biozentrum-research-summer",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Transcript", "Carta Motivación"],
-    "tags": ["Suiza", "Biología", "Verano"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Transcript",
+      "Carta Motivación"
+    ],
+    "tags": [
+      "Suiza",
+      "Biología",
+      "Verano"
+    ]
   },
   {
     "id": "beca_066",
@@ -530,14 +1110,32 @@
     "institucion": "ETH Zurich",
     "pais": "Suiza",
     "tipo": "Fellowship",
-    "nivel": ["Pregrado", "Maestría"],
-    "area": ["Robótica", "Ingeniería", "IA"],
+    "nivel": [
+      "Pregrado",
+      "Maestría"
+    ],
+    "area": [
+      "Robótica",
+      "Ingeniería",
+      "IA"
+    ],
     "financiamiento": "Stipend + Alojamiento",
     "deadline": "2026-02-27",
     "url_convocatoria": "https://robotx.ethz.ch/education/robotics-student-fellowship.html",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Carta Motivación", "Transcript", "Portafolio"],
-    "tags": ["Suiza", "Robótica", "Verano"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación",
+      "Transcript",
+      "Portafolio"
+    ],
+    "tags": [
+      "Suiza",
+      "Robótica",
+      "Verano"
+    ]
   },
   {
     "id": "beca_067",
@@ -545,14 +1143,31 @@
     "institucion": "Industrial Technology Research Institute",
     "pais": "Taiwán",
     "tipo": "Internship",
-    "nivel": ["Pregrado", "Posgrado"],
-    "area": ["Tecnología", "Ingeniería", "IA"],
+    "nivel": [
+      "Pregrado",
+      "Posgrado"
+    ],
+    "area": [
+      "Tecnología",
+      "Ingeniería",
+      "IA"
+    ],
     "financiamiento": "Stipend + Alojamiento + Seguro",
     "deadline": "2026-02-27",
     "url_convocatoria": "https://www.itri.org.tw/english/ListStyle.aspx?DisplayStyle=05&SiteID=1&MmmID=617731531432246346",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Transcript", "Carta Motivación"],
-    "tags": ["Taiwán", "Industria", "Verano"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Transcript",
+      "Carta Motivación"
+    ],
+    "tags": [
+      "Taiwán",
+      "Industria",
+      "Verano"
+    ]
   },
   {
     "id": "beca_068",
@@ -560,14 +1175,30 @@
     "institucion": "UC Santa Cruz",
     "pais": "Estados Unidos",
     "tipo": "Internship",
-    "nivel": ["Secundaria"],
-    "area": ["Ciencias", "Ingeniería", "Matemáticas"],
+    "nivel": [
+      "Secundaria"
+    ],
+    "area": [
+      "Ciencias",
+      "Ingeniería",
+      "Matemáticas"
+    ],
     "financiamiento": "Gratuito (Becas disponibles)",
     "deadline": "2026-02-27",
     "url_convocatoria": "https://sip.ucsc.edu/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["Formulario", "Ensayo", "Nota Escolar"],
-    "tags": ["USA", "High School", "Ciencias"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "Formulario",
+      "Ensayo",
+      "Nota Escolar"
+    ],
+    "tags": [
+      "USA",
+      "High School",
+      "Ciencias"
+    ]
   },
   {
     "id": "beca_069",
@@ -575,14 +1206,31 @@
     "institucion": "Centro Universitario de Baviera",
     "pais": "Alemania",
     "tipo": "Beca",
-    "nivel": ["Pregrado", "Maestría"],
-    "area": ["Todas"],
+    "nivel": [
+      "Pregrado",
+      "Maestría"
+    ],
+    "area": [
+      "Todas"
+    ],
     "financiamiento": "Parcial (Viaje + Estipendio mensual)",
     "deadline": "2026-02-27",
     "url_convocatoria": "https://www.drii.usach.cl/es/noticia/convocatoria-becas-baylat/",
-    "requisitos_idioma": ["Español", "Alemán (Opcional)"],
-    "documentos_sugeridos": ["CV", "Carta Motivación", "Expediente", "Propuesta Tesis"],
-    "tags": ["Alemania", "Latinoamérica", "Movilidad"]
+    "requisitos_idioma": [
+      "Español",
+      "Alemán (Opcional)"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación",
+      "Expediente",
+      "Propuesta Tesis"
+    ],
+    "tags": [
+      "Alemania",
+      "Latinoamérica",
+      "Movilidad"
+    ]
   },
   {
     "id": "beca_070",
@@ -590,14 +1238,29 @@
     "institucion": "Ashinaga",
     "pais": "Remoto / Japón",
     "tipo": "Internship",
-    "nivel": ["Pregrado", "Maestría"],
-    "area": ["Todas"],
+    "nivel": [
+      "Pregrado",
+      "Maestría"
+    ],
+    "area": [
+      "Todas"
+    ],
     "financiamiento": "Stipend + Experiencia Internacional",
     "deadline": "2026-02-27",
     "url_convocatoria": "https://ashinagainternship.my.canva.site/en-home",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Carta Motivación", "Ensayo Personal"],
-    "tags": ["Global", "Liderazgo", "Huérfanos"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación",
+      "Ensayo Personal"
+    ],
+    "tags": [
+      "Global",
+      "Liderazgo",
+      "Huérfanos"
+    ]
   },
   {
     "id": "beca_071",
@@ -605,29 +1268,59 @@
     "institucion": "PUCP",
     "pais": "Perú",
     "tipo": "Posdoctorado",
-    "nivel": ["Posdoctorado"],
-    "area": ["Todas"],
+    "nivel": [
+      "Posdoctorado"
+    ],
+    "area": [
+      "Todas"
+    ],
     "financiamiento": "Stipend mensual",
     "deadline": "2026-02-27",
     "url_convocatoria": "https://investigacion.pucp.edu.pe/convocatorias/apoyos-para-estancias-posdoctorales-en-la-pucp-2026/",
-    "requisitos_idioma": ["Español", "Inglés"],
-    "documentos_sugeridos": ["CV", "Plan de Trabajo", "Título PhD", "Carta Invitación"],
-    "tags": ["Perú", "Posdoc", "Investigación"]
+    "requisitos_idioma": [
+      "Español",
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Plan de Trabajo",
+      "Título PhD",
+      "Carta Invitación"
+    ],
+    "tags": [
+      "Perú",
+      "Posdoc",
+      "Investigación"
+    ]
   },
   {
     "id": "beca_072",
     "titulo": "IEEE ComSoc 4MT Competition",
     "institucion": "IEEE Communications Society",
-    "pais": "Reino Unido (Final)",
+    "pais": "Reino Unido",
     "tipo": "Competencia",
-    "nivel": ["Doctorado"],
-    "area": ["Telecomunicaciones", "Ingeniería"],
+    "nivel": [
+      "Doctorado"
+    ],
+    "area": [
+      "Telecomunicaciones",
+      "Ingeniería"
+    ],
     "financiamiento": "Premio + Viaje a la final",
     "deadline": "2026-02-27",
     "url_convocatoria": "https://www.comsoc.org/engagement-community/competitions/ieee-comsoc-four-minute-thesis-4mt-competition",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["Video Resumen", "Abstract"],
-    "tags": ["Competencia", "Telecomunicaciones", "Divulgación"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "Video Resumen",
+      "Abstract"
+    ],
+    "tags": [
+      "Competencia",
+      "Telecomunicaciones",
+      "Divulgación"
+    ]
   },
   {
     "id": "beca_073",
@@ -635,14 +1328,29 @@
     "institucion": "IEEE",
     "pais": "Remoto",
     "tipo": "Competencia",
-    "nivel": ["Pregrado", "Profesionales"],
-    "area": ["Tecnología", "Innovación"],
+    "nivel": [
+      "Pregrado",
+      "Profesionales"
+    ],
+    "area": [
+      "Tecnología",
+      "Innovación"
+    ],
     "financiamiento": "Premios + Reconocimiento",
     "deadline": "2026-02-27",
     "url_convocatoria": "https://www.ieee.org/ieee-future-tech-explorers-challenge",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["Propuesta de Proyecto", "Video Pitch"],
-    "tags": ["Innovación", "Competencia", "Tech"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "Propuesta de Proyecto",
+      "Video Pitch"
+    ],
+    "tags": [
+      "Innovación",
+      "Competencia",
+      "Tech"
+    ]
   },
   {
     "id": "beca_074",
@@ -650,14 +1358,31 @@
     "institucion": "GIST",
     "pais": "Corea del Sur",
     "tipo": "Internship",
-    "nivel": ["Pregrado", "Maestría"],
-    "area": ["Computación", "Ciencias Naturales", "Ingeniería"],
+    "nivel": [
+      "Pregrado",
+      "Maestría"
+    ],
+    "area": [
+      "Computación",
+      "Ciencias Naturales",
+      "Ingeniería"
+    ],
     "financiamiento": "Viaje + Alojamiento + Stipend",
     "deadline": "2026-02-27",
     "url_convocatoria": "https://www.gist.ac.kr/ipa/html/sub03/030101.html",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Transcript", "2 Recomendaciones"],
-    "tags": ["Corea", "Internship", "Ciencia"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Transcript",
+      "2 Recomendaciones"
+    ],
+    "tags": [
+      "Corea",
+      "Internship",
+      "Ciencia"
+    ]
   },
   {
     "id": "beca_075",
@@ -665,14 +1390,31 @@
     "institucion": "Empathic Computing Lab",
     "pais": "Remoto",
     "tipo": "Internship",
-    "nivel": ["Pregrado", "Posgrado"],
-    "area": ["Computación", "Realidad Aumentada", "IA"],
+    "nivel": [
+      "Pregrado",
+      "Posgrado"
+    ],
+    "area": [
+      "Computación",
+      "Realidad Aumentada",
+      "IA"
+    ],
     "financiamiento": "Experiencia + Carta Recomendación",
     "deadline": "2026-02-27",
     "url_convocatoria": "https://empathiccomputing.org/virtual-intern-program/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Portafolio", "Carta Motivación"],
-    "tags": ["Remoto", "IA", "Realidad Virtual"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Portafolio",
+      "Carta Motivación"
+    ],
+    "tags": [
+      "Remoto",
+      "IA",
+      "Realidad Virtual"
+    ]
   },
   {
     "id": "beca_076",
@@ -680,14 +1422,31 @@
     "institucion": "Mohamed bin Zayed University of AI",
     "pais": "Emiratos Árabes",
     "tipo": "Internship",
-    "nivel": ["Pregrado"],
-    "area": ["IA", "Machine Learning", "Visión Computacional"],
+    "nivel": [
+      "Pregrado"
+    ],
+    "area": [
+      "IA",
+      "Machine Learning",
+      "Visión Computacional"
+    ],
     "financiamiento": "100% (Viaje + Alojamiento + Stipend)",
     "deadline": "2026-02-28",
     "url_convocatoria": "https://mbzuai.ac.ae/ugrip/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Transcript", "2 Recomendaciones", "Portafolio GitHub"],
-    "tags": ["IA", "Emiratos", "Top Tier"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Transcript",
+      "2 Recomendaciones",
+      "Portafolio GitHub"
+    ],
+    "tags": [
+      "IA",
+      "Emiratos",
+      "Top Tier"
+    ]
   },
   {
     "id": "beca_077",
@@ -695,14 +1454,29 @@
     "institucion": "Global Bioimaging",
     "pais": "Global",
     "tipo": "Funding",
-    "nivel": ["Investigadores"],
-    "area": ["Imagenología Médica", "Biología"],
+    "nivel": [
+      "Investigadores"
+    ],
+    "area": [
+      "Imagenología Médica",
+      "Biología"
+    ],
     "financiamiento": "Fondo para proyectos",
     "deadline": "2026-02-28",
     "url_convocatoria": "https://globalbioimaging.org/i4a",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["Propuesta Proyecto", "Presupuesto", "CV"],
-    "tags": ["Salud", "Países en desarrollo", "Funding"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "Propuesta Proyecto",
+      "Presupuesto",
+      "CV"
+    ],
+    "tags": [
+      "Salud",
+      "Países en desarrollo",
+      "Funding"
+    ]
   },
   {
     "id": "beca_078",
@@ -710,29 +1484,61 @@
     "institucion": "Charité / Berlin",
     "pais": "Alemania",
     "tipo": "Doctorado",
-    "nivel": ["Doctorado"],
-    "area": ["Ciencia de Datos", "Salud", "Bioinformática"],
+    "nivel": [
+      "Doctorado"
+    ],
+    "area": [
+      "Ciencia de Datos",
+      "Salud",
+      "Bioinformática"
+    ],
     "financiamiento": "Salario Doctoral (TV-L E13)",
     "deadline": "2026-02-28",
     "url_convocatoria": "https://iph.charite.de/en/academic_programs/phd_in_health_data_sciences/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Título Master", "Carta Motivación", "Publicaciones"],
-    "tags": ["Alemania", "Salud Digital", "Doctorado"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Título Master",
+      "Carta Motivación",
+      "Publicaciones"
+    ],
+    "tags": [
+      "Alemania",
+      "Salud Digital",
+      "Doctorado"
+    ]
   },
   {
     "id": "beca_079",
     "titulo": "Opportunity Funds (Embajada USA)",
     "institucion": "Embajada de EE.UU.",
-    "pais": "Estados Unidos (Postulación local)",
+    "pais": "Estados Unidos",
     "tipo": "Apoyo Financiero",
-    "nivel": ["Pregrado", "Posgrado"],
-    "area": ["Todas"],
+    "nivel": [
+      "Pregrado",
+      "Posgrado"
+    ],
+    "area": [
+      "Todas"
+    ],
     "financiamiento": "Apoyo para costos de postulación (TOEFL/GRE)",
     "deadline": "2026-02-28",
     "url_convocatoria": "https://pe.usembassy.gov/es/postula-al-programa-opportunity-funds/",
-    "requisitos_idioma": ["Inglés Básico"],
-    "documentos_sugeridos": ["Formulario", "Expediente Académico", "Ensayo"],
-    "tags": ["USA", "Apoyo Financiero", "Perú"]
+    "requisitos_idioma": [
+      "Inglés Básico"
+    ],
+    "documentos_sugeridos": [
+      "Formulario",
+      "Expediente Académico",
+      "Ensayo"
+    ],
+    "tags": [
+      "USA",
+      "Apoyo Financiero",
+      "Perú"
+    ]
   },
   {
     "id": "beca_080",
@@ -740,29 +1546,64 @@
     "institucion": "Asian Infrastructure Investment Bank",
     "pais": "China",
     "tipo": "Internship",
-    "nivel": ["Pregrado", "Posgrado", "Recién Graduados"],
-    "area": ["Economía", "Finanzas", "Ingeniería", "Desarrollo"],
+    "nivel": [
+      "Pregrado",
+      "Posgrado",
+      "Recién Graduados"
+    ],
+    "area": [
+      "Economía",
+      "Finanzas",
+      "Ingeniería",
+      "Desarrollo"
+    ],
     "financiamiento": "Stipend + Alojamiento + Viaje",
     "deadline": "2026-02-28",
     "url_convocatoria": "https://www.aiib.org/en/opportunities/career/job-vacancies/internship/index.html",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Carta Motivación", "Transcript", "2 Recomendaciones"],
-    "tags": ["China", "Banca Desarrollo", "Internship"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación",
+      "Transcript",
+      "2 Recomendaciones"
+    ],
+    "tags": [
+      "China",
+      "Banca Desarrollo",
+      "Internship"
+    ]
   },
   {
     "id": "beca_100",
     "titulo": "L'Oréal Brandstorm Competition",
     "institucion": "L'Oréal",
-    "pais": "Francia (Final Global)",
+    "pais": "Francia",
     "tipo": "Competencia",
-    "nivel": ["Todos"],
-    "area": ["Negocios", "Marketing", "Innovación"],
+    "nivel": [
+      "Todos"
+    ],
+    "area": [
+      "Negocios",
+      "Marketing",
+      "Innovación"
+    ],
     "financiamiento": "Premios + Aceleración",
     "deadline": "2026-03-10",
     "url_convocatoria": "https://brandstorm.loreal.com/en",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["Equipo (max 3)", "Propuesta Innovadora"],
-    "tags": ["Competencia", "Negocios", "Innovación"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "Equipo (max 3)",
+      "Propuesta Innovadora"
+    ],
+    "tags": [
+      "Competencia",
+      "Negocios",
+      "Innovación"
+    ]
   },
   {
     "id": "beca_057",
@@ -770,14 +1611,30 @@
     "institucion": "Neuromatch",
     "pais": "Remoto",
     "tipo": "Curso Corto",
-    "nivel": ["Pregrado", "Posgrado"],
-    "area": ["Neurociencia", "IA", "Computación"],
+    "nivel": [
+      "Pregrado",
+      "Posgrado"
+    ],
+    "area": [
+      "Neurociencia",
+      "IA",
+      "Computación"
+    ],
     "financiamiento": "Gratuito (Becas para stipend)",
     "deadline": "2026-03-15",
     "url_convocatoria": "https://neuromatch.io/courses/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["Formulario", "Conocimientos Python"],
-    "tags": ["Neurociencia", "Online", "Computacional"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "Formulario",
+      "Conocimientos Python"
+    ],
+    "tags": [
+      "Neurociencia",
+      "Online",
+      "Computacional"
+    ]
   },
   {
     "id": "beca_060",
@@ -785,14 +1642,31 @@
     "institucion": "CSH Asia",
     "pais": "China",
     "tipo": "Escuela Verano",
-    "nivel": ["Pregrado", "Posgrado"],
-    "area": ["Neurociencia", "Biofísica", "Óptica"],
+    "nivel": [
+      "Pregrado",
+      "Posgrado"
+    ],
+    "area": [
+      "Neurociencia",
+      "Biofísica",
+      "Óptica"
+    ],
     "financiamiento": "Pago (Becas limitadas)",
     "deadline": "2026-03-15",
     "url_convocatoria": "https://www.csh-asia.org/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Carta Motivación", "Recomendación"],
-    "tags": ["China", "Imagenología", "Neurociencia"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación",
+      "Recomendación"
+    ],
+    "tags": [
+      "China",
+      "Imagenología",
+      "Neurociencia"
+    ]
   },
   {
     "id": "beca_097",
@@ -800,14 +1674,31 @@
     "institucion": "Yale University",
     "pais": "Estados Unidos",
     "tipo": "Internship",
-    "nivel": ["Pregrado", "Maestría"],
-    "area": ["Computer Science", "Ingeniería"],
+    "nivel": [
+      "Pregrado",
+      "Maestría"
+    ],
+    "area": [
+      "Computer Science",
+      "Ingeniería"
+    ],
     "financiamiento": "Stipend competitivo",
     "deadline": "2026-03-15",
     "url_convocatoria": "https://engineering.yale.edu/academic-study/departments/computer-science/undergraduate-study/research-internship-program",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Transcript", "2 Recomendaciones", "GitHub"],
-    "tags": ["USA", "Ivy League", "Investigación"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Transcript",
+      "2 Recomendaciones",
+      "GitHub"
+    ],
+    "tags": [
+      "USA",
+      "Ivy League",
+      "Investigación"
+    ]
   },
   {
     "id": "beca_062",
@@ -815,14 +1706,32 @@
     "institucion": "Supercomputing Conference",
     "pais": "Estados Unidos",
     "tipo": "Voluntariado",
-    "nivel": ["Secundaria", "Pregrado", "Posgrado"],
-    "area": ["HPC", "Computación", "Ingeniería"],
+    "nivel": [
+      "Secundaria",
+      "Pregrado",
+      "Posgrado"
+    ],
+    "area": [
+      "HPC",
+      "Computación",
+      "Ingeniería"
+    ],
     "financiamiento": "Registro gratis + Alojamiento (Parcial)",
     "deadline": "2026-03-16",
     "url_convocatoria": "https://sc26.supercomputing.org/students/student-volunteers/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Ensayo", "Recomendación"],
-    "tags": ["USA", "Supercomputación", "Voluntariado"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Ensayo",
+      "Recomendación"
+    ],
+    "tags": [
+      "USA",
+      "Supercomputación",
+      "Voluntariado"
+    ]
   },
   {
     "id": "beca_063",
@@ -830,14 +1739,30 @@
     "institucion": "The Francis Crick Institute",
     "pais": "Reino Unido",
     "tipo": "Doctorado",
-    "nivel": ["Doctorado"],
-    "area": ["Biomedicina", "Ciencias de la Vida"],
+    "nivel": [
+      "Doctorado"
+    ],
+    "area": [
+      "Biomedicina",
+      "Ciencias de la Vida"
+    ],
     "financiamiento": "Salario Doctoral Completo",
     "deadline": "2026-03-17",
     "url_convocatoria": "https://www.crick.ac.uk/careers-and-study/students/phd-students",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Carta Motivación", "2 Recomendaciones", "Títulos"],
-    "tags": ["UK", "Biomedicina", "Doctorado"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación",
+      "2 Recomendaciones",
+      "Títulos"
+    ],
+    "tags": [
+      "UK",
+      "Biomedicina",
+      "Doctorado"
+    ]
   },
   {
     "id": "beca_064",
@@ -845,14 +1770,31 @@
     "institucion": "University of Barcelona",
     "pais": "España",
     "tipo": "Escuela Verano",
-    "nivel": ["Posgrado", "Investigadores"],
-    "area": ["Economía", "Ciencia de Datos", "IA"],
+    "nivel": [
+      "Posgrado",
+      "Investigadores"
+    ],
+    "area": [
+      "Economía",
+      "Ciencia de Datos",
+      "IA"
+    ],
     "financiamiento": "Pago (Becas disponibles)",
     "deadline": "2026-03-20",
     "url_convocatoria": "https://www.ub.edu/school-economics/summer-school-2026-1/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Carta Motivación", "Background Cuantitativo"],
-    "tags": ["España", "Economía", "IA"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación",
+      "Background Cuantitativo"
+    ],
+    "tags": [
+      "España",
+      "Economía",
+      "IA"
+    ]
   },
   {
     "id": "beca_065",
@@ -860,14 +1802,31 @@
     "institucion": "USTC",
     "pais": "China",
     "tipo": "Internship",
-    "nivel": ["Pregrado", "Maestría"],
-    "area": ["STEM", "Física", "Química"],
+    "nivel": [
+      "Pregrado",
+      "Maestría"
+    ],
+    "area": [
+      "STEM",
+      "Física",
+      "Química"
+    ],
     "financiamiento": "Stipend + Alojamiento + Viaje",
     "deadline": "2026-03-22",
     "url_convocatoria": "https://fusep.ustc.edu.cn/fusep/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Transcript", "2 Recomendaciones"],
-    "tags": ["China", "Investigación", "Verano"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Transcript",
+      "2 Recomendaciones"
+    ],
+    "tags": [
+      "China",
+      "Investigación",
+      "Verano"
+    ]
   },
   {
     "id": "beca_110",
@@ -875,14 +1834,32 @@
     "institucion": "Encode / Pillar VC",
     "pais": "Reino Unido",
     "tipo": "Fellowship",
-    "nivel": ["Doctorado", "Posdoctorado", "Senior Researcher"],
-    "area": ["IA", "Ciencia de Datos", "Biotech"],
+    "nivel": [
+      "Doctorado",
+      "Posdoctorado",
+      "Senior Researcher"
+    ],
+    "area": [
+      "IA",
+      "Ciencia de Datos",
+      "Biotech"
+    ],
     "financiamiento": "Funding + Mentoría",
     "deadline": "2026-03-28",
     "url_convocatoria": "https://encode.pillar.vc/apply",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Portfolio de Proyectos IA", "Propuesta"],
-    "tags": ["IA", "Ciencia", "Venture Capital"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Portfolio de Proyectos IA",
+      "Propuesta"
+    ],
+    "tags": [
+      "IA",
+      "Ciencia",
+      "Venture Capital"
+    ]
   },
   {
     "id": "beca_109",
@@ -890,14 +1867,28 @@
     "institucion": "Coursera / ShePlusTech",
     "pais": "Remoto",
     "tipo": "Curso Corto",
-    "nivel": ["Todos"],
-    "area": ["Tecnología", "Ciencia de Datos"],
+    "nivel": [
+      "Todos"
+    ],
+    "area": [
+      "Tecnología",
+      "Ciencia de Datos"
+    ],
     "financiamiento": "Gratuito (Becas de certificados)",
     "deadline": "2026-03-30",
     "url_convocatoria": "https://docs.google.com/forms/d/e/1FAIpQLSdvHQAQFw2hS62hMhNu0CkONcsAnXCo-ScjN1daZmCSFIHMUg/viewform",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["Formulario", "Ser mujer"],
-    "tags": ["Mujeres", "Online", "Certificación"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "Formulario",
+      "Ser mujer"
+    ],
+    "tags": [
+      "Mujeres",
+      "Online",
+      "Certificación"
+    ]
   },
   {
     "id": "beca_054",
@@ -905,14 +1896,30 @@
     "institucion": "Google",
     "pais": "Remoto",
     "tipo": "Fellowship",
-    "nivel": ["Pregrado", "Maestría"],
-    "area": ["Computer Science", "Software"],
+    "nivel": [
+      "Pregrado",
+      "Maestría"
+    ],
+    "area": [
+      "Computer Science",
+      "Software"
+    ],
     "financiamiento": "Stipend ($1500-$3000 USD)",
     "deadline": "2026-03-31",
     "url_convocatoria": "https://summerofcode.withgoogle.com/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["Propuesta de Proyecto", "Perfil GitHub", "CV"],
-    "tags": ["Coding", "Open Source", "Remoto"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "Propuesta de Proyecto",
+      "Perfil GitHub",
+      "CV"
+    ],
+    "tags": [
+      "Coding",
+      "Open Source",
+      "Remoto"
+    ]
   },
   {
     "id": "beca_104",
@@ -920,14 +1927,30 @@
     "institucion": "Government of Canada",
     "pais": "Canadá",
     "tipo": "Beca",
-    "nivel": ["Pregrado", "Posgrado"],
-    "area": ["Todas"],
+    "nivel": [
+      "Pregrado",
+      "Posgrado"
+    ],
+    "area": [
+      "Todas"
+    ],
     "financiamiento": "$6,000 CAD (Estancia corta)",
     "deadline": "2026-03-31",
     "url_convocatoria": "https://www.educanada.ca/scholarships-bourses/can/institutions/elap-pfla.aspx",
-    "requisitos_idioma": ["Inglés", "Francés"],
-    "documentos_sugeridos": ["Acuerdo Institucional", "Expediente", "Propuesta"],
-    "tags": ["Canadá", "Intercambio", "Liderazgo"]
+    "requisitos_idioma": [
+      "Inglés",
+      "Francés"
+    ],
+    "documentos_sugeridos": [
+      "Acuerdo Institucional",
+      "Expediente",
+      "Propuesta"
+    ],
+    "tags": [
+      "Canadá",
+      "Intercambio",
+      "Liderazgo"
+    ]
   },
   {
     "id": "beca_105",
@@ -935,14 +1958,29 @@
     "institucion": "University of St Andrews",
     "pais": "Reino Unido",
     "tipo": "Escuela Verano",
-    "nivel": ["Pregrado"],
-    "area": ["Ciencias Ambientales", "Biología Marina"],
+    "nivel": [
+      "Pregrado"
+    ],
+    "area": [
+      "Ciencias Ambientales",
+      "Biología Marina"
+    ],
     "financiamiento": "Pago (Becas parciales disponibles)",
     "deadline": "2026-03-31",
     "url_convocatoria": "https://www.st-andrews.ac.uk/study-abroad/at-st-andrews/summer-study/blue-carbon/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Expediente (GPA 3.2+)", "Carta Motivación"],
-    "tags": ["UK", "Medio Ambiente", "Verano"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Expediente (GPA 3.2+)",
+      "Carta Motivación"
+    ],
+    "tags": [
+      "UK",
+      "Medio Ambiente",
+      "Verano"
+    ]
   },
   {
     "id": "beca_106",
@@ -950,14 +1988,31 @@
     "institucion": "EEMLE Community",
     "pais": "Montenegro",
     "tipo": "Escuela Verano",
-    "nivel": ["Pregrado", "Posgrado", "Profesional"],
-    "area": ["Machine Learning", "IA"],
+    "nivel": [
+      "Pregrado",
+      "Posgrado",
+      "Profesional"
+    ],
+    "area": [
+      "Machine Learning",
+      "IA"
+    ],
     "financiamiento": "Pago (Becas disponibles)",
     "deadline": "2026-03-31",
     "url_convocatoria": "https://www.eeml.eu/home",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Conocimientos Python", "Motivación"],
-    "tags": ["Europa del Este", "ML", "Verano"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Conocimientos Python",
+      "Motivación"
+    ],
+    "tags": [
+      "Europa del Este",
+      "ML",
+      "Verano"
+    ]
   },
   {
     "id": "beca_107",
@@ -965,14 +2020,30 @@
     "institucion": "International Telecommunication Union",
     "pais": "Suiza",
     "tipo": "Programa Liderazgo",
-    "nivel": ["Pregrado", "Recién Graduado"],
-    "area": ["STEM", "Políticas TIC"],
+    "nivel": [
+      "Pregrado",
+      "Recién Graduado"
+    ],
+    "area": [
+      "STEM",
+      "Políticas TIC"
+    ],
     "financiamiento": "Beca de viaje y estancia",
     "deadline": "2026-03-31",
     "url_convocatoria": "https://www.itu.int/generationconnect/empower/generation-connect-young-leadership-programme-in-partnership-with-huawei-v2/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Video Pitch", "Carta Motivación"],
-    "tags": ["ONU", "Liderazgo", "TIC"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Video Pitch",
+      "Carta Motivación"
+    ],
+    "tags": [
+      "ONU",
+      "Liderazgo",
+      "TIC"
+    ]
   },
   {
     "id": "beca_108",
@@ -980,14 +2051,29 @@
     "institucion": "Internet Governance Forum",
     "pais": "Suiza",
     "tipo": "Fellowship",
-    "nivel": ["Profesional Joven"],
-    "area": ["Gobernanza de Internet", "Políticas Públicas"],
+    "nivel": [
+      "Profesional Joven"
+    ],
+    "area": [
+      "Gobernanza de Internet",
+      "Políticas Públicas"
+    ],
     "financiamiento": "Viaje + Estancia + Inscripción",
     "deadline": "2026-03-31",
     "url_convocatoria": "https://www.intgovforum.org/en/content/igf-2026-fellowship-programme",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Ensayo sobre Gobernanza", "2 Recomendaciones"],
-    "tags": ["ONU", "Internet", "Políticas"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Ensayo sobre Gobernanza",
+      "2 Recomendaciones"
+    ],
+    "tags": [
+      "ONU",
+      "Internet",
+      "Políticas"
+    ]
   },
   {
     "id": "beca_101",
@@ -995,14 +2081,31 @@
     "institucion": "Alexander von Humboldt Foundation",
     "pais": "Alemania",
     "tipo": "Fellowship",
-    "nivel": ["Posdoctorado", "Investigador Senior"],
-    "area": ["Todas"],
+    "nivel": [
+      "Posdoctorado",
+      "Investigador Senior"
+    ],
+    "area": [
+      "Todas"
+    ],
     "financiamiento": "Stipend Generoso + Viaje",
     "deadline": "2026-03-31",
     "url_convocatoria": "https://www.humboldt-foundation.de/en/apply/sponsorship-programmes/humboldt-research-fellowship",
-    "requisitos_idioma": ["Inglés", "Alemán (Opcional)"],
-    "documentos_sugeridos": ["CV", "Propuesta Investigación", "Host Invitation", "Publicaciones"],
-    "tags": ["Alemania", "Prestigio", "Posdoc"]
+    "requisitos_idioma": [
+      "Inglés",
+      "Alemán (Opcional)"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Propuesta Investigación",
+      "Host Invitation",
+      "Publicaciones"
+    ],
+    "tags": [
+      "Alemania",
+      "Prestigio",
+      "Posdoc"
+    ]
   },
   {
     "id": "beca_055",
@@ -1010,14 +2113,28 @@
     "institucion": "Stanford University",
     "pais": "Remoto",
     "tipo": "Escuela Verano",
-    "nivel": ["Secundaria"],
-    "area": ["Data Science", "IA"],
+    "nivel": [
+      "Secundaria"
+    ],
+    "area": [
+      "Data Science",
+      "IA"
+    ],
     "financiamiento": "Gratuito (Becas disponibles)",
     "deadline": "2026-04-07",
     "url_convocatoria": "https://deepdata.stanford.edu/stanford-data-ocean-summer-camp/",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["Formulario", "Nota Escolar"],
-    "tags": ["High School", "IA", "Online"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "Formulario",
+      "Nota Escolar"
+    ],
+    "tags": [
+      "High School",
+      "IA",
+      "Online"
+    ]
   },
   {
     "id": "beca_056",
@@ -1025,14 +2142,32 @@
     "institucion": "OIST",
     "pais": "Japón",
     "tipo": "Internship",
-    "nivel": ["Pregrado", "Maestría"],
-    "area": ["STEM", "Biología", "Física"],
+    "nivel": [
+      "Pregrado",
+      "Maestría"
+    ],
+    "area": [
+      "STEM",
+      "Biología",
+      "Física"
+    ],
     "financiamiento": "100% (Flight + Accommodation + Stipend)",
     "deadline": "2026-04-15",
     "url_convocatoria": "https://www.oist.jp/admissions/research-internship/program-description",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Carta Motivación", "2 Recomendaciones", "Transcript"],
-    "tags": ["Japón", "Investigación", "Verano"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación",
+      "2 Recomendaciones",
+      "Transcript"
+    ],
+    "tags": [
+      "Japón",
+      "Investigación",
+      "Verano"
+    ]
   },
   {
     "id": "beca_004",
@@ -1040,14 +2175,30 @@
     "institucion": "Comisión Fulbright",
     "pais": "Estados Unidos",
     "tipo": "Beca",
-    "nivel": ["Maestría", "Doctorado"],
-    "area": ["Todas"],
+    "nivel": [
+      "Maestría",
+      "Doctorado"
+    ],
+    "area": [
+      "Todas"
+    ],
     "financiamiento": "100% (Tuition + Stipend)",
     "deadline": "2026-04-26",
     "url_convocatoria": "https://www.fulbright.pe/becaposgradofulbright",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "3 Cartas Recomendación", "Ensayos", "Títulos"],
-    "tags": ["USA", "Prestigio", "Investigación"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "3 Cartas Recomendación",
+      "Ensayos",
+      "Títulos"
+    ],
+    "tags": [
+      "USA",
+      "Prestigio",
+      "Investigación"
+    ]
   },
   {
     "id": "beca_098",
@@ -1055,14 +2206,31 @@
     "institucion": "Weizmann Institute of Science",
     "pais": "Israel",
     "tipo": "Maestría/Doctorado",
-    "nivel": ["Maestría", "Doctorado"],
-    "area": ["Biofísica", "Neurociencia", "STEM"],
+    "nivel": [
+      "Maestría",
+      "Doctorado"
+    ],
+    "area": [
+      "Biofísica",
+      "Neurociencia",
+      "STEM"
+    ],
     "financiamiento": "Full Funding (Tuition + Stipend)",
     "deadline": "2026-04-30",
     "url_convocatoria": "https://www.weizmann.ac.il/chembiophys/shemesh/join-us",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV", "Propuesta Investigación", "3 Recomendaciones"],
-    "tags": ["Israel", "Ciencia Punta", "Full Ride"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Propuesta Investigación",
+      "3 Recomendaciones"
+    ],
+    "tags": [
+      "Israel",
+      "Ciencia Punta",
+      "Full Ride"
+    ]
   },
   {
     "id": "beca_006",
@@ -1070,14 +2238,31 @@
     "institucion": "Embajada de Japón",
     "pais": "Japón",
     "tipo": "Beca",
-    "nivel": ["Maestría", "Doctorado"],
-    "area": ["Todas"],
+    "nivel": [
+      "Maestría",
+      "Doctorado"
+    ],
+    "area": [
+      "Todas"
+    ],
     "financiamiento": "100% (Tuition + Flight + Stipend)",
     "deadline": "2026-05-30",
     "url_convocatoria": "https://www.pe.emb-japan.go.jp/",
-    "requisitos_idioma": ["Inglés", "Japonés (Opcional)"],
-    "documentos_sugeridos": ["Formulario", "Research Proposal", "Títulos", "Certificado Médico"],
-    "tags": ["Asia", "Investigación", "Full Ride"]
+    "requisitos_idioma": [
+      "Inglés",
+      "Japonés (Opcional)"
+    ],
+    "documentos_sugeridos": [
+      "Formulario",
+      "Research Proposal",
+      "Títulos",
+      "Certificado Médico"
+    ],
+    "tags": [
+      "Asia",
+      "Investigación",
+      "Full Ride"
+    ]
   },
   {
     "id": "beca_096",
@@ -1085,14 +2270,30 @@
     "institucion": "Government of Argentina",
     "pais": "Argentina",
     "tipo": "Internship",
-    "nivel": ["Pregrado", "Posgrado"],
-    "area": ["Todas"],
+    "nivel": [
+      "Pregrado",
+      "Posgrado"
+    ],
+    "area": [
+      "Todas"
+    ],
     "financiamiento": "Stipend + Experiencia Cultural",
     "deadline": "2026-05-30",
     "url_convocatoria": "https://argentinainternshipprogram.com/#the-program",
-    "requisitos_idioma": ["Español", "Inglés"],
-    "documentos_sugeridos": ["CV", "Carta Motivación", "Pasaporte"],
-    "tags": ["Latinoamérica", "Internship", "Cultura"]
+    "requisitos_idioma": [
+      "Español",
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación",
+      "Pasaporte"
+    ],
+    "tags": [
+      "Latinoamérica",
+      "Internship",
+      "Cultura"
+    ]
   },
   {
     "id": "beca_102",
@@ -1100,14 +2301,32 @@
     "institucion": "HENNGE K.K.",
     "pais": "Japón",
     "tipo": "Internship",
-    "nivel": ["Pregrado", "Posgrado"],
-    "area": ["IT", "Cloud Computing", "Seguridad"],
+    "nivel": [
+      "Pregrado",
+      "Posgrado"
+    ],
+    "area": [
+      "IT",
+      "Cloud Computing",
+      "Seguridad"
+    ],
     "financiamiento": "Salario competitivo + Alojamiento",
     "deadline": "2026-05-31",
     "url_convocatoria": "https://recruit.hennge.com/en/gip/",
-    "requisitos_idioma": ["Inglés", "Japonés (No obligatorio)"],
-    "documentos_sugeridos": ["CV", "Coding Test", "Entrevista Técnica"],
-    "tags": ["Japón", "Tech", "Startup"]
+    "requisitos_idioma": [
+      "Inglés",
+      "Japonés (No obligatorio)"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Coding Test",
+      "Entrevista Técnica"
+    ],
+    "tags": [
+      "Japón",
+      "Tech",
+      "Startup"
+    ]
   },
   {
     "id": "beca_099",
@@ -1115,14 +2334,28 @@
     "institucion": "National Student Research Institution",
     "pais": "Remoto",
     "tipo": "Investigación",
-    "nivel": ["Pregrado", "Posgrado"],
-    "area": ["Todas las Ciencias"],
+    "nivel": [
+      "Pregrado",
+      "Posgrado"
+    ],
+    "area": [
+      "Todas las Ciencias"
+    ],
     "financiamiento": "Gratuito + Certificación",
     "deadline": "2026-06-30",
     "url_convocatoria": "https://discord.com/invite/DZ9FwNYSeJ",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["Formulario", "Interés en Investigación"],
-    "tags": ["Remoto", "Investigación", "Comunidad"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "Formulario",
+      "Interés en Investigación"
+    ],
+    "tags": [
+      "Remoto",
+      "Investigación",
+      "Comunidad"
+    ]
   },
   {
     "id": "beca_007",
@@ -1130,14 +2363,32 @@
     "institucion": "DAAD",
     "pais": "Alemania",
     "tipo": "Beca",
-    "nivel": ["Maestría"],
-    "area": ["Ciencias Políticas", "Economía", "Derecho"],
+    "nivel": [
+      "Maestría"
+    ],
+    "area": [
+      "Ciencias Políticas",
+      "Economía",
+      "Derecho"
+    ],
     "financiamiento": "100% (Tuition + Stipend)",
     "deadline": "2026-07-31",
     "url_convocatoria": "https://www.daad.de/en/",
-    "requisitos_idioma": ["Inglés", "Alemán"],
-    "documentos_sugeridos": ["CV", "Carta Motivación", "2 Recomendaciones", "Título"],
-    "tags": ["Alemania", "Ciencias Sociales", "Full Ride"]
+    "requisitos_idioma": [
+      "Inglés",
+      "Alemán"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación",
+      "2 Recomendaciones",
+      "Título"
+    ],
+    "tags": [
+      "Alemania",
+      "Ciencias Sociales",
+      "Full Ride"
+    ]
   },
   {
     "id": "beca_027",
@@ -1145,14 +2396,29 @@
     "institucion": "UK Government",
     "pais": "Reino Unido",
     "tipo": "Beca",
-    "nivel": ["Maestría"],
-    "area": ["Todas"],
+    "nivel": [
+      "Maestría"
+    ],
+    "area": [
+      "Todas"
+    ],
     "financiamiento": "100% (Tuition + Flight + Stipend)",
     "deadline": "2026-11-05",
     "url_convocatoria": "https://www.chevening.org/",
-    "requisitos_idioma": ["Inglés IELTS"],
-    "documentos_sugeridos": ["CV", "4 Ensayos", "2 Cartas Recomendación", "Título"],
-    "tags": ["UK", "Liderazgo", "Full Ride"]
+    "requisitos_idioma": [
+      "Inglés IELTS"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "4 Ensayos",
+      "2 Cartas Recomendación",
+      "Título"
+    ],
+    "tags": [
+      "UK",
+      "Liderazgo",
+      "Full Ride"
+    ]
   },
   {
     "id": "beca_005",
@@ -1160,14 +2426,29 @@
     "institucion": "Unión Europea",
     "pais": "Europa",
     "tipo": "Maestría",
-    "nivel": ["Maestría"],
-    "area": ["Todas"],
+    "nivel": [
+      "Maestría"
+    ],
+    "area": [
+      "Todas"
+    ],
     "financiamiento": "100% (Tuition + Stipend)",
     "deadline": "2027-01-15",
     "url_convocatoria": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en",
-    "requisitos_idioma": ["Inglés"],
-    "documentos_sugeridos": ["CV Europass", "Carta Motivación", "2 Recomendaciones", "Título Pregrado"],
-    "tags": ["Europa", "Movilidad", "Full Ride"]
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV Europass",
+      "Carta Motivación",
+      "2 Recomendaciones",
+      "Título Pregrado"
+    ],
+    "tags": [
+      "Europa",
+      "Movilidad",
+      "Full Ride"
+    ]
   },
   {
     "id": "beca_008",
@@ -1175,14 +2456,30 @@
     "institucion": "Fundación Carolina",
     "pais": "España",
     "tipo": "Beca",
-    "nivel": ["Maestría", "Doctorado"],
-    "area": ["Todas"],
+    "nivel": [
+      "Maestría",
+      "Doctorado"
+    ],
+    "area": [
+      "Todas"
+    ],
     "financiamiento": "Parcial o 100%",
     "deadline": "2027-02-20",
     "url_convocatoria": "https://www.fundacioncarolina.es/convocatoria-de-becas-2026-2027/",
-    "requisitos_idioma": ["Español"],
-    "documentos_sugeridos": ["CV", "Carta Motivación", "Título", "Admisión Universidad"],
-    "tags": ["España", "Latinoamérica", "Posgrado"]
+    "requisitos_idioma": [
+      "Español"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación",
+      "Título",
+      "Admisión Universidad"
+    ],
+    "tags": [
+      "España",
+      "Latinoamérica",
+      "Posgrado"
+    ]
   },
   {
     "id": "beca_053",
@@ -1190,13 +2487,3247 @@
     "institucion": "NIIED",
     "pais": "Corea del Sur",
     "tipo": "Beca",
-    "nivel": ["Maestría", "Doctorado"],
-    "area": ["Todas"],
+    "nivel": [
+      "Maestría",
+      "Doctorado"
+    ],
+    "area": [
+      "Todas"
+    ],
     "financiamiento": "100% (Tuition + Flight + Stipend)",
     "deadline": "2027-02-25",
     "url_convocatoria": "https://boston.mofa.go.kr/us-boston-en/brd/m_4558/view.do?seq=761392",
-    "requisitos_idioma": ["Inglés", "Coreano (Opcional)"],
-    "documentos_sugeridos": ["CV", "Carta Motivación", "Plan de Estudio", "2 Recomendaciones", "Certificado Médico"],
-    "tags": ["Asia", "Full Ride", "Posgrado"]
+    "requisitos_idioma": [
+      "Inglés",
+      "Coreano (Opcional)"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación",
+      "Plan de Estudio",
+      "2 Recomendaciones",
+      "Certificado Médico"
+    ],
+    "tags": [
+      "Asia",
+      "Full Ride",
+      "Posgrado"
+    ]
+  },
+  {
+    "id": "beca_201",
+    "titulo": "Erasmus Mundus Joint Masters",
+    "institucion": "",
+    "pais": "Europa",
+    "tipo": "Maestria",
+    "nivel": [
+      "Estudiantes de pregrado (ultimo año) o egresados"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "",
+    "deadline": "Depende del programa",
+    "url_convocatoria": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en?prefLang=es",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Maestria",
+      "Europa"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_202",
+    "titulo": "Humboldt Research Fellowship",
+    "institucion": "",
+    "pais": "Alemania",
+    "tipo": "Posdoc",
+    "nivel": [
+      "Graduados de PhD o investigadores experimentados"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "Marzo, Julio, Noviembre",
+    "url_convocatoria": "https://www.humboldt-foundation.de/en/apply/sponsorship-programmes/humboldt-research-fellowship#h1268",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Posdoc",
+      "Alemania"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_203",
+    "titulo": "ISTA Scientific Internships",
+    "institucion": "",
+    "pais": "Austria",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregado o maestria,o egresados"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "Sin deadline",
+    "url_convocatoria": "https://phd.pages.ist.ac.at/scientific-internships/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Austria"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_204",
+    "titulo": "PhD in BioRobotics",
+    "institucion": "",
+    "pais": "Italia",
+    "tipo": "Doctorado",
+    "nivel": [
+      "Egresados de maestria"
+    ],
+    "area": [
+      "Ingenieria Biomedica"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-05-15",
+    "url_convocatoria": "https://www.santannapisa.it/en/training/phd-biorobotics",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Doctorado",
+      "Italia"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_205",
+    "titulo": "Becas “Excelencia Francia” 2026 Embajada de Francia - Campus France Perú",
+    "institucion": "",
+    "pais": "Francia",
+    "tipo": "Maestria",
+    "nivel": [
+      "Postulantes a maestria en Francia, residentes en el Perú"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-05-02",
+    "url_convocatoria": "https://www.perou.campusfrance.org/convocatoria-de-becas-excelencia-francia-2026-embajada-de-francia-campus-france-peru",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Maestria",
+      "Francia"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "para el año académico 2026-2027"
+  },
+  {
+    "id": "beca_206",
+    "titulo": "Jóvenes Líderes Iberoamericanos 2026 - Fundación Carolina",
+    "institucion": "",
+    "pais": "España",
+    "tipo": "Programa corto",
+    "nivel": [
+      "graduados de pregrado"
+    ],
+    "area": [
+      "Liderazgo"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-04-22",
+    "url_convocatoria": "https://app.santanderopenacademy.com/es/program/jovenes-lideres-iberoamericanos-2026-fundacion-carolina",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Programa corto",
+      "España"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Haber obtenido una titulación superior (grado, licenciatura o equivalente, ingeniería o título de arquitecto/ a, etc.) después del 1 de octubre de 2023 y no superar los 27 años al momento de realizar la inscripción. Ser nacional de algún país de América Latina miembro de la Comunidad Iberoamericana de Naciones, de España o Portugal."
+  },
+  {
+    "id": "beca_207",
+    "titulo": "\"María de Maeztu\" International PhD Programme",
+    "institucion": "",
+    "pais": "España",
+    "tipo": "Doctorado",
+    "nivel": [
+      "Graduados de master"
+    ],
+    "area": [
+      "Biociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-04-19",
+    "url_convocatoria": "https://cimus.usc.gal/es/training/mdm-phd-programme",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Doctorado",
+      "España"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_208",
+    "titulo": "SEE-Diversity to Success Workshop",
+    "institucion": "",
+    "pais": "Estados Unidos",
+    "tipo": "Taller",
+    "nivel": [
+      "científicos con doctorado, investigadores posdoctorales sénior, profesores adjuntos, profesores adjuntos de investigación"
+    ],
+    "area": [
+      "Neurociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-04-17",
+    "url_convocatoria": "https://ibro.org/training-opportunity/see-diversity-to-success-workshop/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Taller",
+      "Estados Unidos"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_209",
+    "titulo": "PhD Scholarship in Global Health - Ad Astra",
+    "institucion": "",
+    "pais": "Irlanda",
+    "tipo": "Doctorado",
+    "nivel": [
+      "Egresados de pregrado o maestria"
+    ],
+    "area": [
+      "Salud"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-04-16",
+    "url_convocatoria": "https://www.ucd.ie/nmhs/newsandevents/2026newsandevents/phdscholarshipglobalhealth/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Doctorado",
+      "Irlanda"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Ciencias Sociales, \nSalud o ámbitos relacionados con la Educación"
+  },
+  {
+    "id": "beca_210",
+    "titulo": "Scientific Fellowships for Master, PhD, and Medical Students",
+    "institucion": "",
+    "pais": "Alemania",
+    "tipo": "Fellowship",
+    "nivel": [
+      "Estudiantes de maestria, PhD, medicina"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-04-15",
+    "url_convocatoria": "https://www.bayer-foundation.com/science/fellowships-stipends",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Fellowship",
+      "Alemania"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_211",
+    "titulo": "Neuroimaging in Neuroscience: Techniques and Applications Across Systems",
+    "institucion": "",
+    "pais": "India",
+    "tipo": "Professional Training",
+    "nivel": [
+      "Profesores adjuntos\nInvestigadores posdoctorales\nEstudiantes de doctorado\nEstudiantes de máster\nMédicos (MD)"
+    ],
+    "area": [
+      "Neurociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-04-15",
+    "url_convocatoria": "https://ibro.org/training-opportunity/aprc2_india/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Professional Training",
+      "India"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_212",
+    "titulo": "1st FALAN Latin American Training Program in Neuroscience",
+    "institucion": "",
+    "pais": "Chile",
+    "tipo": "Professional Training",
+    "nivel": [
+      "Estudiantes de doctorado\nEstudiantes de máster"
+    ],
+    "area": [
+      "Neurociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-04-15",
+    "url_convocatoria": "https://ibro.org/training-opportunity/larc4_chile/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Professional Training",
+      "Chile"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "de Latam"
+  },
+  {
+    "id": "beca_213",
+    "titulo": "Fundacion Carolina: becas de doctorado, estancias cortas y de movilidad posdoctoral",
+    "institucion": "",
+    "pais": "España",
+    "tipo": "Beca de estudios",
+    "nivel": [
+      "con título de máster o doctorado"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-04-09",
+    "url_convocatoria": "https://gestion.fundacioncarolina.es/programas",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Beca de estudios",
+      "España"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "ser docente de carrera o de planta, o personal administrativo de una universidad iberoamericana"
+  },
+  {
+    "id": "beca_214",
+    "titulo": "BMSIS Young Scientist Program (YSP)",
+    "institucion": "",
+    "pais": "Remoto",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregrado o egresados"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-04-08",
+    "url_convocatoria": "https://bmsis.org/ysp/projects/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Remoto"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "No aceptan estudiantes de posgrado"
+  },
+  {
+    "id": "beca_215",
+    "titulo": "Stanford| Code in Place",
+    "institucion": "",
+    "pais": "Remoto",
+    "tipo": "Curso",
+    "nivel": [
+      "Todos"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-04-07",
+    "url_convocatoria": "https://codeinplace.stanford.edu/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Curso",
+      "Remoto"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_216",
+    "titulo": "Woven by Toyota",
+    "institucion": "",
+    "pais": "Japon",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de maestria o PhD"
+    ],
+    "area": [
+      "Software"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-04-06",
+    "url_convocatoria": "https://woven.toyota/en/internship/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Japon"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_217",
+    "titulo": "Cold Spring Harbor Asia - Computational and Cognitive Neuroscience Course",
+    "institucion": "",
+    "pais": "China",
+    "tipo": "Curso",
+    "nivel": [
+      "Estudiantes de pregrado y posgrado"
+    ],
+    "area": [
+      "Neurociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-04-01",
+    "url_convocatoria": "https://www.csh-asia.org/?content/3043",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Curso",
+      "China"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_218",
+    "titulo": "Brain Bee Bootcamp",
+    "institucion": "",
+    "pais": "Remoto",
+    "tipo": "Bootcamp",
+    "nivel": [
+      "Estudiantes de secundaria"
+    ],
+    "area": [
+      "Neurociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-01",
+    "url_convocatoria": "https://youthneuro.org/brain-bee#about",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Bootcamp",
+      "Remoto"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "13-19 años"
+  },
+  {
+    "id": "beca_219",
+    "titulo": "Bridge Internship Program",
+    "institucion": "",
+    "pais": "Panama",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de ultimo año de pregrado o recien graduados"
+    ],
+    "area": [
+      "Biociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-31",
+    "url_convocatoria": "https://stri.si.edu/bridge-internship-program",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Panama"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_220",
+    "titulo": "Probabilistic AI School (ProbAI) 2026",
+    "institucion": "",
+    "pais": "Lithuania",
+    "tipo": "Escuela de Verano",
+    "nivel": [
+      "Estudiantes de doctorado, estudiantes avanzados de master y pregrado"
+    ],
+    "area": [
+      "Computer Science"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-31",
+    "url_convocatoria": "https://probai.school/application/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Escuela de Verano",
+      "Lithuania"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_221",
+    "titulo": "Study in Romania Scholarship",
+    "institucion": "",
+    "pais": "Romania",
+    "tipo": "Beca de estudios",
+    "nivel": [
+      "Todos los niveles"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-31",
+    "url_convocatoria": "https://scholarships.studyinromania.gov.ro/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Beca de estudios",
+      "Romania"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Ciudadanos extranjeros de todos los países no pertenecientes a la UE"
+  },
+  {
+    "id": "beca_222",
+    "titulo": "AP-S 2026 Doctoral Research Grants",
+    "institucion": "",
+    "pais": "nan",
+    "tipo": "Beca",
+    "nivel": [
+      "Estudiantes de doctorado"
+    ],
+    "area": [
+      "Ingenieria"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-31",
+    "url_convocatoria": "https://ieeeaps.org/aps-2026-doctoral-research-grants",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Beca",
+      "nan"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Ingenieria Electrica o afines"
+  },
+  {
+    "id": "beca_223",
+    "titulo": "Emerging Leaders in the Americas Program",
+    "institucion": "",
+    "pais": "Canada",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregrado y posgrado"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-31",
+    "url_convocatoria": "https://www.educanada.ca/scholarships-bourses/can/institutions/elap-pfla.aspx?lang=eng",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Canada"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "La postulacion la realizan las instituciones canadienses. Uno postula a la universidad canadiense (diferentes deadlines) directamente (internship) o a traves de su universidad local (intercambio)"
+  },
+  {
+    "id": "beca_224",
+    "titulo": "Workshop on Bioprocess with Recombinant Microorganisms: Fermentation, Recovery and Purification of a Recombinant Enzyme at Pilot Scale",
+    "institucion": "",
+    "pais": "Mexico",
+    "tipo": "Curso",
+    "nivel": [
+      "Profesionales, educadores y estudiantes de ingeniería química o bioquímica, biotecnología, tecnología alimentaria, química, biología, farmacia, medicina y campos relacionados."
+    ],
+    "area": [
+      "Biociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-27",
+    "url_convocatoria": "https://unu.edu/biolac/announcement/next-course-workshop-bioprocess-recombinant-microorganisms-fermentation",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Curso",
+      "Mexico"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Los participantes deben tener conocimientos teóricos básicos sobre el cultivo microbiano y estar interesados en aplicar conceptos de ingeniería al desarrollo de bioprocesos."
+  },
+  {
+    "id": "beca_225",
+    "titulo": "Initiative of Excellence (IdEx) Université Grenoble Alpes",
+    "institucion": "",
+    "pais": "Francia",
+    "tipo": "Maestria",
+    "nivel": [
+      "Estudiantes de ultimo semestre o egresados de pregrado"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-27",
+    "url_convocatoria": "https://formations.univ-grenoble-alpes.fr/fr/catalogue-2021/master-XB/master-chimie-IK5DXE34/parcours-chemistry-for-life-sciences-2e-annee-IK5HNKRF.html",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Maestria",
+      "Francia"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_226",
+    "titulo": "Academic Research Internship Programme 2026",
+    "institucion": "",
+    "pais": "Remoto",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregrado/posgrado o egresados"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-27",
+    "url_convocatoria": "https://www.linkedin.com/posts/b-khrease-academic-consult_academic-research-internship-programme-2026-activity-7426585454738714624-dGLN?utm_source=share&utm_medium=member_desktop&rcm=ACoAADJ8SpEBtIsclRI0GrjRdc9gPltud0_Zegc",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Remoto"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_227",
+    "titulo": "IEEE IES SYP Congress 2026",
+    "institucion": "",
+    "pais": "Brasil",
+    "tipo": "Travel grant/Conferencia",
+    "nivel": [
+      "Estudiantes y jovenes profesionales"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-25",
+    "url_convocatoria": "https://syp-congress.ieee-ies.org/apply-for-funding",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Travel grant/Conferencia",
+      "Brasil"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Miembros/representates IEEE IES"
+  },
+  {
+    "id": "beca_228",
+    "titulo": "International Master's Scholarships Program Paris-Saclay",
+    "institucion": "",
+    "pais": "Francia",
+    "tipo": "Maestria",
+    "nivel": [
+      "Estudiantes de ultimo semestre o egresados de pregrado"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-25",
+    "url_convocatoria": "https://www.universite-paris-saclay.fr/en/admission/bourses-et-aides-financieres/international-masters-scholarships-program",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Maestria",
+      "Francia"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "menores de 30"
+  },
+  {
+    "id": "beca_229",
+    "titulo": "British Council English online 2026",
+    "institucion": "",
+    "pais": "Remoto",
+    "tipo": "Curso",
+    "nivel": [
+      "Cualquier persona con más de 18 años"
+    ],
+    "area": [
+      "Ingles"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-23",
+    "url_convocatoria": "https://app.santanderopenacademy.com/es/program/british-council-english-online-2026",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Curso",
+      "Remoto"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Ser residente en Argentina, Alemania, Brasil, Chile, Colombia, España, Estados Unidos, México, Perú, Polonia, Portugal, Reino Unido o Uruguay."
+  },
+  {
+    "id": "beca_230",
+    "titulo": "European Forum Alpbach",
+    "institucion": "",
+    "pais": "Austria",
+    "tipo": "Evento/Forum",
+    "nivel": [
+      "Estudiantes y jovenes profesionales"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-22",
+    "url_convocatoria": "https://www.alpbach.org/blog/scholarship-programme",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Evento/Forum",
+      "Austria"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "18 y 30 años (o entre 18 y 35 años para los ciudadanos del Sur Global)"
+  },
+  {
+    "id": "beca_231",
+    "titulo": "ROSCon Global 2026 Diversity Scholarships",
+    "institucion": "",
+    "pais": "Canada",
+    "tipo": "Travel grant/Conferencia",
+    "nivel": [
+      "Mujeres, personas de las comunidades LGBTQIA+, personas con discapacidades, personas de minorías raciales y/o étnicas en la comunidad robótica, y personas de países en desarrollo"
+    ],
+    "area": [
+      "Robotica"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-22",
+    "url_convocatoria": "https://roscon.ros.org/2026/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Travel grant/Conferencia",
+      "Canada"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_232",
+    "titulo": "Machine Learning Summer School 2026",
+    "institucion": "",
+    "pais": "Estados Unidos",
+    "tipo": "Escuela de Verano",
+    "nivel": [
+      "Estudiantes de pregrado, posgrado y profesionales"
+    ],
+    "area": [
+      "IA"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-22",
+    "url_convocatoria": "https://cfe.columbia.edu/content/mlss2",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Escuela de Verano",
+      "Estados Unidos"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "becas disponibles"
+  },
+  {
+    "id": "beca_233",
+    "titulo": "6th IAPR TC10/TC11 Summer School Next-Gen Document Understanding: RAG, VLMs, and Structured Knowledge Extraction",
+    "institucion": "",
+    "pais": "España",
+    "tipo": "Escuela de Verano",
+    "nivel": [
+      "Profesionales, estudiantes de master, estudiantes de PhD"
+    ],
+    "area": [
+      "IA"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-20",
+    "url_convocatoria": "https://ssdag.cvc.uab.es/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Escuela de Verano",
+      "España"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_234",
+    "titulo": "Australasian Course in Advanced Neuroscience",
+    "institucion": "",
+    "pais": "Australia",
+    "tipo": "Curso",
+    "nivel": [
+      "Profesores\nProfesores asociados\nProfesores adjuntos\nProfesores titulares\nInvestigadores posdoctorales\nEstudiantes de doctorado"
+    ],
+    "area": [
+      "Neurociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-20",
+    "url_convocatoria": "https://ibro.org/training-opportunity/aprc5_australia/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Curso",
+      "Australia"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_235",
+    "titulo": "IEEE TEMS Annual Global Student Case Competition 2026, 2nd Edition",
+    "institucion": "",
+    "pais": "Remoto",
+    "tipo": "Competencia",
+    "nivel": [
+      "Estudiantes de pregrado y posgrado"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-20",
+    "url_convocatoria": "https://www.ieee-tems.org/global-student-competition/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Competencia",
+      "Remoto"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_236",
+    "titulo": "Student Volunteers SC2026",
+    "institucion": "",
+    "pais": "Estados Unidos",
+    "tipo": "Travel grant/Conferencia",
+    "nivel": [
+      "Estudiantes de secundaria, pregrado y posgrado"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-16",
+    "url_convocatoria": "https://sc26.supercomputing.org/students/student-volunteers/?trk=feed_main-feed-card_feed-article-content",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Travel grant/Conferencia",
+      "Estados Unidos"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_237",
+    "titulo": "23rd International Summer Academy on AI in Healthcare, Medicine, and Biology",
+    "institucion": "",
+    "pais": "Grecia",
+    "tipo": "Escuela de Verano",
+    "nivel": [
+      "Estudiantes senior de pregrado y posgrado"
+    ],
+    "area": [
+      "Ingenieria Biomedica"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-15",
+    "url_convocatoria": "http://2026.biocomplexitysummerschool.org/fellowships.html",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Escuela de Verano",
+      "Grecia"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_238",
+    "titulo": "Cold Spring Harbor Asia - The Brain Enlightened - Advanced Imaging Techniques in Neuroscience",
+    "institucion": "",
+    "pais": "China",
+    "tipo": "Curso",
+    "nivel": [
+      "Estudiantes de pregrado y posgrado"
+    ],
+    "area": [
+      "Neurociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-15",
+    "url_convocatoria": "https://www.csh-asia.org/?content/2964",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Curso",
+      "China"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_239",
+    "titulo": "Cold Spring Harbor Asia - Genome-wide Footprinting of Transcription Factors with Deaminase (FOODIE)",
+    "institucion": "",
+    "pais": "China",
+    "tipo": "Curso",
+    "nivel": [
+      "Estudiantes de pregrado y posgrado"
+    ],
+    "area": [
+      "Biociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-15",
+    "url_convocatoria": "https://www.csh-asia.org/?content/3074",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Curso",
+      "China"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_240",
+    "titulo": "IBRO School: Complexity in Mental Health",
+    "institucion": "",
+    "pais": "Italia",
+    "tipo": "Escuela de Verano",
+    "nivel": [
+      "Professors\nAssociate Professors\nAssistant Professors\nLecturers\nPostdoctoral Fellows\nPhD Students\nMaster Students\nMedical Doctors (MD)"
+    ],
+    "area": [
+      "Neurociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-15",
+    "url_convocatoria": "https://ibro.org/training-opportunity/perc3_italy/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Escuela de Verano",
+      "Italia"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_241",
+    "titulo": "Big Data (for human health) Summer Immersion at Yale",
+    "institucion": "",
+    "pais": "Estados Unidos",
+    "tipo": "Programa de verano",
+    "nivel": [
+      "Estudiantes de pregado"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-13",
+    "url_convocatoria": "https://www.bdsy.org/program",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Programa de verano",
+      "Estados Unidos"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_242",
+    "titulo": "Government of Ireland International Education Scholarship (GOI-IES) programme",
+    "institucion": "",
+    "pais": "Irlanda",
+    "tipo": "Posgrado",
+    "nivel": [
+      "graduados de bachiller o Maestria"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-12",
+    "url_convocatoria": "https://hea.ie/policy/internationalisation/goi-ies/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Posgrado",
+      "Irlanda"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "que cuenten con admision a una universidad irlandesa elegible"
+  },
+  {
+    "id": "beca_243",
+    "titulo": "2026 CIC biomaGUNE Summer Research Program",
+    "institucion": "",
+    "pais": "España",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregrado"
+    ],
+    "area": [
+      "Biociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-11",
+    "url_convocatoria": "https://www.cicbiomagune.es/job-offer-detail?id=43197",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "España"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "se encuentren en los dos últimos años de Química, Ciencia de los Materiales, Biología, Medicina, Bioingeniería, Bioquímica, Nanociencia, Física o áreas relacionadas."
+  },
+  {
+    "id": "beca_244",
+    "titulo": "Human Diseases Models Morphological Phenotyping (MorphoPHEN)",
+    "institucion": "",
+    "pais": "Europa",
+    "tipo": "Maestria",
+    "nivel": [
+      "Estudiantes de ultimo semestre o egresados"
+    ],
+    "area": [
+      "Biociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-11",
+    "url_convocatoria": "https://morphophen.eu/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Maestria",
+      "Europa"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Biología, Bioquímica, Biotecnología, Farmacia, Veterinaria o Medicina."
+  },
+  {
+    "id": "beca_245",
+    "titulo": "Montreal Robotics Summer School 2026",
+    "institucion": "",
+    "pais": "Canada",
+    "tipo": "Escuela de Verano",
+    "nivel": [
+      "Estudiantes de pregrado, máster y doctorado, y profesionales"
+    ],
+    "area": [
+      "Robotica"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-11",
+    "url_convocatoria": "https://docs.google.com/forms/d/e/1FAIpQLSepqDobf7JcMqAgRAq7c-RXjDfga1YOZ29hxiC_mTLBQ1mZqA/viewform",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Escuela de Verano",
+      "Canada"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_246",
+    "titulo": "Canada Impact+ Research Chairs and Canada Impact+ Emerging Leaders competition",
+    "institucion": "",
+    "pais": "Canada",
+    "tipo": "Fellowship",
+    "nivel": [
+      "Puestos de investigador y profesor asociado"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-10",
+    "url_convocatoria": "https://www.canada.ca/en/impact-plus-chairs/program-details/competition/2026/apply.html",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Fellowship",
+      "Canada"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Internacionales o canadienses fuera de Canada, postulacion es a traves de cada universidad canadiense (cierre mediados/fines de enero)"
+  },
+  {
+    "id": "beca_247",
+    "titulo": "EMBL International PhD Programme",
+    "institucion": "",
+    "pais": "Europa",
+    "tipo": "Doctorado",
+    "nivel": [
+      "Graduados de maestria"
+    ],
+    "area": [
+      "Biociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-09",
+    "url_convocatoria": "https://www.embl.org/about/info/embl-international-phd-programme/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Doctorado",
+      "Europa"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_248",
+    "titulo": "INSAIT Summer Undergraduate Research Fellowship (SURF)",
+    "institucion": "",
+    "pais": "Bulgaria",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregrado"
+    ],
+    "area": [
+      "Computer Science"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-08",
+    "url_convocatoria": "https://insait.ai/surf/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Bulgaria"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "desde 1er año"
+  },
+  {
+    "id": "beca_249",
+    "titulo": "II Latin-American School on Cryo‑Electron Microscopy – Structural Imaging for Microbial Biotechnology in Health and the Environment",
+    "institucion": "",
+    "pais": "Argentina",
+    "tipo": "Escuela de Verano",
+    "nivel": [
+      "Estudiantes de posgrado e investigadores"
+    ],
+    "area": [
+      "Biociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-08",
+    "url_convocatoria": "https://unu.edu/biolac/announcement/next-course-ii-latin-american-school-cryo-electron-microscopy-structural",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Escuela de Verano",
+      "Argentina"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_250",
+    "titulo": "imAGEin: The Erasmus Mundus Joint Master on the Biology of Ageing",
+    "institucion": "",
+    "pais": "Europa",
+    "tipo": "Maestria",
+    "nivel": [
+      "Estudiantes de ultimo semestre o egresados"
+    ],
+    "area": [
+      "Biociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-06",
+    "url_convocatoria": "https://life.univ-cotedazur.eu/international/imagein",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Maestria",
+      "Europa"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "en STEM"
+  },
+  {
+    "id": "beca_251",
+    "titulo": "Erasmus Mundus Master in Biomedical Engineering (EMMBIOME)",
+    "institucion": "",
+    "pais": "Europa",
+    "tipo": "Maestria",
+    "nivel": [
+      "Estudiantes de ultimo semestre o egresados"
+    ],
+    "area": [
+      "Ingenieria Biomedica"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-06",
+    "url_convocatoria": "http://emmbiome.eu/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Maestria",
+      "Europa"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "de Ingenieria Biomedica, Electronica, Computer Engineering, Informatics, etc"
+  },
+  {
+    "id": "beca_252",
+    "titulo": "Master in Neurosciences FROM THE BENCH TO THE BEDSIDE",
+    "institucion": "",
+    "pais": "España",
+    "tipo": "Maestria",
+    "nivel": [
+      "Egresados de pregrado"
+    ],
+    "area": [
+      "Neurociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-05",
+    "url_convocatoria": "https://in.umh-csic.es/wp-content/uploads/2026/02/ScholarshipsMIN2026-2027.pdf",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Maestria",
+      "España"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "preferible de Biología / Biomedicina o disciplinas afines"
+  },
+  {
+    "id": "beca_253",
+    "titulo": "Canada Impact+ Research Training Awards",
+    "institucion": "",
+    "pais": "Canada",
+    "tipo": "Posgrado",
+    "nivel": [
+      "Para doctorado y posdoctorado"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-04",
+    "url_convocatoria": "https://sshrc-crsh.canada.ca/en/funding/opportunities/canada-impact-plus-research-training-awards.aspx",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Posgrado",
+      "Canada"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Internacionales o canadienses fuera de Canada, postulacion es a traves de cada universidad canadiense (cierre mediados/fines de enero)"
+  },
+  {
+    "id": "beca_254",
+    "titulo": "Verano Científico del Observatorio Astronómico Nacional de la UNAM",
+    "institucion": "",
+    "pais": "Mexico",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregrado"
+    ],
+    "area": [
+      "Astronomía"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-02",
+    "url_convocatoria": "https://astronomia.unam.mx/veranocientifico-oan/inicio/?fbclid=IwY2xjawP4b3pleHRuA2FlbQIxMABicmlkETFpSGprRmNFeHMzMmxHMkRBc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHhg7Om9Qvp65BsHF2UdwIgQ-PAd0gBOzE3fUlKn27tySylBqVdghfeBhAK0l_aem_gYXqdfAvVXRCIaz90tBt4A",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Mexico"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "con 50% de los creditos aprobados (mitad de carrera completada)"
+  },
+  {
+    "id": "beca_255",
+    "titulo": "USA Summer Experience - Penn 2026",
+    "institucion": "",
+    "pais": "Estados Unidos",
+    "tipo": "Curso",
+    "nivel": [
+      "Entre 18 y no más de 30 años"
+    ],
+    "area": [
+      "Ingles"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-02",
+    "url_convocatoria": "https://app.santanderopenacademy.com/es/program/usa-summer-experience-penn-2026",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Curso",
+      "Estados Unidos"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Ser residente de Alemania, Argentina, Brasil, Colombia, Chile, Perú, España, Estados Unidos, México, Portugal, Reino Unido o Uruguay."
+  },
+  {
+    "id": "beca_256",
+    "titulo": "Excellentium Leaders of Tomorrow",
+    "institucion": "",
+    "pais": "Francia",
+    "tipo": "Professional Training",
+    "nivel": [
+      "Estudiantes de doctorado, posdoctorados, founders y profesionales STEM con gran potencial."
+    ],
+    "area": [
+      "Biociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-01",
+    "url_convocatoria": "https://globalbiotechrevolution.com/excellerator/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Professional Training",
+      "Francia"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_257",
+    "titulo": "Summer Research Awards",
+    "institucion": "",
+    "pais": "Estados Unidos",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregrado"
+    ],
+    "area": [
+      "Neurociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-01",
+    "url_convocatoria": "https://srndna.utdallas.edu/awards/summer-research-awards/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Estados Unidos"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_258",
+    "titulo": "Transylvanian Experimental Neuroscience Summer School (TENSS 2026)",
+    "institucion": "",
+    "pais": "Romania",
+    "tipo": "Escuela de Verano",
+    "nivel": [
+      "Becarios posdoctorales\nEstudiantes de doctorado"
+    ],
+    "area": [
+      "Neurociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-01",
+    "url_convocatoria": "https://ibro.org/training-opportunity/perc4_romania/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Escuela de Verano",
+      "Romania"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_259",
+    "titulo": "Global Research Immersion Program for Young Scientists",
+    "institucion": "",
+    "pais": "China",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregado o maestria"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-03-01",
+    "url_convocatoria": "http://grips.zju.edu.cn/apply/main.htm",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "China"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Haber completado 2 años de pregrado como minimo"
+  },
+  {
+    "id": "beca_260",
+    "titulo": "IEEE ComSoc Four Minute Thesis (4MT) Competition",
+    "institucion": "",
+    "pais": "UK",
+    "tipo": "Competencia",
+    "nivel": [
+      "Estudiantes de doctorado"
+    ],
+    "area": [
+      "Telecomunicaciones"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-27",
+    "url_convocatoria": "https://www.comsoc.org/engagement-community/competitions/ieee-comsoc-four-minute-thesis-4mt-competition?utm_campaign=comsoc-org&utm_content=1769448310&utm_medium=social&utm_source=bluesky,facebook,linkedin,threads,twitter",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Competencia",
+      "UK"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "miembros graduados de ComSoc"
+  },
+  {
+    "id": "beca_261",
+    "titulo": "SI Scholarship for Global Professionals",
+    "institucion": "",
+    "pais": "Suecia",
+    "tipo": "Maestria",
+    "nivel": [
+      "Egresados"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-25",
+    "url_convocatoria": "https://si.se/en/apply/scholarships/swedish-institute-scholarships-for-global-professionals/#overview",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Maestria",
+      "Suecia"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_262",
+    "titulo": "International Women's Day 2026 Computational Biology Facility Scholarship",
+    "institucion": "",
+    "pais": "Remoto",
+    "tipo": "Curso",
+    "nivel": [
+      "mujeres, graduadas de master"
+    ],
+    "area": [
+      "Biociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-20",
+    "url_convocatoria": "https://docs.google.com/forms/d/e/1FAIpQLSeyZBEpq9k0pDnZ2GBF_laztLsfOb4ELnRK5HOUI6aAPnwmFg/viewform?pli=1",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Curso",
+      "Remoto"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "interesadas en ciencia de datos/bioinformática"
+  },
+  {
+    "id": "beca_263",
+    "titulo": "IBRO Translational Neuroscience School 2026 From Molecular Mechanisms to Clinical Applications in Neurodegenerative",
+    "institucion": "",
+    "pais": "Peru",
+    "tipo": "Escuela de Verano",
+    "nivel": [
+      "estudiantes de pregrado, posgrado, posdoc, profesores"
+    ],
+    "area": [
+      "Neurociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-20",
+    "url_convocatoria": "https://www.labneurosciencecusco.com/ibro-school-2026/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Escuela de Verano",
+      "Peru"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "de Latinoamerica"
+  },
+  {
+    "id": "beca_264",
+    "titulo": "Special Research Fund - Doctoral Scholarships for Candidates from the Global South - call 2026",
+    "institucion": "",
+    "pais": "Belgica",
+    "tipo": "Doctorado",
+    "nivel": [
+      "Estudiantes de doctorado"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-17",
+    "url_convocatoria": "https://www.ugent.be/en/research/funding/bof/dos",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Doctorado",
+      "Belgica"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "en el Sur Global (Global South)"
+  },
+  {
+    "id": "beca_265",
+    "titulo": "FENS-Chen Institute Summer Program on AI-Accelerated Neuroscience Discovery and Translation hosted by the University of Cambridge",
+    "institucion": "",
+    "pais": "UK",
+    "tipo": "Programa de verano",
+    "nivel": [
+      "Postdoctorados, estudiantes de doctorado o estudiantes de máster en investigación"
+    ],
+    "area": [
+      "Neurociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-16",
+    "url_convocatoria": "https://www.fens.org/news-activities/fens-and-societies-calendar/training-event/fens-chen-institute-summer-program-on-ai-accelerated-neuroscience-discovery-and-translation-hosted-by-the-university-of-cambridge",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Programa de verano",
+      "UK"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "de matemáticas, ingeniería, informática o neurociencia"
+  },
+  {
+    "id": "beca_266",
+    "titulo": "Social Innovation in Health",
+    "institucion": "",
+    "pais": "Remoto",
+    "tipo": "Fellowship",
+    "nivel": [
+      "estudiantes y profesionales"
+    ],
+    "area": [
+      "Salud"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-16",
+    "url_convocatoria": "https://unc.az1.qualtrics.com/jfe/form/SV_8J1on6f4rRWAtiC",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Fellowship",
+      "Remoto"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "de 15 a 35 años y con max 10 años de experiencia"
+  },
+  {
+    "id": "beca_267",
+    "titulo": "IEEE Antennas and Propagation Society Undergraduate Summer Research Scholarship",
+    "institucion": "",
+    "pais": "nan",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregrado"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-16",
+    "url_convocatoria": "https://ieeeaps.wizehive.app/program/ieee-aps-undergraduate-summer-research-scholarship/info",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "nan"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "que tengan completados al menos 4 semestres"
+  },
+  {
+    "id": "beca_268",
+    "titulo": "CVC Talent Internship Program",
+    "institucion": "",
+    "pais": "España",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregrado o posgrado"
+    ],
+    "area": [
+      "Computer Science"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-15",
+    "url_convocatoria": "https://www.cvc.uab.es/internship/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "España"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "a partir de 2 año de pregrado"
+  },
+  {
+    "id": "beca_269",
+    "titulo": "RNA Institute Virtual Bioinformatics Research Program - Summer 2026",
+    "institucion": "",
+    "pais": "Remoto",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregrado o posgrado"
+    ],
+    "area": [
+      "Biociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-15",
+    "url_convocatoria": "https://docs.google.com/forms/d/e/1FAIpQLSeMP5AaS_U4i1ItABTyT2IkvufXqYDG-4r8zLhM3NsZl0WOhw/viewform",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Remoto"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "nacionales de paises de bajos y medios ingresos definidos por OECD"
+  },
+  {
+    "id": "beca_270",
+    "titulo": "Dorrit Hoffleit Undergraduate Research Scholarship",
+    "institucion": "",
+    "pais": "Estados Unidos",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregrado en Astronomía, Astrofísica o Física"
+    ],
+    "area": [
+      "Astronomía"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-15",
+    "url_convocatoria": "https://astronomy.yale.edu/undergraduate-program/research/dorrit-hoffleit-undergraduate-research-scholarship",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Estados Unidos"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "segundo o tercer año de estudios"
+  },
+  {
+    "id": "beca_271",
+    "titulo": "IEEE IES Generative AI Challenge 2026",
+    "institucion": "",
+    "pais": "Australia",
+    "tipo": "Competencia",
+    "nivel": [
+      "Abierto a participantes mayores de 18 años."
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-15",
+    "url_convocatoria": "https://ai.ieee-ies.org/index.html",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Competencia",
+      "Australia"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Los equipos pueden estar formados por entre 1 y 5 miembros."
+  },
+  {
+    "id": "beca_272",
+    "titulo": "2026 Summer KAI-X Research Internship Program",
+    "institucion": "",
+    "pais": "Corea",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes extranjeros de grado (3.º o 4.º año) y de posgrado (máster)"
+    ],
+    "area": [
+      "Ciencias naturales"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-15",
+    "url_convocatoria": "https://kai-x.kaist.ac.kr/boards/view/menu_05_02_en/14",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Corea"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_273",
+    "titulo": "Global Connect Fellowship",
+    "institucion": "",
+    "pais": "Singapur",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregrado o maestria"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-15",
+    "url_convocatoria": "https://www.ntu.edu.sg/about-us/global/global-connect-fellowship",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Singapur"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "que se graduan en 2026 o 2027"
+  },
+  {
+    "id": "beca_274",
+    "titulo": "2026 NSTC International Internship Pilot Program in Taiwan",
+    "institucion": "",
+    "pais": "Taiwan",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregrado, máster y doctorado"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-13",
+    "url_convocatoria": "https://iipp.stpi.niar.org.tw/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Taiwan"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_275",
+    "titulo": "12th Heidelberg Laureate Forum for Outstanding Young Researchers in Mathematics & Computer Science",
+    "institucion": "",
+    "pais": "Alemania",
+    "tipo": "Evento/Forum",
+    "nivel": [
+      "Estudiantes de pregrado/Pre-Máster, Doctorado o Postdoctorado"
+    ],
+    "area": [
+      "Computer Science"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-11",
+    "url_convocatoria": "https://application.heidelberg-laureate-forum.org/site/index.php?a=bUY5NFpLQXYrcVRneWpPdUUvekFjUXJsUllUb2pOcDlSZVRvdXlhV1ZtREFKQUJXZitOVERQakJsQi9lbzRXRHdDUUFWbi9qVXd6NHdaUWYzcU9GZzhBa0FGWi80MU1NK01HVUg5NmpoWU81RmNSNEdpWTR5WHNoR05rbFdvcEE%3D",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Evento/Forum",
+      "Alemania"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_276",
+    "titulo": "European Master in Radiation and its Effects on MicroElectronics and Photonics Technologies (RADMEP+)",
+    "institucion": "",
+    "pais": "Europa",
+    "tipo": "Maestria",
+    "nivel": [
+      "Egresado de pregrado"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-09",
+    "url_convocatoria": "https://master-radmep.org/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Maestria",
+      "Europa"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "en areas afines a  microelectrónica, fotónica y física"
+  },
+  {
+    "id": "beca_277",
+    "titulo": "University of Hong Kong (HKU) Summer Research Programme",
+    "institucion": "",
+    "pais": "Hong Kong",
+    "tipo": "Internship",
+    "nivel": [
+      "estudiantes de pregrado o maestria"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-09",
+    "url_convocatoria": "https://gradsch.hku.hk/news_and_events/news_and_future_events/summer-research-programme-2026",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Hong Kong"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Haber completado 2 años de pregrado como minimo. Solicita cuota de postulacion (HK$300)"
+  },
+  {
+    "id": "beca_278",
+    "titulo": "UCLA Neuroscience High School Scholars Program",
+    "institucion": "",
+    "pais": "Remoto",
+    "tipo": "Secundaria",
+    "nivel": [
+      "estudiantes de secundaria"
+    ],
+    "area": [
+      "Neurociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-09",
+    "url_convocatoria": "https://eastonad.ucla.edu/about/neuroscience-high-school-scholars-program",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Secundaria",
+      "Remoto"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_279",
+    "titulo": "PhD Research Studentships- Transforming medical device development for brain cancer through patient involvement and co-creation",
+    "institucion": "",
+    "pais": "UK",
+    "tipo": "Doctorado",
+    "nivel": [
+      "Egresados de pregrado o maestria"
+    ],
+    "area": [
+      "Ingenieria Biomedica"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-06",
+    "url_convocatoria": "https://www.sems.qmul.ac.uk/research/studentships/715/transforming-medical-device-development-for-brain-cancer-through-patient-involvement-and-co-creation",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Doctorado",
+      "UK"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_280",
+    "titulo": "Sumitomo Electric Global Internship 2026",
+    "institucion": "",
+    "pais": "Japon",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiante de pregrado"
+    ],
+    "area": [
+      "Otros"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-06",
+    "url_convocatoria": "https://sumitomoelectric.com/careers/global-internship/2026",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Japon"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_281",
+    "titulo": "International Neuroscience Doctoral Programme (INDP) at the Champalimaud Foundation",
+    "institucion": "",
+    "pais": "Portugal",
+    "tipo": "Doctorado",
+    "nivel": [
+      "Máster y/o carrera universitaria de más de cuatro años."
+    ],
+    "area": [
+      "Neurociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-04",
+    "url_convocatoria": "https://fchampalimaud.org/champalimaud-research/education/indp",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Doctorado",
+      "Portugal"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_282",
+    "titulo": "Erasmus Mundus Joint Master in Health and Wellbeing across the Lifespan",
+    "institucion": "",
+    "pais": "Europa",
+    "tipo": "Maestria",
+    "nivel": [
+      "estudiantes de ultimo semestre o egresados"
+    ],
+    "area": [
+      "Salud"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-03",
+    "url_convocatoria": "https://www.hygieiamaster.eu/admission",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Maestria",
+      "Europa"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "ciencias farmacéuticas, ciencias médicas, nutrición, deportes, bioquímica, química, biología u otras"
+  },
+  {
+    "id": "beca_283",
+    "titulo": "Young Voices of Science Program Spring 2026",
+    "institucion": "",
+    "pais": "Remoto",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes o egresados"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-02",
+    "url_convocatoria": "https://docs.google.com/forms/d/e/1FAIpQLSf4aIyIoZO-WCCn4g4a2wQtjWqDyEBG8TOY_ZIKm9En3mFkKQ/viewform",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Remoto"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "interesados en Medioambiente"
+  },
+  {
+    "id": "beca_284",
+    "titulo": "Biotechnology and Biological Sciences Doctoral Training Programme",
+    "institucion": "",
+    "pais": "UK",
+    "tipo": "Doctorado",
+    "nivel": [
+      "Egresados de pregrado o maestria"
+    ],
+    "area": [
+      "Biociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-02",
+    "url_convocatoria": "https://www.nottingham.ac.uk/bbdtp/apply/apply-online.aspx",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Doctorado",
+      "UK"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_285",
+    "titulo": "Society of Women Engineers Collegiate/Graduate Scholars",
+    "institucion": "",
+    "pais": "nan",
+    "tipo": "Beca",
+    "nivel": [
+      "Todos los niveles"
+    ],
+    "area": [
+      "Ingenieria"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-02",
+    "url_convocatoria": "https://apply.mykaleidoscope.com/program/SWECollegiateApp26",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Beca",
+      "nan"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Planeando postular a un programa Acreditado ABET(pregrado) o aceptado/estudiando uno (posgrado)"
+  },
+  {
+    "id": "beca_286",
+    "titulo": "Korea Science Academy of KAIST",
+    "institucion": "",
+    "pais": "Corea",
+    "tipo": "Secundaria",
+    "nivel": [
+      "Estudiantes de primeros años de secundaria"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-02",
+    "url_convocatoria": "https://admission.ksa.hs.kr/iphak_eng/bbs_view.php?pNum=27&bbsID=eng_notice",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Secundaria",
+      "Corea"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_287",
+    "titulo": "CALL: Students Participating in IEEE Robotic Standardization Efforts (SPIRSE)",
+    "institucion": "",
+    "pais": "Austria",
+    "tipo": "Travel grant/Conferencia",
+    "nivel": [
+      "Estudiantes de pregrado y posgrado"
+    ],
+    "area": [
+      "Robotica"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-01",
+    "url_convocatoria": "https://www.ieee-ras.org/call-students-participating-in-ieee-robotic-standardization-efforts-spirse-2/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Travel grant/Conferencia",
+      "Austria"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_288",
+    "titulo": "PhD Program International DIM C-BRAINS",
+    "institucion": "",
+    "pais": "Francia",
+    "tipo": "Doctorado",
+    "nivel": [
+      "Graduados de maestria"
+    ],
+    "area": [
+      "Neurociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-01",
+    "url_convocatoria": "https://dim-cbrains.fr/en/phd-program/dim-cbrains?search=",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Doctorado",
+      "Francia"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "No haber estudiado la maestria en Francia, ni haber tenido contrato (internship) en los 2 años previos en Francia"
+  },
+  {
+    "id": "beca_289",
+    "titulo": "Sophie Germain scholarship",
+    "institucion": "",
+    "pais": "Francia",
+    "tipo": "Maestria",
+    "nivel": [
+      "Egresados de pregrado"
+    ],
+    "area": [
+      "Matematicas"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-02-01",
+    "url_convocatoria": "https://fondation-hadamard.fr/en/our-programs/transversal-programs/graduate-program/apply-for-a-sophie-germain-scholarship/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Maestria",
+      "Francia"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_290",
+    "titulo": "2026 Internship at IIJ Research Laboratory",
+    "institucion": "",
+    "pais": "Japon",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de maestria o doctorado"
+    ],
+    "area": [
+      "Telecomunicaciones"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-31",
+    "url_convocatoria": "https://www.iijlab.net/en/career/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Japon"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_291",
+    "titulo": "2026 Space Astronomy Summer Program",
+    "institucion": "",
+    "pais": "Estados Unidos",
+    "tipo": "Internship",
+    "nivel": [
+      "estudiantes de pregrado"
+    ],
+    "area": [
+      "Astronomía"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-31",
+    "url_convocatoria": "https://stsci.slideroom.com/?fbclid=PAdGRleAPqJBVleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAadkq8euloc4PTCmNjZF27VYwYVwYB0qHvp7CkbR1FLSLzsuDX3DyPk3RX6s-w_aem_2Csp0ND29uyF0f_LWkHl-g#/login/program/87644/0XGJAXVGWl",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Estados Unidos"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "vinculados a astronomía espacial, ingeniería de software o divulgación pública"
+  },
+  {
+    "id": "beca_292",
+    "titulo": "Columbia-WHO Center for Global Mental Health Undergraduate Summer Internship",
+    "institucion": "",
+    "pais": "Remoto",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregrado"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-31",
+    "url_convocatoria": "https://www.ccgmh.org/initiatives/undergraduate-summer-internship/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Remoto"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "en el penúltimo año"
+  },
+  {
+    "id": "beca_293",
+    "titulo": "Aalto Science Institute International Summer Research Programme",
+    "institucion": "",
+    "pais": "Finlandia",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregrado o posgrado"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-31",
+    "url_convocatoria": "https://www.aalto.fi/en/aalto-science-institute-asci/aalto-science-institute-international-summer-research-programme",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Finlandia"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_294",
+    "titulo": "International Max Planck Research School for Molecular Organ Biology (IMPRS-MOB)",
+    "institucion": "",
+    "pais": "Alemania",
+    "tipo": "Doctorado",
+    "nivel": [
+      "Estudiantes o graduados de maestria"
+    ],
+    "area": [
+      "Biociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-31",
+    "url_convocatoria": "https://www.mpg.de/25797606/phd-positions-imprs",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Doctorado",
+      "Alemania"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "contar con el diploma para octubre 2026"
+  },
+  {
+    "id": "beca_295",
+    "titulo": "ReSkillSpan Training for Impactful Researcher Careers",
+    "institucion": "",
+    "pais": "Remoto",
+    "tipo": "Professional Training",
+    "nivel": [
+      "Investigadores (R1–R4)"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-31",
+    "url_convocatoria": "https://impactfulresearchercareers.eu/training-programme/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Professional Training",
+      "Remoto"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_296",
+    "titulo": "Neuroinformatics Unit Open Software Summer School",
+    "institucion": "",
+    "pais": "UK",
+    "tipo": "Escuela de Verano",
+    "nivel": [
+      "Estudiantes, investigadores, profesionales"
+    ],
+    "area": [
+      "Neurociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-31",
+    "url_convocatoria": "https://neuroinformatics.dev/open-software-summer-school/#key-dates",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Escuela de Verano",
+      "UK"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Programa con costo, becas disponibles"
+  },
+  {
+    "id": "beca_297",
+    "titulo": "Neuroscience Initiative for Education & Discovery",
+    "institucion": "",
+    "pais": "Estados Unidos",
+    "tipo": "Evento/Forum",
+    "nivel": [
+      "Estudiante de segundo, tercer o cuarto año de pregrado o recién graduado."
+    ],
+    "area": [
+      "Neurociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-31",
+    "url_convocatoria": "https://grad.neuroscience.ucdavis.edu/NIED",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Evento/Forum",
+      "Estados Unidos"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_298",
+    "titulo": "International Student Summer Research Program (iScholar) University of Rochester",
+    "institucion": "",
+    "pais": "Estados Unidos",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregado o maestria"
+    ],
+    "area": [
+      "Quimica"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-31",
+    "url_convocatoria": "https://www.sas.rochester.edu/chm/undergraduate/i-scholar.html",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Estados Unidos"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_299",
+    "titulo": "Programa Jóvenes Profesionales INACAL",
+    "institucion": "",
+    "pais": "Alemania",
+    "tipo": "Professional Training",
+    "nivel": [
+      "Egresados"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-31",
+    "url_convocatoria": "https://www.inacal.gob.pe/normalizacion/categoria/jovenes-profesionales",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Professional Training",
+      "Alemania"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "interesados en temas de calidad, sostenibilidad e innovación. Peruanos."
+  },
+  {
+    "id": "beca_300",
+    "titulo": "ESO Summer Internship Program",
+    "institucion": "",
+    "pais": "Alemania",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregado o posgrado"
+    ],
+    "area": [
+      "Astronomía"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-31",
+    "url_convocatoria": "https://recruitment.eso.org/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Alemania"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "de Astronomia, fisica, computer science, matematica, etc"
+  },
+  {
+    "id": "beca_301",
+    "titulo": "International MemBioMed Master’s Programme (From Membrane Biology to Neuroscience and Experimental Medicine)",
+    "institucion": "",
+    "pais": "Europa",
+    "tipo": "Maestria",
+    "nivel": [
+      "Estudiantes de ultimo semestre o egresados de"
+    ],
+    "area": [
+      "Biociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-31",
+    "url_convocatoria": "https://life.univ-cotedazur.eu/international/membiomed/course-outline",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Maestria",
+      "Europa"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "de Biología o equivalente en STEM (Ciencias, Tecnología, Ingeniería y Matemáticas) con cursos avanzados en biología celular, bioquímica, genética, biología molecular, biofísica, biotecnología, bioingeniería, biología médica celular, farmacología y estadística"
+  },
+  {
+    "id": "beca_302",
+    "titulo": "Erasmus Mundus Joint Master in Environmental Contamination and Toxicology + ONE HEALTH ECT+ ONE HEALTH",
+    "institucion": "",
+    "pais": "Europa",
+    "tipo": "Maestria",
+    "nivel": [
+      "Estudiantes de ultimo semestre o egresados de"
+    ],
+    "area": [
+      "Salud"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-31",
+    "url_convocatoria": "https://www.ectplus.eu/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Maestria",
+      "Europa"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "de geociencias, biociencias, veterinaria, ciencias de la salud, química, matemáticas, física o ciencias ambientales"
+  },
+  {
+    "id": "beca_303",
+    "titulo": "EUROPEAN MASTER OF SCIENCE IN SKIN HEALTH AND CARE (EMOTION)",
+    "institucion": "",
+    "pais": "Europa",
+    "tipo": "Maestria",
+    "nivel": [
+      "Estudiantes de ultimo semestre o egresados de"
+    ],
+    "area": [
+      "Salud"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-31",
+    "url_convocatoria": "https://www.emotion-master.eu/application/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Maestria",
+      "Europa"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Medicina, Farmacia, Biotecnologia, Biologia, Bioingenieria, Bioquimica, etc"
+  },
+  {
+    "id": "beca_304",
+    "titulo": "IFSC/USP 2026 International Undergraduate Internship Program",
+    "institucion": "",
+    "pais": "Brasil",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de avanzados de pregrado"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-30",
+    "url_convocatoria": "https://www2.ifsc.usp.br/portal-ifsc/ifsc-usp-applications-are-now-open-for-the-2026-international-undergraduate-internship-program/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Brasil"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_305",
+    "titulo": "Clean Water Science Network 2026 Mentorship Program",
+    "institucion": "",
+    "pais": "Remoto",
+    "tipo": "Mentoria",
+    "nivel": [
+      "estudiantes universitarios o recién graduados de América Latina"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-30",
+    "url_convocatoria": "https://www.cleanwaterscience.org/?fbclid=IwY2xjawPl7etleHRuA2FlbQIxMABicmlkETFpSGprRmNFeHMzMmxHMkRBc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHsRIjCevHQTiR9R4hLjSMkgJcs6nb1R2GN0vb70LveHg5udoxJBAlPavkLfr_aem_XEVU9c_Yf680B4A3LlF2jg",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Mentoria",
+      "Remoto"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "interesados en la investigación relacionada con el agua y en estudios de posgrado"
+  },
+  {
+    "id": "beca_306",
+    "titulo": "APEC Women’s Business Activator Program 2026",
+    "institucion": "",
+    "pais": "Australia",
+    "tipo": "Programa corto",
+    "nivel": [
+      "Mujeres ciudadanas o residentes permanentes de una economía de la APEC"
+    ],
+    "area": [
+      "Negocios"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-30",
+    "url_convocatoria": "https://www.apec.org.au/2026-apec-women-s-business-activator-program?fbclid=IwY2xjawPXTERleHRuA2FlbQIxMABicmlkETFJZE00M1o3ZmZZdkhydjJGc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHnqmw-IIwRp9hKPi7TTHHfC-ILAnk663CoOI5xx5PU-FmV_4s8v8Q-Cr9Xfq_aem_oVlp9aFhEZeY-76nFpwxcg",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Programa corto",
+      "Australia"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Fundadora o responsable clave de la toma de decisiones en una pequeña o mediana empresa."
+  },
+  {
+    "id": "beca_307",
+    "titulo": "Doctoral INPhINIT fellowships",
+    "institucion": "",
+    "pais": "España/Portugal",
+    "tipo": "Doctorado",
+    "nivel": [
+      "Graduados de maestria"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-27",
+    "url_convocatoria": "https://lacaixafoundation.org/en/doctoral-inphinit-fellowships-incoming-call",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Doctorado",
+      "España/Portugal"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "no deben haber residido ni haber desarrollado estudios/trabajo en España/Portugal durante más de 12 meses en los ultimos 3 años"
+  },
+  {
+    "id": "beca_308",
+    "titulo": "Engineering for Change (E4C) Fellowship",
+    "institucion": "",
+    "pais": "Remoto",
+    "tipo": "Fellowship",
+    "nivel": [
+      "Estudiantes de pregado o egresados"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-26",
+    "url_convocatoria": "https://www.engineeringforchange.org/fellowships/2026-e4c-fellowship/#overview",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Fellowship",
+      "Remoto"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Menos de 10  años de experiencia laboral"
+  },
+  {
+    "id": "beca_309",
+    "titulo": "CERN OpenLab",
+    "institucion": "",
+    "pais": "Suiza",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregado o maestria"
+    ],
+    "area": [
+      "IT"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-26",
+    "url_convocatoria": "https://www.smartrecruiters.com/CERN/744000092333786-cern-openlab-summer-student-programme-2026",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Suiza"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_310",
+    "titulo": "Innovative Biotechnological Approaches in Health - From Research to Application",
+    "institucion": "",
+    "pais": "Argentina",
+    "tipo": "Curso",
+    "nivel": [
+      "Estudiantes de posgrado e investigadores"
+    ],
+    "area": [
+      "Biociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-26",
+    "url_convocatoria": "https://unu.edu/biolac/announcement/next-course-innovative-biotechnological-approaches-health-research-application",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Curso",
+      "Argentina"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_311",
+    "titulo": "8va EDICIÓN DEL PIT – CURSOS GRATUITOS DE LA UNI",
+    "institucion": "",
+    "pais": "Remoto",
+    "tipo": "Curso",
+    "nivel": [
+      "Estudiantes y egresados de universidades o institutos de todo el país."
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-23",
+    "url_convocatoria": "https://www.ctic.uni.edu.pe/cursos-gratuitos-oti-uni/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Curso",
+      "Remoto"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Peru"
+  },
+  {
+    "id": "beca_312",
+    "titulo": "Global Research Mentorship Program (GREMP) in Medical Physics",
+    "institucion": "",
+    "pais": "Estados Unidos",
+    "tipo": "Mentoria",
+    "nivel": [
+      "Asesores de doctorado (PIs) con sus estudiantes"
+    ],
+    "area": [
+      "Medicina"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-22",
+    "url_convocatoria": "https://aapm.secure-platform.com/gaf/page/gremp",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Mentoria",
+      "Estados Unidos"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "de programa de investigación emergente"
+  },
+  {
+    "id": "beca_313",
+    "titulo": "SPACEMED Erasmus Mundus Joint Master Degree on Physiology and Medicine of Humans in Space and Extreme Environments",
+    "institucion": "",
+    "pais": "Europa",
+    "tipo": "Maestria",
+    "nivel": [
+      "Estudiantes de ultimo semestre o egresados de"
+    ],
+    "area": [
+      "Medicina"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-22",
+    "url_convocatoria": "https://www.space-med.eu/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Maestria",
+      "Europa"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "ciencias de la vida, psicología o kinesiología, ingeniería, título de medicina o equivalente"
+  },
+  {
+    "id": "beca_314",
+    "titulo": "Master in Membrane Engineering for Sustainable Development",
+    "institucion": "",
+    "pais": "Europa",
+    "tipo": "Maestria",
+    "nivel": [
+      "Estudiantes de ultimo semestre o egresados de"
+    ],
+    "area": [
+      "Quimica"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-21",
+    "url_convocatoria": "https://mesd.edu.umontpellier.fr/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Maestria",
+      "Europa"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Química, Física, Ingeniería de Materiales, Ingeniería Química, Ingeniería Bioquímica o  equivalente."
+  },
+  {
+    "id": "beca_315",
+    "titulo": "Master in International Vaccinology",
+    "institucion": "",
+    "pais": "Europa",
+    "tipo": "Maestria",
+    "nivel": [
+      "Estudiantes de ultimo semestre o egresados de"
+    ],
+    "area": [
+      "Biociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-21",
+    "url_convocatoria": "https://masterlive-vaccinology.eu/program-structure/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Maestria",
+      "Europa"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Bioquímicos, bioingenieros, biólogos, médicos, farmacéuticos y veterinarios."
+  },
+  {
+    "id": "beca_316",
+    "titulo": "École Polytechnique -Research Program for International Talents",
+    "institucion": "",
+    "pais": "Francia",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregado (3-4 año) o posgrado"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-19",
+    "url_convocatoria": "https://programmes.polytechnique.edu/en/exchange-programs/research-program-for-international-talents/how-to-apply",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Francia"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "de universidades partners de École Polytechnique"
+  },
+  {
+    "id": "beca_317",
+    "titulo": "Vienna Center for Disarmament and Non-Proliferation (VCDNP) Internship",
+    "institucion": "",
+    "pais": "Austria",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de posgrado y recien egresados"
+    ],
+    "area": [
+      "Energia Nuclear"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-18",
+    "url_convocatoria": "https://vcdnp.org/spring-2026-internship/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Austria"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_318",
+    "titulo": "2026 IYNA–Alzheimer’s Association Ideathon",
+    "institucion": "",
+    "pais": "Remoto",
+    "tipo": "Hackathon",
+    "nivel": [
+      "Estudiantes de secundaria y pregrado"
+    ],
+    "area": [
+      "Neurociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-17",
+    "url_convocatoria": "https://docs.google.com/forms/d/e/1FAIpQLSezKC5OPxxEPGlnRjIh2K3_CZuoWrtyiAlJSRZNpzretA0l_A/viewform",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Hackathon",
+      "Remoto"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "(Deadline extendido)"
+  },
+  {
+    "id": "beca_319",
+    "titulo": "Université Paris Cité - SMARTS-UP International scholarships for Master’s students",
+    "institucion": "",
+    "pais": "Francia",
+    "tipo": "Maestria",
+    "nivel": [
+      "Postulantes a maestria"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-16",
+    "url_convocatoria": "https://mobility.smarts-up.fr/?trk=feed_main-feed-card_feed-article-content",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Maestria",
+      "Francia"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_320",
+    "titulo": "Stipendium Hungaricum",
+    "institucion": "",
+    "pais": "Hungria",
+    "tipo": "Beca de estudios",
+    "nivel": [
+      "Todos"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-15",
+    "url_convocatoria": "https://apply.studyinhungary.hu/news/new/128-stipendium-hungaricum-application-system-open",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Beca de estudios",
+      "Hungria"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Estudios de pregrado, maestria, doctorado, cursos de especializacion e intercambios"
+  },
+  {
+    "id": "beca_321",
+    "titulo": "Hansen Leadership Institute",
+    "institucion": "",
+    "pais": "Estados Unidos",
+    "tipo": "Programa corto",
+    "nivel": [
+      "Estudiantes de pregrado/ posgrado o recien egresados"
+    ],
+    "area": [
+      "Liderazgo"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-15",
+    "url_convocatoria": "https://hansenleadershipinstitute.org/apply-now/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Programa corto",
+      "Estados Unidos"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Menores de 25 años a Julio 2026"
+  },
+  {
+    "id": "beca_322",
+    "titulo": "AMAS Young Researcher Associate Programme",
+    "institucion": "",
+    "pais": "Remoto",
+    "tipo": "Fellowship",
+    "nivel": [
+      "Estudiantes de posgrado"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-15",
+    "url_convocatoria": "https://aiforgood.itu.int/multimedia-authenticity/amas-young-researcher-associate-programme/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Fellowship",
+      "Remoto"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Interes en IA"
+  },
+  {
+    "id": "beca_323",
+    "titulo": "Student Summer Internship 2026 at the Max Planck Institute for Astronomy (MPIA)",
+    "institucion": "",
+    "pais": "Alemania",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregado o maestria"
+    ],
+    "area": [
+      "Astronomía"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-15",
+    "url_convocatoria": "https://www.mpia.de/en/careers/internships/summer?utm_source=chatgpt.com",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Alemania"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_324",
+    "titulo": "SFI’s 2026 Undergraduate Complexity Research (UCR) program",
+    "institucion": "",
+    "pais": "Estados Unidos",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregrado"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-14",
+    "url_convocatoria": "www.santafe.edu/ucr",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Estados Unidos"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_325",
+    "titulo": "Talents for the Future Program - Vienna BioCenter Summer School",
+    "institucion": "",
+    "pais": "Austria",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregado o maestria"
+    ],
+    "area": [
+      "Biociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-11",
+    "url_convocatoria": "https://training.vbc.ac.at/summer-school/talents-for-future/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Austria"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "El Salvador, Ghana, Costa Rica, Mozambique, Nicaragua, Nigeria, Peru and the Philippines."
+  },
+  {
+    "id": "beca_326",
+    "titulo": "Constellation Visiting Fellows",
+    "institucion": "",
+    "pais": "Estados Unidos",
+    "tipo": "Fellowship",
+    "nivel": [
+      "Todos"
+    ],
+    "area": [
+      "IA"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-05",
+    "url_convocatoria": "https://www.constellation.org/programs/visiting-fellows",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Fellowship",
+      "Estados Unidos"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_327",
+    "titulo": "National Institute of Genetics (NIG) Internship Program",
+    "institucion": "",
+    "pais": "Japon",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregado o maestria"
+    ],
+    "area": [
+      "Biociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-05",
+    "url_convocatoria": "https://www.nig.ac.jp/jimu/soken/intern/2026/index.html",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Japon"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "En su año previo al ultimo"
+  },
+  {
+    "id": "beca_328",
+    "titulo": "SUSI en Emprendimiento y Prosperidad Económica",
+    "institucion": "",
+    "pais": "Estados Unidos",
+    "tipo": "Programa corto",
+    "nivel": [
+      "Estudiantes de pregrado"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "",
+    "deadline": "2026-01-04",
+    "url_convocatoria": "Peru: https://docs.google.com/forms/d/e/1FAIpQLSctgFiOxNRtGvTLGTuiO5U4ujkcBxIJwe-5EVJkPNzgZIyKUg/viewform Costa Rica(12/01): https://cr.usembassy.gov/es/education-es/exchanges/susi-students/?fbclid=IwY2xjawO_x25leHRuA2FlbQIxMABicmlkETA1QTY5ZkFZQmdMcEkwMnVRc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHjAGR-dYTAkuvXk8C2d5YTeEOQGHheGhOSzV_B53uSk-orEy046RRn7sgN3Z_aem_xPjkun5tLqliL_yQEuFvAQ Mexico: https://mx.usembassy.gov/wp-content/uploads/sites/15/2025/12/2026-SUSI-for-Student-Leaders-Call-in-Spanish-1-1.pdf  Honduras (31/12): https://hn.usembassy.gov/es/susi-lideres-estudiantiles/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Programa corto",
+      "Estados Unidos"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Consultar con la embajada de tu pais"
+  },
+  {
+    "id": "beca_329",
+    "titulo": "Women@Dior & UNESCO",
+    "institucion": "",
+    "pais": "Remoto",
+    "tipo": "Mentoria",
+    "nivel": [
+      "Estudiantes de ultimo año de pregrado o de posgrado"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "",
+    "deadline": "2025-12-31",
+    "url_convocatoria": "https://womenatdior.com/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Mentoria",
+      "Remoto"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Mujeres menores de 30 años"
+  },
+  {
+    "id": "beca_330",
+    "titulo": "UNIL Summer Undergraduate Research (SUR) Programme",
+    "institucion": "",
+    "pais": "Suiza",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregrado"
+    ],
+    "area": [
+      "Biociencias"
+    ],
+    "financiamiento": "",
+    "deadline": "2025-12-31",
+    "url_convocatoria": "https://www.unil.ch/fbm/en/home/menuinst/formation/short-continuing-postgraduate-training/sur-programme.html",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Suiza"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "En su tercer año"
+  },
+  {
+    "id": "beca_331",
+    "titulo": "Astrophysics Summer Program for International Research Experience",
+    "institucion": "",
+    "pais": "Paises Bajos",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de maestria"
+    ],
+    "area": [
+      "Astronomía"
+    ],
+    "financiamiento": "",
+    "deadline": "2025-12-17",
+    "url_convocatoria": "https://aspire.science.uva.nl/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Paises Bajos"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_332",
+    "titulo": "ETH Student Summer Research Fellowship",
+    "institucion": "",
+    "pais": "Suiza",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregado o maestria"
+    ],
+    "area": [
+      "Computer Science"
+    ],
+    "financiamiento": "",
+    "deadline": "2025-12-16",
+    "url_convocatoria": "https://inf.ethz.ch/studies/summer-research-fellowship.html",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Suiza"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_333",
+    "titulo": "ISSP - International Summer Student Programme",
+    "institucion": "",
+    "pais": "Alemania",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregado o maestria"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2025-12-14",
+    "url_convocatoria": "https://www.helmholtz-berlin.de/jobskarriere/schule-und-studium/summer-schools/sommerstudierende/index_en.html",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Alemania"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
+  },
+  {
+    "id": "beca_334",
+    "titulo": "LPI Summer Intern Program in Planetary Science",
+    "institucion": "",
+    "pais": "Estados Unidos",
+    "tipo": "Internship",
+    "nivel": [
+      "Estudiantes de pregado"
+    ],
+    "area": [
+      "STEM"
+    ],
+    "financiamiento": "",
+    "deadline": "2025-12-12",
+    "url_convocatoria": "https://www.lpi.usra.edu/lpiintern/application/",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Internship",
+      "Estados Unidos"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": ""
   }
 ]
