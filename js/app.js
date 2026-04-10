@@ -13,7 +13,36 @@ document.addEventListener('DOMContentLoaded', () => {
     loadScholarships();
     checkAuth();
     setupEventListeners();
+    
+    // DETECTOR DE DEEP LINKING (Si la URL tiene ?beca=ID)
+    checkDeepLink();
 });
+
+// Función para detectar y abrir beca desde URL
+function checkDeepLink() {
+    const params = new URLSearchParams(window.location.search);
+    const becaId = params.get('beca');
+
+    if (becaId) {
+        // Esperamos un momento a que carguen los datos
+        setTimeout(() => {
+            const beca = allScholarshipsRaw.find(b => b.id === becaId);
+            if (beca) {
+                console.log(`🔗 Beca detectada en URL: ${beca.titulo}`);
+                
+                // Opción A: Abrir directamente el modal de detalles
+                openDetailModal(beca);
+                
+                // Opción B (Extra): Si quieres que el popup de compartir salga automático, descomenta esto:
+                // currentSharedBeca = beca;
+                // Crear un evento falso para abrir el popup en el centro de la pantalla podría ser complejo,
+                // así que lo mejor es abrir el modal de detalles que ya tiene el botón de compartir o la info.
+            } else {
+                console.warn("⚠️ La beca solicitada no existe o no ha cargado aún.");
+            }
+        }, 1000); // 1 segundo de espera para asegurar carga de JSON
+    }
+}
 
 // --- CARGA DE DATOS (FORZADA) ---
 async function loadScholarships() {
@@ -557,10 +586,17 @@ window.closeDetailModal = () => {
     if(modal) modal.classList.add('hidden');
 };
 
+// Función auxiliar para construir la URL específica de la beca
+function getBecaUrl(beca) {
+    const baseUrl = window.location.origin + window.location.pathname;
+    return `${baseUrl}?beca=${beca.id}`;
+}
+
 window.shareWhatsApp = () => {
     if (!currentSharedBeca) return;
-    const text = `Mira esta beca: ${currentSharedBeca.titulo} en ${currentSharedBeca.pais}. Deadline: ${currentSharedBeca.deadline}.`;
-    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text + ' ' + window.location.href)}`, '_blank');
+    const urlEspecifica = getBecaUrl(currentSharedBeca);
+    const text = `🎓 ¡Oportunidad! ${currentSharedBeca.titulo} en ${currentSharedBeca.pais}. Deadline: ${currentSharedBeca.deadline}.`;
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text + ' ' + urlEspecifica)}`, '_blank');
 };
 
 // --- FUNCIONES DE COMPARTIR MEJORADAS ---
@@ -572,31 +608,34 @@ function getShareText(beca) {
 
 window.shareTwitter = () => {
     if (!currentSharedBeca) return;
-    const text = encodeURIComponent(`${getShareText(currentSharedBeca)} #Becas #StudyAbroad`);
-    const url = encodeURIComponent(window.location.href);
-    window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+    const urlEspecifica = getBecaUrl(currentSharedBeca);
+    const text = encodeURIComponent(`${currentSharedBeca.titulo} - ${currentSharedBeca.pais} 🇺🇳 #Becas #StudyAbroad`);
+    window.open(`https://twitter.com/intent/tweet?text=${text}&url=${encodeURIComponent(urlEspecifica)}`, '_blank');
 };
 
 window.shareLinkedIn = () => {
     if (!currentSharedBeca) return;
-    const url = encodeURIComponent(window.location.href);
-    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+    const urlEspecifica = getBecaUrl(currentSharedBeca);
+    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(urlEspecifica)}`, '_blank');
 };
 
 window.shareFacebook = () => {
     if (!currentSharedBeca) return;
-    const url = encodeURIComponent(window.location.href);
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+    const urlEspecifica = getBecaUrl(currentSharedBeca);
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(urlEspecifica)}`, '_blank');
 };
 
-// Mejora de copyLink con feedback visual
-window.copyLink = () => {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-        // Pequeño truco para mostrar un mensaje más amigable sin alert nativo si quisieras
-        alert("✅ Enlace copiado al portapapeles. ¡Pégalo donde quieras!");
+// Versión directa de copiar enlace para el popup (También actualizada)
+window.copyLinkDirect = () => {
+    if (!currentSharedBeca) return;
+    const urlEspecifica = getBecaUrl(currentSharedBeca);
+    
+    navigator.clipboard.writeText(urlEspecifica).then(() => {
+        alert("✅ Enlace directo a la beca copiado al portapapeles");
+        closeSharePopup();
     }).catch(err => {
         console.error('Error al copiar', err);
-        alert("No se pudo copiar automáticamente. Por favor copia la URL manualmente.");
+        alert("No se pudo copiar automáticamente.");
     });
 };
 
