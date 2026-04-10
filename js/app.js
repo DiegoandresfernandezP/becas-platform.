@@ -439,6 +439,10 @@ function renderTracker() {
                     <option value="Aceptada" ${app.status === 'Aceptada' ? 'selected' : ''}>Aceptada</option>
                     <option value="Rechazada" ${app.status === 'Rechazada' ? 'selected' : ''}>Rechazada</option>
                 </select>
+                <!-- NUEVO BOTÓN DE ELIMINAR -->
+                <button class="btn btn-danger btn-sm" onclick="removeFromTracker('${app.id}')" title="Eliminar de mi lista" style="background:#ef4444; color:white; padding:6px 10px;">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
             </div>
         `;
         container.appendChild(item);
@@ -460,6 +464,22 @@ function updateStatus(id, newStatus) {
         app.status = newStatus;
         localStorage.setItem(`apps_${currentUser.email}`, JSON.stringify(userApplications));
     }
+}
+
+function removeFromTracker(id) {
+    if (!confirm('¿Estás seguro de que quieres eliminar esta beca de tu tracker?')) return;
+
+    // Filtrar para quitar la beca con ese ID
+    userApplications = userApplications.filter(app => app.id !== id);
+    
+    // Guardar en localStorage
+    localStorage.setItem(`apps_${currentUser.email}`, JSON.stringify(userApplications));
+    
+    // Recargar el dashboard para reflejar el cambio
+    loadDashboard();
+    
+    // Si estamos en la vista de catálogo, actualizar los botones de "Guardar" también
+    applyFilters(); 
 }
 
 function renderChart() {
