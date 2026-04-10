@@ -199,14 +199,14 @@ function applyFilters() {
         return el ? el.value : 'all';
     };
 
-    const term = (document.getElementById('searchInput')?.value || '').toLowerCase();
+    const term = (document.getElementById('searchInput')?.value || '').toLowerCase().trim(); // .trim() elimina espacios extra
     const type = getVal('filterType');
     const level = getVal('filterLevel');
     const area = getVal('filterArea');
     const country = getVal('filterCountry');
     const sort = getVal('filterSort');
 
-    // Filtramos sobre TODAS las becas (activas y cerradas) para que el buscador funcione en histórico
+    // 1. Filtramos sobre TODAS las becas
     let filtered = allScholarshipsRaw.filter(beca => {
         const matchText = beca.titulo.toLowerCase().includes(term) || 
                           beca.institucion.toLowerCase().includes(term) ||
@@ -223,7 +223,7 @@ function applyFilters() {
         return matchText && matchType && matchLevel && matchArea && matchCountry;
     });
 
-    // Ordenamiento
+    // 2. Ordenamiento
     if (sort === 'deadline') {
         filtered.sort((a, b) => new Date(a.deadline || '9999-12-31') - new Date(b.deadline || '9999-12-31'));
     } else if (sort === 'recent') {
@@ -232,36 +232,36 @@ function applyFilters() {
         filtered.sort((a, b) => a.titulo.localeCompare(b.titulo));
     }
 
-    // Limpiamos el contenedor antes de volver a renderizar todo junto o separado?
-    // Para simplificar filtros globales, renderizamos todo junto si hay búsqueda, 
-    // sino mantenemos la lógica de separación.
-    
     const container = document.getElementById('catalogo');
-    container.innerHTML = ''; // Limpiar
+    container.innerHTML = ''; // Limpiar contenedor
     
-    // Si hay término de búsqueda, mostramos todo mezclado
-    if (term !== '' || type !== 'all' || level !== 'all' || area !== 'all' || country !== 'all') {
-         renderScholarships(filtered, false); // Renderizamos resultado único
-    } else {
-        // Si no hay filtros, restauramos vista dividida (Activas | Cerradas)
-        const todayStr = new Date().toISOString().split('T')[0];
-        const active = filtered.filter(b => !b.deadline || b.deadline >= todayStr);
-        const closed = filtered.filter(b => b.deadline && b.deadline < todayStr);
+    // 3. SEPARACIÓN OBLIGATORIA (ACTIVAS vs CERRADAS)
+    // Esto se ejecuta SIEMPRE, haya búsqueda o no.
+    const todayStr = new Date().toISOString().split('T')[0];
+    
+    const active = filtered.filter(b => !b.deadline || b.deadline >= todayStr);
+    const closed = filtered.filter(b => b.deadline && b.deadline < todayStr);
 
-        renderScholarships(active, false);
-        
-        if (closed.length > 0) {
-            const separator = document.createElement('div');
-            separator.style.gridColumn = "1 / -1";
-            separator.style.marginTop = "40px";
-            separator.style.marginBottom = "20px";
-            separator.innerHTML = `<h3 style="text-align:center; color:#666;">Convocatorias Cerradas</h3>`;
-            container.appendChild(separator);
-            renderScholarships(closed, true);
-        }
+    // Renderizamos activas
+    renderScholarships(active, false);
+    
+    // Si hay cerradas, añadimos separador y renderizamos
+    if (closed.length > 0) {
+        const separator = document.createElement('div');
+        separator.style.gridColumn = "1 / -1";
+        separator.style.marginTop = "40px";
+        separator.style.marginBottom = "20px";
+        separator.innerHTML = `
+            <h3 style="text-align:center; color:#666; border-bottom: 2px solid #eee; padding-bottom:10px;">
+                🕰️ Convocatorias Cerradas (Referencia Histórica)
+            </h3>
+            <p style="text-align:center; font-size:0.9rem; color:#888;">Úsalas para preparar tus documentos para el próximo ciclo.</p>
+        `;
+        container.appendChild(separator);
+        renderScholarships(closed, true);
     }
     
-    // Actualizar contador
+    // Actualizar contador con el total filtrado
     const countDisplay = document.getElementById('count-display');
     if(countDisplay) countDisplay.textContent = filtered.length;
 }
