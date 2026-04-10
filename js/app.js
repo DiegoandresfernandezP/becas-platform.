@@ -601,10 +601,6 @@ window.shareWhatsApp = () => {
 
 // --- FUNCIONES DE COMPARTIR MEJORADAS ---
 
-// Función auxiliar para obtener el texto base
-function getShareText(beca) {
-    return `🎓 ¡Oportunidad! ${beca.titulo} en ${beca.pais}. Deadline: ${beca.deadline}. Más info aquí:`;
-}
 
 window.shareTwitter = () => {
     if (!currentSharedBeca) return;
@@ -712,16 +708,7 @@ window.closeSharePopup = () => {
     document.removeEventListener('click', closeSharePopupExternal);
 };
 
-// Versión directa de copiar enlace para el popup
-window.copyLinkDirect = () => {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-        alert("✅ Enlace copiado al portapapeles");
-        closeSharePopup();
-    }).catch(err => {
-        console.error('Error al copiar', err);
-        alert("No se pudo copiar automáticamente.");
-    });
-};
+
 
 window.openLetterGenerator = (id) => {
     const app = userApplications.find(a => a.id === id);
