@@ -4921,39 +4921,6 @@
     "nota": "No aceptan estudiantes de posgrado"
   },
   {
-    "id": "beca_056",
-    "titulo": "OIST Research Internship Program",
-    "institucion": "OIST",
-    "pais": "Japón",
-    "tipo": "Internship",
-    "nivel": [
-      "Pregrado",
-      "Maestría"
-    ],
-    "area": [
-      "STEM",
-      "Biología",
-      "Física"
-    ],
-    "financiamiento": "100% (Flight + Accommodation + Stipend)",
-    "deadline": "2026-04-15",
-    "url_convocatoria": "https://www.oist.jp/admissions/research-internship/program-description",
-    "requisitos_idioma": [
-      "Inglés"
-    ],
-    "documentos_sugeridos": [
-      "CV",
-      "Carta Motivación",
-      "2 Recomendaciones",
-      "Transcript"
-    ],
-    "tags": [
-      "Japón",
-      "Investigación",
-      "Verano"
-    ]
-  },
-  {
     "id": "beca_210",
     "titulo": "Scientific Fellowships for Master, PhD, and Medical Students",
     "institucion": "",
@@ -5663,6 +5630,40 @@
     ],
     "fase": "Pendiente de solicitar",
     "nota": "ser docente de carrera o de planta, o personal administrativo de una universidad iberoamericana"
+  },
+  {
+    "id": "beca_056",
+    "titulo": "OIST Research Internship Program",
+    "institucion": "OIST",
+    "pais": "Japón",
+    "tipo": "Internship",
+    "nivel": [
+      "Pregrado",
+      "Maestría"
+    ],
+    "area": [
+      "STEM",
+      "Biología",
+      "Física"
+    ],
+    "financiamiento": "100% (Flight + Accommodation + Stipend)",
+    "deadline": "2027-04-15",
+    "url_convocatoria": "https://www.oist.jp/admissions/research-internship/program-description",
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación",
+      "2 Recomendaciones",
+      "Transcript"
+    ],
+    "tags": [
+      "Japón",
+      "Investigación",
+      "Verano",
+      "Re-Validada Auto"
+    ]
   },
   {
     "id": "beca_201",
