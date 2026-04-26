@@ -5065,30 +5065,6 @@
     "nota": ""
   },
   {
-    "id": "beca_206",
-    "titulo": "Jóvenes Líderes Iberoamericanos 2026 - Fundación Carolina",
-    "institucion": "",
-    "pais": "España",
-    "tipo": "Programa corto",
-    "nivel": [
-      "graduados de pregrado"
-    ],
-    "area": [
-      "Liderazgo"
-    ],
-    "financiamiento": "",
-    "deadline": "2026-04-22",
-    "url_convocatoria": "https://app.santanderopenacademy.com/es/program/jovenes-lideres-iberoamericanos-2026-fundacion-carolina",
-    "requisitos_idioma": [],
-    "documentos_sugeridos": [],
-    "tags": [
-      "Programa corto",
-      "España"
-    ],
-    "fase": "Pendiente de solicitar",
-    "nota": "Haber obtenido una titulación superior (grado, licenciatura o equivalente, ingeniería o título de arquitecto/ a, etc.) después del 1 de octubre de 2023 y no superar los 27 años al momento de realizar la inscripción. Ser nacional de algún país de América Latina miembro de la Comunidad Iberoamericana de Naciones, de España o Portugal."
-  },
-  {
     "id": "beca_004",
     "titulo": "Fulbright Foreign Student Program",
     "institucion": "Comisión Fulbright",
@@ -5666,6 +5642,31 @@
     ]
   },
   {
+    "id": "beca_206",
+    "titulo": "Jóvenes Líderes Iberoamericanos 2026 - Fundación Carolina",
+    "institucion": "",
+    "pais": "España",
+    "tipo": "Programa corto",
+    "nivel": [
+      "graduados de pregrado"
+    ],
+    "area": [
+      "Liderazgo"
+    ],
+    "financiamiento": "",
+    "deadline": "2027-04-22",
+    "url_convocatoria": "https://app.santanderopenacademy.com/es/program/jovenes-lideres-iberoamericanos-2026-fundacion-carolina",
+    "requisitos_idioma": [],
+    "documentos_sugeridos": [],
+    "tags": [
+      "Programa corto",
+      "España",
+      "Re-Validada Auto"
+    ],
+    "fase": "Pendiente de solicitar",
+    "nota": "Haber obtenido una titulación superior (grado, licenciatura o equivalente, ingeniería o título de arquitecto/ a, etc.) después del 1 de octubre de 2023 y no superar los 27 años al momento de realizar la inscripción. Ser nacional de algún país de América Latina miembro de la Comunidad Iberoamericana de Naciones, de España o Portugal."
+  },
+  {
     "id": "beca_201",
     "titulo": "Erasmus Mundus Joint Masters",
     "institucion": "",
@@ -5789,6 +5790,62 @@
     ],
     "tags": [
       "Curso",
+      "España"
+    ],
+    "source_type": "rss_auto"
+  },
+  {
+    "id": "auto_0bcbe932ebd9",
+    "titulo": "Cierra la convocatoria del Programa Jóvenes Líderes Iberoamericanos 2026 con cifra récord de solicitudes",
+    "institucion": "Fundación Carolina (España)",
+    "pais": "España",
+    "tipo": "Otro",
+    "nivel": [
+      "Todos"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "Variable",
+    "deadline": "Verificar en web",
+    "url_convocatoria": "https://www.fundacioncarolina.es/cierra-la-convocatoria-del-programa-jovenes-lideres-iberoamericanos-2026-con-cifra-record-de-solicitudes/",
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación"
+    ],
+    "tags": [
+      "Otro",
+      "España"
+    ],
+    "source_type": "rss_auto"
+  },
+  {
+    "id": "auto_cbd96b84c0ea",
+    "titulo": "La Fundación Carolina y la Fundación Ramón Areces inauguran en Madrid la I edición del Programa de Periodistas Iberoamericanos",
+    "institucion": "Fundación Carolina (España)",
+    "pais": "España",
+    "tipo": "Otro",
+    "nivel": [
+      "Todos"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "Variable",
+    "deadline": "Verificar en web",
+    "url_convocatoria": "https://www.fundacioncarolina.es/la-fundacion-carolina-y-la-fundacion-ramon-areces-inauguran-en-madrid-la-i-edicion-del-programa-de-periodistas-iberoamericanos/",
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación"
+    ],
+    "tags": [
+      "Otro",
       "España"
     ],
     "source_type": "rss_auto"
