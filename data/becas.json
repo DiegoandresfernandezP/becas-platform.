@@ -5065,37 +5065,6 @@
     "nota": ""
   },
   {
-    "id": "beca_004",
-    "titulo": "Fulbright Foreign Student Program",
-    "institucion": "Comisión Fulbright",
-    "pais": "Estados Unidos",
-    "tipo": "Beca",
-    "nivel": [
-      "Maestría",
-      "Doctorado"
-    ],
-    "area": [
-      "Todas"
-    ],
-    "financiamiento": "100% (Tuition + Stipend)",
-    "deadline": "2026-04-26",
-    "url_convocatoria": "https://www.fulbright.pe/becaposgradofulbright",
-    "requisitos_idioma": [
-      "Inglés"
-    ],
-    "documentos_sugeridos": [
-      "CV",
-      "3 Cartas Recomendación",
-      "Ensayos",
-      "Títulos"
-    ],
-    "tags": [
-      "USA",
-      "Prestigio",
-      "Investigación"
-    ]
-  },
-  {
     "id": "beca_098",
     "titulo": "Weizmann Institute PhD/Msc Openings",
     "institucion": "Weizmann Institute of Science",
@@ -5667,6 +5636,38 @@
     "nota": "Haber obtenido una titulación superior (grado, licenciatura o equivalente, ingeniería o título de arquitecto/ a, etc.) después del 1 de octubre de 2023 y no superar los 27 años al momento de realizar la inscripción. Ser nacional de algún país de América Latina miembro de la Comunidad Iberoamericana de Naciones, de España o Portugal."
   },
   {
+    "id": "beca_004",
+    "titulo": "Fulbright Foreign Student Program",
+    "institucion": "Comisión Fulbright",
+    "pais": "Estados Unidos",
+    "tipo": "Beca",
+    "nivel": [
+      "Maestría",
+      "Doctorado"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "100% (Tuition + Stipend)",
+    "deadline": "2027-04-26",
+    "url_convocatoria": "https://www.fulbright.pe/becaposgradofulbright",
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "3 Cartas Recomendación",
+      "Ensayos",
+      "Títulos"
+    ],
+    "tags": [
+      "USA",
+      "Prestigio",
+      "Investigación",
+      "Re-Validada Auto"
+    ]
+  },
+  {
     "id": "beca_201",
     "titulo": "Erasmus Mundus Joint Masters",
     "institucion": "",
@@ -5837,6 +5838,62 @@
     "financiamiento": "Variable",
     "deadline": "Verificar en web",
     "url_convocatoria": "https://www.fundacioncarolina.es/la-fundacion-carolina-y-la-fundacion-ramon-areces-inauguran-en-madrid-la-i-edicion-del-programa-de-periodistas-iberoamericanos/",
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación"
+    ],
+    "tags": [
+      "Otro",
+      "España"
+    ],
+    "source_type": "rss_auto"
+  },
+  {
+    "id": "auto_0e8c2a1a813e",
+    "titulo": "Cuatrocientas personas se han doctorado con una beca de la Fundación Carolina",
+    "institucion": "Fundación Carolina (España)",
+    "pais": "España",
+    "tipo": "Doctorado",
+    "nivel": [
+      "Todos"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "Variable",
+    "deadline": "Verificar en web",
+    "url_convocatoria": "https://www.fundacioncarolina.es/cuatrocientas-personas-se-han-doctorado-con-una-beca-de-la-fundacion-carolina/",
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación"
+    ],
+    "tags": [
+      "Doctorado",
+      "España"
+    ],
+    "source_type": "rss_auto"
+  },
+  {
+    "id": "auto_2293daa3da33",
+    "titulo": "Fundación Carolina y Fundación Ramón Areces clausuran la primera edición del Programa Periodistas de Iberoamérica",
+    "institucion": "Fundación Carolina (España)",
+    "pais": "España",
+    "tipo": "Otro",
+    "nivel": [
+      "Todos"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "Variable",
+    "deadline": "Verificar en web",
+    "url_convocatoria": "https://www.fundacioncarolina.es/fundacion-carolina-y-fundacion-ramon-areces-clausuran-la-primera-edicion-del-programa-periodistas-de-iberoamerica/",
     "requisitos_idioma": [
       "Inglés"
     ],
