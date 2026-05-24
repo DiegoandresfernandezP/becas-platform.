@@ -5906,5 +5906,33 @@
       "España"
     ],
     "source_type": "rss_auto"
+  },
+  {
+    "id": "auto_91bb638fd8c2",
+    "titulo": "51 becarios y becarias de la Fundación Carolina participan en un encuentro regional en Valencia",
+    "institucion": "Fundación Carolina (España)",
+    "pais": "España",
+    "tipo": "Beca",
+    "nivel": [
+      "Todos"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "Variable",
+    "deadline": "Verificar en web",
+    "url_convocatoria": "https://www.fundacioncarolina.es/51-becarios-y-becarias-de-la-fundacion-carolina-participan-en-un-encuentro-regional-en-valencia/",
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación"
+    ],
+    "tags": [
+      "Beca",
+      "España"
+    ],
+    "source_type": "rss_auto"
   }
 ]
