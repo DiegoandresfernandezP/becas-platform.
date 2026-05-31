@@ -5934,5 +5934,62 @@
       "España"
     ],
     "source_type": "rss_auto"
+  },
+  {
+    "id": "auto_948d9ccf28cb",
+    "titulo": "Fundación Carolina abre la convocatoria de becas para sus Cursos de Verano 2026",
+    "institucion": "Fundación Carolina (España)",
+    "pais": "España",
+    "tipo": "Verano",
+    "nivel": [
+      "Pregrado",
+      "Maestría"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "Variable",
+    "deadline": "Verificar en web",
+    "url_convocatoria": "https://www.fundacioncarolina.es/fundacion-carolina-abre-su-convocatoria-de-becas-para-los-cursos-de-verano-2026/",
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación"
+    ],
+    "tags": [
+      "Verano",
+      "España"
+    ],
+    "source_type": "rss_auto"
+  },
+  {
+    "id": "auto_8059c98541c0",
+    "titulo": "El Programa de Líderes Hispanos de Estados Unidos refuerza los vínculos entre España y la comunidad hispana estadounidense",
+    "institucion": "Fundación Carolina (España)",
+    "pais": "España",
+    "tipo": "Otro",
+    "nivel": [
+      "Todos"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "Variable",
+    "deadline": "Verificar en web",
+    "url_convocatoria": "https://www.fundacioncarolina.es/el-programa-de-lideres-hispanos-de-estados-unidos-refuerza-los-vinculos-entre-espana-y-la-comunidad-hispana-estadounidense/",
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación"
+    ],
+    "tags": [
+      "Otro",
+      "España"
+    ],
+    "source_type": "rss_auto"
   }
 ]
