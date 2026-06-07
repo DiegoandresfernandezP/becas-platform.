@@ -5991,5 +5991,33 @@
       "España"
     ],
     "source_type": "rss_auto"
+  },
+  {
+    "id": "auto_79026a542641",
+    "titulo": "En Madrid finaliza el Programa de CAF y Fundación Carolina sobre valores democráticos",
+    "institucion": "Fundación Carolina (España)",
+    "pais": "España",
+    "tipo": "Otro",
+    "nivel": [
+      "Todos"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "Variable",
+    "deadline": "Verificar en web",
+    "url_convocatoria": "https://www.fundacioncarolina.es/en-madrid-finaliza-el-programa-de-caf-y-fundacion-carlina-sobre-valores-democraticos/",
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación"
+    ],
+    "tags": [
+      "Otro",
+      "España"
+    ],
+    "source_type": "rss_auto"
   }
 ]
