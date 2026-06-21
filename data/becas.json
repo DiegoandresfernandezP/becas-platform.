@@ -6019,5 +6019,61 @@
       "España"
     ],
     "source_type": "rss_auto"
+  },
+  {
+    "id": "auto_10ffd4115253",
+    "titulo": "Fundación Carolina y AECID presentan su programa de protección y formación para defensores de los Derechos Humanos",
+    "institucion": "Fundación Carolina (España)",
+    "pais": "España",
+    "tipo": "Otro",
+    "nivel": [
+      "Todos"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "Variable",
+    "deadline": "Verificar en web",
+    "url_convocatoria": "https://www.fundacioncarolina.es/fundacion-carolina-y-aecid-presentan-su-programa-de-proteccion-y-formacion-para-defensores-de-los-derechos-humanos/",
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación"
+    ],
+    "tags": [
+      "Otro",
+      "España"
+    ],
+    "source_type": "rss_auto"
+  },
+  {
+    "id": "auto_bd6cc0ff597c",
+    "titulo": "La secretaria de Estado de Cooperación Internacional, Eva Granados, inaugura la XXI edición del Programa Jóvenes Líderes Iberoamericanos",
+    "institucion": "Fundación Carolina (España)",
+    "pais": "España",
+    "tipo": "Otro",
+    "nivel": [
+      "Todos"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "Variable",
+    "deadline": "Verificar en web",
+    "url_convocatoria": "https://www.fundacioncarolina.es/la-secretaria-de-estado-de-cooperacion-internacional-eva-granados-inaugura-la-xxi-edicion-del-programa-jovenes-lideres-iberoamericanos/",
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación"
+    ],
+    "tags": [
+      "Otro",
+      "España"
+    ],
+    "source_type": "rss_auto"
   }
 ]
