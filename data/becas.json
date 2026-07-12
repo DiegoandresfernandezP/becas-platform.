@@ -6075,5 +6075,34 @@
       "España"
     ],
     "source_type": "rss_auto"
+  },
+  {
+    "id": "auto_c6e7490fd920",
+    "titulo": "La Fundación Carolina da la bienvenida a 59 becarios y becarias en la XXV edición de la Escuela de Verano de la UCM",
+    "institucion": "Fundación Carolina (España)",
+    "pais": "España",
+    "tipo": "Verano",
+    "nivel": [
+      "Pregrado",
+      "Maestría"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "Variable",
+    "deadline": "Verificar en web",
+    "url_convocatoria": "https://www.fundacioncarolina.es/la-fundacion-carolina-da-la-bienvenida-a-59-becarios-y-becarias-en-la-xxv-edicion-de-la-escuela-de-verano-de-la-ucm/",
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación"
+    ],
+    "tags": [
+      "Verano",
+      "España"
+    ],
+    "source_type": "rss_auto"
   }
 ]
