@@ -6104,5 +6104,62 @@
       "España"
     ],
     "source_type": "rss_auto"
+  },
+  {
+    "id": "auto_72b2a4293f23",
+    "titulo": "El exbecario de Fundación Carolina José Eduardo Méndez Delgado recibe el Premio Princesa de Girona Internacional de Investigación 2026",
+    "institucion": "Fundación Carolina (España)",
+    "pais": "España",
+    "tipo": "Beca",
+    "nivel": [
+      "Todos"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "Variable",
+    "deadline": "Verificar en web",
+    "url_convocatoria": "https://www.fundacioncarolina.es/el-exbecario-de-fundacion-carolina-jose-eduardo-mendez-delgado-recibe-el-premio-princesa-de-girona-internacional-de-investigacion-2026/",
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación"
+    ],
+    "tags": [
+      "Beca",
+      "España"
+    ],
+    "source_type": "rss_auto"
+  },
+  {
+    "id": "auto_a99e3ed2870c",
+    "titulo": "Líderes del programa formativo de Fundación Carolina y CAF participarán en el Cybersecurity Summer BootCamp 2026",
+    "institucion": "Fundación Carolina (España)",
+    "pais": "España",
+    "tipo": "Verano",
+    "nivel": [
+      "Pregrado",
+      "Maestría"
+    ],
+    "area": [
+      "Todas"
+    ],
+    "financiamiento": "Variable",
+    "deadline": "Verificar en web",
+    "url_convocatoria": "https://www.fundacioncarolina.es/lideres-del-programa-formativo-de-fundacion-carolina-y-caf-participaran-en-el-cybersecurity-summer-bootcamp-2026/",
+    "requisitos_idioma": [
+      "Inglés"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación"
+    ],
+    "tags": [
+      "Verano",
+      "España"
+    ],
+    "source_type": "rss_auto"
   }
 ]
