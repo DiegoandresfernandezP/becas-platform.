@@ -5270,39 +5270,6 @@
     ]
   },
   {
-    "id": "beca_007",
-    "titulo": "DAAD Helmut-Schmidt-Programme",
-    "institucion": "DAAD",
-    "pais": "Alemania",
-    "tipo": "Beca",
-    "nivel": [
-      "Maestría"
-    ],
-    "area": [
-      "Ciencias Políticas",
-      "Economía",
-      "Derecho"
-    ],
-    "financiamiento": "100% (Tuition + Stipend)",
-    "deadline": "2026-07-31",
-    "url_convocatoria": "https://www.daad.de/en/",
-    "requisitos_idioma": [
-      "Inglés",
-      "Alemán"
-    ],
-    "documentos_sugeridos": [
-      "CV",
-      "Carta Motivación",
-      "2 Recomendaciones",
-      "Título"
-    ],
-    "tags": [
-      "Alemania",
-      "Ciencias Sociales",
-      "Full Ride"
-    ]
-  },
-  {
     "id": "beca_027",
     "titulo": "Chevening Scholarships",
     "institucion": "UK Government",
@@ -5664,6 +5631,40 @@
       "USA",
       "Prestigio",
       "Investigación",
+      "Re-Validada Auto"
+    ]
+  },
+  {
+    "id": "beca_007",
+    "titulo": "DAAD Helmut-Schmidt-Programme",
+    "institucion": "DAAD",
+    "pais": "Alemania",
+    "tipo": "Beca",
+    "nivel": [
+      "Maestría"
+    ],
+    "area": [
+      "Ciencias Políticas",
+      "Economía",
+      "Derecho"
+    ],
+    "financiamiento": "100% (Tuition + Stipend)",
+    "deadline": "2027-07-31",
+    "url_convocatoria": "https://www.daad.de/en/",
+    "requisitos_idioma": [
+      "Inglés",
+      "Alemán"
+    ],
+    "documentos_sugeridos": [
+      "CV",
+      "Carta Motivación",
+      "2 Recomendaciones",
+      "Título"
+    ],
+    "tags": [
+      "Alemania",
+      "Ciencias Sociales",
+      "Full Ride",
       "Re-Validada Auto"
     ]
   },
